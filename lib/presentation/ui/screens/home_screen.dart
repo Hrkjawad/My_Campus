@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   Get.to(
-                    () => const TeacherAvailabilityCheckScreen(),
+                    () => const FacAvailabilityCheckScreen(),
                   );
                 },
                 child: const Text('FACULTY MEMBER'),

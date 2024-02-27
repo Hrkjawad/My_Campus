@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../utility/image_assets.dart';
 
-class PasswordChangeScreen extends StatefulWidget {
-  const PasswordChangeScreen({super.key});
+class StuPasswordChangeScreen extends StatefulWidget {
+  const StuPasswordChangeScreen({super.key});
 
   @override
-  State<PasswordChangeScreen> createState() => _PasswordChangeScreenState();
+  State<StuPasswordChangeScreen> createState() =>
+      _StuPasswordChangeScreenState();
 }
 
-class _PasswordChangeScreenState extends State<PasswordChangeScreen> {
+class _StuPasswordChangeScreenState extends State<StuPasswordChangeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
