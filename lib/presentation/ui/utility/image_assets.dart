@@ -1,4 +1,3 @@
 class ImageAssets{
-  static const String baseImagePath = 'assets/images';
-
+  static const String myCampusLogoSVG = 'assets/images/logo.svg';
 }
