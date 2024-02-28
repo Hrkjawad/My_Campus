@@ -16,11 +16,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.25,
-        leading: InkWell(
-          borderRadius: BorderRadius.circular(40),
-          onTap: () {},
-          child: const AppLogo(),
-        ),
+        leading: const AppLogo(),
         title: const Text('Teacher mail'),
         actions: [
           IconButton(
@@ -32,6 +28,80 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
           )
         ],
         centerTitle: true,
+      ),
+      drawer: Drawer(
+        width: 250,
+        backgroundColor: const Color(0xFFE0FFF1),
+        child: ListView(
+          children: [
+            ListTile(
+              title: const Text(
+                'Batches CR Number',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Text(
+                'Bus Schedules',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Text(
+                'Faculty Numbers',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Text(
+                'Add Tasks',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Text(
+                'My ToDo',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            const Text('V 1.0.0'),
+          ],
+        ),
       ),
       body: ScreenBackground(
         child: SingleChildScrollView(
@@ -211,7 +281,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 height: 48,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 120,
@@ -259,6 +329,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                         ),
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    width: 40,
                   ),
                   SizedBox(
                     width: 120,
@@ -362,16 +435,20 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
               ),
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 27,
                 backgroundColor: Colors.black,
-                child: CircleAvatar(
-                  radius: 26,
-                  backgroundColor: Color(0xFFF8FFAC),
-                  child: Icon(
-                    Icons.add,
-                    size: 50,
-                    color: Colors.black,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(20),
+                  onTap: () {},
+                  child: const CircleAvatar(
+                    radius: 26,
+                    backgroundColor: Color(0xFFF8FFAC),
+                    child: Icon(
+                      Icons.add,
+                      size: 50,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               )
