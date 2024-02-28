@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
@@ -129,7 +130,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     controller: _passTEController,
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(hintText: 'Enter password'),
+                    decoration:
+                        const InputDecoration(hintText: 'Enter password'),
                     validator: (String? value) {
                       if (value?.isEmpty ?? true) {
                         return 'Please enter your password';
@@ -150,6 +152,9 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {}
+                      Get.to(
+                        () => const FacMainBottomNavScreen(),
+                      );
                     },
                     child: const Text('LOGIN'),
                   ),
