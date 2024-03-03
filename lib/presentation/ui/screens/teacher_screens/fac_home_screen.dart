@@ -398,136 +398,140 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return AlertDialog(
-                            title: const Center(
-                              child: Text(
-                                "SELECT BATCH & COURSES",
-                                style: TextStyle(
-                                    fontSize: 22, fontWeight: FontWeight.w900),
+                          return StatefulBuilder(builder: (context, StateSetter setState){
+                            return AlertDialog(
+                              title: const Center(
+                                child: Text(
+                                  "SELECT BATCH & COURSES",
+                                  style: TextStyle(
+                                      fontSize: 22, fontWeight: FontWeight.w900),
+                                ),
                               ),
-                            ),
-                            actions: [
-                              CustomDropdownButton(
-                                items: ['57 A+B', '56 A', '56 B'],
-                                value: selectedBatch,
-                                hintText: 'Select Batch',
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedBatch = value;
-                                  });
-                                },
-                              ),
-                              const SizedBox(width: 20),
-                              CustomDropdownButton(
-                                items: ['CSE1111', 'EEE1111', 'CSE3121'],
-                                value: selectedCourse,
-                                hintText: 'Select Course',
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedCourse = value;
-                                  });
-                                },
-                              ),
-                              Center(
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    shape: const CircleBorder(
-                                      side: BorderSide(
-                                        color: Colors.grey,
-                                        width: 2,
+                              actions: [
+                                CustomDropdownButton(
+                                  items: ['57-A+B', '56-A', '56-B'],
+                                  value: selectedBatch,
+                                  hintText: 'Select Batch',
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedBatch = value;
+                                    });
+                                  },
+                                ),
+                                const SizedBox(width: 20),
+                                CustomDropdownButton(
+                                  items: ['CSE-1111', 'EEE-1111', 'CSE-3121'],
+                                  value: selectedCourse,
+                                  hintText: 'Select Course',
+                                  onChanged: (value) {
+                                    setState(() {
+                                      selectedCourse = value;
+                                    });
+                                  },
+                                ),
+                                Center(
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: const CircleBorder(
+                                        side: BorderSide(
+                                          color: Colors.grey,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      backgroundColor: const Color(0xFFFFE8D2),
+                                      foregroundColor: const Color(0x999B9B9B),
+                                    ),
+                                    onPressed: () {
+                                      if (selectedBatch != null &&
+                                          selectedCourse != null) {
+                                        setState(() {
+                                          tableData.add({
+                                            'Batch': selectedBatch!,
+                                            'Course': selectedCourse!,
+                                          });
+                                          selectedBatch = null;
+                                          selectedCourse = null;
+                                        });
+                                      }
+                                    },
+                                    child: const Text(
+                                      "ADD",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
                                       ),
                                     ),
-                                    backgroundColor: const Color(0xFFFFE8D2),
-                                    foregroundColor: const Color(0x999B9B9B),
                                   ),
-                                  onPressed: () {
-                                    if (selectedBatch != null &&
-                                        selectedCourse != null) {
-                                      setState(() {
-                                        tableData.add({
-                                          'Batch': selectedBatch!,
-                                          'Course': selectedCourse!,
-                                        });
-                                      });
-                                    }
-                                  },
-                                  child: const Text(
-                                    "ADD",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Container(
+                                    height: 320,
+                                    width: 343,
+                                    padding: const EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xFFF8FFAC),
+                                        border: Border.all(
+                                            color: const Color(0x999B9B9B)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(20))),
+                                    child: SingleChildScrollView(
+                                      child: DataTable(
+                                        columns: const [
+                                          DataColumn(
+                                            label: Text(
+                                              'Batch',
+                                              style: TextStyle(
+                                                color: Color(0xFF0D6858),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 26,
+                                              ),
+                                            ),
+                                          ),
+                                          DataColumn(
+                                            label: Text(
+                                              'Course',
+                                              style: TextStyle(
+                                                color: Color(0xFF0D6858),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 26,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                        rows: tableData.map((data) {
+                                          return DataRow(
+                                            cells: [
+                                              DataCell(
+                                                Text(
+                                                  data['Batch']!,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 19,
+                                                  ),
+                                                ),
+                                              ),
+                                              DataCell(
+                                                Text(
+                                                  data['Course']!,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 19,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }).toList(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Container(
-                                  height: 434,
-                                  width: 343,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xFFF8FFAC),
-                                      border: Border.all(
-                                          color: const Color(0x999B9B9B)),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(20))),
-                                  child: SingleChildScrollView(
-                                    child: DataTable(
-                                      columns: const [
-                                        DataColumn(
-                                          label: Text(
-                                            'Batch',
-                                            style: TextStyle(
-                                              color: Color(0xFF0D6858),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 26,
-                                            ),
-                                          ),
-                                        ),
-                                        DataColumn(
-                                          label: Text(
-                                            'Course',
-                                            style: TextStyle(
-                                              color: Color(0xFF0D6858),
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 26,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                      rows: tableData.map((data) {
-                                        return DataRow(
-                                          cells: [
-                                            DataCell(
-                                              Text(
-                                                data['Batch']!,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 22,
-                                                ),
-                                              ),
-                                            ),
-                                            DataCell(
-                                              Text(
-                                                data['Course']!,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 22,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      }).toList(),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
+                              ],
+                            );
+                          });
                         });
                   },
                   borderRadius: BorderRadius.circular(25),
