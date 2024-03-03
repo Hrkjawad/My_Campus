@@ -58,7 +58,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               hoverColor: Colors.grey,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> Image.asset('assets/images/Bus Time.jpg')));
+              },
             ),
             const Divider(
               color: Color(0xFF0D6858),
@@ -71,7 +73,62 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               hoverColor: Colors.grey,
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                          builder: (context, StateSetter setState) {
+                        return SingleChildScrollView(
+                          child: AlertDialog(
+                            title: const Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Faculty",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  SizedBox(height: 6,),
+                                  LinearProgressIndicator(
+                                    value: .5,
+                                  )
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              for(int i=0; i<20; i++)
+                                Column(
+                                  children: [
+                                    ListTile(
+                                      leading: CircleAvatar(child: Icon(Icons.person, size: 35, color: Colors.blueGrey,),),
+                                      title: Text('Pritiraj Battacharje', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, letterSpacing: .6),),
+                                      subtitle: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(height: 6,),
+                                          Text('Lecturer', style: TextStyle(fontSize: 15),),
+                                          SizedBox(height: 8,),
+                                          Text('CSE Department', style: TextStyle(fontSize: 15),),
+                                          SizedBox(height: 8,),
+                                          Text('Email: prb@lus.ac.bd', style: TextStyle(fontSize: 15),),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(thickness: 3,)
+                                  ],
+                                )
+
+
+
+                            ],
+                          ),
+                        );
+                      });
+                    });
+              },
             ),
             const Divider(
               color: Color(0xFF0D6858),
@@ -398,13 +455,15 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     showDialog(
                         context: context,
                         builder: (context) {
-                          return StatefulBuilder(builder: (context, StateSetter setState){
+                          return StatefulBuilder(
+                              builder: (context, StateSetter setState) {
                             return AlertDialog(
                               title: const Center(
                                 child: Text(
                                   "SELECT BATCH & COURSES",
                                   style: TextStyle(
-                                      fontSize: 22, fontWeight: FontWeight.w900),
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w900),
                                 ),
                               ),
                               actions: [
