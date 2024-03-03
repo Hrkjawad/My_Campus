@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'application/app.dart';
 
-void main(){
-  runApp(const MyCampus());
+void main() {
+  runApp(
+    const MyCampus(),
+  );
 }
-
