@@ -19,6 +19,7 @@ dependencies:
   connectivity_plus: ^5.0.1
   webview_flutter: any
   url_launcher: ^6.0.7
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

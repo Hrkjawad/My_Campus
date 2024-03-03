@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../widgets/dropdown_button.dart';
 
 class FacHomeScreen extends StatefulWidget {
   const FacHomeScreen({super.key});
@@ -8,6 +9,10 @@ class FacHomeScreen extends StatefulWidget {
   @override
   State<FacHomeScreen> createState() => _FacHomeScreenState();
 }
+
+String? selectedBatch;
+String? selectedCourse;
+List<Map<String, String>> tableData = [];
 
 class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
@@ -389,7 +394,142 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 width: 292,
                 height: 77,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Center(
+                              child: Text(
+                                "SELECT BATCH & COURSES",
+                                style: TextStyle(
+                                    fontSize: 22, fontWeight: FontWeight.w900),
+                              ),
+                            ),
+                            actions: [
+                              CustomDropdownButton(
+                                items: ['57 A+B', '56 A', '56 B'],
+                                value: selectedBatch,
+                                hintText: 'Select Batch',
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedBatch = value;
+                                  });
+                                },
+                              ),
+                              const SizedBox(width: 20),
+                              CustomDropdownButton(
+                                items: ['CSE1111', 'EEE1111', 'CSE3121'],
+                                value: selectedCourse,
+                                hintText: 'Select Course',
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedCourse = value;
+                                  });
+                                },
+                              ),
+                              Center(
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    shape: const CircleBorder(
+                                      side: BorderSide(
+                                        color: Colors.grey,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    backgroundColor: const Color(0xFFFFE8D2),
+                                    foregroundColor: const Color(0x999B9B9B),
+                                  ),
+                                  onPressed: () {
+                                    if (selectedBatch != null &&
+                                        selectedCourse != null) {
+                                      setState(() {
+                                        tableData.add({
+                                          'Batch': selectedBatch!,
+                                          'Course': selectedCourse!,
+                                        });
+                                      });
+                                    }
+                                  },
+                                  child: const Text(
+                                    "ADD",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Container(
+                                  height: 434,
+                                  width: 343,
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xFFF8FFAC),
+                                      border: Border.all(
+                                          color: const Color(0x999B9B9B)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(20))),
+                                  child: SingleChildScrollView(
+                                    child: DataTable(
+                                      columns: const [
+                                        DataColumn(
+                                          label: Text(
+                                            'Batch',
+                                            style: TextStyle(
+                                              color: Color(0xFF0D6858),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 26,
+                                            ),
+                                          ),
+                                        ),
+                                        DataColumn(
+                                          label: Text(
+                                            'Course',
+                                            style: TextStyle(
+                                              color: Color(0xFF0D6858),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 26,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                      rows: tableData.map((data) {
+                                        return DataRow(
+                                          cells: [
+                                            DataCell(
+                                              Text(
+                                                data['Batch']!,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 22,
+                                                ),
+                                              ),
+                                            ),
+                                            DataCell(
+                                              Text(
+                                                data['Course']!,
+                                                style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 22,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        });
+                  },
                   borderRadius: BorderRadius.circular(25),
                   child: Card(
                     color: const Color(0xFFF8FFAC),
