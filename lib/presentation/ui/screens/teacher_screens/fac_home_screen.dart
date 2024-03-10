@@ -59,7 +59,13 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               ),
               hoverColor: Colors.grey,
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> Image.asset('assets/images/Bus Time.jpg')));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        Image.asset('assets/images/Bus Time.jpg'),
+                  ),
+                );
               },
             ),
             const Divider(
@@ -75,10 +81,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               hoverColor: Colors.grey,
               onTap: () {
                 showDialog(
-                    context: context,
-                    builder: (context) {
-                      return StatefulBuilder(
-                          builder: (context, StateSetter setState) {
+                  context: context,
+                  builder: (context) {
+                    return StatefulBuilder(
+                      builder: (context, StateSetter setState) {
                         return SingleChildScrollView(
                           child: AlertDialog(
                             title: const Center(
@@ -91,7 +97,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                       fontWeight: FontWeight.w800,
                                     ),
                                   ),
-                                  SizedBox(height: 6,),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
                                   LinearProgressIndicator(
                                     value: .5,
                                   )
@@ -99,35 +107,64 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                               ),
                             ),
                             actions: [
-                              for(int i=0; i<20; i++)
+                              for (int i = 0; i < 20; i++)
                                 Column(
                                   children: [
                                     ListTile(
-                                      leading: CircleAvatar(child: Icon(Icons.person, size: 35, color: Colors.blueGrey,),),
-                                      title: Text('Pritiraj Battacharje', style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, letterSpacing: .6),),
+                                      leading: CircleAvatar(
+                                        child: Icon(
+                                          Icons.person,
+                                          size: 35,
+                                          color: Colors.blueGrey,
+                                        ),
+                                      ),
+                                      title: Text(
+                                        'Pritiraj Battacharje',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 16,
+                                            letterSpacing: .6),
+                                      ),
                                       subtitle: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(height: 6,),
-                                          Text('Lecturer', style: TextStyle(fontSize: 15),),
-                                          SizedBox(height: 8,),
-                                          Text('CSE Department', style: TextStyle(fontSize: 15),),
-                                          SizedBox(height: 8,),
-                                          Text('Email: prb@lus.ac.bd', style: TextStyle(fontSize: 15),),
+                                          SizedBox(
+                                            height: 6,
+                                          ),
+                                          Text(
+                                            'Lecturer',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            'CSE Department',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            'Email: prb@lus.ac.bd',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    Divider(thickness: 3,)
+                                    Divider(
+                                      thickness: 3,
+                                    )
                                   ],
                                 )
-
-
-
                             ],
                           ),
                         );
-                      });
-                    });
+                      },
+                    );
+                  },
+                );
               },
             ),
             const Divider(
@@ -360,32 +397,14 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                         child: const Padding(
                           padding: EdgeInsets.all(10),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'My',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                '    My\nClasses',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Classes',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
@@ -402,7 +421,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       onTap: () {},
                       borderRadius: BorderRadius.circular(25),
                       child: Card(
-                        color: const Color(0xFFFFE8D2),
+                        color: const Color(0xFFACFFDC),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(24),
                         ),
@@ -410,32 +429,14 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                         child: const Padding(
                           padding: EdgeInsets.all(10),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Exam',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                '  Exam\nRoutine',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Routine',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
@@ -453,10 +454,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 child: InkWell(
                   onTap: () {
                     showDialog(
-                        context: context,
-                        builder: (context) {
-                          return StatefulBuilder(
-                              builder: (context, StateSetter setState) {
+                      context: context,
+                      builder: (context) {
+                        return StatefulBuilder(
+                          builder: (context, StateSetter setState) {
                             return AlertDialog(
                               title: const Center(
                                 child: Text(
@@ -483,9 +484,11 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                   value: selectedCourse,
                                   hintText: 'Select Course',
                                   onChanged: (value) {
-                                    setState(() {
-                                      selectedCourse = value;
-                                    });
+                                    setState(
+                                      () {
+                                        selectedCourse = value;
+                                      },
+                                    );
                                   },
                                 ),
                                 Center(
@@ -529,11 +532,14 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                     width: 343,
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                        color: const Color(0xFFF8FFAC),
-                                        border: Border.all(
-                                            color: const Color(0x999B9B9B)),
-                                        borderRadius: const BorderRadius.all(
-                                            Radius.circular(20))),
+                                      color: const Color(0xFFF8FFAC),
+                                      border: Border.all(
+                                        color: const Color(0x999B9B9B),
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
                                     child: SingleChildScrollView(
                                       child: DataTable(
                                         columns: const [
@@ -558,40 +564,46 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                             ),
                                           ),
                                         ],
-                                        rows: tableData.map((data) {
-                                          return DataRow(
-                                            cells: [
-                                              DataCell(
-                                                Text(
-                                                  data['Batch']!,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 19,
+                                        rows: tableData.map(
+                                          (data) {
+                                            return DataRow(
+                                              cells: [
+                                                DataCell(
+                                                  Text(
+                                                    data['Batch']!,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 19,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              DataCell(
-                                                Text(
-                                                  data['Course']!,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 19,
+                                                DataCell(
+                                                  Text(
+                                                    data['Course']!,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 19,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          );
-                                        }).toList(),
+                                              ],
+                                            );
+                                          },
+                                        ).toList(),
                                       ),
                                     ),
                                   ),
                                 ),
                               ],
                             );
-                          });
-                        });
+                          },
+                        );
+                      },
+                    );
                   },
                   borderRadius: BorderRadius.circular(25),
                   child: Card(

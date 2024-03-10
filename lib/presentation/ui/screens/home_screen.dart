@@ -22,11 +22,11 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 225,
+                height: 263,
               ),
               const AppLogo(),
               const SizedBox(
-                height: 58,
+                height: 67,
               ),
               SizedBox(
                 width: 277,
