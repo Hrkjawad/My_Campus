@@ -115,7 +115,19 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                               bottomRight: Radius.circular(20),
                             ),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                            ),
+                          ),
                         ),
+                        validator: (String? value) {
+                          if (value?.trim().isEmpty ?? true) {
+                            return '';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],

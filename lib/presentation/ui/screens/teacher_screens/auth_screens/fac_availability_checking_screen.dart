@@ -102,6 +102,7 @@ class _FacAvailabilityCheckScreenState
                     SizedBox(
                       width: 84,
                       child: TextFormField(
+                        controller: _emailTEController,
                         decoration: const InputDecoration(
                           enabled: false,
                           hintText: '@lus.ac.bd',
@@ -118,7 +119,19 @@ class _FacAvailabilityCheckScreenState
                               bottomRight: Radius.circular(20),
                             ),
                           ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20),
+                            ),
+                          ),
                         ),
+                        validator: (String? value) {
+                          if (value?.trim().isEmpty ?? true) {
+                            return '';
+                          }
+                          return null;
+                        },
                       ),
                     ),
                   ],
@@ -133,7 +146,7 @@ class _FacAvailabilityCheckScreenState
                     onPressed: () {
                       /*if (_formKey.currentState!.validate()) {
                         Get.to(
-                          () => const SignUpScreen(),
+                          () => const FacSignUpScreen(),
                         );
                       }*/
                       Get.to(
