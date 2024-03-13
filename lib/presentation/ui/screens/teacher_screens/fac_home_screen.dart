@@ -35,7 +35,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
         centerTitle: true,
       ),
       drawer: Drawer(
-        width: 250,
+        width: 186,
         backgroundColor: const Color(0xFFE0FFF1),
         child: ListView(
           children: [
@@ -108,7 +108,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             ),
                             actions: [
                               for (int i = 0; i < 20; i++)
-                                Column(
+                                const Column(
                                   children: [
                                     ListTile(
                                       leading: CircleAvatar(
@@ -207,10 +207,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 39,
+                height: 46,
               ),
               SizedBox(
-                width: 292,
+                width: 355,
                 height: 160,
                 child: ListView.builder(
                   shrinkWrap: false,
@@ -383,61 +383,47 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: 120,
-                    height: 80,
+                    width: 142,
+                    height: 102,
                     child: InkWell(
                       onTap: () {},
                       borderRadius: BorderRadius.circular(25),
-                      child: Card(
-                        color: const Color(0xFFACFFDC),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFACFFDC),
+                          elevation: 5,
                         ),
-                        elevation: 5,
-                        child: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Text(
-                                '    My\nClasses',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                        onPressed: () {},
+                        child: const Text(
+                          '    My\nClasses',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                     ),
                   ),
                   const SizedBox(
-                    width: 40,
+                    width: 71,
                   ),
                   SizedBox(
-                    width: 120,
-                    height: 80,
+                    width: 142,
+                    height: 102,
                     child: InkWell(
                       onTap: () {},
                       borderRadius: BorderRadius.circular(25),
-                      child: Card(
-                        color: const Color(0xFFACFFDC),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFFFE8D2),
+                          elevation: 5,
                         ),
-                        elevation: 5,
-                        child: const Padding(
-                          padding: EdgeInsets.all(10),
-                          child: Column(
-                            children: [
-                              Text(
-                                '  Exam\nRoutine',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                        onPressed: () {},
+                        child: const Text(
+                          '  Exam\nRoutine',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
@@ -449,8 +435,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 height: 29,
               ),
               SizedBox(
-                width: 292,
-                height: 77,
+                width: 355,
+                height: 84,
                 child: InkWell(
                   onTap: () {
                     showDialog(
@@ -469,7 +455,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                               ),
                               actions: [
                                 CustomDropdownButton(
-                                  items: ['57-A+B', '56-A', '56-B'],
+                                  items: const ['57-A+B', '56-A', '56-B'],
                                   value: selectedBatch,
                                   hintText: 'Select Batch',
                                   onChanged: (value) {
@@ -480,7 +466,11 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                 ),
                                 const SizedBox(width: 20),
                                 CustomDropdownButton(
-                                  items: ['CSE-1111', 'EEE-1111', 'CSE-3121'],
+                                  items: const [
+                                    'CSE-1111',
+                                    'EEE-1111',
+                                    'CSE-3121'
+                                  ],
                                   value: selectedCourse,
                                   hintText: 'Select Course',
                                   onChanged: (value) {
@@ -606,43 +596,34 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     );
                   },
                   borderRadius: BorderRadius.circular(25),
-                  child: Card(
-                    color: const Color(0xFFF8FFAC),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFF8FFAC),
                     ),
-                    elevation: 5,
-                    child: const Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Batches & Courses',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                    onPressed: () {},
+                    child: const Text(
+                      'Batches & Courses',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 33,
+                height: 40,
               ),
               const SizedBox(
                 width: double.infinity,
-                height: 184,
+                height: 214,
                 child: Card(
                   color: Colors.white,
                   child: Center(
                     child: Text(
                       'Announcements',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 35,
                         fontWeight: FontWeight.w900,
                         color: Color(0xFF0D6858),
                       ),

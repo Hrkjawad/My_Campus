@@ -27,33 +27,33 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 112,
+                    height: 131,
                   ),
                   const Text(
                     'SIGN UP',
                     style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 47,
+                      fontWeight: FontWeight.bold,
                       letterSpacing: 1,
                     ),
                   ),
                   const Text(
                     'Join as a Faculty',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xFF585858),
                     ),
                   ),
                   const SizedBox(
-                    height: 46,
+                    height: 52,
                   ),
                   const AppLogo(),
                   const SizedBox(
-                    height: 66,
+                    height: 77,
                   ),
                   SizedBox(
-                    width: 277,
+                    width: 323,
                     child: Column(
                       children: [
                         TextFormField(
@@ -71,7 +71,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 12,
                         ),
                         TextFormField(
                           controller: _newPassTEController,
@@ -92,7 +92,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 12,
                         ),
                         TextFormField(
                           controller: _confirmPassTEController,
@@ -113,11 +113,11 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 36,
+                    height: 42,
                   ),
                   SizedBox(
-                    width: 277,
-                    height: 50,
+                    width: 323,
+                    height: 58,
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {}

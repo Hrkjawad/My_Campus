@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../utility/image_assets.dart';
 
 class FacPasswordChangeScreen extends StatefulWidget {
   const FacPasswordChangeScreen({super.key});
@@ -27,37 +26,33 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   const SizedBox(
-                    height: 112,
+                    height: 131,
                   ),
                   const Text(
                     'CHANGE',
                     style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 47,
+                      fontWeight: FontWeight.bold,
                       letterSpacing: 1,
                     ),
                   ),
                   const Text(
                     'Set your password',
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xFF585858),
                     ),
                   ),
                   const SizedBox(
-                    height: 46,
+                    height: 53,
                   ),
-                  SvgPicture.asset(
-                    ImageAssets.myCampusLogoSVG,
-                    width: 130,
-                    height: 117,
-                  ),
+                  const AppLogo(),
                   const SizedBox(
-                    height: 65,
+                    height: 76,
                   ),
                   SizedBox(
-                    width: 277,
+                    width: 323,
                     child: Column(
                       children: [
                         TextFormField(
@@ -78,15 +73,15 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 13,
                         ),
                         TextFormField(
                           controller: _confirmTEController,
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
                           obscureText: true,
-                          decoration:
-                              const InputDecoration(hintText: 'Confirm password'),
+                          decoration: const InputDecoration(
+                              hintText: 'Confirm password'),
                           validator: (String? value) {
                             if (value != _newPassTEController.text) {
                               return "Password didn't match";
@@ -98,11 +93,11 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 34,
+                    height: 40,
                   ),
                   SizedBox(
-                    width: 277,
-                    height: 50,
+                    width: 323,
+                    height: 58,
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {}

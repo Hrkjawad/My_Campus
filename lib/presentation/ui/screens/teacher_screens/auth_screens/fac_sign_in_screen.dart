@@ -28,21 +28,21 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 112,
+                  height: 131,
                 ),
                 const Text(
                   'SIGN IN',
                   style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 47,
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   ),
                 ),
                 const Text(
                   'Faculty Member',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
                     color: Color(0xFF585858),
                   ),
                 ),
@@ -51,13 +51,13 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 ),
                 const AppLogo(),
                 const SizedBox(
-                  height: 65,
+                  height: 76,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 205,
+                      width: 239,
                       child: TextFormField(
                         controller: _emailTEController,
                         keyboardType: TextInputType.emailAddress,
@@ -99,17 +99,18 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                       ),
                     ),
                     SizedBox(
-                      width: 72,
+                      width: 84,
                       child: TextFormField(
                         decoration: const InputDecoration(
                           enabled: false,
                           hintText: '@lus.ac.bd',
                           hintStyle: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: Color(0xFF000000),
-                              fontWeight: FontWeight.w700),
+                              fontWeight: FontWeight.bold),
                           fillColor: Color(0xFFFFFFFF),
-                          contentPadding: EdgeInsets.only(left: 4),
+                          contentPadding: EdgeInsets.only(
+                              left: 4, right: 4, top: 20, bottom: 20),
                           disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20),
@@ -122,10 +123,10 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 13,
                 ),
                 SizedBox(
-                  width: 277,
+                  width: 323,
                   child: TextFormField(
                     controller: _passTEController,
                     keyboardType: TextInputType.visiblePassword,
@@ -144,11 +145,11 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 35,
+                  height: 41,
                 ),
                 SizedBox(
-                  width: 277,
-                  height: 50,
+                  width: 323,
+                  height: 58,
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {}
@@ -160,7 +161,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 29,
+                  height: 34,
                 ),
                 TextButton(
                   onPressed: () {
@@ -171,8 +172,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   child: const Text(
                     'Forgot Password',
                     style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
                       color: Color(0xFF505050),
                     ),
                   ),

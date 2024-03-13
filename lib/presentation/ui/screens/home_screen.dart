@@ -26,11 +26,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const AppLogo(),
               const SizedBox(
-                height: 67,
+                height: 68,
               ),
               SizedBox(
-                width: 277,
-                height: 50,
+                width: 323,
+                height: 58,
                 child: ElevatedButton(
                   onPressed: () {
                     Get.to(
@@ -41,11 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(
-                height: 43,
+                height: 50,
               ),
               SizedBox(
-                width: 277,
-                height: 50,
+                width: 323,
+                height: 58,
                 child: ElevatedButton(
                   onPressed: () {
                     Get.to(

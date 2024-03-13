@@ -34,13 +34,14 @@ class MyCampus extends StatelessWidget {
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 18),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 18, vertical: 20),
           filled: true,
           fillColor: AppColors.primaryColor,
           hintStyle: const TextStyle(
-              fontSize: 14,
+              fontSize: 16,
               color: Color(0xFF505050),
-              fontWeight: FontWeight.w700),
+              fontWeight: FontWeight.bold),
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),

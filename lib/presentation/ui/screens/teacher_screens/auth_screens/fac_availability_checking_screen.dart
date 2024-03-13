@@ -29,36 +29,36 @@ class _FacAvailabilityCheckScreenState
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 112,
+                  height: 131,
                 ),
                 const Text(
                   'WELCOME',
                   style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 47,
+                    fontWeight: FontWeight.bold,
                     letterSpacing: 1,
                   ),
                 ),
                 const Text(
                   'Join as a Faculty',
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
                     color: Color(0xFF585858),
                   ),
                 ),
                 const SizedBox(
-                  height: 46,
+                  height: 53,
                 ),
                 const AppLogo(),
                 const SizedBox(
-                  height: 65,
+                  height: 76,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      width: 205,
+                      width: 239,
                       child: TextFormField(
                         controller: _emailTEController,
                         keyboardType: TextInputType.emailAddress,
@@ -100,17 +100,18 @@ class _FacAvailabilityCheckScreenState
                       ),
                     ),
                     SizedBox(
-                      width: 72,
+                      width: 84,
                       child: TextFormField(
                         decoration: const InputDecoration(
                           enabled: false,
                           hintText: '@lus.ac.bd',
                           hintStyle: TextStyle(
-                              fontSize: 12,
+                              fontSize: 14,
                               color: Color(0xFF000000),
-                              fontWeight: FontWeight.w700),
+                              fontWeight: FontWeight.bold),
                           fillColor: Color(0xFFFFFFFF),
-                          contentPadding: EdgeInsets.only(left: 4),
+                          contentPadding: EdgeInsets.only(
+                              left: 4, right: 4, top: 20, bottom: 20),
                           disabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.only(
                               topRight: Radius.circular(20),
@@ -123,11 +124,11 @@ class _FacAvailabilityCheckScreenState
                   ],
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 47,
                 ),
                 SizedBox(
-                  width: 277,
-                  height: 50,
+                  width: 323,
+                  height: 58,
                   child: ElevatedButton(
                     onPressed: () {
                       /*if (_formKey.currentState!.validate()) {
@@ -143,7 +144,7 @@ class _FacAvailabilityCheckScreenState
                   ),
                 ),
                 const SizedBox(
-                  height: 37,
+                  height: 43,
                 ),
                 TextButton(
                   onPressed: () {
@@ -154,7 +155,7 @@ class _FacAvailabilityCheckScreenState
                   child: const Text(
                     'Sign In',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Color(0xFF505050),
                     ),
