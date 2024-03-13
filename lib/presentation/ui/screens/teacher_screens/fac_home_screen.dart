@@ -437,8 +437,12 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               SizedBox(
                 width: 355,
                 height: 84,
-                child: InkWell(
-                  onTap: () {
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFF8FFAC),
+                  ),
+                  onPressed: () {
+
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -475,7 +479,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                   hintText: 'Select Course',
                                   onChanged: (value) {
                                     setState(
-                                      () {
+                                          () {
                                         selectedCourse = value;
                                       },
                                     );
@@ -555,7 +559,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                           ),
                                         ],
                                         rows: tableData.map(
-                                          (data) {
+                                              (data) {
                                             return DataRow(
                                               cells: [
                                                 DataCell(
@@ -564,7 +568,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                                     style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       fontSize: 19,
                                                     ),
                                                   ),
@@ -575,7 +579,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                                     style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                          FontWeight.w600,
+                                                      FontWeight.w600,
                                                       fontSize: 19,
                                                     ),
                                                   ),
@@ -594,19 +598,13 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                         );
                       },
                     );
+
                   },
-                  borderRadius: BorderRadius.circular(25),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFF8FFAC),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Batches & Courses',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  child: const Text(
+                    'Batches & Courses',
+                    style: TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
