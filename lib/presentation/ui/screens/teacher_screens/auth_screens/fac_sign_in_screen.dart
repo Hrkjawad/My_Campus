@@ -3,7 +3,12 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
+import 'package:my_campus/presentation/ui/widgets/email_header_text_field_method.dart';
+import 'package:my_campus/presentation/ui/widgets/email_trailing_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../widgets/customised_elevated_button.dart';
 
 class FacSignInScreen extends StatefulWidget {
   const FacSignInScreen({super.key});
@@ -27,28 +32,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 131,
-                ),
-                const Text(
-                  'SIGN IN',
-                  style: TextStyle(
-                    fontSize: 47,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const Text(
-                  'Faculty Member',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xFF585858),
-                  ),
-                ),
-                const SizedBox(
-                  height: 46,
-                ),
+                const TitleAndSubtitle(
+                    title: 'SIGN IN', subtitle: 'Faculty Member'),
                 const AppLogo(),
                 const SizedBox(
                   height: 76,
@@ -56,82 +41,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      width: 239,
-                      child: TextFormField(
-                        controller: _emailTEController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        cursorColor: Colors.black,
-                        decoration: const InputDecoration(
-                          hintText: 'Type your email',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 84,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          enabled: false,
-                          hintText: '@lus.ac.bd',
-                          hintStyle: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.bold),
-                          fillColor: Color(0xFFFFFFFF),
-                          contentPadding: EdgeInsets.only(
-                              left: 4, right: 4, top: 20, bottom: 20),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return '';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                    emailHeaderTextField(_emailTEController),
+                    emailTrailing(_emailTEController),
                   ],
                 ),
                 const SizedBox(
@@ -159,37 +70,25 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 const SizedBox(
                   height: 41,
                 ),
-                SizedBox(
-                  width: 323,
-                  height: 58,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                      Get.to(
-                        () => const FacMainBottomNavScreen(),
-                      );
-                    },
-                    child: const Text('LOGIN'),
-                  ),
+                CustomisedElevatedButton(
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {}
+                    Get.to(
+                      () => const FacMainBottomNavScreen(),
+                    );
+                  },
+                  text: 'LOGIN',
                 ),
                 const SizedBox(
                   height: 34,
                 ),
-                TextButton(
-                  onPressed: () {
-                    Get.to(
-                      () => const FacRecoveryEmailScreen(),
-                    );
-                  },
-                  child: const Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF505050),
-                    ),
-                  ),
-                ),
+                CustomisedTextButton(
+                    onTap: () {
+                      Get.to(
+                        () => const FacRecoveryEmailScreen(),
+                      );
+                    },
+                    text: 'Forgot Password')
               ],
             ),
           ),
