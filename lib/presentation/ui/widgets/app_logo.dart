@@ -23,8 +23,8 @@ class AppLogo extends StatelessWidget {
       ),
       child: SvgPicture.asset(
         ImageAssets.myCampusLogoSVG,
-        width: 137,
-        height: 152,
+        width: 152,
+        height: 137,
       ),
     );
   }

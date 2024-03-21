@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../widgets/customised_elevated_button.dart';
 
 class FacPasswordChangeScreen extends StatefulWidget {
   const FacPasswordChangeScreen({super.key});
@@ -25,28 +27,8 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 131,
-                  ),
-                  const Text(
-                    'CHANGE',
-                    style: TextStyle(
-                      fontSize: 47,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  const Text(
-                    'Set your password',
-                    style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF585858),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 53,
-                  ),
+                  const TitleAndSubtitle(
+                      title: 'CHANGE', subtitle: 'Set your password'),
                   const AppLogo(),
                   const SizedBox(
                     height: 76,
@@ -95,16 +77,11 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                   const SizedBox(
                     height: 40,
                   ),
-                  SizedBox(
-                    width: 323,
-                    height: 58,
-                    child: ElevatedButton(
-                      onPressed: () {
+                  CustomisedElevatedButton(
+                      onTap: () {
                         if (_formKey.currentState!.validate()) {}
                       },
-                      child: const Text('SUBMIT'),
-                    ),
-                  ),
+                      text: 'SUBMIT'),
                 ],
               ),
             ),

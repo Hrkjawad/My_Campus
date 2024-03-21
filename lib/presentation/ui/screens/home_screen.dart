@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_availability_checking_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_availability_checking_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../widgets/app_logo.dart';
 
@@ -28,33 +29,23 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 68,
               ),
-              SizedBox(
-                width: 323,
-                height: 58,
-                child: ElevatedButton(
-                  onPressed: () {
+              CustomisedElevatedButton(
+                  onTap: () {
                     Get.to(
                       () => const FacAvailabilityCheckScreen(),
                     );
                   },
-                  child: const Text('FACULTY MEMBER'),
-                ),
-              ),
+                  text: 'FACULTY MEMBER'),
               const SizedBox(
                 height: 50,
               ),
-              SizedBox(
-                width: 323,
-                height: 58,
-                child: ElevatedButton(
-                  onPressed: () {
+              CustomisedElevatedButton(
+                  onTap: () {
                     Get.to(
                       () => const StuAvailabilityCheckScreen(),
                     );
                   },
-                  child: const Text('STUDENT'),
-                ),
-              ),
+                  text: 'STUDENT'),
             ],
           ),
         ),
