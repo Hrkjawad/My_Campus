@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_registration_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -44,15 +44,31 @@ class _FacAvailabilityCheckScreenState
                 const SizedBox(
                   height: 47,
                 ),
-                CustomisedElevatedButton(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {}
-                    Get.to(
-                      () => const FacSignUpScreen(),
-                    );
-                  },
-                  text: 'CHECK AVAILABILITY',
-                ),
+                GetBuilder<FacRegistrationController>(
+                    builder: (facRegController) {
+                      if (facRegController.facRegInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                  return CustomisedElevatedButton(
+                    onTap: () async {
+                      /*if (_formKey.currentState!.validate()) {
+                        final result = await facRegController
+                            .facReg(_emailTEController.text.trim());
+                        if (result) {
+                          print('hi');
+                        } else {
+                          print('hello');
+                        }
+                      }*/
+                      /*Get.to(
+                        () => const FacSignUpScreen(),
+                      );*/
+                    },
+                    text: 'CHECK AVAILABILITY',
+                  );
+                }),
                 const SizedBox(
                   height: 43,
                 ),

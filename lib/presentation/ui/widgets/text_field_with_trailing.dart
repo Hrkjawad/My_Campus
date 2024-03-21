@@ -58,7 +58,6 @@ class TextFieldWithTrailing extends StatelessWidget {
         SizedBox(
           width: 84,
           child: TextFormField(
-            controller: _emailTEController,
             decoration: const InputDecoration(
               enabled: false,
               hintText: '@lus.ac.bd',

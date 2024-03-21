@@ -1,25 +1,37 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart';
-
 import '../../presentation/state_holders/auth_controller.dart';
 import '../models/network_response.dart';
 
 class NetworkCaller {
   /// get request method
-  Future<NetworkResponse> getRequest(String url) async {
+  static Future<NetworkResponse> getRequest(String url) async {
     try {
-      Response response = await get(Uri.parse(url),
-          headers: {'token': AuthController.accessToken.toString()});
+      Response response = await get(
+        Uri.parse(url),
+        headers: {
+          'token': AuthController.accessToken.toString(),
+        },
+      );
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200) {
+        log(response.statusCode.toString());
+
         return NetworkResponse(
-            true, response.statusCode, jsonDecode(response.body));
+          true,
+          response.statusCode,
+          jsonDecode(response.body),
+        );
       } else if (response.statusCode == 401) {
         //gotoLogin();
       } else {
-        return NetworkResponse(false, response.statusCode, null);
+        return NetworkResponse(
+          false,
+          response.statusCode,
+          null,
+        );
       }
     } catch (e) {
       log(e.toString());
@@ -27,7 +39,8 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  Future<NetworkResponse> postRequest(String url, Map<String, dynamic> body,
+  static Future<NetworkResponse> postRequest(
+      String url, Map<String, dynamic> body,
       {bool isLogin = false}) async {
     try {
       Response response = await post(
@@ -38,7 +51,9 @@ class NetworkCaller {
         },
         body: jsonEncode(body),
       );
-      log(response.statusCode.toString());
+      log(
+        response.statusCode.toString(),
+      );
       log(response.body);
       if (response.statusCode == 200) {
         return NetworkResponse(
@@ -51,7 +66,11 @@ class NetworkCaller {
           //gotoLogin();
         }
       } else {
-        return NetworkResponse(false, response.statusCode, null);
+        return NetworkResponse(
+          false,
+          response.statusCode,
+          null,
+        );
       }
     } catch (e) {
       log(e.toString());
