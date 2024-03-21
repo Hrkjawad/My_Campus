@@ -13,15 +13,22 @@ class FacHomeScreen extends StatefulWidget {
 String? selectedBatch;
 String? selectedCourse;
 List<Map<String, String>> tableData = [];
+var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.25,
-        leading: const AppLogo(),
+        leading: IconButton(
+          icon: const AppLogo(),
+          onPressed: () {
+            scaffoldKey.currentState?.openDrawer();
+          },
+        ),
         title: const Text('Teacher mail'),
         actions: [
           IconButton(
@@ -442,7 +449,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     backgroundColor: const Color(0xFFF8FFAC),
                   ),
                   onPressed: () {
-
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -479,7 +485,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                   hintText: 'Select Course',
                                   onChanged: (value) {
                                     setState(
-                                          () {
+                                      () {
                                         selectedCourse = value;
                                       },
                                     );
@@ -559,7 +565,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                           ),
                                         ],
                                         rows: tableData.map(
-                                              (data) {
+                                          (data) {
                                             return DataRow(
                                               cells: [
                                                 DataCell(
@@ -568,7 +574,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                                     style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w600,
+                                                          FontWeight.w600,
                                                       fontSize: 19,
                                                     ),
                                                   ),
@@ -579,7 +585,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                                     style: const TextStyle(
                                                       color: Colors.black,
                                                       fontWeight:
-                                                      FontWeight.w600,
+                                                          FontWeight.w600,
                                                       fontSize: 19,
                                                     ),
                                                   ),
@@ -598,7 +604,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                         );
                       },
                     );
-
                   },
                   child: const Text(
                     'Batches & Courses',

@@ -4,11 +4,10 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/f
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
-import 'package:my_campus/presentation/ui/widgets/email_header_text_field_method.dart';
-import 'package:my_campus/presentation/ui/widgets/email_trailing_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
+import '../../../widgets/text_field_with_trailing.dart';
 
 class FacSignInScreen extends StatefulWidget {
   const FacSignInScreen({super.key});
@@ -38,13 +37,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 const SizedBox(
                   height: 76,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    emailHeaderTextField(_emailTEController),
-                    emailTrailing(_emailTEController),
-                  ],
-                ),
+                TextFieldWithTrailing(emailTEController: _emailTEController),
+
                 const SizedBox(
                   height: 13,
                 ),

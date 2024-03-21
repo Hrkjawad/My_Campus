@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_password_change_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
-import 'package:my_campus/presentation/ui/widgets/email_header_text_field_method.dart';
-import 'package:my_campus/presentation/ui/widgets/email_trailing_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
+import '../../../widgets/text_field_with_trailing.dart';
 
 class FacRecoveryEmailScreen extends StatefulWidget {
   const FacRecoveryEmailScreen({super.key});
@@ -36,13 +35,8 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                 const SizedBox(
                   height: 76,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    emailHeaderTextField(_emailTEController),
-                    emailTrailing(_emailTEController),
-                  ],
-                ),
+                TextFieldWithTrailing(emailTEController: _emailTEController),
+
                 const SizedBox(
                   height: 40,
                 ),

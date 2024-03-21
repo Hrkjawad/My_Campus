@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
-import 'package:my_campus/presentation/ui/widgets/email_header_text_field_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_text_button.dart';
-import '../../../widgets/email_trailing_method.dart';
+import '../../../widgets/text_field_with_trailing.dart';
 import 'fac_sign_in_screen.dart';
 
 class FacAvailabilityCheckScreen extends StatefulWidget {
@@ -41,23 +40,13 @@ class _FacAvailabilityCheckScreenState
                 const SizedBox(
                   height: 76,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    emailHeaderTextField(_emailTEController),
-                    emailTrailing(_emailTEController),
-                  ],
-                ),
+                TextFieldWithTrailing(emailTEController: _emailTEController),
                 const SizedBox(
                   height: 47,
                 ),
                 CustomisedElevatedButton(
                   onTap: () {
-                    /*if (_formKey.currentState!.validate()) {
-                        Get.to(
-                          () => const FacSignUpScreen(),
-                        );
-                      }*/
+                    if (_formKey.currentState!.validate()) {}
                     Get.to(
                       () => const FacSignUpScreen(),
                     );
