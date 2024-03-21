@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../widgets/app_logo.dart';
 import '../../widgets/dropdown_button.dart';
 
 class FacHomeScreen extends StatefulWidget {
@@ -13,15 +13,22 @@ class FacHomeScreen extends StatefulWidget {
 String? selectedBatch;
 String? selectedCourse;
 List<Map<String, String>> tableData = [];
+var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.25,
-        leading: const AppLogo(),
+        leading: IconButton(
+          icon: const AppLogo(),
+          onPressed: (){
+           scaffoldKey.currentState?.openDrawer();
+          },
+        ),
         title: const Text('Teacher mail'),
         actions: [
           IconButton(
