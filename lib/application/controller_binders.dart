@@ -6,6 +6,6 @@ class GetXBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(() => FacMainBottomNavController());
-    Get.put(() => FacRegistrationController());
+    Get.put(FacRegistrationController());
   }
 }

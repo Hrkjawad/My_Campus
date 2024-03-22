@@ -8,6 +8,7 @@ import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_text_button.dart';
 import '../../../widgets/text_field_with_trailing.dart';
 import 'fac_sign_in_screen.dart';
+import 'fac_sign_up_screen.dart';
 
 class FacAvailabilityCheckScreen extends StatefulWidget {
   const FacAvailabilityCheckScreen({super.key});
@@ -45,30 +46,36 @@ class _FacAvailabilityCheckScreenState
                   height: 47,
                 ),
                 GetBuilder<FacRegistrationController>(
-                    builder: (facRegController) {
-                      if (facRegController.facRegInProgress) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                  return CustomisedElevatedButton(
-                    onTap: () async {
-                      /*if (_formKey.currentState!.validate()) {
-                        final result = await facRegController
-                            .facReg(_emailTEController.text.trim());
-                        if (result) {
-                          print('hi');
-                        } else {
-                          print('hello');
+                  builder: (facRegistrationController) {
+                    if (facRegistrationController.facRegInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          final result = await facRegistrationController.facReg(
+                            _emailTEController.text.trim(),
+                          );
+                          if (result) {
+                            Get.snackbar(
+                                'Successful!', 'Profile has been updated');
+
+                            Get.offAll(
+                              () => const FacSignUpScreen(),
+                            );
+                          } else {
+                            Get.snackbar(
+                                'Failed!', "Profile couldn't be updated",
+                                colorText: Colors.redAccent);
+                          }
                         }
-                      }*/
-                      /*Get.to(
-                        () => const FacSignUpScreen(),
-                      );*/
-                    },
-                    text: 'CHECK AVAILABILITY',
-                  );
-                }),
+                      },
+                      text: 'CHECK AVAILABILITY',
+                    );
+                  },
+                ),
                 const SizedBox(
                   height: 43,
                 ),
