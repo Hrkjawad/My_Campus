@@ -21,6 +21,7 @@ class FacLoginController extends GetxController {
       "email": email,
     });
     _facLoginInProgress = false;
+    update();
     if (response.isSuccess) {
       _facLoginModel = FacLoginModel.fromJson(response.responseJson!);
       return true;

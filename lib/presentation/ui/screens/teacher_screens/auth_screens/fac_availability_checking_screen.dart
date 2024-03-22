@@ -49,7 +49,9 @@ class _FacAvailabilityCheckScreenState
                   builder: (facLoginController) {
                     if (facLoginController.facLoginInProgress) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
                       );
                     }
                     return CustomisedElevatedButton(
