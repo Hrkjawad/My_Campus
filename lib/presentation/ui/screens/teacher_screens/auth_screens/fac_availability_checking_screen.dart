@@ -54,11 +54,10 @@ class _FacAvailabilityCheckScreenState
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          await facLoginController.facLogin(
+                          final result = await facLoginController.facLogin(
                             ('${_emailTEController.text.trim()}@lus.ac.bd'),
                           );
-                          if (facLoginController.facLoginModel.status ==
-                              "success") {
+                          if (result) {
                             Get.snackbar(
                                 'Successful!', facLoginController.message);
                             _emailTEController.clear();

@@ -21,12 +21,15 @@ class FacLoginController extends GetxController {
       "email": email,
     });
     _facLoginInProgress = false;
+    //update();
     if (response.isSuccess) {
       _facLoginModel = FacLoginModel.fromJson(response.responseJson!);
       _message = _facLoginModel.status!;
+      update();
       return true;
     } else {
-      _message = _facLoginModel.status!;
+      _message = 'fail';
+      update();
       return false;
     }
   }
