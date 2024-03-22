@@ -59,8 +59,9 @@ class _FacAvailabilityCheckScreenState
                           );
                           if (facLoginController.facLoginModel.status ==
                               "success") {
-                            Get.snackbar('Successful!',
-                                'One time Code is sent to this email address');
+                            Get.snackbar(
+                                'Successful!', facLoginController.message);
+                            _emailTEController.clear();
                           } else {
                             Get.snackbar('Failed!', facLoginController.message,
                                 colorText: Colors.redAccent);
@@ -69,24 +70,6 @@ class _FacAvailabilityCheckScreenState
                       },
                       text: 'CHECK AVAILABILITY',
                     );
-                    /*ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                await facLoginController.facLogin(
-                                  ('${_emailTEController.text.trim()}@lus.ac.bd'),
-                                );
-                                if (facLoginController.facLoginModel.status ==
-                                    "success") {
-                                  Get.snackbar('Successful!',
-                                      'One time Code is sent to this email address');
-                                } else {
-                                  Get.snackbar(
-                                      'Failed!', facLoginController.message,
-                                      colorText: Colors.redAccent);
-                                }
-                              }
-                            },
-                            child: Text('press me'));*/
                   },
                 ),
                 const SizedBox(

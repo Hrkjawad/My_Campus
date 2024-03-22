@@ -23,6 +23,7 @@ class FacLoginController extends GetxController {
     _facLoginInProgress = false;
     if (response.isSuccess) {
       _facLoginModel = FacLoginModel.fromJson(response.responseJson!);
+      _message = _facLoginModel.status!;
       return true;
     } else {
       _message = _facLoginModel.status!;
