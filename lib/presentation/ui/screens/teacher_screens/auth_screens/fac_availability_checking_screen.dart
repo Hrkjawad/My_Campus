@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_login_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../widgets/customised_text_button.dart';
+import '../../../widgets/text_field_with_trailing.dart';
 import 'fac_sign_in_screen.dart';
 
 class FacAvailabilityCheckScreen extends StatefulWidget {
@@ -28,137 +32,73 @@ class _FacAvailabilityCheckScreenState
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 112,
-                ),
-                const Text(
-                  'WELCOME',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const Text(
-                  'Join as a Faculty',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF585858),
-                  ),
-                ),
-                const SizedBox(
-                  height: 46,
+                const TitleAndSubtitle(
+                  title: 'WELCOME',
+                  subtitle: 'Join as a Faculty',
                 ),
                 const AppLogo(),
                 const SizedBox(
-                  height: 65,
+                  height: 76,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 205,
-                      child: TextFormField(
-                        controller: _emailTEController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.done,
-                        cursorColor: Colors.black,
-                        decoration: const InputDecoration(
-                          hintText: 'Type your email',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 72,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          enabled: false,
-                          hintText: '@lus.ac.bd',
-                          hintStyle: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.w700),
-                          fillColor: Color(0xFFFFFFFF),
-                          contentPadding: EdgeInsets.only(left: 4),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                TextFieldWithTrailing(emailTEController: _emailTEController),
                 const SizedBox(
-                  height: 40,
+                  height: 47,
                 ),
-                SizedBox(
-                  width: 277,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      /*if (_formKey.currentState!.validate()) {
-                        Get.to(
-                          () => const SignUpScreen(),
-                        );
-                      }*/
-                      Get.to(
-                        () => const FacSignUpScreen(),
+                GetBuilder<FacLoginController>(
+                  builder: (facLoginController) {
+                    if (facLoginController.facLoginInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
                       );
-                    },
-                    child: const Text('CHECK AVAILABILITY'),
-                  ),
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await facLoginController.facLogin(
+                            ('${_emailTEController.text.trim()}@lus.ac.bd'),
+                          );
+                          if (facLoginController.facLoginModel.status ==
+                              "success") {
+                            Get.snackbar('Successful!',
+                                'One time Code is sent to this email address');
+                          } else {
+                            Get.snackbar('Failed!', facLoginController.message,
+                                colorText: Colors.redAccent);
+                          }
+                        }
+                      },
+                      text: 'CHECK AVAILABILITY',
+                    );
+                    /*ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                await facLoginController.facLogin(
+                                  ('${_emailTEController.text.trim()}@lus.ac.bd'),
+                                );
+                                if (facLoginController.facLoginModel.status ==
+                                    "success") {
+                                  Get.snackbar('Successful!',
+                                      'One time Code is sent to this email address');
+                                } else {
+                                  Get.snackbar(
+                                      'Failed!', facLoginController.message,
+                                      colorText: Colors.redAccent);
+                                }
+                              }
+                            },
+                            child: Text('press me'));*/
+                  },
                 ),
                 const SizedBox(
-                  height: 37,
+                  height: 43,
                 ),
-                TextButton(
-                  onPressed: () {
+                CustomisedTextButton(
+                  onTap: () {
                     Get.to(
                       () => const FacSignInScreen(),
                     );
                   },
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF505050),
-                    ),
-                  ),
+                  text: 'Sign In',
                 ),
               ],
             ),

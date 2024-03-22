@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../widgets/customised_elevated_button.dart';
 
 class FacSignUpScreen extends StatefulWidget {
   const FacSignUpScreen({super.key});
@@ -10,9 +12,11 @@ class FacSignUpScreen extends StatefulWidget {
 }
 
 class _FacSignUpScreenState extends State<FacSignUpScreen> {
-  final TextEditingController _oneTimePassTEController = TextEditingController();
+  final TextEditingController _oneTimePassTEController =
+      TextEditingController();
   final TextEditingController _newPassTEController = TextEditingController();
-  final TextEditingController _confirmPassTEController = TextEditingController();
+  final TextEditingController _confirmPassTEController =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -26,34 +30,14 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 112,
-                  ),
-                  const Text(
-                    'SIGN UP',
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  const Text(
-                    'Join as a Faculty',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF585858),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 46,
-                  ),
+                  const TitleAndSubtitle(
+                      title: 'SIGN UP', subtitle: 'Join as a Faculty'),
                   const AppLogo(),
                   const SizedBox(
-                    height: 66,
+                    height: 77,
                   ),
                   SizedBox(
-                    width: 277,
+                    width: 323,
                     child: Column(
                       children: [
                         TextFormField(
@@ -71,7 +55,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 12,
                         ),
                         TextFormField(
                           controller: _newPassTEController,
@@ -92,7 +76,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                           },
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 12,
                         ),
                         TextFormField(
                           controller: _confirmPassTEController,
@@ -100,8 +84,8 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                           textInputAction: TextInputAction.done,
                           obscureText: true,
                           cursorColor: Colors.black,
-                          decoration:
-                              const InputDecoration(hintText: 'Confirm password'),
+                          decoration: const InputDecoration(
+                              hintText: 'Confirm password'),
                           validator: (String? value) {
                             if (value != _newPassTEController.text) {
                               return "Password didn't match";
@@ -113,17 +97,13 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 36,
+                    height: 42,
                   ),
-                  SizedBox(
-                    width: 277,
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {}
-                      },
-                      child: const Text('REGISTER'),
-                    ),
+                  CustomisedElevatedButton(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {}
+                    },
+                    text: 'REGISTER',
                   ),
                 ],
               ),

@@ -11,7 +11,7 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(45),
+        borderRadius: BorderRadius.circular(53),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
@@ -23,6 +23,8 @@ class AppLogo extends StatelessWidget {
       ),
       child: SvgPicture.asset(
         ImageAssets.myCampusLogoSVG,
+        width: 152,
+        height: 137,
       ),
     );
   }

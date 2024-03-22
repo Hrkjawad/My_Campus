@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_availability_checking_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_availability_checking_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../widgets/app_logo.dart';
 
@@ -22,39 +23,29 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 225,
+                height: 263,
               ),
               const AppLogo(),
               const SizedBox(
-                height: 58,
+                height: 68,
               ),
-              SizedBox(
-                width: 277,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
+              CustomisedElevatedButton(
+                  onTap: () {
                     Get.to(
                       () => const FacAvailabilityCheckScreen(),
                     );
                   },
-                  child: const Text('FACULTY MEMBER'),
-                ),
-              ),
+                  text: 'FACULTY MEMBER'),
               const SizedBox(
-                height: 43,
-              ),
-              SizedBox(
-                width: 277,
                 height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
+              ),
+              CustomisedElevatedButton(
+                  onTap: () {
                     Get.to(
                       () => const StuAvailabilityCheckScreen(),
                     );
                   },
-                  child: const Text('STUDENT'),
-                ),
-              ),
+                  text: 'STUDENT'),
             ],
           ),
         ),
