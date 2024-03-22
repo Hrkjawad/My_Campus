@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_login_controller.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -48,7 +49,9 @@ class _FacAvailabilityCheckScreenState
                   builder: (facLoginController) {
                     if (facLoginController.facLoginInProgress) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
                       );
                     }
                     return CustomisedElevatedButton(
@@ -60,7 +63,9 @@ class _FacAvailabilityCheckScreenState
                           if (result) {
                             Get.snackbar(
                                 'Successful!', facLoginController.message);
-                            _emailTEController.clear();
+                            Get.to(
+                              () => const FacSignUpScreen(),
+                            );
                           } else {
                             Get.snackbar('Failed!', facLoginController.message,
                                 colorText: Colors.redAccent);

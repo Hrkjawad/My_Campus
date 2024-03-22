@@ -24,11 +24,11 @@ class FacLoginController extends GetxController {
     //update();
     if (response.isSuccess) {
       _facLoginModel = FacLoginModel.fromJson(response.responseJson!);
-      _message = _facLoginModel.status!;
+      _message = 'OTP has been sent to this email address';
       update();
       return true;
     } else {
-      _message = 'fail';
+      _message = 'Email is not found in database!!';
       update();
       return false;
     }
