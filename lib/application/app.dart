@@ -44,15 +44,19 @@ class MyCampus extends StatelessWidget {
               fontWeight: FontWeight.bold),
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           disabledBorder: const OutlineInputBorder(),

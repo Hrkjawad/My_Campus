@@ -5,7 +5,6 @@ import '../../presentation/state_holders/auth_controller.dart';
 import '../models/network_response.dart';
 
 class NetworkCaller {
-  /// get request method
   static Future<NetworkResponse> getRequest(String url) async {
     try {
       Response response = await get(
@@ -78,12 +77,13 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-  // static Future<void> gotoLogin() async {
-  //   await AuthController.clearUserInfo();
-  //   Navigator.pushAndRemoveUntil(
-  //       CraftyBay.globalKey.currentContext!,
-  //       MaterialPageRoute(
-  //           builder: (context) => const EmailVerificationScreen()),
-  //           (route) => false);
-  // }
+/*  static Future<void> gotoLogin() async {
+    await AuthController.clear();
+    Navigator.pushAndRemoveUntil(
+        CraftyBay.globalKey.currentContext!,
+        MaterialPageRoute(
+          builder: (context) => const EmailVerificationScreen(),
+        ),
+            (route) => false);
+  }*/
 }
