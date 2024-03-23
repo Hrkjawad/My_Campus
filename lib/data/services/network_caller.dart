@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:my_campus/presentation/ui/screens/home_screen.dart';
+import '../../application/app.dart';
 import '../../presentation/state_holders/auth_controller.dart';
 import '../models/network_response.dart';
 
@@ -24,7 +27,7 @@ class NetworkCaller {
           jsonDecode(response.body),
         );
       } else if (response.statusCode == 401) {
-        //gotoLogin();
+        gotoLogin();
       } else {
         return NetworkResponse(
           false,
@@ -62,7 +65,7 @@ class NetworkCaller {
         );
       } else if (response.statusCode == 401) {
         if (isLogin == false) {
-          //gotoLogin();
+          gotoLogin();
         }
       } else {
         return NetworkResponse(
@@ -77,13 +80,13 @@ class NetworkCaller {
     return NetworkResponse(false, -1, null);
   }
 
-/*  static Future<void> gotoLogin() async {
+  static Future<void> gotoLogin() async {
     await AuthController.clear();
     Navigator.pushAndRemoveUntil(
-        CraftyBay.globalKey.currentContext!,
+        MyCampus.globalKey.currentContext!,
         MaterialPageRoute(
-          builder: (context) => const EmailVerificationScreen(),
+          builder: (context) => const HomeScreen(),
         ),
-            (route) => false);
-  }*/
+        (route) => false);
+  }
 }

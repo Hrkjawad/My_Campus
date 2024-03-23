@@ -4,12 +4,22 @@ import 'package:my_campus/presentation/ui/screens/splash_screen.dart';
 import '../presentation/ui/utility/app_colors.dart';
 import 'controller_binders.dart';
 
-class MyCampus extends StatelessWidget {
+class MyCampus extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
+
   const MyCampus({super.key});
 
   @override
+  State<MyCampus> createState() => _MyCampusState();
+}
+
+State<MyCampus> createState() => _MyCampusState();
+
+class _MyCampusState extends State<MyCampus> {
+  @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: MyCampus.globalKey,
       home: const SplashScreen(),
       initialBinding: GetXBindings(),
       debugShowCheckedModeBanner: false,

@@ -36,6 +36,7 @@ class FacRegistrationController extends GetxController {
 }
 */
 
+/*
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import '../../../data/models/faculty_model/fac_registration_model.dart';
 import '../../../data/models/network_response.dart';
@@ -73,3 +74,4 @@ class FacRegistrationController extends GetxController {
     }
   }
 }
+*/

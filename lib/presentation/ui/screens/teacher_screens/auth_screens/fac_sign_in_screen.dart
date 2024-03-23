@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_login_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
+import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
@@ -38,40 +40,45 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   height: 76,
                 ),
                 TextFieldWithTrailing(emailTEController: _emailTEController),
-
                 const SizedBox(
-                  height: 13,
+                  height: 12,
                 ),
-                SizedBox(
-                  width: 323,
-                  child: TextFormField(
-                    controller: _passTEController,
-                    keyboardType: TextInputType.visiblePassword,
-                    textInputAction: TextInputAction.done,
-                    decoration:
-                        const InputDecoration(hintText: 'Enter password'),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your password';
-                      }
-                      if (value!.length < 6) {
-                        return 'Password length must be more than 6';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
+                PasswordTextField(
+                    emailTEController: _passTEController, isObscure: true),
                 const SizedBox(
                   height: 41,
                 ),
-                CustomisedElevatedButton(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {}
-                    Get.to(
-                      () => const FacMainBottomNavScreen(),
+                GetBuilder<FacLoginController>(
+                  builder: (facLoginController) {
+                    if (facLoginController.facLoginInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
+                      );
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          final result = await facLoginController.facLogin(
+                            ('${_emailTEController.text.trim()}@lus.ac.bd'),
+                            _passTEController.text.trim(),
+                          );
+                          if (result) {
+                            Get.snackbar(
+                                'Successful!', facLoginController.message);
+                            Get.to(
+                              () => const FacMainBottomNavScreen(),
+                            );
+                          } else {
+                            Get.snackbar('Failed!', facLoginController.message,
+                                colorText: Colors.redAccent);
+                          }
+                        }
+                      },
+                      text: 'LOGIN',
                     );
                   },
-                  text: 'LOGIN',
                 ),
                 const SizedBox(
                   height: 34,
