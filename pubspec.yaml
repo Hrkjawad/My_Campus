@@ -20,6 +20,7 @@ dependencies:
   webview_flutter: any
   url_launcher: ^6.0.7
   dropdown_button2: ^2.3.9
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
