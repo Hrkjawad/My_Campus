@@ -466,7 +466,7 @@ class _FacTeacherAndTaskState extends State<FacTeacherAndTask> {
                     SingleChildScrollView(
                       child: SizedBox(
                         height: 400,
-                        width: 380, // Adjust the width of the DataTable
+                        width: 380,
                         child: DataTable(
                           columnSpacing: 20,
                           columns: const [
