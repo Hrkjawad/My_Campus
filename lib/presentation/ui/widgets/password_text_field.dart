@@ -4,10 +4,11 @@ class PasswordTextField extends StatefulWidget {
   PasswordTextField({
     super.key,
     required TextEditingController emailTEController,
-    required this.isObscure,
+    required this.isObscure, required this.hintText,
   }) : _passwordTEController = emailTEController;
 
   final TextEditingController _passwordTEController;
+  final String hintText;
   bool isObscure;
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -25,7 +26,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         obscureText: widget.isObscure,
         cursorColor: Colors.black,
         decoration: InputDecoration(
-          hintText: 'Confirm password',
+          hintText: widget.hintText,
           suffixIcon: IconButton(
             onPressed: () {
               widget.isObscure = !widget.isObscure;

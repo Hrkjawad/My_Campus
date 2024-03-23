@@ -44,7 +44,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   height: 12,
                 ),
                 PasswordTextField(
-                    emailTEController: _passTEController, isObscure: true),
+                    emailTEController: _passTEController, isObscure: true, hintText: 'Confirm Password',),
                 const SizedBox(
                   height: 41,
                 ),

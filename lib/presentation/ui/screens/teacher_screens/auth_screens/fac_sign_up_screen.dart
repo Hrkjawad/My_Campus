@@ -62,14 +62,14 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                   ),
                   PasswordTextField(
                     emailTEController: _newPassTEController,
-                    isObscure: true,
+                    isObscure: true, hintText: 'New Password',
                   ),
                   const SizedBox(
                     height: 12,
                   ),
                   PasswordTextField(
                     emailTEController: _confirmPassTEController,
-                    isObscure: true,
+                    isObscure: true, hintText: 'Confirm Password',
                   ),
                   const SizedBox(
                     height: 42,

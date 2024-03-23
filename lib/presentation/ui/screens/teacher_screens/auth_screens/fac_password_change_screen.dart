@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
@@ -37,39 +38,18 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                     width: 323,
                     child: Column(
                       children: [
-                        TextFormField(
-                          controller: _newPassTEController,
-                          keyboardType: TextInputType.visiblePassword,
-                          textInputAction: TextInputAction.next,
-                          obscureText: true,
-                          decoration:
-                              const InputDecoration(hintText: 'New password'),
-                          validator: (String? value) {
-                            if (value?.isEmpty ?? true) {
-                              return 'Please enter new password';
-                            }
-                            if (value!.length < 6) {
-                              return 'Password length must be more than 6';
-                            }
-                            return null;
-                          },
+                        PasswordTextField(
+                          emailTEController: _newPassTEController,
+                          isObscure: true,
+                          hintText: 'New Password',
                         ),
                         const SizedBox(
                           height: 13,
                         ),
-                        TextFormField(
-                          controller: _confirmTEController,
-                          keyboardType: TextInputType.visiblePassword,
-                          textInputAction: TextInputAction.done,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                              hintText: 'Confirm password'),
-                          validator: (String? value) {
-                            if (value != _newPassTEController.text) {
-                              return "Password didn't match";
-                            }
-                            return null;
-                          },
+                        PasswordTextField(
+                          emailTEController: _confirmTEController,
+                          isObscure: true,
+                          hintText: 'Confirm Password',
                         ),
                       ],
                     ),
