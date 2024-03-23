@@ -397,163 +397,166 @@ class _FacTeacherAndTaskState extends State<FacTeacherAndTask> {
               Expanded(
                 child: Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Container(
-                        width: 370,
-                        height: 380,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF8FFAC),
-                          border: Border.all(
-                            color: const Color(0x999B9B9B),
+                    Container(
+                      width: 380,
+                      height: 380,
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF8FFAC),
+                        border: Border.all(
+                          color: const Color(0x999B9B9B),
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 290,
+                      height: 380,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        border: Border(
+                          left: BorderSide(
+                            color: Color(0x999B9B9B),
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(20),
+                          top: BorderSide(
+                            color: Color(0x999B9B9B),
+                          ),
+                          bottom: BorderSide(
+                            color: Color(0x999B9B9B),
                           ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Container(
-                        width: 290,
-                        height: 380,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                          ),
-                          border: Border(
-                            left: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            top: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            bottom: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                          ),
+                    Container(
+                      width: 90,
+                      height: 380,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFF8FFAC),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12.0),
-                      child: Container(
-                        width: 90,
-                        height: 380,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFF8FFAC),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
+                        border: Border(
+                          left: BorderSide(
+                            color: Color(0x999B9B9B),
                           ),
-                          border: Border(
-                            left: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            top: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            bottom: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
+                          top: BorderSide(
+                            color: Color(0x999B9B9B),
+                          ),
+                          bottom: BorderSide(
+                            color: Color(0x999B9B9B),
                           ),
                         ),
                       ),
                     ),
                     SingleChildScrollView(
-                      child: SizedBox(
-                        height: 400,
-                        width: 380,
-                        child: DataTable(
-                          columnSpacing: 20,
-                          columns: const [
-                            DataColumn(
-                              label: Text(
-                                'Batch',
-                                style: TextStyle(
-                                  color: Color(0xFF0D6858),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 26,
-                                ),
+                      child: DataTable(
+                        dataRowMaxHeight: 105,
+                        columnSpacing: 24,
+                        horizontalMargin: 10,
+                        columns: const [
+                          DataColumn(
+                            label: Text(
+                              'Batch',
+                              style: TextStyle(
+                                color: Color(0xFF0D6858),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 26,
                               ),
                             ),
-                            DataColumn(
-                              label: Text(
-                                'Exam & Task',
-                                style: TextStyle(
-                                  color: Color(0xFF0D6858),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 26,
-                                ),
+                          ),
+                          DataColumn(
+                            label: Text(
+                              'Exam & Task',
+                              style: TextStyle(
+                                color: Color(0xFF0D6858),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 26,
                               ),
                             ),
-                            DataColumn(
-                              label: Text(
-                                'Date',
-                                style: TextStyle(
-                                  color: Color(0xFF0D6858),
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 26,
-                                ),
+                          ),
+                          DataColumn(
+                            label: Text(
+                              'Date',
+                              style: TextStyle(
+                                color: Color(0xFF0D6858),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 26,
                               ),
                             ),
-                          ],
-                          rows: tableData.map(
-                                (data) {
-                              return DataRow(
-                                cells: [
-                                  DataCell(
-                                    SizedBox(
-                                      width: 80,
-                                      child: Text(
-                                        data['Batch']!,
-                                        softWrap: true,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 19,
+                          ),
+                        ],
+                        rows: tableData.map(
+                              (data) {
+                            return DataRow(
+                              cells: [
+                                DataCell(
+                                  SizedBox(
+                                    width: 80,
+                                    child: Wrap(
+                                      children: [
+                                        Text(
+                                          data['Batch']!,
+                                          softWrap: true,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 19,
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 160,
-                                      child: Text(
-                                        data['Exam&Task']!,
-                                        softWrap: true,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 19,
+                                ),
+                                DataCell(
+                                  SizedBox(
+                                    width: 160,
+                                    child: Wrap(
+                                      children: [
+                                        Text(
+                                          data['Exam&Task']!,
+                                          softWrap: true,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 19,
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
-                                  DataCell(
-                                    SizedBox(
-                                      width: 80,
-                                      child: Text(
-                                        data['Date']!,
-                                        softWrap: true,
-                                        style: const TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 14,
+                                ),
+                                DataCell(
+                                  SizedBox(
+                                    width: 80,
+                                    child: Wrap(
+                                      children: [
+                                        Text(
+                                          data['Date']!,
+                                          softWrap: true,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              );
-                            },
-                          ).toList(),
-                        ),
+                                ),
+                              ],
+                            );
+                          },
+                        ).toList(),
                       ),
                     ),
+
+
                   ],
                 ),
               ),
