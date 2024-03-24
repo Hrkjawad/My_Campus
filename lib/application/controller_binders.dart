@@ -13,7 +13,7 @@ class GetXBindings extends Bindings {
     Get.put(() => FacMainBottomNavController());
     //Get.put(FacRegistrationController());
     Get.put(FacAvailabilityCheckingController());
-    Get.put(FacLoginController());
+    Get.put(FacSignInController());
     Get.put(FacSignupController());
     Get.put(FacVerifyEmailController());
     Get.put(FacVerifyOTPController());

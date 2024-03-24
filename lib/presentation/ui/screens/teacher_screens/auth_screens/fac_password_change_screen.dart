@@ -85,16 +85,17 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                         );
                       }
                       return GetBuilder<FacPasswordChangeController>(
-                          builder: (facPasswordChangeController) {
-                        return CustomisedElevatedButton(
-                            onTap: () async {
-                              if (_formKey.currentState!.validate()) {
-                                verifyOTP(facVerifyOTPController,
-                                    facPasswordChangeController);
-                              }
-                            },
-                            text: 'SUBMIT');
-                      });
+                        builder: (facPasswordChangeController) {
+                          return CustomisedElevatedButton(
+                              onTap: () async {
+                                if (_formKey.currentState!.validate()) {
+                                  verifyOTP(facVerifyOTPController,
+                                      facPasswordChangeController);
+                                }
+                              },
+                              text: 'SUBMIT');
+                        },
+                      );
                     },
                   ),
                 ],

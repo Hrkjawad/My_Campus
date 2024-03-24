@@ -46,8 +46,8 @@ class _FacAvailabilityCheckScreenState
                   height: 47,
                 ),
                 GetBuilder<FacAvailabilityCheckingController>(
-                  builder: (facFacAvailabilityCheckingController) {
-                    if (facFacAvailabilityCheckingController
+                  builder: (facAvailabilityCheckingController) {
+                    if (facAvailabilityCheckingController
                         .facAvailabilityCheckingProgress) {
                       return const Center(
                         child: CircularProgressIndicator(
@@ -58,22 +58,8 @@ class _FacAvailabilityCheckScreenState
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          final result =
-                              await facFacAvailabilityCheckingController
-                                  .facAvailabilityCheck(
-                            ('${_emailTEController.text.trim()}@lus.ac.bd'),
-                          );
-                          if (result) {
-                            Get.snackbar('Successful!',
-                                facFacAvailabilityCheckingController.message);
-                            Get.to(
-                              () => const FacSignUpScreen(),
-                            );
-                          } else {
-                            Get.snackbar('Failed!',
-                                facFacAvailabilityCheckingController.message,
-                                colorText: Colors.redAccent);
-                          }
+                          facAvailabilityCheck(
+                              facAvailabilityCheckingController);
                         }
                       },
                       text: 'CHECK AVAILABILITY',
@@ -97,5 +83,22 @@ class _FacAvailabilityCheckScreenState
         ),
       ),
     );
+  }
+
+  Future<void> facAvailabilityCheck(
+      FacAvailabilityCheckingController
+          facAvailabilityCheckingController) async {
+    final result = await facAvailabilityCheckingController.facAvailabilityCheck(
+      ('${_emailTEController.text.trim()}@lus.ac.bd'),
+    );
+    if (result) {
+      Get.snackbar('Successful!', facAvailabilityCheckingController.message);
+      Get.to(
+        () => const FacSignUpScreen(),
+      );
+    } else {
+      Get.snackbar('Failed!', facAvailabilityCheckingController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

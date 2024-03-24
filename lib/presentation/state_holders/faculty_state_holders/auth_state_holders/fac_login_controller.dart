@@ -5,32 +5,32 @@ import '../../../../data/services/network_caller.dart';
 import '../../../../data/utility/urls.dart';
 import '../../auth_controller.dart';
 
-class FacLoginController extends GetxController {
-  bool _facLoginInProgress = false;
+class FacSignInController extends GetxController {
+  bool _facSignInInProgress = false;
   String _message = '';
-  FacLoginModel _facLoginModel = FacLoginModel();
+  FacSignInModel _facSignInModel = FacSignInModel();
 
-  bool get facLoginInProgress => _facLoginInProgress;
+  bool get facSignInInProgress => _facSignInInProgress;
   String get message => _message;
-  FacLoginModel get facLoginModel => _facLoginModel;
+  FacSignInModel get facLoginModel => _facSignInModel;
 
-  Future<bool> facLogin(String email, String password) async {
-    _facLoginInProgress = true;
+  Future<bool> facSignIn(String email, String password) async {
+    _facSignInInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller.postRequest(Urls.facultyLogin, {
+        await NetworkCaller.postRequest(Urls.facultySignIn, {
       "email": email,
       "password": password,
     });
-    _facLoginInProgress = false;
+    _facSignInInProgress = false;
     update();
     if (response.isSuccess) {
-      _facLoginModel = FacLoginModel.fromJson(response.responseJson!);
+      _facSignInModel = FacSignInModel.fromJson(response.responseJson!);
       await AuthController.setAccessToken(response.responseJson?['token']);
-      _message = 'Logged In';
+      _message = 'Signed In';
       return true;
     } else {
-      _message = 'Could not log in!!';
+      _message = "Couldn't sign in!!";
       return false;
     }
   }

@@ -8,24 +8,24 @@ import '../../auth_controller.dart';
 class FacAvailabilityCheckingController extends GetxController {
   bool _facAvailabilityCheckingInProgress = false;
   String _message = '';
-  FacLoginModel _facLoginModel = FacLoginModel();
+  FacSignInModel _facLoginModel = FacSignInModel();
 
   bool get facAvailabilityCheckingProgress =>
       _facAvailabilityCheckingInProgress;
   String get message => _message;
-  FacLoginModel get facLoginModel => _facLoginModel;
+  FacSignInModel get facLoginModel => _facLoginModel;
 
   Future<bool> facAvailabilityCheck(String email) async {
     _facAvailabilityCheckingInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller.postRequest(Urls.facultyLogin, {
+        await NetworkCaller.postRequest(Urls.facultySignIn, {
       "email": email,
     });
     _facAvailabilityCheckingInProgress = false;
     update();
     if (response.isSuccess) {
-      _facLoginModel = FacLoginModel.fromJson(response.responseJson!);
+      _facLoginModel = FacSignInModel.fromJson(response.responseJson!);
       await AuthController.setAccessToken(response.responseJson?['token']);
       _message = '6 digit OTP has been sent to this email address';
       return true;

@@ -52,24 +52,7 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          final result =
-                              await facVerifyEmailController.facVerifyEmail(
-                            _emailTEController.text.trim(),
-                            /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
-                          );
-                          if (result) {
-                            Get.snackbar('Successful!',
-                                facVerifyEmailController.message);
-                            Get.to(
-                              () => FacPasswordChangeScreen(
-                                email: _emailTEController.text.trim(),
-                              ),
-                            );
-                          } else {
-                            Get.snackbar(
-                                'Failed!', facVerifyEmailController.message,
-                                colorText: Colors.redAccent);
-                          }
+                          facVerifyEmail(facVerifyEmailController);
                         }
                       },
                       text: 'SUBMIT',
@@ -82,5 +65,24 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> facVerifyEmail(
+      FacVerifyEmailController facVerifyEmailController) async {
+    final result = await facVerifyEmailController.facVerifyEmail(
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+    );
+    if (result) {
+      Get.snackbar('Successful!', facVerifyEmailController.message);
+      Get.to(
+        () => FacPasswordChangeScreen(
+          email: _emailTEController.text.trim(),
+        ),
+      );
+    } else {
+      Get.snackbar('Failed!', facVerifyEmailController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

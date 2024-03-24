@@ -44,13 +44,16 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   height: 12,
                 ),
                 PasswordTextField(
-                    emailTEController: _passTEController, isObscure: true, hintText: 'Confirm Password',),
+                  emailTEController: _passTEController,
+                  isObscure: true,
+                  hintText: 'Confirm Password',
+                ),
                 const SizedBox(
                   height: 41,
                 ),
-                GetBuilder<FacLoginController>(
+                GetBuilder<FacSignInController>(
                   builder: (facLoginController) {
-                    if (facLoginController.facLoginInProgress) {
+                    if (facLoginController.facSignInInProgress) {
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.teal,
@@ -60,23 +63,10 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          final result = await facLoginController.facLogin(
-                            ('${_emailTEController.text.trim()}@lus.ac.bd'),
-                            _passTEController.text.trim(),
-                          );
-                          if (result) {
-                            Get.snackbar(
-                                'Successful!', facLoginController.message);
-                            Get.to(
-                              () => const FacMainBottomNavScreen(),
-                            );
-                          } else {
-                            Get.snackbar('Failed!', facLoginController.message,
-                                colorText: Colors.redAccent);
-                          }
+                          facSignIn(facLoginController);
                         }
                       },
-                      text: 'LOGIN',
+                      text: 'SIGN IN',
                     );
                   },
                 ),
@@ -96,5 +86,21 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> facSignIn(FacSignInController facLoginController) async {
+    final result = await facLoginController.facSignIn(
+      ('${_emailTEController.text.trim()}@lus.ac.bd'),
+      _passTEController.text.trim(),
+    );
+    if (result) {
+      Get.snackbar('Successful!', facLoginController.message);
+      Get.to(
+        () => const FacMainBottomNavScreen(),
+      );
+    } else {
+      Get.snackbar('Failed!', facLoginController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }
