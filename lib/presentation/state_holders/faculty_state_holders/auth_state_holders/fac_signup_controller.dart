@@ -1,29 +1,34 @@
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/faculty_model/auth_models/fac_signup_model.dart';
+import '../../../../data/models/faculty_model/auth_models/fac_password_change_model.dart';
 import '../../../../data/models/network_response.dart';
 import '../../../../data/services/network_caller.dart';
 import '../../../../data/utility/urls.dart';
 
-class FacSignupController extends GetxController {
+class FacSignUpController extends GetxController {
   bool _facSignupInProgress = false;
   String _message = '';
-  FacSignupModel _facSignupModel = FacSignupModel();
+  FacPasswordChangeModel _facPasswordChangeModel = FacPasswordChangeModel();
 
   bool get facSignupInProgress => _facSignupInProgress;
   String get message => _message;
-  FacSignupModel get facSignupModel => _facSignupModel;
+  FacPasswordChangeModel get facPasswordChangeModel => _facPasswordChangeModel;
 
-  Future<bool> facSignup(String password) async {
+  Future<bool> facSignUp(String email, otp, password) async {
     _facSignupInProgress = true;
     update();
-    final NetworkResponse response =
-        await NetworkCaller.postRequest(Urls.facultySignup, {
-      "password": password,
-    });
+    final NetworkResponse response = await NetworkCaller.postRequest(
+      Urls.facultyPasswordChange,
+      {
+        "email": email,
+        "OTP": otp,
+        "password": password,
+      },
+    );
     _facSignupInProgress = false;
     update();
     if (response.isSuccess) {
-      _facSignupModel = FacSignupModel.fromJson(response.responseJson!);
+      _facPasswordChangeModel =
+          FacPasswordChangeModel.fromJson(response.responseJson!);
       _message = 'Sign up completed';
       return true;
     } else {

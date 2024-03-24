@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signup_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
@@ -9,15 +10,15 @@ import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
 
 class FacSignUpScreen extends StatefulWidget {
-  const FacSignUpScreen({super.key});
+  const FacSignUpScreen({super.key, required this.email});
+  final String email;
 
   @override
   State<FacSignUpScreen> createState() => _FacSignUpScreenState();
 }
 
 class _FacSignUpScreenState extends State<FacSignUpScreen> {
-  final TextEditingController _oneTimePassTEController =
-      TextEditingController();
+  final TextEditingController _otpTEController = TextEditingController();
   final TextEditingController _newPassTEController = TextEditingController();
   final TextEditingController _confirmPassTEController =
       TextEditingController();
@@ -43,15 +44,17 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                   SizedBox(
                     width: 323,
                     child: TextFormField(
-                      controller: _oneTimePassTEController,
+                      controller: _otpTEController,
                       keyboardType: TextInputType.number,
                       textInputAction: TextInputAction.next,
                       cursorColor: Colors.black,
-                      decoration:
-                          const InputDecoration(hintText: 'One time password'),
+                      decoration: const InputDecoration(hintText: 'OTP'),
                       validator: (String? value) {
                         if (value?.trim().isEmpty ?? true) {
-                          return 'Please enter one time password';
+                          return 'Please enter OTP';
+                        }
+                        if (value?.trim().length != 6) {
+                          return 'OTP length is 6';
                         }
                         return null;
                       },
@@ -62,47 +65,39 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                   ),
                   PasswordTextField(
                     emailTEController: _newPassTEController,
-                    isObscure: true, hintText: 'New Password',
+                    isObscure: true,
+                    hintText: 'New Password',
                   ),
                   const SizedBox(
                     height: 12,
                   ),
                   PasswordTextField(
                     emailTEController: _confirmPassTEController,
-                    isObscure: true, hintText: 'Confirm Password',
+                    isObscure: true,
+                    hintText: 'Confirm Password',
                   ),
                   const SizedBox(
                     height: 42,
                   ),
-                  GetBuilder<FacSignupController>(
-                    builder: (facSignupController) {
-                      if (facSignupController.facSignupInProgress) {
+                  GetBuilder<FacVerifyOTPController>(
+                    builder: (facVerifyOTPController) {
+                      if (facVerifyOTPController.facVerifyOTPInProgress) {
                         return const Center(
                           child: CircularProgressIndicator(
                             color: Colors.teal,
                           ),
                         );
                       }
-                      return CustomisedElevatedButton(
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final result = await facSignupController.facSignup(
-                              _newPassTEController.text.trim(),
-                            );
-                            if (result) {
-                              Get.snackbar(
-                                  'Successful!', facSignupController.message);
-                              Get.to(
-                                () => const FacSignInScreen(),
-                              );
-                            } else {
-                              Get.snackbar(
-                                  'Failed!', facSignupController.message,
-                                  colorText: Colors.redAccent);
-                            }
-                          }
+                      return GetBuilder<FacSignUpController>(
+                        builder: (facSignUpController) {
+                          return CustomisedElevatedButton(
+                            onTap: () async {
+                              verifyOTP(
+                                  facVerifyOTPController, facSignUpController);
+                            },
+                            text: 'SIGN UP',
+                          );
                         },
-                        text: 'SIGN UP',
                       );
                     },
                   ),
@@ -113,5 +108,38 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> verifyOTP(FacVerifyOTPController facVerifyOTPController,
+      FacSignUpController facSignUpController) async {
+    final result = await facVerifyOTPController.facVerifyOTP(
+      widget.email,
+      _otpTEController.text.trim(),
+    );
+    if (result) {
+      Get.snackbar('Successful!', facVerifyOTPController.message);
+      changePassword(facSignUpController);
+    } else {
+      Get.snackbar('Failed!', facVerifyOTPController.message,
+          colorText: Colors.redAccent);
+    }
+  }
+
+  Future<void> changePassword(
+      FacSignUpController facSignUpController) async {
+    final result = await facSignUpController.facSignUp(
+      widget.email,
+      _otpTEController.text.trim(),
+      _newPassTEController.text,
+    );
+    if (result) {
+      Get.snackbar('Successful!', facSignUpController.message);
+      Get.to(
+            () => const FacSignInScreen(),
+      );
+    } else {
+      Get.snackbar('Failed!', facSignUpController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

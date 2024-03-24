@@ -90,7 +90,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
 
   Future<void> facSignIn(FacSignInController facLoginController) async {
     final result = await facLoginController.facSignIn(
-      ('${_emailTEController.text.trim()}@lus.ac.bd'),
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
       _passTEController.text.trim(),
     );
     if (result) {

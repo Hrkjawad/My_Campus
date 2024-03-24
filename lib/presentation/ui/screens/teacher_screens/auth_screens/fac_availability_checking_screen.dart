@@ -89,12 +89,15 @@ class _FacAvailabilityCheckScreenState
       FacAvailabilityCheckingController
           facAvailabilityCheckingController) async {
     final result = await facAvailabilityCheckingController.facAvailabilityCheck(
-      ('${_emailTEController.text.trim()}@lus.ac.bd'),
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
     );
     if (result) {
       Get.snackbar('Successful!', facAvailabilityCheckingController.message);
       Get.to(
-        () => const FacSignUpScreen(),
+        () => FacSignUpScreen(
+          email: _emailTEController.text.trim(),
+        ),
       );
     } else {
       Get.snackbar('Failed!', facAvailabilityCheckingController.message,
