@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:my_campus/data/models/faculty_model/auth_models/fac_signup_model.dart';
-import '../../../data/models/network_response.dart';
-import '../../../data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
+import '../../../../data/models/network_response.dart';
+import '../../../../data/services/network_caller.dart';
+import '../../../../data/utility/urls.dart';
 
 class FacSignupController extends GetxController {
   bool _facSignupInProgress = false;
@@ -17,7 +17,7 @@ class FacSignupController extends GetxController {
     _facSignupInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller.postRequest(Urls.facultyPassChange, {
+        await NetworkCaller.postRequest(Urls.facultySignup, {
       "password": password,
     });
     _facSignupInProgress = false;

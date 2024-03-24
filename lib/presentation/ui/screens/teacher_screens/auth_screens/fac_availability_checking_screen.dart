@@ -5,7 +5,7 @@ import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
-import '../../../../state_holders/faculty_state_holders/fac_availability_checking_controller.dart';
+import '../../../../state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
 import '../../../widgets/customised_text_button.dart';
 import '../../../widgets/text_field_with_trailing.dart';
 import 'fac_sign_in_screen.dart';

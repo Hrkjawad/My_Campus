@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:my_campus/data/models/faculty_model/auth_models/fac_login_model.dart';
-import '../../../data/models/network_response.dart';
-import '../../../data/services/network_caller.dart';
-import '../../../data/utility/urls.dart';
-import '../auth_controller.dart';
+import '../../../../data/models/network_response.dart';
+import '../../../../data/services/network_caller.dart';
+import '../../../../data/utility/urls.dart';
+import '../../auth_controller.dart';
 
 class FacLoginController extends GetxController {
   bool _facLoginInProgress = false;
