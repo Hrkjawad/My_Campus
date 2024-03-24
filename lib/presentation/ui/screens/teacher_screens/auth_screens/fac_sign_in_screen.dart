@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_login_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';

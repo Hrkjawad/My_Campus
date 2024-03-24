@@ -25,7 +25,6 @@ class FacAvailabilityCheckingController extends GetxController {
     if (response.isSuccess) {
       _facVerifyEmailModel =
           FacVerifyEmailModel.fromJson(response.responseJson!);
-      //await AuthController.setAccessToken(response.responseJson?['token']);
       _message = '6 digit OTP has been sent to this email address';
       return true;
     } else {

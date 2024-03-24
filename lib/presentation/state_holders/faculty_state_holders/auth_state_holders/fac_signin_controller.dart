@@ -30,7 +30,7 @@ class FacSignInController extends GetxController {
       _message = 'Signed In';
       return true;
     } else {
-      _message = "Couldn't sign in!!";
+      _message = 'No user found. Try again!!';
       return false;
     }
   }
