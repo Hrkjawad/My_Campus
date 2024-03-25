@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_logo.dart';
 
-AppBar facAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
+AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey, String title) {
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0.25,
@@ -11,7 +11,7 @@ AppBar facAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
         scaffoldKey.currentState!.openDrawer();
       },
     ),
-    title: const Text('Teacher mail'),
+    title:  Text(title),
     actions: [
       IconButton(
         onPressed: () {

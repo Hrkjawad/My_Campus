@@ -16,7 +16,7 @@ class _FacMainBottomNavScreenState extends State<FacMainBottomNavScreen> {
       Get.put(FacMainBottomNavController());
   final List<Widget> _screens = [
     const FacHomeScreen(),
-    const FacTeacherAndTask(),
+    const FacAddTask(),
   ];
   @override
   Widget build(BuildContext context) {

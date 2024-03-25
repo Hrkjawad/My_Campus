@@ -18,7 +18,6 @@ class CustomDropdownButton extends StatelessWidget {
     required this.height,
     required this.width,
     required this.dropDownWidth,
-
     this.value,
   });
 
@@ -40,23 +39,25 @@ class CustomDropdownButton extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            items: items.map((String item) {
-              return DropdownMenuItem<String>(
-                value: item,
-                child: Center(
-                  child: Text(
-                    item,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+            items: items.map(
+              (String item) {
+                return DropdownMenuItem<String>(
+                  value: item,
+                  child: Center(
+                    child: Text(
+                      item,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              );
-            }).toList(),
+                );
+              },
+            ).toList(),
             value: value,
             onChanged: onChanged,
             buttonStyleData: ButtonStyleData(

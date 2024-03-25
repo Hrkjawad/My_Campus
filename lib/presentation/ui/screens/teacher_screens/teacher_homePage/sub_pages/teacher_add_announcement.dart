@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/appbar.dart';
+import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
-import '../../../../widgets/main_drawer.dart';
+import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
 
 class TeacherAddAnnouncement extends StatefulWidget {
@@ -38,8 +38,8 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: facAppBar(scaffoldKey),
-      drawer: facultyDrawer(context),
+      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      drawer: customisedFacultyDrawer(context),
       body: ScreenBackground(
         child: Padding(
           padding: const EdgeInsets.only(left: 16),
@@ -81,7 +81,9 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             });
                           },
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         CustomDropdownButton(
                           width: 360,
                           height: 45,
@@ -95,7 +97,9 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             });
                           },
                         ),
-                        const SizedBox(height: 10,),
+                        const SizedBox(
+                          height: 10,
+                        ),
                         CustomDatePicker(
                           controller: dateInput,
                           width: 360,
@@ -106,7 +110,6 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             });
                           },
                         ),
-
                       ],
                     ),
                   ),
@@ -117,10 +120,13 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                       height: 55,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (selectedAnnouncement != null && selectedDate != null && selectedBatch !=null) {
+                          if (selectedAnnouncement != null &&
+                              selectedDate != null &&
+                              selectedBatch != null) {
                             setState(() {
                               tableData.add({
-                                'announcement': "${selectedDate!} -> ${selectedAnnouncement!}",
+                                'announcement':
+                                    "${selectedDate!} -> ${selectedAnnouncement!}",
                                 'Batch': selectedBatch!
                               });
                               selectedDate = null;
@@ -202,7 +208,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                   ),
                                 ],
                                 rows: tableData.map(
-                                      (data) {
+                                  (data) {
                                     return DataRow(
                                       cells: [
                                         DataCell(
@@ -210,50 +216,58 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                             onLongPress: () {
                                               showDialog(
                                                 context: context,
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   return AlertDialog(
                                                     title: const Text(
                                                       "Delete Data",
                                                       style: TextStyle(
                                                           fontSize: 24,
-                                                          fontWeight: FontWeight.w900
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w900),
                                                     ),
                                                     content: const Text(
                                                       "Are you sure you want to delete this data?",
                                                       style: TextStyle(
                                                           fontSize: 20,
-                                                          fontWeight: FontWeight.w500
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w500),
                                                     ),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () {
-                                                          Navigator.of(context).pop();
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         },
                                                         child: const Text(
                                                           "NO",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Colors.green
-                                                          ),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.green),
                                                         ),
                                                       ),
                                                       TextButton(
                                                         onPressed: () {
                                                           setState(() {
-                                                            tableData.remove(data);
+                                                            tableData
+                                                                .remove(data);
                                                           });
-                                                          Navigator.of(context).pop();
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         },
                                                         child: const Text(
                                                           "YES",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Colors.red
-                                                          ),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.red),
                                                         ),
                                                       ),
                                                     ],
@@ -270,7 +284,8 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                                     softWrap: true,
                                                     style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontSize: 20,
                                                     ),
                                                   ),
@@ -284,50 +299,58 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                             onLongPress: () {
                                               showDialog(
                                                 context: context,
-                                                builder: (BuildContext context) {
+                                                builder:
+                                                    (BuildContext context) {
                                                   return AlertDialog(
                                                     title: const Text(
                                                       "Delete Data",
                                                       style: TextStyle(
                                                           fontSize: 24,
-                                                          fontWeight: FontWeight.w900
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w900),
                                                     ),
                                                     content: const Text(
                                                       "Are you sure you want to delete this data?",
                                                       style: TextStyle(
                                                           fontSize: 20,
-                                                          fontWeight: FontWeight.w500
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w500),
                                                     ),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () {
-                                                          Navigator.of(context).pop();
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         },
                                                         child: const Text(
                                                           "NO",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Colors.green
-                                                          ),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.green),
                                                         ),
                                                       ),
                                                       TextButton(
                                                         onPressed: () {
                                                           setState(() {
-                                                            tableData.remove(data);
+                                                            tableData
+                                                                .remove(data);
                                                           });
-                                                          Navigator.of(context).pop();
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         },
                                                         child: const Text(
                                                           "YES",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight: FontWeight.w500,
-                                                              color: Colors.red
-                                                          ),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.red),
                                                         ),
                                                       ),
                                                     ],
@@ -344,7 +367,8 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                                     softWrap: true,
                                                     style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       fontSize: 24,
                                                     ),
                                                   ),
@@ -373,8 +397,6 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                       ],
                     ),
                   ),
-
-
                 ],
               ),
             ],

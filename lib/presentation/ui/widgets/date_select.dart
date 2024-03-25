@@ -8,12 +8,12 @@ class CustomDatePicker extends StatefulWidget {
   final ValueChanged<String>? onChanged; // Added onChanged callback
 
   const CustomDatePicker({
-    Key? key,
+    super.key,
     required this.controller,
     required this.height,
     required this.width,
     this.onChanged, // Optional onChanged callback
-  }) : super(key: key);
+  });
 
   @override
   CustomDatePickerState createState() => CustomDatePickerState();
@@ -82,14 +82,17 @@ class CustomDatePickerState extends State<CustomDatePicker> {
             );
 
             if (pickedDate != null) {
-              String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-              setState(() {
-                widget.controller.text = formattedDate;
-                // Call onChanged callback if provided
-                if (widget.onChanged != null) {
-                  widget.onChanged!(formattedDate);
-                }
-              });
+              String formattedDate =
+                  DateFormat('dd-MM-yyyy').format(pickedDate);
+              setState(
+                () {
+                  widget.controller.text = formattedDate;
+                  // Call onChanged callback if provided
+                  if (widget.onChanged != null) {
+                    widget.onChanged!(formattedDate);
+                  }
+                },
+              );
             }
           },
         ),
