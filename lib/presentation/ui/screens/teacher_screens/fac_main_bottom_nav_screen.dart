@@ -2,68 +2,94 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_tasks.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
-import '../../../state_holders/faculty_state_holders/fac_main_bottom_nav_controller.dart';
 
-class FacMainBottomNavScreen extends StatefulWidget {
-  const FacMainBottomNavScreen({super.key});
+class FacBottomNavScreen extends StatelessWidget {
+  const FacBottomNavScreen({super.key});
 
-  @override
-  State<FacMainBottomNavScreen> createState() => _FacMainBottomNavScreenState();
-}
-
-class _FacMainBottomNavScreenState extends State<FacMainBottomNavScreen> {
-  FacMainBottomNavController mainBottomNavController =
-      Get.put(FacMainBottomNavController());
-  final List<Widget> _screens = [
-    const FacHomeScreen(),
-    const TeacherAndTask(),
-    const TeacherMyTodo(),
-    const TeacherAddAnnouncement(),
-  ];
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<FacMainBottomNavController>(
-      builder: (navController) {
-        return Scaffold(
-          body: _screens[navController.currentSelectedIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: navController.currentSelectedIndex,
-            onTap: navController.changeScreen,
-            selectedItemColor: Colors.green,
-            unselectedItemColor: Colors.grey,
-            showUnselectedLabels: false,
-            showSelectedLabels: false,
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.home_outlined,
-                    size: 28,
+    return Container(
+      width: double.infinity,
+      height: 80,
+      color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.to(
+                          () => const FacHomeScreen(),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.home,
+                    size: 30,
+                    color: Colors.green,
                   ),
-                  label: 'Home'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.picture_as_pdf_outlined,
-                    size: 28,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(
+                          () => const TeacherMyTodo(),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.mark_unread_chat_alt_rounded,
+                    size: 30,
+                    color: Colors.blue,
                   ),
-                  label: 'PDF'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.picture_as_pdf_outlined,
-                    size: 28,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.to(
+                          () => const TeacherAddAnnouncement(),
+                    );
+                  },
+                  child: const Icon(
+                    Icons.my_library_books_rounded,
+                    size: 30,
+                    color: Colors.red,
                   ),
-                  label: 'PDF'),
-              BottomNavigationBarItem(
-                  icon: Icon(
-                    Icons.picture_as_pdf_outlined,
-                    size: 28,
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 37,
                   ),
-                  label: 'PDF'),
-            ],
-          ),
-        );
-      },
+                  Text(
+                    "Home",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: 85,
+                  ),
+                  Text(
+                    "Chat",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: 70,
+                  ),
+                  Text(
+                    "Resources",
+                    style: TextStyle(fontSize: 16, color: Colors.black),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

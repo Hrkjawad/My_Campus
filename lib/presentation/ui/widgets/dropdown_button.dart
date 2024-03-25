@@ -11,7 +11,7 @@ class CustomDropdownButton extends StatelessWidget {
   final double dropDownWidth;
 
   const CustomDropdownButton({
-    Key? key,
+    super.key,
     required this.items,
     required this.onChanged,
     required this.hintText,
@@ -19,7 +19,7 @@ class CustomDropdownButton extends StatelessWidget {
     required this.width,
     required this.dropDownWidth,
     this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_home_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -68,7 +68,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   onTap: () {
                     if (_formKey.currentState!.validate()) {}
                     Get.to(
-                      () => const FacMainBottomNavScreen(),
+                      () => const FacHomeScreen(),
                     );
                   },
                   text: 'LOGIN',

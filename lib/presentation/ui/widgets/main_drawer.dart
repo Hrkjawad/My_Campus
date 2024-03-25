@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../state_holders/faculty_state_holders/fac_main_bottom_nav_controller.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_tasks.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
 Drawer facultyDrawer(BuildContext context) {
   return Drawer(
     width: 286,
@@ -283,7 +284,7 @@ Drawer facultyDrawer(BuildContext context) {
           ),
           hoverColor: Colors.grey,
           onTap: () {
-            Get.find<FacMainBottomNavController>().changeScreen(1);
+            Get.to(const TeacherAndTask());
           },
         ),
         const Divider(
@@ -300,7 +301,7 @@ Drawer facultyDrawer(BuildContext context) {
           ),
           hoverColor: Colors.grey,
           onTap: () {
-            Get.find<FacMainBottomNavController>().changeScreen(2);
+            Get.to(const TeacherMyTodo());
           },
         ),
         const Divider(

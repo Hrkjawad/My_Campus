@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../state_holders/faculty_state_holders/fac_main_bottom_nav_controller.dart';
 import '../../../widgets/appbar.dart';
 import '../../../widgets/dropdown_button.dart';
 import '../../../widgets/homepage_card_elevatedbutton.dart';
@@ -30,7 +31,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
           child: Column(
             children: [
               const SizedBox(
-                height: 46,
+                height: 40,
               ),
               SizedBox(
                 width: 355,
@@ -267,7 +268,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 },
               ),
               const SizedBox(
-                height: 40,
+                height: 25,
               ),
               const SizedBox(
                 width: double.infinity,
@@ -286,29 +287,34 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
               ),
-              CircleAvatar(
-                radius: 27,
-                backgroundColor: Colors.black,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(20),
-                  onTap: () {
-                    Get.find<FacMainBottomNavController>().changeScreen(3);
-                  },
-                  child: const CircleAvatar(
-                    radius: 26,
-                    backgroundColor: Color(0xFFF8FFAC),
-                    child: Icon(
-                      Icons.add,
-                      size: 50,
-                      color: Colors.black,
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: CircleAvatar(
+                  radius: 27,
+                  backgroundColor: Colors.black,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () {
+                      Get.to(const TeacherAddAnnouncement());
+                    },
+                    child: const CircleAvatar(
+                      radius: 26,
+                      backgroundColor: Color(0xFFF8FFAC),
+                      child: Icon(
+                        Icons.add,
+                        size: 50,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
-              )
+              ),
+              const FacBottomNavScreen(),
             ],
           ),
         ),
       ),
+
     );
   }
 
