@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/appbar.dart';
+import '../../../../widgets/app_logo.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
-import '../../../../widgets/main_drawer.dart';
 import '../../../../widgets/text_fields.dart';
 
-class TeacherAndTask extends StatefulWidget {
-  const TeacherAndTask({super.key});
+class FacTeacherAndTask extends StatefulWidget {
+  const FacTeacherAndTask({super.key});
 
   @override
-  State<TeacherAndTask> createState() => _TeacherAndTaskState();
+  State<FacTeacherAndTask> createState() => _FacTeacherAndTaskState();
 }
 
-class _TeacherAndTaskState extends State<TeacherAndTask> {
+class _FacTeacherAndTaskState extends State<FacTeacherAndTask> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedBatch, selectedSubject, selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
@@ -38,8 +37,212 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: facAppBar(scaffoldKey),
-      drawer: facultyDrawer(context),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0.25,
+        leading: IconButton(
+          icon: const AppLogo(),
+          onPressed: () {
+            scaffoldKey.currentState?.openDrawer();
+          },
+        ),
+        title: const Text('Teacher mail'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.logout_outlined,
+              color: Colors.red,
+            ),
+          )
+        ],
+        centerTitle: true,
+      ),
+      drawer: Drawer(
+        width: 286,
+        backgroundColor: const Color(0xFFE0FFF1),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            ListTile(
+              title: const Center(
+                child: Text(
+                  'Batches CR Number',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
+                ),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Center(
+                child: Text(
+                  'Bus Schedules',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
+                ),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        Image.asset('assets/images/Bus Time.jpg'),
+                  ),
+                );
+              },
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Center(
+                child: Text(
+                  'Faculty Numbers',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
+                ),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return StatefulBuilder(
+                      builder: (context, StateSetter setState) {
+                        return SingleChildScrollView(
+                          child: AlertDialog(
+                            title: const Center(
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Faculty",
+                                    style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.w800,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  LinearProgressIndicator(
+                                    value: .5,
+                                  )
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              for (int i = 0; i < 20; i++)
+                                const Column(
+                                  children: [
+                                    ListTile(
+                                      leading: CircleAvatar(
+                                        child: Icon(
+                                          Icons.person,
+                                          size: 35,
+                                          color: Colors.blueGrey,
+                                        ),
+                                      ),
+                                      title: Text(
+                                        'Pritiraj Battacharje',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            fontSize: 16,
+                                            letterSpacing: .6),
+                                      ),
+                                      subtitle: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 6,
+                                          ),
+                                          Text(
+                                            'Lecturer',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            'CSE Department',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Text(
+                                            'Email: prb@lus.ac.bd',
+                                            style: TextStyle(fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      thickness: 3,
+                                    )
+                                  ],
+                                )
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Center(
+                child: Text(
+                  'Add Tasks',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
+                ),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            ListTile(
+              title: const Center(
+                child: Text(
+                  'My ToDo',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
+                ),
+              ),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            const Divider(
+              color: Color(0xFF0D6858),
+              height: 3,
+              thickness: 1,
+            ),
+            const SizedBox(height: 480),
+            const Center(
+              child: Text(
+                'V 1.0',
+                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 19),
+              ),
+            ),
+          ],
+        ),
+      ),
       body: ScreenBackground(
         child: Padding(
           padding: const EdgeInsets.only(left: 12),
@@ -157,12 +360,6 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
                   width: 258,
                   height: 55,
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        side: const BorderSide(color: Color(0x999B9B9B)),
-                      ),
-                    ),
                     onPressed: () {
                       if (selectedBatch != null &&
                           selectedSubject != null &&

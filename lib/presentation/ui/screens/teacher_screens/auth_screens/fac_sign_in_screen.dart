@@ -63,7 +63,10 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          facSignIn(facLoginController);
+                          Get.to(
+                                () => const FacMainBottomNavScreen(),
+                          );
+                          //facSignIn(facLoginController);
                         }
                       },
                       text: 'SIGN IN',
@@ -94,6 +97,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
       /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
       _passTEController.text.trim(),
     );
+
     if (result) {
       Get.snackbar('Successful!', facLoginController.message);
       Get.to(
