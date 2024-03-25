@@ -53,7 +53,7 @@ class _FacAddTaskState extends State<FacAddTask> {
               ),
               Row(
                 children: [
-                  titles('BATCH     :  '),
+                  customisedTitles('BATCH     :  '),
                   CustomDropdownButton(
                     width: 258,
                     height: 44.50,
@@ -74,7 +74,7 @@ class _FacAddTaskState extends State<FacAddTask> {
               ),
               Row(
                 children: [
-                  titles('SUBJECT :  '),
+                  customisedTitles('SUBJECT :  '),
                   CustomDropdownButton(
                     width: 258,
                     dropDownWidth: 258,
@@ -95,7 +95,7 @@ class _FacAddTaskState extends State<FacAddTask> {
               ),
               Row(
                 children: [
-                  titles('TASK        :  '),
+                  customisedTitles('TASK        :  '),
                   CustomTextField(
                     controller: taskController,
                     hintText: 'Enter Text',
@@ -114,7 +114,7 @@ class _FacAddTaskState extends State<FacAddTask> {
               ),
               Row(
                 children: [
-                  titles('DATE         :  '),
+                  customisedTitles('DATE         :  '),
                   CustomDatePicker(
                     controller: dateInput,
                     width: 258,

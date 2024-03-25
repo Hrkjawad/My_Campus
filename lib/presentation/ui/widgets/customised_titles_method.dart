@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Text titles(String text) {
+Text customisedTitles(String text) {
   return Text(
     text,
     style: const TextStyle(
