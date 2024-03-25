@@ -8,12 +8,12 @@ class CustomDatePicker extends StatefulWidget {
   final ValueChanged<String>? onChanged; // Added onChanged callback
 
   const CustomDatePicker({
-    Key? key,
+    super.key,
     required this.controller,
     required this.height,
     required this.width,
-    this.onChanged, // Optional onChanged callback
-  }) : super(key: key);
+    this.onChanged,
+  });
 
   @override
   CustomDatePickerState createState() => CustomDatePickerState();
@@ -53,7 +53,7 @@ class CustomDatePickerState extends State<CustomDatePicker> {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
               borderSide: const BorderSide(
-                color: Colors.grey,
+                color: Color(0x999B9B9B),
               ),
             ),
             focusedBorder: OutlineInputBorder(

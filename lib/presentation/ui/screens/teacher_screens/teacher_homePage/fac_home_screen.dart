@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_tasks.dart';
+import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../state_holders/faculty_state_holders/fac_main_bottom_nav_controller.dart';
 import '../../../widgets/app_logo.dart';
 import '../../../widgets/dropdown_button.dart';
 
@@ -10,6 +11,7 @@ class FacHomeScreen extends StatefulWidget {
   @override
   State<FacHomeScreen> createState() => _FacHomeScreenState();
 }
+
 var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _FacHomeScreenState extends State<FacHomeScreen> {
@@ -49,12 +51,104 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             ListTile(
               title: const Center(
                 child: Text(
-                  'Batches CR Number',
+                  'Departments CR',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
                 ),
               ),
               hoverColor: Colors.grey,
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                  context: context,
+                  barrierDismissible: true,
+                  builder: (context) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: StatefulBuilder(
+                        builder: (context, StateSetter setState) {
+                          return SingleChildScrollView(
+                            child: AlertDialog(
+                              title: const Center(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Batch CR",
+                                      style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    LinearProgressIndicator(
+                                      value: .5,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              actions: [
+                                for (int i = 0; i < 20; i++)
+                                  const Column(
+                                    children: [
+                                      ListTile(
+                                        leading: CircleAvatar(
+                                          child: Icon(
+                                            Icons.person,
+                                            size: 35,
+                                            color: Colors.blueGrey,
+                                          ),
+                                        ),
+                                        title: Text(
+                                          'Hasin Israq',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 20,
+                                              letterSpacing: .6),
+                                        ),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Text(
+                                              'CSE Department',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              'Batch Name',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              'Mobile Number',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        thickness: 3,
+                                      )
+                                    ],
+                                  )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
             ),
             const Divider(
               color: Color(0xFF0D6858),
@@ -70,13 +164,33 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               ),
               hoverColor: Colors.grey,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        Image.asset('assets/images/Bus Time.jpg'),
-                  ),
-                );
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return
+                        SizedBox(
+                          width: double.infinity,
+                          height: 250,
+                          child: AlertDialog(
+                            title: const Center(
+                              child: Text(
+                                "Bus Schedules",
+                                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                            content: InteractiveViewer(
+                              boundaryMargin: const EdgeInsets.all(20),
+                              minScale: 0.1,
+                              maxScale: 6.0,
+                              child: Image.asset(
+                                'assets/images/Bus Time.jpg',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+
+                        );
+                    });
               },
             ),
             const Divider(
@@ -87,7 +201,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             ListTile(
               title: const Center(
                 child: Text(
-                  'Faculty Numbers',
+                  'Departments Faculty',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21),
                 ),
               ),
@@ -95,86 +209,99 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               onTap: () {
                 showDialog(
                   context: context,
+                  barrierDismissible: true,
                   builder: (context) {
-                    return StatefulBuilder(
-                      builder: (context, StateSetter setState) {
-                        return SingleChildScrollView(
-                          child: AlertDialog(
-                            title: const Center(
-                              child: Column(
-                                children: [
-                                  Text(
-                                    "Faculty",
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 6,
-                                  ),
-                                  LinearProgressIndicator(
-                                    value: .5,
-                                  )
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              for (int i = 0; i < 20; i++)
-                                const Column(
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: StatefulBuilder(
+                        builder: (context, StateSetter setState) {
+                          return SingleChildScrollView(
+                            child: AlertDialog(
+                              title: const Center(
+                                child: Column(
                                   children: [
-                                    ListTile(
-                                      leading: CircleAvatar(
-                                        child: Icon(
-                                          Icons.person,
-                                          size: 35,
-                                          color: Colors.blueGrey,
-                                        ),
-                                      ),
-                                      title: Text(
-                                        'Pritiraj Battacharje',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w800,
-                                            fontSize: 16,
-                                            letterSpacing: .6),
-                                      ),
-                                      subtitle: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                            height: 6,
-                                          ),
-                                          Text(
-                                            'Lecturer',
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text(
-                                            'CSE Department',
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                          SizedBox(
-                                            height: 8,
-                                          ),
-                                          Text(
-                                            'Email: prb@lus.ac.bd',
-                                            style: TextStyle(fontSize: 15),
-                                          ),
-                                        ],
+                                    Text(
+                                      "Faculty",
+                                      style: TextStyle(
+                                        fontSize: 26,
+                                        fontWeight: FontWeight.w800,
                                       ),
                                     ),
-                                    Divider(
-                                      thickness: 3,
+                                    SizedBox(
+                                      height: 6,
+                                    ),
+                                    LinearProgressIndicator(
+                                      value: .5,
                                     )
                                   ],
-                                )
-                            ],
-                          ),
-                        );
-                      },
+                                ),
+                              ),
+                              actions: [
+                                for (int i = 0; i < 20; i++)
+                                  const Column(
+                                    children: [
+                                      ListTile(
+                                        leading: CircleAvatar(
+                                          child: Icon(
+                                            Icons.person,
+                                            size: 35,
+                                            color: Colors.blueGrey,
+                                          ),
+                                        ),
+                                        title: Text(
+                                          'Pritiraj Battacharje',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w800,
+                                              fontSize: 20,
+                                              letterSpacing: .6),
+                                        ),
+                                        subtitle: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 6,
+                                            ),
+                                            Text(
+                                              'Lecturer',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              'CSE Department',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              'Email: prb@lus.ac.bd',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Text(
+                                              'Mobile Number',
+                                              style: TextStyle(fontSize: 18),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Divider(
+                                        thickness: 3,
+                                      )
+                                    ],
+                                  )
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                     );
                   },
                 );
@@ -194,12 +321,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               ),
               hoverColor: Colors.grey,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FacTeacherAndTask(),
-                  ),
-                );
+                Get.find<FacMainBottomNavController>().changeScreen(1);
               },
             ),
             const Divider(
@@ -215,7 +337,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 ),
               ),
               hoverColor: Colors.grey,
-              onTap: () {},
+              onTap: () {
+                Get.find<FacMainBottomNavController>().changeScreen(2);
+              },
             ),
             const Divider(
               color: Color(0xFF0D6858),
@@ -439,21 +563,45 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 SizedBox(
                   width: 142,
                   height: 102,
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(25),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFFE8D2),
-                        elevation: 5,
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        '  Exam\nRoutine',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                        ),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFFFE8D2),
+                      elevation: 5,
+                    ),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return
+                              SizedBox(
+                                width: double.infinity,
+                                height: 250,
+                                child: AlertDialog(
+                                  title: const Center(
+                                    child: Text(
+                                      "Exam Routine",
+                                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  content: InteractiveViewer(
+                                    boundaryMargin: const EdgeInsets.all(20),
+                                    minScale: 0.1,
+                                    maxScale: 6.0,
+                                    child: Image.asset(
+                                      'assets/images/Bus Time.jpg',
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+
+                              );
+                          });
+                    },
+                    child: const Text(
+                      '  Exam\nRoutine',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
@@ -669,7 +817,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               backgroundColor: Colors.black,
               child: InkWell(
                 borderRadius: BorderRadius.circular(20),
-                onTap: () {},
+                onTap: () {
+                  Get.find<FacMainBottomNavController>().changeScreen(3);
+                },
                 child: const CircleAvatar(
                   radius: 26,
                   backgroundColor: Color(0xFFF8FFAC),

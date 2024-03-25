@@ -4,19 +4,18 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../../state_holders/faculty_state_holders/fac_main_bottom_nav_controller.dart';
 import '../../../../widgets/app_logo.dart';
 import '../../../../widgets/date_select.dart';
-import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/text_fields.dart';
 
-class TeacherAndTask extends StatefulWidget {
-  const TeacherAndTask({super.key});
+class TeacherMyTodo extends StatefulWidget {
+  const TeacherMyTodo({super.key});
 
   @override
-  State<TeacherAndTask> createState() => _TeacherAndTaskState();
+  State<TeacherMyTodo> createState() => _TeacherMyTodoState();
 }
 
-class _TeacherAndTaskState extends State<TeacherAndTask> {
+class _TeacherMyTodoState extends State<TeacherMyTodo> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  String? selectedBatch, selectedSubject, selectedDate, selectedTask;
+  String? selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
   late TextEditingController dateInput;
   late TextEditingController taskController;
@@ -387,61 +386,7 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
               Row(
                 children: [
                   const Text(
-                    "BATCH     :  ",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomDropdownButton(
-                    width: 258,
-                    height: 44.50,
-                    dropDownWidth: 258,
-                    items: const ['57-A+B', '56-A', '56-B'],
-                    value: selectedBatch,
-                    hintText: 'Select',
-                    onChanged: (value) {
-                      setState(() {
-                        selectedBatch = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Text(
-                    "SUBJECT :  ",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomDropdownButton(
-                    width: 258,
-                    dropDownWidth: 258,
-                    height: 44.50,
-                    items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
-                    value: selectedSubject,
-                    hintText: 'Select',
-                    onChanged: (value) {
-                      setState(() {
-                        selectedSubject = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Text(
-                    "TASK        :  ",
+                    "TITLE       :  ",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
@@ -466,7 +411,7 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
               Row(
                 children: [
                   const Text(
-                    "DATE         :  ",
+                    "DATE        :  ",
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
@@ -487,50 +432,46 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
               const SizedBox(
                 height: 20,
               ),
-              Center(
-                child: SizedBox(
-                  width: 258,
-                  height: 55,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        side: const BorderSide(color: Color(0x999B9B9B)),
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                          side: const BorderSide(color: Color(0x999B9B9B)),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      if (selectedBatch != null &&
-                          selectedSubject != null &&
-                          selectedTask != null &&
-                          selectedDate != null) {
-                        setState(() {
-                          tableData.add({
-                            'Batch': selectedBatch!,
-                            'Exam&Task':
-                                "${selectedSubject!} -> ${selectedTask!}",
-                            'Date': selectedDate!
+                      onPressed: () {
+                        if (selectedTask != null && selectedDate != null) {
+                          setState(() {
+                            tableData.add({
+                              'Meeting_Title': selectedTask!,
+                              'Date': selectedDate!
+                            });
+                            selectedDate = null;
+                            selectedTask = null;
+                            dateInput.clear();
+                            taskController.clear();
                           });
-                          selectedBatch = null;
-                          selectedSubject = null;
-                          selectedDate = null;
-                          selectedTask = null;
-                          dateInput.clear();
-                          taskController.clear();
-                        });
-                      }
-                    },
-                    child: const Text(
-                      "SUBMIT",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        }
+                      },
+                      child: const Text(
+                        "ADD",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
               Expanded(
                 child: Padding(
@@ -539,7 +480,7 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
                     children: [
                       Container(
                         width: 380,
-                        height: 380,
+                        height: 500,
                         decoration: BoxDecoration(
                           color: const Color(0xFFF8FFAC),
                           border: Border.all(
@@ -551,8 +492,8 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
                         ),
                       ),
                       Container(
-                        width: 290,
-                        height: 380,
+                        width: 280,
+                        height: 500,
                         decoration: const BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -573,29 +514,7 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
                         ),
                       ),
                       Container(
-                        width: 90,
-                        height: 380,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFF8FFAC),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
-                          ),
-                          border: Border(
-                            left: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            top: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            bottom: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 380,
+                        height: 500,
                         width: 380,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -604,254 +523,205 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: SingleChildScrollView(
-                          child: DataTable(
-                            dataRowMaxHeight: 105,
-                            columnSpacing: 24,
-                            horizontalMargin: 10,
-                            columns: const [
-                              DataColumn(
-                                label: Text(
-                                  'Batch',
-                                  style: TextStyle(
-                                    color: Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 26,
-                                  ),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Exam & Task',
-                                  style: TextStyle(
-                                    color: Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 26,
-                                  ),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Date',
-                                  style: TextStyle(
-                                    color: Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 26,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            rows: tableData.map(
-                              (data) {
-                                return DataRow(
-                                  cells: [
-                                    DataCell(
-                                      GestureDetector(
-                                        onLongPress: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                  "Delete Data",
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
-                                                ),
-                                                content: const Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w500)),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: Colors.green)),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        tableData.remove(data);
-                                                      });
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: Colors.red)),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: SizedBox(
-                                          width: 80,
-                                          child: Wrap(
-                                            children: [
-                                              Text(
-                                                data['Batch']!,
-                                                softWrap: true,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 19,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 0.0),
+                            child: DataTable(
+                              dataRowMaxHeight: 105,
+                              columnSpacing: 25,
+                              horizontalMargin: 10,
+                              columns: const [
+                                DataColumn(
+                                  label: SizedBox(
+                                    width: 250,
+                                    child: Center(
+                                      child: Text(
+                                        'Meeting Title',
+                                        style: TextStyle(
+                                          color: Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 26,
                                         ),
                                       ),
                                     ),
-                                    DataCell(
-                                      GestureDetector(
-                                        onLongPress: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                  "Delete Data",
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
-                                                ),
-                                                content: const Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.green)),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        tableData.remove(data);
-                                                      });
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: SizedBox(
-                                          width: 160,
-                                          child: Wrap(
-                                            children: [
-                                              Text(
-                                                data['Exam&Task']!,
-                                                softWrap: true,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 19,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                  ),
+                                ),
+                                DataColumn(
+                                  label: SizedBox(
+                                    width: 85,
+                                    child: Center(
+                                      child: Text(
+                                        'Date',
+                                        style: TextStyle(
+                                          color: Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 26,
                                         ),
                                       ),
                                     ),
-                                    DataCell(
-                                      GestureDetector(
-                                        onLongPress: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: const Text(
-                                                  "Delete Data",
-                                                  style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
-                                                ),
-                                                content: const Text(
-                                                    "Are you sure you want to delete this data?",
+                                  ),
+                                ),
+                              ],
+                              rows: tableData.map(
+                                (data) {
+                                  return DataRow(
+                                    cells: [
+                                      DataCell(
+                                        GestureDetector(
+                                          onLongPress: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                    "Delete Data",
                                                     style: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: 24,
                                                         fontWeight:
-                                                        FontWeight.w500)),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.green)),
+                                                            FontWeight.w900),
                                                   ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        tableData.remove(data);
-                                                      });
-                                                      Navigator.of(context).pop();
-                                                    },
-                                                    child: const Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
+                                                  content: const Text(
+                                                      "Are you sure you want to delete this data?",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w500)),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text("NO",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color: Colors
+                                                                  .green)),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          tableData
+                                                              .remove(data);
+                                                        });
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text("YES",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.red)),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: SizedBox(
+                                            width: 250,
+                                            child: Wrap(
+                                              children: [
+                                                Text(
+                                                  data['Meeting_Title']!,
+                                                  softWrap: true,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 19,
                                                   ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: SizedBox(
-                                          width: 80,
-                                          child: Wrap(
-                                            children: [
-                                              Text(
-                                                data['Date']!,
-                                                softWrap: true,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 14,
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ).toList(),
+                                      DataCell(
+                                        GestureDetector(
+                                          onLongPress: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                  title: const Text(
+                                                    "Delete Data",
+                                                    style: TextStyle(
+                                                        fontSize: 24,
+                                                        fontWeight:
+                                                            FontWeight.w900),
+                                                  ),
+                                                  content: const Text(
+                                                      "Are you sure you want to delete this data?",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w500)),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text("NO",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color: Colors
+                                                                  .green)),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          tableData
+                                                              .remove(data);
+                                                        });
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text("YES",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color:
+                                                                  Colors.red)),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: SizedBox(
+                                            width: 100,
+                                            child: Wrap(
+                                              children: [
+                                                Text(
+                                                  data['Date']!,
+                                                  softWrap: true,
+                                                  style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 16,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ).toList(),
+                            ),
                           ),
                         ),
                       ),
