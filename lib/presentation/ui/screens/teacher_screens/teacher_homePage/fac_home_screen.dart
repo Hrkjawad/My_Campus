@@ -32,7 +32,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             child: Column(
               children: [
                 const SizedBox(
-                  height: 35,
+                  height: 20,
                 ),
                 SizedBox(
                   width: 355,

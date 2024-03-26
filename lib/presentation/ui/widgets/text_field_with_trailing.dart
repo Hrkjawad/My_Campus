@@ -20,17 +20,33 @@ class TextFieldWithTrailing extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
             cursorColor: Colors.black,
-            decoration:  const InputDecoration(
-              suffixIcon: Padding(
-                padding: EdgeInsets.all(15.0),
-                child: Text(
-                  '@lus.ac.bd',
-                  style: TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
+            decoration:   InputDecoration(
+              suffixIcon: Container(
+                width: 110,
+                height: 59,
+                decoration:  BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(21.0),
+                    bottomLeft: Radius.circular(0.0),
+                    bottomRight: Radius.circular(21.0),
+                  ),
+                  border: Border.all(
+                    color: const Color(0x999B9B9B),
+                  ),
+
+                ),
+                child: const Center(
+                  child: Text(
+                    '@lus.ac.bd',
+                    style: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
                 ),
               ),
               hintText: 'Type your email',
-              errorStyle: TextStyle(
+              errorStyle: const TextStyle(
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
                 fontSize: 15,
