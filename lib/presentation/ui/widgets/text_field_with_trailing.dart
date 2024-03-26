@@ -22,30 +22,6 @@ class TextFieldWithTrailing extends StatelessWidget {
             cursorColor: Colors.black,
             decoration: const InputDecoration(
               hintText: 'Type your email',
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
-              ),
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -55,41 +31,17 @@ class TextFieldWithTrailing extends StatelessWidget {
             },
           ),
         ),
-        SizedBox(
-          width: 84,
-          child: TextFormField(
-            controller: _emailTEController,
-            decoration: const InputDecoration(
-              enabled: false,
-              hintText: '@lus.ac.bd',
-              hintStyle: TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF000000),
-                  fontWeight: FontWeight.bold),
-              fillColor: Color(0xFFFFFFFF),
-              contentPadding:
-                  EdgeInsets.only(left: 4, right: 4, top: 20, bottom: 20),
-              disabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-              ),
-            ),
-            validator: (String? value) {
-              if (value?.trim().isEmpty ?? true) {
-                return '';
-              }
-              return null;
-            },
-          ),
+        const SizedBox(
+          width: 4,
         ),
+        const SizedBox(
+          width: 84,
+          child: Text(
+            '@lus.ac.bd',
+            style: TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
+          ),
+        )
       ],
     );
   }

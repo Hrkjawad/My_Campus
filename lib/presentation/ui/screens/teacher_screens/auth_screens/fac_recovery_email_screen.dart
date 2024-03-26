@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_password_change_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -36,18 +37,27 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                   height: 76,
                 ),
                 TextFieldWithTrailing(emailTEController: _emailTEController),
-
                 const SizedBox(
                   height: 40,
                 ),
-                CustomisedElevatedButton(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {}
-                    Get.to(
-                      () => const FacPasswordChangeScreen(),
+                GetBuilder<FacVerifyEmailController>(
+                  builder: (facVerifyEmailController) {
+                    if (facVerifyEmailController.facVerifyEmailProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
+                      );
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          facVerifyEmail(facVerifyEmailController);
+                        }
+                      },
+                      text: 'SUBMIT',
                     );
                   },
-                  text: 'SUBMIT',
                 ),
               ],
             ),
@@ -55,5 +65,24 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> facVerifyEmail(
+      FacVerifyEmailController facVerifyEmailController) async {
+    final result = await facVerifyEmailController.facVerifyEmail(
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+    );
+    if (result) {
+      Get.snackbar('Successful!', facVerifyEmailController.message);
+      Get.to(
+        () => FacPasswordChangeScreen(
+          email: _emailTEController.text.trim(),
+        ),
+      );
+    } else {
+      Get.snackbar('Failed!', facVerifyEmailController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

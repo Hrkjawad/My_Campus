@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../widgets/appbar.dart';
+import '../../../widgets/appbar_method.dart';
 import '../../../widgets/dropdown_button.dart';
-import '../../../widgets/homepage_card_elevatedbutton.dart';
-import '../../../widgets/main_drawer.dart';
+import '../../../widgets/fac_drawer_method.dart';
+import '../../../widgets/homepage_card_elevated_button.dart';
 
 class FacHomeScreen extends StatefulWidget {
   const FacHomeScreen({super.key});
@@ -24,8 +24,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: facAppBar(scaffoldKey),
-      drawer: facultyDrawer(context),
+      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      drawer: customisedFacultyDrawer(context),
       body: ScreenBackground(
         child: SingleChildScrollView(
           child: Column(
@@ -221,37 +221,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     height: 102,
                     text: '  Exam\nRoutine',
                     color: 0xFFFFE8D2,
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SizedBox(
-                              width: double.infinity,
-                              height: 250,
-                              child: AlertDialog(
-                                title: const Center(
-                                  child: Text(
-                                    "Exam Routine",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                                content: InteractiveViewer(
-                                  boundaryMargin: const EdgeInsets.all(20),
-                                  minScale: 0.1,
-                                  maxScale: 6.0,
-                                  child: Image.asset(
-                                    width: 400,
-                                    height: 400,
-                                    'assets/images/Bus Time.jpg',
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                            );
-                          });
-                    },
+                    onTap: () {},
                   ),
                 ],
               ),
@@ -268,7 +238,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 },
               ),
               const SizedBox(
-                height: 25,
+                height: 40,
               ),
               const SizedBox(
                 width: double.infinity,
@@ -328,7 +298,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
               title: const Center(
                 child: Text(
                   "SELECT BATCH & COURSES",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                  style: TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.w900),
                 ),
               ),
               actions: [
@@ -354,7 +325,11 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     width: 332,
                     height: 51,
                     dropDownWidth: 290,
-                    items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
+                    items: const [
+                      'CSE-1111',
+                      'EEE-1111',
+                      'CSE-3121'
+                    ],
                     value: selectedCourse,
                     hintText: 'Select Course',
                     onChanged: (value) {
@@ -379,7 +354,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       foregroundColor: const Color(0x999B9B9B),
                     ),
                     onPressed: () {
-                      if (selectedBatch != null && selectedCourse != null) {
+                      if (selectedBatch != null &&
+                          selectedCourse != null) {
                         setState(() {
                           tableData.add({
                             'Batch': selectedBatch!,

@@ -5,6 +5,7 @@ import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../../state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
 import '../../../widgets/customised_text_button.dart';
 import '../../../widgets/text_field_with_trailing.dart';
 import 'fac_sign_in_screen.dart';
@@ -44,14 +45,26 @@ class _FacAvailabilityCheckScreenState
                 const SizedBox(
                   height: 47,
                 ),
-                CustomisedElevatedButton(
-                  onTap: () {
-                    if (_formKey.currentState!.validate()) {}
-                    Get.to(
-                      () => const FacSignUpScreen(),
+                GetBuilder<FacAvailabilityCheckingController>(
+                  builder: (facAvailabilityCheckingController) {
+                    if (facAvailabilityCheckingController
+                        .facAvailabilityCheckingProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
+                      );
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          facAvailabilityCheck(
+                              facAvailabilityCheckingController);
+                        }
+                      },
+                      text: 'CHECK AVAILABILITY',
                     );
                   },
-                  text: 'CHECK AVAILABILITY',
                 ),
                 const SizedBox(
                   height: 43,
@@ -70,5 +83,25 @@ class _FacAvailabilityCheckScreenState
         ),
       ),
     );
+  }
+
+  Future<void> facAvailabilityCheck(
+      FacAvailabilityCheckingController
+          facAvailabilityCheckingController) async {
+    final result = await facAvailabilityCheckingController.facAvailabilityCheck(
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+    );
+    if (result) {
+      Get.snackbar('Successful!', facAvailabilityCheckingController.message);
+      Get.to(
+        () => FacSignUpScreen(
+          email: _emailTEController.text.trim(),
+        ),
+      );
+    } else {
+      Get.snackbar('Failed!', facAvailabilityCheckingController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

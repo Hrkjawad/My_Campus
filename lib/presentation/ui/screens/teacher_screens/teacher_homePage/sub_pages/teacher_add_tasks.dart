@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
+import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/appbar.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
-import '../../../../widgets/main_drawer.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../fac_main_bottom_nav_screen.dart';
 
-class TeacherAndTask extends StatefulWidget {
-  const TeacherAndTask({super.key});
+class FacAddTask extends StatefulWidget {
+  const FacAddTask({super.key});
 
   @override
-  State<TeacherAndTask> createState() => _TeacherAndTaskState();
+  State<FacAddTask> createState() => _FacAddTaskState();
 }
 
-class _TeacherAndTaskState extends State<TeacherAndTask> {
+class _FacAddTaskState extends State<FacAddTask> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedBatch, selectedSubject, selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
@@ -39,8 +39,8 @@ class _TeacherAndTaskState extends State<TeacherAndTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: facAppBar(scaffoldKey),
-      drawer: facultyDrawer(context),
+      appBar: customisedAppBar(scaffoldKey, 'Teacher email'),
+      drawer: customisedFacultyDrawer(context),
       body: ScreenBackground(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

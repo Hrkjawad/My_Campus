@@ -35,7 +35,7 @@ class FacBottomNavScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                          () => const TeacherMyTodo(),
+                          () => const FacMyTodo(),
                     );
                   },
                   child: const Icon(

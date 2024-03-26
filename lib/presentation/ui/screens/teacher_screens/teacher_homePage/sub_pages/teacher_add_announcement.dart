@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/appbar.dart';
+import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
-import '../../../../widgets/main_drawer.dart';
+import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../fac_main_bottom_nav_screen.dart';
 
@@ -39,8 +39,8 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: facAppBar(scaffoldKey),
-      drawer: facultyDrawer(context),
+      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      drawer: customisedFacultyDrawer(context),
       body: ScreenBackground(
         child: Stack(
           children: [

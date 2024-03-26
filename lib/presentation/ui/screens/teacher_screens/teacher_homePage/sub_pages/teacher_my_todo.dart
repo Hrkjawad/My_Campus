@@ -1,36 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/appbar.dart';
+import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
-import '../../../../widgets/main_drawer.dart';
+import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../fac_main_bottom_nav_screen.dart';
 
-class TeacherMyTodo extends StatefulWidget {
-  const TeacherMyTodo({super.key});
+class FacMyTodo extends StatefulWidget {
+  const FacMyTodo({super.key});
 
   @override
-  State<TeacherMyTodo> createState() => _TeacherMyTodoState();
+  State<FacMyTodo> createState() => _FacMyTodoState();
 }
 
-class _TeacherMyTodoState extends State<TeacherMyTodo> {
+class _FacMyTodoState extends State<FacMyTodo> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
-  late TextEditingController dateInput;
-  late TextEditingController taskController;
+  late TextEditingController _dateInputTEController;
+  late TextEditingController _taskTEController;
 
   @override
   void initState() {
     super.initState();
-    dateInput = TextEditingController();
-    taskController = TextEditingController();
+    _dateInputTEController = TextEditingController();
+    _taskTEController = TextEditingController();
   }
 
   @override
   void dispose() {
-    dateInput.dispose();
-    taskController.dispose();
+    _dateInputTEController.dispose();
+    _taskTEController.dispose();
     super.dispose();
   }
 
@@ -38,8 +38,8 @@ class _TeacherMyTodoState extends State<TeacherMyTodo> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: facAppBar(scaffoldKey),
-      drawer: facultyDrawer(context),
+      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      drawer: customisedFacultyDrawer(context),
       body: ScreenBackground(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,7 +58,7 @@ class _TeacherMyTodoState extends State<TeacherMyTodo> {
                   ),
                 ),
                 CustomTextField(
-                  controller: taskController,
+                  controller: _taskTEController,
                   hintText: 'Enter Text',
                   height: 44.50,
                   width: 258,
@@ -84,7 +84,7 @@ class _TeacherMyTodoState extends State<TeacherMyTodo> {
                   ),
                 ),
                 CustomDatePicker(
-                  controller: dateInput,
+                  controller: _dateInputTEController,
                   width: 258,
                   height: 44.50,
                   onChanged: (value) {
@@ -118,8 +118,8 @@ class _TeacherMyTodoState extends State<TeacherMyTodo> {
                         });
                         selectedDate = null;
                         selectedTask = null;
-                        dateInput.clear();
-                        taskController.clear();
+                        _dateInputTEController.clear();
+                        _taskTEController.clear();
                       });
                     }
                   },

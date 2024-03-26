@@ -8,12 +8,22 @@ import '../presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/te
 import '../presentation/ui/utility/app_colors.dart';
 import 'controller_binders.dart';
 
-class MyCampus extends StatelessWidget {
+class MyCampus extends StatefulWidget {
+  static GlobalKey<NavigatorState> globalKey = GlobalKey<NavigatorState>();
+
   const MyCampus({super.key});
 
   @override
+  State<MyCampus> createState() => _MyCampusState();
+}
+
+State<MyCampus> createState() => _MyCampusState();
+
+class _MyCampusState extends State<MyCampus> {
+  @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      navigatorKey: MyCampus.globalKey,
       home: const SplashScreen(),
       initialBinding: GetXBindings(),
       debugShowCheckedModeBanner: false,
@@ -48,15 +58,19 @@ class MyCampus extends StatelessWidget {
               fontWeight: FontWeight.bold),
           border: const OutlineInputBorder(),
           enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey.shade400),
             borderRadius: BorderRadius.circular(20),
           ),
           disabledBorder: const OutlineInputBorder(),

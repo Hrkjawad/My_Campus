@@ -12,7 +12,7 @@ class CustomDatePicker extends StatefulWidget {
     required this.controller,
     required this.height,
     required this.width,
-    this.onChanged,
+    this.onChanged, // Optional onChanged callback
   });
 
   @override
@@ -53,7 +53,7 @@ class CustomDatePickerState extends State<CustomDatePicker> {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(24),
               borderSide: const BorderSide(
-                color: Color(0x999B9B9B),
+                color: Colors.grey,
               ),
             ),
             focusedBorder: OutlineInputBorder(
@@ -82,14 +82,17 @@ class CustomDatePickerState extends State<CustomDatePicker> {
             );
 
             if (pickedDate != null) {
-              String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
-              setState(() {
-                widget.controller.text = formattedDate;
-                // Call onChanged callback if provided
-                if (widget.onChanged != null) {
-                  widget.onChanged!(formattedDate);
-                }
-              });
+              String formattedDate =
+                  DateFormat('dd-MM-yyyy').format(pickedDate);
+              setState(
+                () {
+                  widget.controller.text = formattedDate;
+                  // Call onChanged callback if provided
+                  if (widget.onChanged != null) {
+                    widget.onChanged!(formattedDate);
+                  }
+                },
+              );
             }
           },
         ),
