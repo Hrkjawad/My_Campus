@@ -14,14 +14,28 @@ class TextFieldWithTrailing extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 239,
+          width: 323,
           child: TextFormField(
             controller: _emailTEController,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.done,
             cursorColor: Colors.black,
-            decoration: const InputDecoration(
+            decoration:  const InputDecoration(
+              suffixIcon: Padding(
+                padding: EdgeInsets.all(15.0),
+                child: Text(
+                  '@lus.ac.bd',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
+                ),
+              ),
               hintText: 'Type your email',
+              errorStyle: TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+
             ),
             validator: (String? value) {
               if (value?.trim().isEmpty ?? true) {
@@ -31,17 +45,6 @@ class TextFieldWithTrailing extends StatelessWidget {
             },
           ),
         ),
-        const SizedBox(
-          width: 4,
-        ),
-        const SizedBox(
-          width: 84,
-          child: Text(
-            '@lus.ac.bd',
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.w600, fontSize: 16),
-          ),
-        )
       ],
     );
   }

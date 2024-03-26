@@ -38,345 +38,347 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
-      drawer: customisedFacultyDrawer(context),
-      body: ScreenBackground(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 15.0, left: 16.0),
-              child: Container(
-                width: 380,
-                height: 300,
-                decoration: BoxDecoration(
-                  color: const Color(0xBBB2FF9E),
-                  border: Border.all(
-                    color: const Color(0x999B9B9B),
+      body: Scaffold(
+        key: scaffoldKey,
+        drawer: customisedFacultyDrawer(context),
+        body: ScreenBackground(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 15.0, left: 16.0),
+                child: Container(
+                  width: 380,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    color: const Color(0xBBB2FF9E),
+                    border: Border.all(
+                      color: const Color(0x999B9B9B),
+                    ),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  borderRadius: BorderRadius.circular(20),
                 ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  height: 23,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomTextField(
-                        controller: taskController,
-                        hintText: 'Type Announcement',
-                        height: 45,
-                        width: 360,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedAnnouncement = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomDropdownButton(
-                        width: 360,
-                        height: 45,
-                        dropDownWidth: 360,
-                        items: const ['57-A+B', '56-A', '56-B'],
-                        value: selectedBatch,
-                        hintText: 'Select Batch',
-                        onChanged: (value) {
-                          setState(() {
-                            selectedBatch = value;
-                          });
-                        },
-                      ),
-                      const SizedBox(height: 10,),
-                      CustomDatePicker(
-                        controller: dateInput,
-                        width: 360,
-                        height: 45,
-                        onChanged: (value) {
-                          setState(() {
-                            selectedDate = value;
-                          });
-                        },
-                      ),
-
-                    ],
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 23,
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 360,
-                    height: 55,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (selectedAnnouncement != null && selectedDate != null && selectedBatch !=null) {
-                          setState(() {
-                            tableData.add({
-                              'announcement': "${selectedDate!} -> ${selectedAnnouncement!}",
-                              'Batch': selectedBatch!
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        CustomTextField(
+                          controller: taskController,
+                          hintText: 'Type Announcement',
+                          height: 45,
+                          width: 360,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedAnnouncement = value;
                             });
-                            selectedDate = null;
-                            selectedAnnouncement = null;
-                            selectedBatch = null;
-                            dateInput.clear();
-                            taskController.clear();
-                          });
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFF8FFAC),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          side: const BorderSide(color: Color(0x999B9B9B)),
+                          },
                         ),
-                      ),
-                      child: const Text(
-                        "ADD",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                        const SizedBox(height: 10,),
+                        CustomDropdownButton(
+                          width: 360,
+                          height: 45,
+                          dropDownWidth: 360,
+                          items: const ['57-A+B', '56-A', '56-B'],
+                          value: selectedBatch,
+                          hintText: 'Select Batch',
+                          onChanged: (value) {
+                            setState(() {
+                              selectedBatch = value;
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 10,),
+                        CustomDatePicker(
+                          controller: dateInput,
+                          width: 360,
+                          height: 45,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedDate = value;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      width: 360,
+                      height: 55,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (selectedAnnouncement != null && selectedDate != null && selectedBatch !=null) {
+                            setState(() {
+                              tableData.add({
+                                'announcement': "${selectedDate!} -> ${selectedAnnouncement!}",
+                                'Batch': selectedBatch!
+                              });
+                              selectedDate = null;
+                              selectedAnnouncement = null;
+                              selectedBatch = null;
+                              dateInput.clear();
+                              taskController.clear();
+                            });
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFF8FFAC),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            side: const BorderSide(color: Color(0x999B9B9B)),
+                          ),
+                        ),
+                        child: const Text(
+                          "ADD",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: Stack(
-                    children: [
-                      Container(
-                        height: 450,
-                        width: 380,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: const Color(0x999B9B9B),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: 450,
+                          width: 380,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                              color: const Color(0x999B9B9B),
+                            ),
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 0.0),
-                            child: DataTable(
-                              dataRowMaxHeight: 105,
-                              columnSpacing: 25,
-                              horizontalMargin: 10,
-                              columns: const [
-                                DataColumn(
-                                  label: SizedBox(
-                                    width: 250,
-                                    child: Center(
-                                      child: Text(
-                                        'Announcements',
-                                        style: TextStyle(
-                                          color: Color(0xFF0D6858),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 26,
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 0.0),
+                              child: DataTable(
+                                dataRowMaxHeight: 105,
+                                columnSpacing: 25,
+                                horizontalMargin: 10,
+                                columns: const [
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 250,
+                                      child: Center(
+                                        child: Text(
+                                          'Announcements',
+                                          style: TextStyle(
+                                            color: Color(0xFF0D6858),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 26,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                DataColumn(
-                                  label: SizedBox(
-                                    width: 85,
-                                    child: Center(
-                                      child: Text(
-                                        'Batch',
-                                        style: TextStyle(
-                                          color: Color(0xFF0D6858),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 26,
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 85,
+                                      child: Center(
+                                        child: Text(
+                                          'Batch',
+                                          style: TextStyle(
+                                            color: Color(0xFF0D6858),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 26,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                              rows: tableData.map(
-                                    (data) {
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(
-                                        GestureDetector(
-                                          onLongPress: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                    "Delete Data",
-                                                    style: TextStyle(
-                                                        fontSize: 24,
-                                                        fontWeight: FontWeight.w900
-                                                    ),
-                                                  ),
-                                                  content: const Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.w500
-                                                    ),
-                                                  ),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: const Text(
-                                                        "NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight: FontWeight.w500,
-                                                            color: Colors.green
-                                                        ),
+                                ],
+                                rows: tableData.map(
+                                      (data) {
+                                    return DataRow(
+                                      cells: [
+                                        DataCell(
+                                          GestureDetector(
+                                            onLongPress: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                      "Delete Data",
+                                                      style: TextStyle(
+                                                          fontSize: 24,
+                                                          fontWeight: FontWeight.w900
                                                       ),
                                                     ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          tableData.remove(data);
-                                                        });
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: const Text(
-                                                        "YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight: FontWeight.w500,
-                                                            color: Colors.red
-                                                        ),
+                                                    content: const Text(
+                                                      "Are you sure you want to delete this data?",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight: FontWeight.w500
                                                       ),
                                                     ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: SizedBox(
-                                            width: 250,
-                                            child: Wrap(
-                                              children: [
-                                                Text(
-                                                  data['announcement']!,
-                                                  softWrap: true,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 20,
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                        child: const Text(
+                                                          "NO",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.green
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            tableData.remove(data);
+                                                          });
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                        child: const Text(
+                                                          "YES",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.red
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: SizedBox(
+                                              width: 250,
+                                              child: Wrap(
+                                                children: [
+                                                  Text(
+                                                    data['announcement']!,
+                                                    softWrap: true,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 20,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      DataCell(
-                                        GestureDetector(
-                                          onLongPress: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                    "Delete Data",
-                                                    style: TextStyle(
-                                                        fontSize: 24,
-                                                        fontWeight: FontWeight.w900
-                                                    ),
-                                                  ),
-                                                  content: const Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20,
-                                                        fontWeight: FontWeight.w500
-                                                    ),
-                                                  ),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: const Text(
-                                                        "NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight: FontWeight.w500,
-                                                            color: Colors.green
-                                                        ),
+                                        DataCell(
+                                          GestureDetector(
+                                            onLongPress: () {
+                                              showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: const Text(
+                                                      "Delete Data",
+                                                      style: TextStyle(
+                                                          fontSize: 24,
+                                                          fontWeight: FontWeight.w900
                                                       ),
                                                     ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          tableData.remove(data);
-                                                        });
-                                                        Navigator.of(context).pop();
-                                                      },
-                                                      child: const Text(
-                                                        "YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            fontWeight: FontWeight.w500,
-                                                            color: Colors.red
-                                                        ),
+                                                    content: const Text(
+                                                      "Are you sure you want to delete this data?",
+                                                      style: TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight: FontWeight.w500
                                                       ),
                                                     ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: SizedBox(
-                                            width: 100,
-                                            child: Wrap(
-                                              children: [
-                                                Text(
-                                                  data['Batch']!,
-                                                  softWrap: true,
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 24,
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                        child: const Text(
+                                                          "NO",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.green
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            tableData.remove(data);
+                                                          });
+                                                          Navigator.of(context).pop();
+                                                        },
+                                                        child: const Text(
+                                                          "YES",
+                                                          style: TextStyle(
+                                                              fontSize: 18,
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.red
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: SizedBox(
+                                              width: 100,
+                                              child: Wrap(
+                                                children: [
+                                                  Text(
+                                                    data['Batch']!,
+                                                    softWrap: true,
+                                                    style: const TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 24,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ).toList(),
+                                      ],
+                                    );
+                                  },
+                                ).toList(),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Positioned(
-                        left: 280,
-                        top: 0,
-                        bottom: 0,
-                        child: Container(
-                          width: 1,
-                          color: const Color(0x999B9B9B),
+                        Positioned(
+                          left: 280,
+                          top: 0,
+                          bottom: 0,
+                          child: Container(
+                            width: 1,
+                            color: const Color(0x999B9B9B),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                const FacBottomNavScreen(),
+                  const FacBottomNavScreen(),
 
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

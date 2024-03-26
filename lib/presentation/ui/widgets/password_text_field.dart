@@ -36,6 +36,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 ? Icons.visibility_off_outlined
                 : Icons.visibility_outlined),
           ),
+          errorStyle: const TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
         ),
         validator: (String? value) {
           if (value != widget._passwordTEController.text) {
