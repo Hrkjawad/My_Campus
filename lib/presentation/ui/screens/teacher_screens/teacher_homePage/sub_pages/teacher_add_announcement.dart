@@ -5,7 +5,7 @@ import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
-import '../../fac_main_bottom_nav_screen.dart';
+import '../../../../widgets/fac_main_bottom_nav_screen.dart';
 
 class TeacherAddAnnouncement extends StatefulWidget {
   const TeacherAddAnnouncement({super.key});
@@ -364,7 +364,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         Positioned(
                           left: 280,
                           top: 0,
-                          bottom: 0,
+                          bottom: 6,
                           child: Container(
                             width: 1,
                             color: const Color(0x999B9B9B),

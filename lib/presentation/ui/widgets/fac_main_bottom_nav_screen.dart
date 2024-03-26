@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_home_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
+
+import 'file_upload.dart';
 
 class FacBottomNavScreen extends StatelessWidget {
   const FacBottomNavScreen({super.key});
@@ -11,7 +12,7 @@ class FacBottomNavScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 80,
+      height: 70,
       color: Colors.white,
       child: Padding(
         padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
@@ -47,7 +48,7 @@ class FacBottomNavScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                          () => const TeacherAddAnnouncement(),
+                          () => const FileUpload(),
                     );
                   },
                   child: const Icon(
