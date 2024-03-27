@@ -66,21 +66,21 @@ class FacBottomNavScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 39.w,
+                    width: 42.w,
                   ),
                   Text(
                     "Home",
                     style: TextStyle(fontSize: 16.sp, color: Colors.black),
                   ),
                   SizedBox(
-                    width: 87.w,
+                    width: 95.w,
                   ),
                   Text(
                     "Chat",
                     style: TextStyle(fontSize: 16.sp, color: Colors.black),
                   ),
                   SizedBox(
-                    width: 75.w,
+                    width: 85.w,
                   ),
                   Text(
                     "Resources",
