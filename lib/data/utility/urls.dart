@@ -8,5 +8,6 @@ class Urls {
       '$_facultyBaseUrl/RecoverVerifyEmail/$email';
   static String facultyVerifyOTP(String email, String otp) =>
       '$_facultyBaseUrl/RecoverVerifyOtp/$email/$otp';
-  static String facultyPasswordChange = '$_facultyBaseUrl/RecoverResetPassword';
+  static const String facultyPasswordChange = '$_facultyBaseUrl/RecoverResetPassword';
+  static const String facultyList = '$_facultyBaseUrl/availableCourseAndTeacher';
 }
