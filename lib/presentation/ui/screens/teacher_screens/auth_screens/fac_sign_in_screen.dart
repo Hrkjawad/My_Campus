@@ -63,7 +63,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          //facSignIn(facLoginController);
+                          facSignIn(facLoginController);
                         }
                         Get.to(
                           () => const FacHomeScreen(),

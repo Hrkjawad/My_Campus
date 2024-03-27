@@ -38,7 +38,7 @@ class _FacAddTaskState extends State<FacAddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher email'),
+      appBar: customisedAppBar(scaffoldKey),
       drawer: customisedFacultyDrawer(context),
       body: Scaffold(
         key: scaffoldKey,
@@ -325,7 +325,8 @@ class _FacAddTaskState extends State<FacAddTask> {
                                                   "Delete Data",
                                                   style: TextStyle(
                                                       fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
+                                                      fontWeight:
+                                                          FontWeight.w900),
                                                 ),
                                                 content: const Text(
                                                     "Are you sure you want to delete this data?",
@@ -336,21 +337,24 @@ class _FacAddTaskState extends State<FacAddTask> {
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text("NO",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            color: Colors.green)),
+                                                            color:
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {
                                                         tableData.remove(data);
                                                       });
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text("YES",
                                                         style: TextStyle(
@@ -393,38 +397,42 @@ class _FacAddTaskState extends State<FacAddTask> {
                                                   "Delete Data",
                                                   style: TextStyle(
                                                       fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
+                                                      fontWeight:
+                                                          FontWeight.w900),
                                                 ),
                                                 content: const Text(
                                                     "Are you sure you want to delete this data?",
                                                     style: TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
-                                                        FontWeight.w500)),
+                                                            FontWeight.w500)),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text("NO",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.green)),
+                                                                FontWeight.w500,
+                                                            color:
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {
                                                         tableData.remove(data);
                                                       });
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text("YES",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             color: Colors.red)),
                                                   ),
                                                 ],
@@ -461,38 +469,42 @@ class _FacAddTaskState extends State<FacAddTask> {
                                                   "Delete Data",
                                                   style: TextStyle(
                                                       fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
+                                                      fontWeight:
+                                                          FontWeight.w900),
                                                 ),
                                                 content: const Text(
                                                     "Are you sure you want to delete this data?",
                                                     style: TextStyle(
                                                         fontSize: 20,
                                                         fontWeight:
-                                                        FontWeight.w500)),
+                                                            FontWeight.w500)),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text("NO",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.green)),
+                                                                FontWeight.w500,
+                                                            color:
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {
                                                         tableData.remove(data);
                                                       });
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
                                                     child: const Text("YES",
                                                         style: TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             color: Colors.red)),
                                                   ),
                                                 ],
