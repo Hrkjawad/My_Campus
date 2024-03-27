@@ -3,6 +3,7 @@ import 'app_logo.dart';
 
 AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey, String title) {
   return AppBar(
+    automaticallyImplyLeading: false,
     backgroundColor: Colors.white,
     elevation: 0.25,
     leading: IconButton(

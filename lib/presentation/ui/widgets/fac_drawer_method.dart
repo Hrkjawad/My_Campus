@@ -4,6 +4,8 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePa
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
 import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
 
+import 'cr_list_method.dart';
+
 Drawer customisedFacultyDrawer(BuildContext context) {
   return Drawer(
     width: 286,
@@ -20,97 +22,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
           ),
           hoverColor: Colors.grey,
           onTap: () {
-            showDialog(
-              context: context,
-              barrierDismissible: true,
-              builder: (context) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: StatefulBuilder(
-                    builder: (context, StateSetter setState) {
-                      return SingleChildScrollView(
-                        child: AlertDialog(
-                          title: const Center(
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Batch CR",
-                                  style: TextStyle(
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 6,
-                                ),
-                                LinearProgressIndicator(
-                                  value: .5,
-                                )
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            for (int i = 0; i < 20; i++)
-                              const Column(
-                                children: [
-                                  ListTile(
-                                    leading: CircleAvatar(
-                                      child: Icon(
-                                        Icons.person,
-                                        size: 35,
-                                        color: Colors.blueGrey,
-                                      ),
-                                    ),
-                                    title: Text(
-                                      'Hasin Israq',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          fontSize: 20,
-                                          letterSpacing: .6),
-                                    ),
-                                    subtitle: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          height: 6,
-                                        ),
-                                        Text(
-                                          'CSE Department',
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          'Batch Name',
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                        SizedBox(
-                                          height: 8,
-                                        ),
-                                        Text(
-                                          'Mobile Number',
-                                          style: TextStyle(fontSize: 18),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    thickness: 3,
-                                  )
-                                ],
-                              )
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            );
+            crList(context);
           },
         ),
         divider(),
@@ -127,8 +39,8 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               context: context,
               builder: (context) {
                 return SizedBox(
-                  width: double.infinity,
-                  height: 250,
+                  width: 500,
+                  height: 300,
                   child: AlertDialog(
                     title: const Center(
                       child: Text(
@@ -142,10 +54,10 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                       minScale: 0.1,
                       maxScale: 6.0,
                       child: Image.asset(
-                        height: 400,
-                        width: 400,
+                        height: 300,
+                        width: 500,
                         'assets/images/Bus Time.jpg',
-                        fit: BoxFit.contain,
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ),
@@ -180,7 +92,6 @@ Drawer customisedFacultyDrawer(BuildContext context) {
             Get.to(
               () => const FacAddTask(),
             );
-            /*Get.find<FacMainBottomNavController>().changeScreen(1);*/
           },
         ),
         divider(),
@@ -196,15 +107,14 @@ Drawer customisedFacultyDrawer(BuildContext context) {
             Get.to(
               () => const FacMyTodo(),
             );
-            /*Get.find<FacMainBottomNavController>().changeScreen(2);*/
           },
         ),
         divider(),
         const SizedBox(height: 480),
         const Center(
           child: Text(
-            'V 1.0',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 19),
+            'Version 1.0',
+            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
           ),
         ),
       ],

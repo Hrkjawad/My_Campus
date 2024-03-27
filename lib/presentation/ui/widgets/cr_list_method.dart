@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void facultyMembers(BuildContext context) {
+void crList(BuildContext context) {
   showDialog(
     context: context,
     barrierDismissible: true,
@@ -17,7 +17,7 @@ void facultyMembers(BuildContext context) {
                   child: Column(
                     children: [
                       Text(
-                        "Faculty",
+                        "Batch CR",
                         style: TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w800,
@@ -45,7 +45,7 @@ void facultyMembers(BuildContext context) {
                             ),
                           ),
                           title: Text(
-                            'Pritiraj Battacharje',
+                            'Hasin Israq',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: 20,
@@ -59,13 +59,6 @@ void facultyMembers(BuildContext context) {
                                 height: 6,
                               ),
                               Text(
-                                'Lecturer',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              SizedBox(
-                                height: 8,
-                              ),
-                              Text(
                                 'CSE Department',
                                 style: TextStyle(fontSize: 18),
                               ),
@@ -73,7 +66,7 @@ void facultyMembers(BuildContext context) {
                                 height: 8,
                               ),
                               Text(
-                                'Email: prb@lus.ac.bd',
+                                'Batch Name',
                                 style: TextStyle(fontSize: 18),
                               ),
                               SizedBox(

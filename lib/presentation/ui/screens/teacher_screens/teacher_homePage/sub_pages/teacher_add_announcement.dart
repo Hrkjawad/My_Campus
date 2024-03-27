@@ -5,6 +5,7 @@ import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
+import '../../../../widgets/fac_main_bottom_nav_screen.dart';
 
 class TeacherAddAnnouncement extends StatefulWidget {
   const TeacherAddAnnouncement({super.key});
@@ -37,16 +38,15 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
       appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
-      drawer: customisedFacultyDrawer(context),
-      body: ScreenBackground(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16),
+      body: Scaffold(
+        key: scaffoldKey,
+        drawer: customisedFacultyDrawer(context),
+        body: ScreenBackground(
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 15.0, left: 16.0),
                 child: Container(
                   width: 380,
                   height: 300,
@@ -60,7 +60,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                 ),
               ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(
                     height: 23,
@@ -68,7 +68,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CustomTextField(
                           controller: taskController,
@@ -81,9 +81,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             });
                           },
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10,),
                         CustomDropdownButton(
                           width: 360,
                           height: 45,
@@ -97,9 +95,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             });
                           },
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
+                        const SizedBox(height: 10,),
                         CustomDatePicker(
                           controller: dateInput,
                           width: 360,
@@ -110,6 +106,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             });
                           },
                         ),
+
                       ],
                     ),
                   ),
@@ -120,13 +117,10 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                       height: 55,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (selectedAnnouncement != null &&
-                              selectedDate != null &&
-                              selectedBatch != null) {
+                          if (selectedAnnouncement != null && selectedDate != null && selectedBatch !=null) {
                             setState(() {
                               tableData.add({
-                                'announcement':
-                                    "${selectedDate!} -> ${selectedAnnouncement!}",
+                                'announcement': "${selectedDate!} -> ${selectedAnnouncement!}",
                                 'Batch': selectedBatch!
                               });
                               selectedDate = null;
@@ -208,7 +202,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                   ),
                                 ],
                                 rows: tableData.map(
-                                  (data) {
+                                      (data) {
                                     return DataRow(
                                       cells: [
                                         DataCell(
@@ -216,58 +210,50 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                             onLongPress: () {
                                               showDialog(
                                                 context: context,
-                                                builder:
-                                                    (BuildContext context) {
+                                                builder: (BuildContext context) {
                                                   return AlertDialog(
                                                     title: const Text(
                                                       "Delete Data",
                                                       style: TextStyle(
                                                           fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.w900),
+                                                          fontWeight: FontWeight.w900
+                                                      ),
                                                     ),
                                                     content: const Text(
                                                       "Are you sure you want to delete this data?",
                                                       style: TextStyle(
                                                           fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500),
+                                                          fontWeight: FontWeight.w500
+                                                      ),
                                                     ),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
+                                                          Navigator.of(context).pop();
                                                         },
                                                         child: const Text(
                                                           "NO",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              color:
-                                                                  Colors.green),
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.green
+                                                          ),
                                                         ),
                                                       ),
                                                       TextButton(
                                                         onPressed: () {
                                                           setState(() {
-                                                            tableData
-                                                                .remove(data);
+                                                            tableData.remove(data);
                                                           });
-                                                          Navigator.of(context)
-                                                              .pop();
+                                                          Navigator.of(context).pop();
                                                         },
                                                         child: const Text(
                                                           "YES",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              color:
-                                                                  Colors.red),
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.red
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -284,8 +270,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                                     softWrap: true,
                                                     style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                       fontSize: 20,
                                                     ),
                                                   ),
@@ -299,58 +284,50 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                             onLongPress: () {
                                               showDialog(
                                                 context: context,
-                                                builder:
-                                                    (BuildContext context) {
+                                                builder: (BuildContext context) {
                                                   return AlertDialog(
                                                     title: const Text(
                                                       "Delete Data",
                                                       style: TextStyle(
                                                           fontSize: 24,
-                                                          fontWeight:
-                                                              FontWeight.w900),
+                                                          fontWeight: FontWeight.w900
+                                                      ),
                                                     ),
                                                     content: const Text(
                                                       "Are you sure you want to delete this data?",
                                                       style: TextStyle(
                                                           fontSize: 20,
-                                                          fontWeight:
-                                                              FontWeight.w500),
+                                                          fontWeight: FontWeight.w500
+                                                      ),
                                                     ),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
+                                                          Navigator.of(context).pop();
                                                         },
                                                         child: const Text(
                                                           "NO",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              color:
-                                                                  Colors.green),
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.green
+                                                          ),
                                                         ),
                                                       ),
                                                       TextButton(
                                                         onPressed: () {
                                                           setState(() {
-                                                            tableData
-                                                                .remove(data);
+                                                            tableData.remove(data);
                                                           });
-                                                          Navigator.of(context)
-                                                              .pop();
+                                                          Navigator.of(context).pop();
                                                         },
                                                         child: const Text(
                                                           "YES",
                                                           style: TextStyle(
                                                               fontSize: 18,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              color:
-                                                                  Colors.red),
+                                                              fontWeight: FontWeight.w500,
+                                                              color: Colors.red
+                                                          ),
                                                         ),
                                                       ),
                                                     ],
@@ -367,8 +344,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                                     softWrap: true,
                                                     style: const TextStyle(
                                                       color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                      fontWeight: FontWeight.w600,
                                                       fontSize: 24,
                                                     ),
                                                   ),
@@ -388,7 +364,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         Positioned(
                           left: 280,
                           top: 0,
-                          bottom: 18,
+                          bottom: 6,
                           child: Container(
                             width: 1,
                             color: const Color(0x999B9B9B),
@@ -397,6 +373,8 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                       ],
                     ),
                   ),
+                  const FacBottomNavScreen(),
+
                 ],
               ),
             ],
