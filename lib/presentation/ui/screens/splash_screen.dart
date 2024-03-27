@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/home_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
@@ -28,25 +29,25 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: ScreenBackground(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
-            Center(
+            const Spacer(),
+            const Center(
               child: AppLogo(),
             ),
-            Spacer(),
-            CircularProgressIndicator(
+            const Spacer(),
+            const CircularProgressIndicator(
               color: Colors.teal,
             ),
             SizedBox(
-              height: 8,
+              height: 8.h,
             ),
-            Text('Version 1.0.0'),
+            const Text('Welcome'),
             SizedBox(
-              height: 16,
+              height: 16.h,
             ),
           ],
         ),

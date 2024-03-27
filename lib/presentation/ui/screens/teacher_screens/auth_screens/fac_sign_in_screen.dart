@@ -49,7 +49,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   hintText: 'Confirm Password',
                 ),
                 const SizedBox(
-                  height: 41,
+                  height: 30,
                 ),
                 GetBuilder<FacSignInController>(
                   builder: (facLoginController) {

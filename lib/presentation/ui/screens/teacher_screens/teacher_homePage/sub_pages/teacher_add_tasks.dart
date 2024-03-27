@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -47,23 +48,23 @@ class _FacAddTaskState extends State<FacAddTask> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 23,
+              SizedBox(
+                height: 23.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "BATCH     :  ",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   CustomDropdownButton(
-                    width: 258,
-                    height: 44.50,
-                    dropDownWidth: 258,
+                    width: 258.w,
+                    height: 44.50.h,
+                    dropDownWidth: 258.w,
                     items: const ['57-A+B', '56-A', '56-B'],
                     value: selectedBatch,
                     hintText: 'Select',
@@ -75,23 +76,23 @@ class _FacAddTaskState extends State<FacAddTask> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "SUBJECT :  ",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   CustomDropdownButton(
-                    width: 258,
-                    dropDownWidth: 258,
-                    height: 44.50,
+                    width: 258.w,
+                    dropDownWidth: 258.w,
+                    height: 44.50.h,
                     items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
                     value: selectedSubject,
                     hintText: 'Select',
@@ -103,24 +104,24 @@ class _FacAddTaskState extends State<FacAddTask> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "TASK        :  ",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   CustomTextField(
                     controller: taskController,
                     hintText: 'Enter Text',
-                    height: 44.50,
-                    width: 258,
+                    height: 44.50.h,
+                    width: 258.w,
                     onChanged: (value) {
                       setState(() {
                         selectedTask = value;
@@ -129,23 +130,23 @@ class _FacAddTaskState extends State<FacAddTask> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "DATE         :  ",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   CustomDatePicker(
                     controller: dateInput,
-                    width: 258,
-                    height: 44.50,
+                    width: 258.w,
+                    height: 44.50.h,
                     onChanged: (value) {
                       setState(() {
                         selectedDate = value;
@@ -154,17 +155,17 @@ class _FacAddTaskState extends State<FacAddTask> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: 15.h,
               ),
               Center(
                 child: SizedBox(
-                  width: 258,
-                  height: 55,
+                  width: 258.w,
+                  height: 58.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(50.0.w),
                         side: const BorderSide(color: Color(0x999B9B9B)),
                       ),
                     ),
@@ -189,47 +190,45 @@ class _FacAddTaskState extends State<FacAddTask> {
                         });
                       }
                     },
-                    child: const Text(
+                    child: Text(
                       "SUBMIT",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: 15.h,
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 3.0),
+                  padding: EdgeInsets.only(left: 3.w),
                   child: Stack(
                     children: [
                       Container(
-                        width: 380,
-                        height: 380,
+                        width: 380.w,
+                        height: 380.h,
                         decoration: BoxDecoration(
                           color: const Color(0xFFF8FFAC),
                           border: Border.all(
                             color: const Color(0x999B9B9B),
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(20),
-                          ),
+                          borderRadius: BorderRadius.circular(20.w),
                         ),
                       ),
                       Container(
-                        width: 290,
-                        height: 380,
-                        decoration: const BoxDecoration(
+                        width: 290.w,
+                        height: 380.h,
+                        decoration:  BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
+                            topLeft: Radius.circular(20.w),
+                            bottomLeft: Radius.circular(20.w),
                           ),
-                          border: Border(
+                          border: const Border(
                             left: BorderSide(
                               color: Color(0x999B9B9B),
                             ),
@@ -243,15 +242,15 @@ class _FacAddTaskState extends State<FacAddTask> {
                         ),
                       ),
                       Container(
-                        width: 90,
-                        height: 380,
-                        decoration: const BoxDecoration(
-                          color: Color(0xFFF8FFAC),
+                        width: 90.w,
+                        height: 380.h,
+                        decoration:  BoxDecoration(
+                          color: const Color(0xFFF8FFAC),
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
+                            topLeft: Radius.circular(20.w),
+                            bottomLeft: Radius.circular(20.w),
                           ),
-                          border: Border(
+                          border: const Border(
                             left: BorderSide(
                               color: Color(0x999B9B9B),
                             ),
@@ -265,27 +264,27 @@ class _FacAddTaskState extends State<FacAddTask> {
                         ),
                       ),
                       Container(
-                        height: 380,
-                        width: 380,
+                        height: 380.h,
+                        width: 380.w,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: const Color(0x999B9B9B),
                           ),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.w),
                         ),
                         child: SingleChildScrollView(
                           child: DataTable(
-                            dataRowMaxHeight: 105,
-                            columnSpacing: 24,
-                            horizontalMargin: 10,
-                            columns: const [
+                            dataRowMaxHeight: 105.h,
+                            columnSpacing: 24.w,
+                            horizontalMargin: 10.w,
+                            columns: [
                               DataColumn(
                                 label: Text(
                                   'Batch',
                                   style: TextStyle(
-                                    color: Color(0xFF0D6858),
+                                    color: const Color(0xFF0D6858),
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 26,
+                                    fontSize: 26.sp,
                                   ),
                                 ),
                               ),
@@ -293,9 +292,9 @@ class _FacAddTaskState extends State<FacAddTask> {
                                 label: Text(
                                   'Exam & Task',
                                   style: TextStyle(
-                                    color: Color(0xFF0D6858),
+                                    color: const Color(0xFF0D6858),
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 26,
+                                    fontSize: 26.sp,
                                   ),
                                 ),
                               ),
@@ -303,9 +302,9 @@ class _FacAddTaskState extends State<FacAddTask> {
                                 label: Text(
                                   'Date',
                                   style: TextStyle(
-                                    color: Color(0xFF0D6858),
+                                    color: const Color(0xFF0D6858),
                                     fontWeight: FontWeight.w500,
-                                    fontSize: 26,
+                                    fontSize: 26.sp,
                                   ),
                                 ),
                               ),
@@ -321,40 +320,44 @@ class _FacAddTaskState extends State<FacAddTask> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: const Text(
+                                                title: Text(
                                                   "Delete Data",
                                                   style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
+                                                      fontSize: 24.sp,
+                                                      fontWeight:
+                                                          FontWeight.w900),
                                                 ),
-                                                content: const Text(
+                                                content: Text(
                                                     "Are you sure you want to delete this data?",
                                                     style: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: 20.sp,
                                                         fontWeight:
                                                             FontWeight.w500)),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
-                                                    child: const Text("NO",
+                                                    child: Text("NO",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 18.sp,
                                                             fontWeight:
                                                                 FontWeight.w500,
-                                                            color: Colors.green)),
+                                                            color:
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {
                                                         tableData.remove(data);
                                                       });
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
-                                                    child: const Text("YES",
+                                                    child: Text("YES",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 18.sp,
                                                             fontWeight:
                                                                 FontWeight.w500,
                                                             color: Colors.red)),
@@ -365,16 +368,16 @@ class _FacAddTaskState extends State<FacAddTask> {
                                           );
                                         },
                                         child: SizedBox(
-                                          width: 80,
+                                          width: 80.w,
                                           child: Wrap(
                                             children: [
                                               Text(
                                                 data['Batch']!,
                                                 softWrap: true,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 19,
+                                                  fontSize: 19.sp,
                                                 ),
                                               ),
                                             ],
@@ -389,42 +392,46 @@ class _FacAddTaskState extends State<FacAddTask> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: const Text(
+                                                title: Text(
                                                   "Delete Data",
                                                   style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
+                                                      fontSize: 24.sp,
+                                                      fontWeight:
+                                                          FontWeight.w900),
                                                 ),
-                                                content: const Text(
+                                                content: Text(
                                                     "Are you sure you want to delete this data?",
                                                     style: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: 20.sp,
                                                         fontWeight:
-                                                        FontWeight.w500)),
+                                                            FontWeight.w500)),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
-                                                    child: const Text("NO",
+                                                    child: Text("NO",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 18.sp,
                                                             fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.green)),
+                                                                FontWeight.w500,
+                                                            color:
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {
                                                         tableData.remove(data);
                                                       });
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
-                                                    child: const Text("YES",
+                                                    child: Text("YES",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 18.sp,
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             color: Colors.red)),
                                                   ),
                                                 ],
@@ -433,16 +440,16 @@ class _FacAddTaskState extends State<FacAddTask> {
                                           );
                                         },
                                         child: SizedBox(
-                                          width: 160,
+                                          width: 160.w,
                                           child: Wrap(
                                             children: [
                                               Text(
                                                 data['Exam&Task']!,
                                                 softWrap: true,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 19,
+                                                  fontSize: 19.sp,
                                                 ),
                                               ),
                                             ],
@@ -457,42 +464,46 @@ class _FacAddTaskState extends State<FacAddTask> {
                                             context: context,
                                             builder: (BuildContext context) {
                                               return AlertDialog(
-                                                title: const Text(
+                                                title: Text(
                                                   "Delete Data",
                                                   style: TextStyle(
-                                                      fontSize: 24,
-                                                      fontWeight: FontWeight.w900),
+                                                      fontSize: 24.sp,
+                                                      fontWeight:
+                                                          FontWeight.w900),
                                                 ),
-                                                content: const Text(
+                                                content: Text(
                                                     "Are you sure you want to delete this data?",
                                                     style: TextStyle(
-                                                        fontSize: 20,
+                                                        fontSize: 20.sp,
                                                         fontWeight:
-                                                        FontWeight.w500)),
+                                                            FontWeight.w500)),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
-                                                    child: const Text("NO",
+                                                    child: Text("NO",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 18.sp,
                                                             fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.green)),
+                                                                FontWeight.w500,
+                                                            color:
+                                                                Colors.green)),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
                                                       setState(() {
                                                         tableData.remove(data);
                                                       });
-                                                      Navigator.of(context).pop();
+                                                      Navigator.of(context)
+                                                          .pop();
                                                     },
-                                                    child: const Text("YES",
+                                                    child: Text("YES",
                                                         style: TextStyle(
-                                                            fontSize: 18,
+                                                            fontSize: 18.sp,
                                                             fontWeight:
-                                                            FontWeight.w500,
+                                                                FontWeight.w500,
                                                             color: Colors.red)),
                                                   ),
                                                 ],
@@ -501,16 +512,16 @@ class _FacAddTaskState extends State<FacAddTask> {
                                           );
                                         },
                                         child: SizedBox(
-                                          width: 80,
+                                          width: 80.w,
                                           child: Wrap(
                                             children: [
                                               Text(
                                                 data['Date']!,
                                                 softWrap: true,
-                                                style: const TextStyle(
+                                                style: TextStyle(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
-                                                  fontSize: 14,
+                                                  fontSize: 14.sp,
                                                 ),
                                               ),
                                             ],
@@ -529,10 +540,10 @@ class _FacAddTaskState extends State<FacAddTask> {
                   ),
                 ),
               ),
-              const FacBottomNavScreen(),
             ],
           ),
         ),
+        bottomNavigationBar: const FacBottomNavScreen(),
       ),
     );
   }

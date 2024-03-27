@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
@@ -45,24 +46,24 @@ class _FacMyTodoState extends State<FacMyTodo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 23,
+              SizedBox(
+                height: 23.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "TITLE       :  ",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   CustomTextField(
                     controller: _taskTEController,
                     hintText: 'Enter Text',
-                    height: 44.50,
-                    width: 258,
+                    height: 44.50.h,
+                    width: 258.w,
                     onChanged: (value) {
                       setState(() {
                         selectedTask = value;
@@ -71,23 +72,23 @@ class _FacMyTodoState extends State<FacMyTodo> {
                   )
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "DATE        :  ",
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 24.sp,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
                   CustomDatePicker(
                     controller: _dateInputTEController,
-                    width: 258,
-                    height: 44.50,
+                    width: 258.w,
+                    height: 44.50.h,
                     onChanged: (value) {
                       setState(() {
                         selectedDate = value;
@@ -96,17 +97,17 @@ class _FacMyTodoState extends State<FacMyTodo> {
                   ),
                 ],
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Center(
                 child: SizedBox(
-                  width: 380,
-                  height: 55,
+                  width: 380.w,
+                  height: 58.h,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
+                        borderRadius: BorderRadius.circular(50.0.w),
                         side: const BorderSide(color: Color(0x999B9B9B)),
                       ),
                     ),
@@ -124,47 +125,47 @@ class _FacMyTodoState extends State<FacMyTodo> {
                         });
                       }
                     },
-                    child: const Text(
+                    child: Text(
                       "ADD",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 22.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20.h,
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 3.0),
+                  padding: EdgeInsets.only(left: 3.0.w),
                   child: Stack(
                     children: [
                       Container(
-                        width: 380,
-                        height: 500,
+                        width: 380.w,
+                        height: 500.h,
                         decoration: BoxDecoration(
                           color: const Color(0xFFF8FFAC),
                           border: Border.all(
                             color: const Color(0x999B9B9B),
                           ),
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(20),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20.w),
                           ),
                         ),
                       ),
                       Container(
-                        width: 280,
-                        height: 500,
-                        decoration: const BoxDecoration(
+                        width: 280.w,
+                        height: 500.h,
+                        decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20),
+                            topLeft: Radius.circular(20.w),
+                            bottomLeft: Radius.circular(20.w),
                           ),
-                          border: Border(
+                          border: const Border(
                             left: BorderSide(
                               color: Color(0x999B9B9B),
                             ),
@@ -178,32 +179,32 @@ class _FacMyTodoState extends State<FacMyTodo> {
                         ),
                       ),
                       Container(
-                        height: 500,
-                        width: 380,
+                        height: 500.h,
+                        width: 380.w,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: const Color(0x999B9B9B),
                           ),
-                          borderRadius: BorderRadius.circular(20),
+                          borderRadius: BorderRadius.circular(20.w),
                         ),
                         child: SingleChildScrollView(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 0.0),
+                            padding: EdgeInsets.only(left: 0.0.w),
                             child: DataTable(
-                              dataRowMaxHeight: 105,
-                              columnSpacing: 25,
-                              horizontalMargin: 10,
-                              columns: const [
+                              dataRowMaxHeight: 105.h,
+                              columnSpacing: 25.w,
+                              horizontalMargin: 10.w,
+                              columns: [
                                 DataColumn(
                                   label: SizedBox(
-                                    width: 250,
+                                    width: 250.w,
                                     child: Center(
                                       child: Text(
                                         'Meeting Title',
                                         style: TextStyle(
-                                          color: Color(0xFF0D6858),
+                                          color: const Color(0xFF0D6858),
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 26,
+                                          fontSize: 26.sp,
                                         ),
                                       ),
                                     ),
@@ -211,14 +212,14 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                 ),
                                 DataColumn(
                                   label: SizedBox(
-                                    width: 85,
+                                    width: 85.w,
                                     child: Center(
                                       child: Text(
                                         'Date',
                                         style: TextStyle(
-                                          color: Color(0xFF0D6858),
+                                          color: const Color(0xFF0D6858),
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 26,
+                                          fontSize: 26.sp,
                                         ),
                                       ),
                                     ),
@@ -236,17 +237,17 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title: const Text(
+                                                  title: Text(
                                                     "Delete Data",
                                                     style: TextStyle(
-                                                        fontSize: 24,
+                                                        fontSize: 24.sp,
                                                         fontWeight:
                                                             FontWeight.w900),
                                                   ),
-                                                  content: const Text(
+                                                  content: Text(
                                                       "Are you sure you want to delete this data?",
                                                       style: TextStyle(
-                                                          fontSize: 20,
+                                                          fontSize: 20.sp,
                                                           fontWeight:
                                                               FontWeight.w500)),
                                                   actions: [
@@ -255,9 +256,9 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text("NO",
+                                                      child: Text("NO",
                                                           style: TextStyle(
-                                                              fontSize: 18,
+                                                              fontSize: 18.sp,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
@@ -273,9 +274,9 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text("YES",
+                                                      child: Text("YES",
                                                           style: TextStyle(
-                                                              fontSize: 18,
+                                                              fontSize: 18.sp,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
@@ -288,16 +289,16 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                             );
                                           },
                                           child: SizedBox(
-                                            width: 250,
+                                            width: 250.w,
                                             child: Wrap(
                                               children: [
                                                 Text(
                                                   data['Meeting_Title']!,
                                                   softWrap: true,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w600,
-                                                    fontSize: 19,
+                                                    fontSize: 19.sp,
                                                   ),
                                                 ),
                                               ],
@@ -312,17 +313,17 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return AlertDialog(
-                                                  title: const Text(
+                                                  title: Text(
                                                     "Delete Data",
                                                     style: TextStyle(
-                                                        fontSize: 24,
+                                                        fontSize: 24.sp,
                                                         fontWeight:
                                                             FontWeight.w900),
                                                   ),
-                                                  content: const Text(
+                                                  content: Text(
                                                       "Are you sure you want to delete this data?",
                                                       style: TextStyle(
-                                                          fontSize: 20,
+                                                          fontSize: 20.sp,
                                                           fontWeight:
                                                               FontWeight.w500)),
                                                   actions: [
@@ -331,9 +332,9 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text("NO",
+                                                      child: Text("NO",
                                                           style: TextStyle(
-                                                              fontSize: 18,
+                                                              fontSize: 18.sp,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
@@ -349,9 +350,9 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text("YES",
+                                                      child: Text("YES",
                                                           style: TextStyle(
-                                                              fontSize: 18,
+                                                              fontSize: 18.sp,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
@@ -364,16 +365,16 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                             );
                                           },
                                           child: SizedBox(
-                                            width: 100,
+                                            width: 100.w,
                                             child: Wrap(
                                               children: [
                                                 Text(
                                                   data['Date']!,
                                                   softWrap: true,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w600,
-                                                    fontSize: 16,
+                                                    fontSize: 16.sp,
                                                   ),
                                                 ),
                                               ],
@@ -393,10 +394,10 @@ class _FacMyTodoState extends State<FacMyTodo> {
                   ),
                 ),
               ),
-              const FacBottomNavScreen(),
             ],
           ),
         ),
+        bottomNavigationBar: const FacBottomNavScreen(),
       ),
     );
   }

@@ -67,7 +67,7 @@ class _FacAvailabilityCheckScreenState
                   },
                 ),
                 const SizedBox(
-                  height: 43,
+                  height: 30,
                 ),
                 CustomisedTextButton(
                   onTap: () {

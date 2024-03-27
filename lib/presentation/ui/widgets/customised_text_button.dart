@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomisedTextButton extends StatelessWidget {
   const CustomisedTextButton({
@@ -15,10 +16,10 @@ class CustomisedTextButton extends StatelessWidget {
       onPressed: onTap,
       child: Text(
         text,
-        style: const TextStyle(
-          fontSize: 16,
+        style:  TextStyle(
+          fontSize: 20.sp,
           fontWeight: FontWeight.w700,
-          color: Color(0xFF505050),
+          color: const Color(0xFF505050),
         ),
       ),
     );

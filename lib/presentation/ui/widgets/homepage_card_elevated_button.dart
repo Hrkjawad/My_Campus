@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardElevatedButton extends StatelessWidget {
   const CardElevatedButton({
@@ -27,8 +28,8 @@ class CardElevatedButton extends StatelessWidget {
         onPressed: onTap,
         child: Text(
           text,
-          style: const TextStyle(
-            fontSize: 24,
+          style:  TextStyle(
+            fontSize: 24.sp,
             fontWeight: FontWeight.w600,
           ),
         ),

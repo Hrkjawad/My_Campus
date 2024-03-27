@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'appbar_method.dart';
 import 'fac_drawer_method.dart';
@@ -37,11 +38,11 @@ class _FileUploadState extends State<FileUpload> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(
-                height: 10,
+               SizedBox(
+                height: 10.h,
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding:  EdgeInsets.all(ScreenUtil().setWidth(16)),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF8FFAC),
@@ -52,14 +53,14 @@ class _FileUploadState extends State<FileUpload> {
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                   child: Card(
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(ScreenUtil().setWidth(20)),
                     ),
                     child: SizedBox(
-                      width: 380,
-                      height: 550,
+                      width: 380.w,
+                      height: 550.h,
                       child: ListView.builder(
                         itemCount: uploadedFiles.length,
                         itemBuilder: (context, index) {

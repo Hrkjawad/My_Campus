@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Text customisedTitles(String text) {
   return Text(
     text,
-    style: const TextStyle(
-      fontSize: 24,
+    style: TextStyle(
+      fontSize: 24.sp,
       fontWeight: FontWeight.w900,
     ),
   );

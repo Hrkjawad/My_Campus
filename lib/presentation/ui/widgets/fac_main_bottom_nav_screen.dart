@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
@@ -12,10 +13,10 @@ class FacBottomNavScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 70,
+      height: 75.h,
       color: Colors.white,
       child: Padding(
-        padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 15.0),
+        padding: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 10.0.h),
         child: Column(
           children: [
             Row(
@@ -24,66 +25,66 @@ class FacBottomNavScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                          () => const FacHomeScreen(),
+                      () => const FacHomeScreen(),
                     );
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.home,
-                    size: 30,
+                    size: ScreenUtil().setSp(30),
                     color: Colors.green,
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                          () => const FacMyTodo(),
+                      () => const FacMyTodo(),
                     );
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.mark_unread_chat_alt_rounded,
-                    size: 30,
+                    size: ScreenUtil().setSp(30),
                     color: Colors.blue,
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                          () => const FileUpload(),
+                      () => const FileUpload(),
                     );
                   },
-                  child: const Icon(
+                  child: Icon(
                     Icons.my_library_books_rounded,
-                    size: 30,
+                    size: ScreenUtil().setSp(30),
                     color: Colors.red,
                   ),
                 ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 4.0),
+            Padding(
+              padding: EdgeInsets.only(left: 4.0.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 37,
+                    width: 39.w,
                   ),
                   Text(
                     "Home",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
                   ),
                   SizedBox(
-                    width: 85,
+                    width: 87.w,
                   ),
                   Text(
                     "Chat",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
                   ),
                   SizedBox(
-                    width: 70,
+                    width: 75.w,
                   ),
                   Text(
                     "Resources",
-                    style: TextStyle(fontSize: 16, color: Colors.black),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
                   ),
                 ],
               ),

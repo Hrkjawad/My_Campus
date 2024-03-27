@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/dropdown_button.dart';
 import '../../../widgets/fac_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class FacHomeScreen extends StatefulWidget {
   const FacHomeScreen({super.key});
@@ -47,65 +49,68 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 Stack(
-                  alignment: const Alignment(0, 0),
+                  alignment: Alignment(
+                    ScreenUtil().setWidth(0),
+                    ScreenUtil().setHeight(0),
+                  ),
                   children: [
-                    const SizedBox(
-                      width: 355,
-                      height: 150,
+                    SizedBox(
+                      width: 355.w,
+                      height: 150.h,
                       child: Card(
                         elevation: 3,
                         margin: EdgeInsets.zero,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(0),
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
+                            bottomLeft: Radius.circular(ScreenUtil().setWidth(0)),
+                            bottomRight: Radius.circular(ScreenUtil().setWidth(0)),
+                            topLeft: Radius.circular(ScreenUtil().setWidth(40)),
+                            topRight: Radius.circular(ScreenUtil().setWidth(40)),
                           ),
-                          side: BorderSide(color: Color(0x999B9B9B), width: 1),
+                          side:  BorderSide(color: const Color(0x999B9B9B), width: 1.w),
                         ),
-                        color: Color(0xFFCBD0F9),
+                        color: const Color(0xFFCBD0F9),
                       ),
                     ),
-                    const Positioned(
-                      top: 10, // Adjust top position as needed
+                    Positioned(
+                      top: 10.h, // Adjust top position as needed
                       child: Text(
                         "Today's Schedule",
                         style: TextStyle(
                           fontWeight: FontWeight.w900,
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           color: Colors.black,
                         ),
                       ),
                     ),
                     Positioned(
-                      top: 50,
+                      top: 50.h,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ClipOval(
                             child: Container(
                               color: Colors.white,
-                              width: 80,
-                              height: 80,
+                              width: 80.w,
+                              height: 80.h,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     classes!,
-                                    style: const TextStyle(
-                                        fontSize: 30,
+                                    style: TextStyle(
+                                        fontSize: 30.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ),
-                                  const Text(
+                                  Text(
                                     "Classes",
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   )
@@ -113,28 +118,28 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 26,
+                          SizedBox(
+                            width: 26.w,
                           ),
                           ClipOval(
                             child: Container(
                               color: Colors.white,
-                              width: 80,
-                              height: 80,
+                              width: 80.w,
+                              height: 80.h,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     exams!,
-                                    style: const TextStyle(
-                                        fontSize: 30,
+                                    style: TextStyle(
+                                        fontSize: 30.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ),
-                                  const Text(
+                                  Text(
                                     "Exams",
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   )
@@ -142,28 +147,28 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            width: 26,
+                          SizedBox(
+                            width: 26.w,
                           ),
                           ClipOval(
                             child: Container(
                               color: Colors.white,
-                              width: 80,
-                              height: 80,
+                              width: 80.w,
+                              height: 80.h,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                     myTodo!,
-                                    style: const TextStyle(
-                                        fontSize: 30,
+                                    style: TextStyle(
+                                        fontSize: 30.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   ),
-                                  const Text(
+                                  Text(
                                     "My ToDo",
                                     style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 16.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   )
@@ -177,54 +182,54 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ],
                 ),
                 SizedBox(
-                  width: 355,
-                  height: 45,
+                  width: 355.w,
+                  height: 45.h,
                   child: Card(
                     margin: EdgeInsets.zero,
                     elevation: 3,
-                    shape: const RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40),
-                        topLeft: Radius.circular(0),
-                        topRight: Radius.circular(0),
+                        bottomLeft: Radius.circular(ScreenUtil().setWidth(40)),
+                        bottomRight: Radius.circular(ScreenUtil().setWidth(40)),
+                        topLeft: Radius.circular(ScreenUtil().setWidth(0)),
+                        topRight: Radius.circular(ScreenUtil().setWidth(0)),
                       ),
-                      side: BorderSide(color: Color(0x999B9B9B), width: 1),
+                      side: BorderSide(color: const Color(0x999B9B9B), width: 1.w),
                     ),
                     color: Colors.white,
                     child: Center(
                         child: Text(
-                      classAndTime!,
-                      style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFF393939)),
-                    )),
+                          classAndTime!,
+                          style: TextStyle(
+                              fontSize: 22.sp,
+                              fontWeight: FontWeight.w900,
+                              color: const Color(0xFF393939)),
+                        )),
                   ),
                 ),
-                const SizedBox(
-                  height: 8,
+                SizedBox(
+                  height: 8.h,
                 ),
                 const Date(),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CardElevatedButton(
-                      width: 142,
-                      height: 102,
+                      width: 142.w,
+                      height: 102.h,
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {},
                     ),
-                    const SizedBox(
-                      width: 71,
+                    SizedBox(
+                      width: 71.w,
                     ),
                     CardElevatedButton(
-                      width: 142,
-                      height: 102,
+                      width: 142.w,
+                      height: 102.h,
                       text: '  Exam\nRoutine',
                       color: 0xFFFFE8D2,
                       onTap: () {
@@ -232,14 +237,14 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             context: context,
                             builder: (context) {
                               return SizedBox(
-                                height: 300,
-                                width: 500,
+                                height: 300.h,
+                                width: 500.w,
                                 child: AlertDialog(
-                                  title: const Center(
+                                  title: Center(
                                     child: Text(
                                       "Exam Routine",
                                       style: TextStyle(
-                                          fontSize: 24,
+                                          fontSize: 24.sp,
                                           fontWeight: FontWeight.w600),
                                     ),
                                   ),
@@ -248,8 +253,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                     minScale: 0.1,
                                     child: Image.asset(
                                       "assets/images/Bus Time.jpg",
-                                      width: 500,
-                                      height: 300,
+                                      width: 500.w,
+                                      height: 300.h,
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -260,28 +265,27 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
                 CardElevatedButton(
-                  width: 355,
-                  height: 84,
+                  width: 355.w,
+                  height: 84.h,
                   text: 'Batches & Courses',
                   color: 0xFFF8FFAC,
                   onTap: () {
                     facultyBatchesAndCourses(context);
                   },
                 ),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.w,
                 ),
                 CarouselSlider(
                   options: CarouselOptions(
                     autoPlay: true,
-                    aspectRatio: MediaQuery.of(context).size.width / 185,
+                    aspectRatio: MediaQuery.of(context).size.width / 185.h,
                     autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
                     autoPlayCurve: Curves.fastOutSlowIn,
                     pauseAutoPlayOnTouch: true,
                     enlargeCenterPage: true,
@@ -293,18 +297,18 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(color: const Color(0x999B9B9B)),
-                            borderRadius: BorderRadius.circular(24),
+                            borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
                           ),
                           child: Center(
                             child: SingleChildScrollView(
                               child: Padding(
-                                padding: const EdgeInsets.all(25.0),
+                                padding: EdgeInsets.all(ScreenUtil().setWidth(25)),
                                 child: Text(
                                   announcement,
-                                  style: const TextStyle(
-                                    fontSize: 28,
+                                  style: TextStyle(
+                                    fontSize: 28.sp,
                                     fontWeight: FontWeight.w700,
-                                    color: Color(0xFF0D6858),
+                                    color: const Color(0xFF0D6858),
                                   ),
                                 ),
                               ),
@@ -315,34 +319,37 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     );
                   }).toList(),
                 ),
-                const SizedBox(height: 5,),
+                SizedBox(
+                  height: 5.h,
+                ),
                 CircleAvatar(
                   radius: 27,
                   backgroundColor: Colors.black,
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius:
+                    BorderRadius.circular(ScreenUtil().setWidth(20)),
                     onTap: () {
                       Get.to(const TeacherAddAnnouncement());
                     },
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       radius: 26,
-                      backgroundColor: Color(0xFFF8FFAC),
+                      backgroundColor: const Color(0xFFF8FFAC),
                       child: Icon(
                         Icons.add,
-                        size: 50,
+                        size: ScreenUtil().setSp(30),
                         color: Colors.black,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 6,
+                SizedBox(
+                  height: 6.h,
                 ),
-                const FacBottomNavScreen(),
               ],
             ),
           ),
         ),
+        bottomNavigationBar: const FacBottomNavScreen(),
       ),
     );
   }
@@ -354,19 +361,20 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
             return AlertDialog(
-              title: const Center(
+              title: Center(
                 child: Text(
                   "SELECT BATCH & COURSES",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                  style:
+                  TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w900),
                 ),
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
                   child: CustomDropdownButton(
-                    width: 332,
-                    height: 51,
-                    dropDownWidth: 290,
+                    width: 332.w,
+                    height: 51.h,
+                    dropDownWidth: 290.w,
                     items: const ['57-A+B', '56-A', '56-B'],
                     value: selectedBatch,
                     hintText: 'Select Batch',
@@ -378,17 +386,17 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
                   child: CustomDropdownButton(
-                    width: 332,
-                    height: 51,
-                    dropDownWidth: 290,
+                    width: 332.w,
+                    height: 51.h,
+                    dropDownWidth: 290.w,
                     items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
                     value: selectedCourse,
                     hintText: 'Select Course',
                     onChanged: (value) {
                       setState(
-                        () {
+                            () {
                           selectedCourse = value;
                         },
                       );
@@ -398,10 +406,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(
+                      shape: CircleBorder(
                         side: BorderSide(
                           color: Colors.grey,
-                          width: 2,
+                          width: 2.w,
                         ),
                       ),
                       backgroundColor: const Color(0xFFFFE8D2),
@@ -429,30 +437,30 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
                   child: Container(
-                    height: 320,
-                    width: 343,
-                    padding: const EdgeInsets.all(10),
+                    height: 320.h,
+                    width: 343.w,
+                    padding: EdgeInsets.all(ScreenUtil().setWidth(10)),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF8FFAC),
                       border: Border.all(
                         color: const Color(0x999B9B9B),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(ScreenUtil().setWidth(20)),
                       ),
                     ),
                     child: SingleChildScrollView(
                       child: DataTable(
-                        columns: const [
+                        columns: [
                           DataColumn(
                             label: Text(
                               'Batch',
                               style: TextStyle(
-                                color: Color(0xFF0D6858),
+                                color: const Color(0xFF0D6858),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 26,
+                                fontSize: 26.sp,
                               ),
                             ),
                           ),
@@ -460,34 +468,34 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             label: Text(
                               'Course',
                               style: TextStyle(
-                                color: Color(0xFF0D6858),
+                                color: const Color(0xFF0D6858),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 26,
+                                fontSize: 26.sp,
                               ),
                             ),
                           ),
                         ],
                         rows: tableData.map(
-                          (data) {
+                              (data) {
                             return DataRow(
                               cells: [
                                 DataCell(
                                   Text(
                                     data['Batch']!,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22,
+                                      fontSize: 22.sp,
                                     ),
                                   ),
                                 ),
                                 DataCell(
                                   Text(
                                     data['Course']!,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22,
+                                      fontSize: 22.sp,
                                     ),
                                   ),
                                 ),
