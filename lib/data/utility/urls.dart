@@ -11,4 +11,6 @@ class Urls {
   static const String facultyPasswordChange = '$_facultyBaseUrl/RecoverResetPassword';
   static const String facultyList = '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
+  static const String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
+
 }
