@@ -46,7 +46,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 PasswordTextField(
                   emailTEController: _passTEController,
                   isObscure: true,
-                  hintText: 'Confirm Password',
+                  hintText: 'Password',
                 ),
                 const SizedBox(
                   height: 41,
@@ -63,11 +63,11 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          Get.to(
-                                () => const FacHomeScreen(),
-                          );
                           //facSignIn(facLoginController);
                         }
+                        Get.to(
+                          () => const FacHomeScreen(),
+                        );
                       },
                       text: 'SIGN IN',
                     );

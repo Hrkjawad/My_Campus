@@ -4,7 +4,8 @@ class PasswordTextField extends StatefulWidget {
   PasswordTextField({
     super.key,
     required TextEditingController emailTEController,
-    required this.isObscure, required this.hintText,
+    required this.isObscure,
+    required this.hintText,
   }) : _passwordTEController = emailTEController;
 
   final TextEditingController _passwordTEController;
@@ -43,9 +44,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           ),
         ),
         validator: (String? value) {
-          if (value != widget._passwordTEController.text) {
-            return "Password didn't match";
+          if (value!.length < 6) {
+            return 'Password too short';
           }
+
           return null;
         },
       ),

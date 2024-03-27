@@ -4,11 +4,12 @@ import 'package:my_campus/presentation/ui/widgets/fac_main_bottom_nav_screen.dar
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../widgets/appbar_method.dart';
+import '../../../widgets/classes_exams_todo.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/dropdown_button.dart';
+import '../../../widgets/fac_announcement_slider.dart';
 import '../../../widgets/fac_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class FacHomeScreen extends StatefulWidget {
   const FacHomeScreen({super.key});
@@ -25,9 +26,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
 
   //api table data fetch
   String? classAndTime = "Room: 302, RAB - 10.30 AM";
-  String? classes = "4";
-  String? exams = "1";
-  String? myTodo = "3";
+  String classes = "4";
+  String exams = "1";
+  String myTodo = "3";
 
   final List<String> announcements = [
     '57-A+B | Next Sunday is Viva ',
@@ -47,164 +48,11 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                Stack(
-                  alignment: const Alignment(0, 0),
-                  children: [
-                    const SizedBox(
-                      width: 355,
-                      height: 150,
-                      child: Card(
-                        elevation: 3,
-                        margin: EdgeInsets.zero,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(0),
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40),
-                          ),
-                          side: BorderSide(color: Color(0x999B9B9B), width: 1),
-                        ),
-                        color: Color(0xFFCBD0F9),
-                      ),
-                    ),
-                    const Positioned(
-                      top: 10, // Adjust top position as needed
-                      child: Text(
-                        "Today's Schedule",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 24,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 50,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ClipOval(
-                            child: Container(
-                              color: Colors.white,
-                              width: 80,
-                              height: 80,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    classes!,
-                                    style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  const Text(
-                                    "Classes",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 26,
-                          ),
-                          ClipOval(
-                            child: Container(
-                              color: Colors.white,
-                              width: 80,
-                              height: 80,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    exams!,
-                                    style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  const Text(
-                                    "Exams",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 26,
-                          ),
-                          ClipOval(
-                            child: Container(
-                              color: Colors.white,
-                              width: 80,
-                              height: 80,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    myTodo!,
-                                    style: const TextStyle(
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  const Text(
-                                    "My ToDo",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  width: 355,
-                  height: 45,
-                  child: Card(
-                    margin: EdgeInsets.zero,
-                    elevation: 3,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40),
-                        topLeft: Radius.circular(0),
-                        topRight: Radius.circular(0),
-                      ),
-                      side: BorderSide(color: Color(0x999B9B9B), width: 1),
-                    ),
-                    color: Colors.white,
-                    child: Center(
-                        child: Text(
-                      classAndTime!,
-                      style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w900,
-                          color: Color(0xFF393939)),
-                    )),
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
+                ClassesExamsToDo(
+                    classes: classes,
+                    exams: exams,
+                    myTodo: myTodo,
+                    classAndTime: classAndTime),
                 const Date(),
                 const SizedBox(
                   height: 10,
@@ -275,47 +123,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: MediaQuery.of(context).size.width / 185,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    pauseAutoPlayOnTouch: true,
-                    enlargeCenterPage: true,
-                  ),
-                  items: announcements.map((announcement) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(color: const Color(0x999B9B9B)),
-                            borderRadius: BorderRadius.circular(24),
-                          ),
-                          child: Center(
-                            child: SingleChildScrollView(
-                              child: Padding(
-                                padding: const EdgeInsets.all(25.0),
-                                child: Text(
-                                  announcement,
-                                  style: const TextStyle(
-                                    fontSize: 28,
-                                    fontWeight: FontWeight.w700,
-                                    color: Color(0xFF0D6858),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
+                FacAnnouncementSlider(announcements: announcements),
+                const SizedBox(
+                  height: 5,
                 ),
-                const SizedBox(height: 5,),
                 CircleAvatar(
                   radius: 27,
                   backgroundColor: Colors.black,
