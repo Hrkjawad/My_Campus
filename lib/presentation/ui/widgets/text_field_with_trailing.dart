@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextFieldWithTrailing extends StatelessWidget {
   const TextFieldWithTrailing({
     super.key,
-    required TextEditingController emailTEController,
+    required TextEditingController emailTEController, required this.hintText,
   }) : _emailTEController = emailTEController;
 
   final TextEditingController _emailTEController;
+  final String hintText;
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class TextFieldWithTrailing extends StatelessWidget {
                   ),
                 ),
               ),
-              hintText: 'Type your email',
+              hintText: hintText,
               errorStyle: TextStyle(
                 color: Colors.red,
                 fontWeight: FontWeight.bold,

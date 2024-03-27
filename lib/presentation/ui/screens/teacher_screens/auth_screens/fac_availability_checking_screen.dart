@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
@@ -38,12 +39,12 @@ class _FacAvailabilityCheckScreenState
                   subtitle: 'Join as a Faculty',
                 ),
                 const AppLogo(),
-                const SizedBox(
-                  height: 76,
+                 SizedBox(
+                  height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController),
-                const SizedBox(
-                  height: 47,
+                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your teacher email",),
+                 SizedBox(
+                  height: 47.h,
                 ),
                 GetBuilder<FacAvailabilityCheckingController>(
                   builder: (facAvailabilityCheckingController) {
@@ -66,8 +67,8 @@ class _FacAvailabilityCheckScreenState
                     );
                   },
                 ),
-                const SizedBox(
-                  height: 30,
+                 SizedBox(
+                  height: 30.h,
                 ),
                 CustomisedTextButton(
                   onTap: () {

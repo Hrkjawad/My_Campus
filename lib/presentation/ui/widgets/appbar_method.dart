@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/home_screen.dart';
 import 'app_logo.dart';
 
 AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey, String title) {
@@ -16,6 +18,9 @@ AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey, String title) {
     actions: [
       IconButton(
         onPressed: () {
+          Get.to(
+                  () => const HomeScreen(),
+          );
         },
         icon: const Icon(
           Icons.logout_outlined,

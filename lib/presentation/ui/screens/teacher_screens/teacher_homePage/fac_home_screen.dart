@@ -323,7 +323,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   height: 5.h,
                 ),
                 CircleAvatar(
-                  radius: 27,
+                  radius: 17,
                   backgroundColor: Colors.black,
                   child: InkWell(
                     borderRadius:
@@ -332,7 +332,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       Get.to(const TeacherAddAnnouncement());
                     },
                     child: CircleAvatar(
-                      radius: 26,
+                      radius: 16,
                       backgroundColor: const Color(0xFFF8FFAC),
                       child: Icon(
                         Icons.add,
@@ -341,9 +341,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 6.h,
                 ),
               ],
             ),

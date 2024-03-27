@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_password_change_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
@@ -37,11 +38,11 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                   const TitleAndSubtitle(
                       title: 'CHANGE', subtitle: 'Set your password'),
                   const AppLogo(),
-                  const SizedBox(
-                    height: 76,
+                   SizedBox(
+                    height: 76.h,
                   ),
                   SizedBox(
-                    width: 323,
+                    width: 323.w,
                     child: TextFormField(
                       controller: _otpTEController,
                       keyboardType: TextInputType.number,
@@ -56,24 +57,24 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 13,
+                   SizedBox(
+                    height: 13.h,
                   ),
                   PasswordTextField(
                     emailTEController: _newPassTEController,
                     isObscure: true,
                     hintText: 'New Password',
                   ),
-                  const SizedBox(
-                    height: 13,
+                  SizedBox(
+                    height: 13.h,
                   ),
                   PasswordTextField(
                     emailTEController: _confirmTEController,
                     isObscure: true,
                     hintText: 'Confirm Password',
                   ),
-                  const SizedBox(
-                    height: 40,
+                  SizedBox(
+                    height: 40.h,
                   ),
                   GetBuilder<FacVerifyOTPController>(
                     builder: (facVerifyOTPController) {

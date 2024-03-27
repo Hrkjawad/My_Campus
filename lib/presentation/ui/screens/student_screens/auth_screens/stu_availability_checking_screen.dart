@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_up_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../../state_holders/student_state_holders/auth_state_holders/stu_availability_checking_controller.dart';
+import '../../../widgets/customised_text_button.dart';
+import '../../../widgets/text_field_with_trailing.dart';
+import 'stu_sign_in_screen.dart';
 
 class StuAvailabilityCheckScreen extends StatefulWidget {
-  const StuAvailabilityCheckScreen({super.key});
+  const StuAvailabilityCheckScreen({Key? key}) : super(key: key);
 
   @override
   State<StuAvailabilityCheckScreen> createState() =>
@@ -28,134 +34,51 @@ class _StuAvailabilityCheckScreenState
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 112,
-                ),
-                const Text(
-                  'WELCOME',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const Text(
-                  'Join as a Student',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF585858),
-                  ),
-                ),
-                const SizedBox(
-                  height: 46,
+                const TitleAndSubtitle(
+                  title: 'WELCOME',
+                  subtitle: 'Join as a Student',
                 ),
                 const AppLogo(),
-                const SizedBox(
-                  height: 65,
+                SizedBox(
+                  height: 76.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 205,
-                      child: TextFormField(
-                        controller: _emailTEController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.done,
-                        cursorColor: Colors.black,
-                        decoration: const InputDecoration(
-                          hintText: 'Type your email',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 72,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          enabled: false,
-                          hintText: '@lus.ac.bd',
-                          hintStyle: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.w700),
-                          fillColor: Color(0xFFFFFFFF),
-                          contentPadding: EdgeInsets.only(left: 4),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 40,
+                TextFieldWithTrailing(
+                  emailTEController: _emailTEController,
+                  hintText: "Type your student email",
                 ),
                 SizedBox(
-                  width: 277,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-        
-                      Get.to(
-                        () => const StuSignUpScreen(),
+                  height: 47.h,
+                ),
+                GetBuilder<StuAvailabilityCheckingController>(
+                  builder: (stuAvailabilityCheckingController) {
+                    if (stuAvailabilityCheckingController
+                        .stuAvailabilityCheckingProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
                       );
-                    },
-                    child: const Text('CHECK AVAILABILITY'),
-                  ),
-                ),
-                const SizedBox(
-                  height: 37,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Get.to(
-                      () => const StuSignInScreen(),
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        final form = _formKey.currentState;
+                        if (form != null && form.validate()) {
+                          stuAvailabilityCheck(
+                              stuAvailabilityCheckingController);
+                        }
+                      },
+                      text: 'CHECK AVAILABILITY',
                     );
                   },
-                  child: const Text(
-                    'Sign In',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF505050),
-                    ),
-                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                CustomisedTextButton(
+                  onTap: () {
+                    Get.to(() => const StuSignInScreen());
+                  },
+                  text: 'Sign In',
                 ),
               ],
             ),
@@ -163,5 +86,25 @@ class _StuAvailabilityCheckScreenState
         ),
       ),
     );
+  }
+
+  Future<void> stuAvailabilityCheck(
+      StuAvailabilityCheckingController
+      stuAvailabilityCheckingController) async {
+    final result = await stuAvailabilityCheckingController.stuAvailabilityCheck(
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+    );
+    if (result) {
+      Get.snackbar('Successful!', stuAvailabilityCheckingController.message);
+      Get.to(
+            () => StuSignUpScreen(
+          email: _emailTEController.text.trim(),
+        ),
+      );
+    } else {
+      Get.snackbar('Failed!', stuAvailabilityCheckingController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

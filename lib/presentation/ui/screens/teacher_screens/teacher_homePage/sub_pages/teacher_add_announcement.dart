@@ -115,7 +115,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                     padding: EdgeInsets.all(8.w),
                     child: SizedBox(
                       width: 360.w,
-                      height: 55.h,
+                      height: 58.h,
                       child: ElevatedButton(
                         onPressed: () {
                           if (selectedAnnouncement != null &&
@@ -145,7 +145,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         child: Text(
                           "ADD",
                           style: TextStyle(
-                            fontSize: 24.sp,
+                            fontSize: 23.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -386,7 +386,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         Positioned(
                           left: 280.w,
                           top: 0.h,
-                          bottom: 6.h,
+                          height: 450.h,
                           child: Container(
                             width: 1.w,
                             color: const Color(0x999B9B9B),
