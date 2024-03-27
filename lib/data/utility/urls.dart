@@ -10,4 +10,5 @@ class Urls {
       '$_facultyBaseUrl/RecoverVerifyOtp/$email/$otp';
   static const String facultyPasswordChange = '$_facultyBaseUrl/RecoverResetPassword';
   static const String facultyList = '$_facultyBaseUrl/availableCourseAndTeacher';
+  static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
 }

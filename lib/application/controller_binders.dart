@@ -18,5 +18,6 @@ class GetXBindings extends Bindings {
     Get.put(FacVerifyOTPController());
     Get.put(FacPasswordChangeController());
     Get.put(FacultyListController());
+    //Get.put(FacProfileDetailsController());
   }
 }

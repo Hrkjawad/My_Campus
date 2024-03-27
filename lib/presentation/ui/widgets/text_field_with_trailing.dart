@@ -18,7 +18,7 @@ class TextFieldWithTrailing extends StatelessWidget {
           child: TextFormField(
             controller: _emailTEController,
             keyboardType: TextInputType.emailAddress,
-            textInputAction: TextInputAction.done,
+            textInputAction: TextInputAction.next,
             cursorColor: Colors.black,
             decoration:   InputDecoration(
               suffixIcon: Container(

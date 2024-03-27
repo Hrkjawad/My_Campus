@@ -1,7 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'faculty_state_holders/auth_state_holders/fac_profile_details_controller.dart';
 
 class AuthController {
   static String? _accessToken;
+  static FacProfileDetailsController userInfo = FacProfileDetailsController();
 
   static String? get accessToken => _accessToken;
 
@@ -18,9 +20,17 @@ class AuthController {
     _accessToken = sharedPreferences.getString('access_token');
   }
 
-  static Future<void> saveProfileDetails(String data) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await sharedPreferences.setString('user-data', data);
+  static Future<void> setProfileDetails(FacProfileDetailsController userData) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    await sharedPreferences.setString('user-data', userData.toString());
+    userInfo = userData;
+  }
+
+  static Future<void> getProfileDetails() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    userInfo = sharedPreferences.getString('user_data') as FacProfileDetailsController;
   }
 
   static Future<void> clear() async {

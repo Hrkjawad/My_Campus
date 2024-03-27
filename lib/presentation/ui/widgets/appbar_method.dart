@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'app_logo.dart';
 
 AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
@@ -14,16 +13,12 @@ AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
         scaffoldKey.currentState!.openDrawer();
       },
     ),
-    title: GetBuilder<FacSignInController>(
-      builder: (facSignInController) {
-        return Text(
-          facSignInController.facLoginModel.data?.email.toString() ?? '',
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-        );
-      },
+    title: Text(
+      AuthController.userInfo.facProfileDetailsData.email.toString(),
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
     ),
     actions: [
       IconButton(
