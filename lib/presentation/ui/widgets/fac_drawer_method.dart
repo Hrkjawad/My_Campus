@@ -5,6 +5,7 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePa
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
 import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
 
+import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
 
 Drawer customisedFacultyDrawer(BuildContext context) {
@@ -17,6 +18,19 @@ Drawer customisedFacultyDrawer(BuildContext context) {
           child: ListView(
             shrinkWrap: true,
             children: [
+              ListTile(
+                title: Center(
+                  child: Text(
+                    'Departments Faculty',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  facultyMembers(context);
+                },
+              ),
+              divider(),
               ListTile(
                 title: Center(
                   child: Text(
@@ -73,13 +87,13 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments Faculty',
+                    'My ToDo',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  facultyMembers(context);
+                  Get.to(() => const FacMyTodo());
                 },
               ),
               divider(),
@@ -99,16 +113,18 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'My ToDo',
+                    'Blood Downers',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  Get.to(() => const FacMyTodo());
+                  bloodDownerList(context);
                 },
               ),
               divider(),
+
+
             ],
           ),
         ),
