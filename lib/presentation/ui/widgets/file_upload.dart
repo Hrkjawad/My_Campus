@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import 'appbar_method.dart';
-import 'fac_drawer_method.dart';
+import '../screens/home_screen.dart';
+import 'app_logo.dart';
 class FileUpload extends StatefulWidget {
   const FileUpload({super.key});
 
@@ -28,10 +29,28 @@ class _FileUploadState extends State<FileUpload> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        elevation: 0.25,
+        leading: const AppLogo(),
+        title:  const Text("All Resources"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.offAll(
+                    () => const HomeScreen(),
+              );
+            },
+            icon: const Icon(
+              Icons.logout_outlined,
+              color: Colors.red,
+            ),
+          )
+        ],
+        centerTitle: true,
+      ),
       body: Scaffold(
-        key: scaffoldKey,
-        drawer: customisedFacultyDrawer(context),
         body: ScreenBackground(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
