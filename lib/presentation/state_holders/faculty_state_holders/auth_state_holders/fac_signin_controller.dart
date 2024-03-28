@@ -20,8 +20,9 @@ class FacSignInController extends GetxController {
   Future<bool> facSignIn(String email, String password) async {
     _facSignInInProgress = true;
     update();
-    final NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.facultySignIn(email, password));
+    final NetworkResponse response = await NetworkCaller.getRequest(
+      Urls.facultySignIn(email, password),
+    );
     _facSignInInProgress = false;
     update();
     if (response.isSuccess) {
