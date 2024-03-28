@@ -10,14 +10,14 @@ class AuthController {
   static Future<void> setAccessToken(String token) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    await sharedPreferences.setString('access_token', token);
+    await sharedPreferences.setString('token', token);
     _accessToken = token;
   }
 
   static Future<void> getAccessToken() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    _accessToken = sharedPreferences.getString('access_token');
+    _accessToken = sharedPreferences.getString('token');
   }
 
   static Future<void> setProfileDetails(FacProfileDetailsController userData) async {
@@ -41,5 +41,15 @@ class AuthController {
 
   static bool get isLoggedIn {
     return _accessToken != null;
+  }
+  static Future<bool> checkLoginState() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? token = sharedPreferences.getString('token');
+
+    if (token == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

@@ -25,6 +25,7 @@ class FacSignInController extends GetxController {
     if (response.isSuccess) {
       _facSignInModel = FacSignInModel.fromJson(response.responseJson!);
       await AuthController.setAccessToken(response.responseJson?['token']);
+      print('token is ${AuthController.accessToken}');
       _message = 'Signed In';
       return true;
     } else {
