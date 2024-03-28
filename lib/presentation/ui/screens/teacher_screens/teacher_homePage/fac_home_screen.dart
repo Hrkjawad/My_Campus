@@ -295,7 +295,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                           final result =
                               await facCreatingSubGrpBatchSecController
                                   .facCreatingSubGrpBatchSec(
-                                      '57', 'A+B', 'CSE-1111', 'CSE');
+                                      '57', 'A+Bdd', 'CSE-1111', 'CSE');
                           if (result) {
                             Get.snackbar('Successful!',
                                 facCreatingSubGrpBatchSecController.message);

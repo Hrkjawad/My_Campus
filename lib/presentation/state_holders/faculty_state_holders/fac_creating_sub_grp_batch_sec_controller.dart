@@ -13,7 +13,9 @@ class FacCreatingSubGrpBatchSecController extends GetxController {
 
   bool get facCreatingSubGrpBatchSecInProgress =>
       _facCreatingSubGrpBatchSecInProgress;
+
   String get message => _message;
+
   FacultyCreatingSubGrpBatchSecData get facCreatingSubGrpBatchSecData =>
       _facultyCreatingSubGrpBatchSecData;
 

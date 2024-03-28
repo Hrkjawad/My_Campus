@@ -3,22 +3,21 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/f
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
-  static String? _accessToken;
+  static String? accessToken;
   static String? email0, fullName0, designation0, department0;
 
-  static String? get accessToken => _accessToken;
+  //static String? get accessToken => _accessToken;
 
   static Future<void> setAccessToken(String token, {String? email2}) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', token);
-    _accessToken = token;
+    accessToken = token;
   }
 
   static Future<void> getAccessToken() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
-    _accessToken = sharedPreferences.getString('token');
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    accessToken = sharedPreferences.getString('token');
   }
 
   static Future<void> setProfileDetails(String email1,String fullName1,String designation1,String department1) async {
@@ -57,14 +56,14 @@ class AuthController {
   }
 
   static bool get isLoggedIn {
-    return _accessToken != null;
+    return accessToken != null;
   }
 
   static Future<bool> checkLoginState() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    String? token = sharedPreferences.getString('token');
+    accessToken = sharedPreferences.getString('token');
 
-    if (token == null) {
+    if (accessToken == null) {
       return false;
     } else {
       return true;
