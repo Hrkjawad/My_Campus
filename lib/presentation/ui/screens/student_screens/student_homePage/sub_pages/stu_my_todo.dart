@@ -3,19 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
-import '../../../../widgets/fac_drawer_method.dart';
+import '../../../../widgets/stu_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../../../widgets/bottom_nav.dart';
-import '../fac_home_screen.dart';
+import '../stu_home_screen.dart';
 
-class FacMyTodo extends StatefulWidget {
-  const FacMyTodo({super.key});
+class StuMyTodo extends StatefulWidget {
+  const StuMyTodo({super.key});
 
   @override
-  State<FacMyTodo> createState() => _FacMyTodoState();
+  State<StuMyTodo> createState() => _StuMyTodoState();
 }
 
-class _FacMyTodoState extends State<FacMyTodo> {
+class _StuMyTodoState extends State<StuMyTodo> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
@@ -39,10 +39,10 @@ class _FacMyTodoState extends State<FacMyTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      appBar: customisedAppBar(scaffoldKey, 'ID: 2122020011'),
       body: Scaffold(
         key: scaffoldKey,
-        drawer: customisedFacultyDrawer(context),
+        drawer: customisedStudentDrawer(context),
         body: ScreenBackground(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -398,7 +398,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
             ],
           ),
         ),
-        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar: const BottomNav(home: StuHomeScreen()),
       ),
     );
   }

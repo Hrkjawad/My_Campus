@@ -12,7 +12,7 @@ import '../../../widgets/text_field_with_trailing.dart';
 import 'stu_sign_in_screen.dart';
 
 class StuAvailabilityCheckScreen extends StatefulWidget {
-  const StuAvailabilityCheckScreen({Key? key}) : super(key: key);
+  const StuAvailabilityCheckScreen({super.key});
 
   @override
   State<StuAvailabilityCheckScreen> createState() =>

@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/bottom_nav.dart';
+import '../../../widgets/dropdown_button.dart';
 import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
 
@@ -21,7 +20,7 @@ var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _StuHomeScreenState extends State<StuHomeScreen> {
   List<Map<String, String>> tableData = [];
-  String? selectedBatch, selectedCourse;
+  String? selectedBatch;
 
   int _currentAnnouncement = 0;
   late Timer _timer;
@@ -427,14 +426,73 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: const BottomNav(),
+        bottomNavigationBar: const BottomNav(home: StuHomeScreen()),
         floatingActionButton: FloatingActionButton(
           elevation: 5,
           mini: true,
           hoverColor: const Color(0xFFFFE8D2),
           backgroundColor: const Color(0xFFF8FFAC),
           onPressed: () {
-            Get.to(const TeacherAddAnnouncement());
+            showDialog(
+              context: context,
+              builder: (context) {
+                return StatefulBuilder(
+                  builder: (context, StateSetter setState) {
+                    return AlertDialog(
+                      title: Center(
+                        child: Text(
+                          "SELECT YOUR BATCH",
+                          style:
+                          TextStyle(fontSize: 28.sp, fontWeight: FontWeight.w900, color: const Color(0xFF0D6858)),
+                        ),
+                      ),
+                      actions: [
+                        Padding(
+                          padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
+                          child: CustomDropdownButton(
+                            width: 332.w,
+                            height: 51.h,
+                            dropDownWidth: 290.w,
+                            items: const ['57-A+B', '56-A', '56-B'],
+                            value: selectedBatch,
+                            hintText: 'Select Batch',
+                            onChanged: (value) {
+                              setState(() {
+                                selectedBatch = value;
+                              });
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 15.h,),
+                        Center(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  color: const Color(0xFF9B9B9B),
+                                  width: 1.w,
+                                ),
+                              ),
+                              backgroundColor: const Color(0xFFF8FFAC),
+                            ),
+                            onPressed: () {
+                            },
+                            child: const Text(
+                              "OK",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 24
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            );
           },
           child: Icon(
             Icons.add,

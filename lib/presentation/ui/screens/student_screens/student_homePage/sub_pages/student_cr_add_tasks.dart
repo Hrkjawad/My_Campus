@@ -7,16 +7,16 @@ import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../../../widgets/bottom_nav.dart';
-import '../fac_home_screen.dart';
+import '../stu_home_screen.dart';
 
-class FacAddTask extends StatefulWidget {
-  const FacAddTask({super.key});
+class StdCrAddTask extends StatefulWidget {
+  const StdCrAddTask({super.key});
 
   @override
-  State<FacAddTask> createState() => _FacAddTaskState();
+  State<StdCrAddTask> createState() => _StdCrAddTaskState();
 }
 
-class _FacAddTaskState extends State<FacAddTask> {
+class _StdCrAddTaskState extends State<StdCrAddTask> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedBatch, selectedSubject, selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
@@ -40,7 +40,7 @@ class _FacAddTaskState extends State<FacAddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher email'),
+      appBar: customisedAppBar(scaffoldKey, 'ID: 2122020011'),
       drawer: customisedFacultyDrawer(context),
       body: Scaffold(
         key: scaffoldKey,
@@ -544,7 +544,7 @@ class _FacAddTaskState extends State<FacAddTask> {
             ],
           ),
         ),
-        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar: const BottomNav(home: StuHomeScreen()),
       ),
     );
   }

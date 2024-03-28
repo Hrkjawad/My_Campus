@@ -7,6 +7,7 @@ import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../../../widgets/bottom_nav.dart';
+import '../fac_home_screen.dart';
 
 class TeacherAddAnnouncement extends StatefulWidget {
   const TeacherAddAnnouncement({super.key});
@@ -400,7 +401,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
             ],
           ),
         ),
-        bottomNavigationBar: const BottomNav(),
+        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
       ),
     );
   }

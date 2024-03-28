@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_home_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
-
 import 'file_upload.dart';
 
 class BottomNav extends StatelessWidget {
-  const BottomNav({super.key});
+  final Widget home;
+
+  const BottomNav({super.key, required this.home});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class BottomNav extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                      () => const FacHomeScreen(),
+                      () =>  (home),
                     );
                   },
                   child: Icon(
@@ -36,9 +35,9 @@ class BottomNav extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(
-                      () => const FacMyTodo(),
-                    );
+                    // Get.to(
+                    //   () =>  (mytodo),
+                    // );
                   },
                   child: Icon(
                     Icons.mark_unread_chat_alt_rounded,
