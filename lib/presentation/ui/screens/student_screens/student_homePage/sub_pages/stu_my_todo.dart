@@ -398,7 +398,7 @@ class _StuMyTodoState extends State<StuMyTodo> {
             ],
           ),
         ),
-        bottomNavigationBar: const BottomNav(home: StuHomeScreen()),
+        bottomNavigationBar:  BottomNav(home: StuHomeScreen()),
       ),
     );
   }

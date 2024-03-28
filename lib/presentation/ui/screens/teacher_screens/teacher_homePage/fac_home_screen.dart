@@ -362,7 +362,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             ),
           ),
         ),
-        bottomNavigationBar:   const BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar:    BottomNav(home: FacHomeScreen()),
       ),
     );
   }

@@ -74,6 +74,9 @@ class _FileUploadState extends State<FileUpload> {
             ],
           ),
         ),
+        bottomNavigationBar: const ColoredBox( color: Color(0xFFCBD0F9),
+            child: BackButton(),
+      ),
       ),
     );
   }

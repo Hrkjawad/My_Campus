@@ -426,7 +426,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
             ),
           ),
         ),
-        bottomNavigationBar: const BottomNav(home: StuHomeScreen()),
+        bottomNavigationBar:  BottomNav(home: StuHomeScreen()),
         floatingActionButton: FloatingActionButton(
           elevation: 5,
           mini: true,
