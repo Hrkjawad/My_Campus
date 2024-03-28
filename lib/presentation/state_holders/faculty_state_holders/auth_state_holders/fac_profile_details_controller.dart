@@ -24,8 +24,8 @@ class FacProfileDetailsController extends GetxController {
     if (response.isSuccess) {
       _facultyProfileDetailsData =
           FacProfileDetailsData.fromJson(response.responseJson!);
-      await AuthController.setProfileDetails(
-          response.responseJson?['data']['email']);
+      // await AuthController.setProfileDetails(
+      //     response.responseJson?['data']['email']);
       //_message = 'Signed In';
 
       return true;

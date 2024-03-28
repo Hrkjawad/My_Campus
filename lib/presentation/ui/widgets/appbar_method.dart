@@ -14,7 +14,7 @@ AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
       },
     ),
     title: Text(
-      AuthController.userInfo.facProfileDetailsData.email.toString(),
+      AuthController.email0 ?? 'null',
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w500,
@@ -22,7 +22,9 @@ AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
     ),
     actions: [
       IconButton(
-        onPressed: () {},
+        onPressed: () async {
+          await AuthController.clear();
+        },
         icon: const Icon(
           Icons.logout_outlined,
           color: Colors.red,

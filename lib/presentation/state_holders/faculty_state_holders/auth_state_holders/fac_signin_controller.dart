@@ -12,20 +12,27 @@ class FacSignInController extends GetxController {
   FacSignInModel _facSignInModel = FacSignInModel();
 
   bool get facSignInInProgress => _facSignInInProgress;
+
   String get message => _message;
+
   FacSignInModel get facLoginModel => _facSignInModel;
 
   Future<bool> facSignIn(String email, String password) async {
     _facSignInInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller.getRequest(Urls.facultySignIn(email,password));
+        await NetworkCaller.getRequest(Urls.facultySignIn(email, password));
     _facSignInInProgress = false;
     update();
     if (response.isSuccess) {
       _facSignInModel = FacSignInModel.fromJson(response.responseJson!);
       await AuthController.setAccessToken(response.responseJson?['token']);
-      print('token is ${AuthController.accessToken}');
+      await AuthController.setProfileDetails(
+        response.responseJson!['data'][0]['email'].toString(),
+        response.responseJson!['data'][0]['fullName'].toString(),
+        response.responseJson!['data'][0]['designation'].toString(),
+        response.responseJson!['data'][0]['department'].toString(),
+      );
       _message = 'Signed In';
       return true;
     } else {

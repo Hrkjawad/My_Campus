@@ -27,8 +27,8 @@ class _SplashScreenState extends State<SplashScreen> {
   void checkUserAuthState() async{
     final bool result = await AuthController.checkLoginState();
     if(result){
-      //await AuthController.getProfileDetails();
-      print('token paise');
+      await AuthController.getProfileDetails();
+      //print('token paise');
       if (mounted) {
         Navigator.pushAndRemoveUntil(context,
             MaterialPageRoute(builder: (context) => const FacHomeScreen()), (
