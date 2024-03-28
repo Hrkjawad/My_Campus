@@ -13,7 +13,7 @@ class AuthController {
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', token);
     accessToken = token;
-  }
+  }//
 
   static Future<void> getAccessToken() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
