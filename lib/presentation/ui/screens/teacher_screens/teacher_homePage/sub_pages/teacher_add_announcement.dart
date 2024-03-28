@@ -401,7 +401,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
       ),
     );
   }

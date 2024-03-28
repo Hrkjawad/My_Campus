@@ -398,7 +398,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
             ],
           ),
         ),
-        bottomNavigationBar:  BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar:  const BottomNav(home: FacHomeScreen()),
       ),
     );
   }

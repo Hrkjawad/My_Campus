@@ -544,7 +544,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
             ],
           ),
         ),
-        bottomNavigationBar:  BottomNav(home: StuHomeScreen()),
+        bottomNavigationBar:  const BottomNav(home: StuHomeScreen()),
       ),
     );
   }

@@ -17,76 +17,66 @@ class BottomNav extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 10.0.h),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GestureDetector(
                   onTap: () {
-                    Get.to(
-                      () =>  (home),
-                    );
+                    Get.to(() => home);
                   },
-                  child: Icon(
-                    Icons.home,
-                    size: ScreenUtil().setSp(30),
-                    color: Colors.green,
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.home,
+                        size: 30.w,
+                        color: Colors.green,
+                      ),
+                      Text(
+                        "Home",
+                        style: TextStyle(fontSize: 16.sp, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Get.to(
-                    //   () =>  (mytodo),
-                    // );
+                    // Handle onTap for chat
                   },
-                  child: Icon(
-                    Icons.mark_unread_chat_alt_rounded,
-                    size: ScreenUtil().setSp(30),
-                    color: Colors.blue,
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.mark_unread_chat_alt_rounded,
+                        size: 30.w,
+                        color: Colors.blue,
+                      ),
+                      Text(
+                        "Chat",
+                        style: TextStyle(fontSize: 16.sp, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.to(
-                      () => const FileUpload(),
-                    );
+                    Get.to(() => const FileUpload());
                   },
-                  child: Icon(
-                    Icons.my_library_books_rounded,
-                    size: ScreenUtil().setSp(30),
-                    color: Colors.red,
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.my_library_books_rounded,
+                        size: 30.w,
+                        color: Colors.red,
+                      ),
+                      Text(
+                        "Resources",
+                        style: TextStyle(fontSize: 16.sp, color: Colors.black),
+                      ),
+                    ],
                   ),
                 ),
               ],
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 4.0.w),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 42.w,
-                  ),
-                  Text(
-                    "Home",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 95.w,
-                  ),
-                  Text(
-                    "Chat",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 85.w,
-                  ),
-                  Text(
-                    "Resources",
-                    style: TextStyle(fontSize: 16.sp, color: Colors.black),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

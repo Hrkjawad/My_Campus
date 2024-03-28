@@ -44,16 +44,18 @@ class CustomDropdownButton extends StatelessWidget {
               (String item) {
                 return DropdownMenuItem<String>(
                   value: item,
-                  child: Center(
-                    child: Text(
-                      item,
-                      style: TextStyle(
-                        fontSize: 24.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Text(
+                        item,
+                        style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
                       ),
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 );
@@ -83,7 +85,7 @@ class CustomDropdownButton extends StatelessWidget {
               iconDisabledColor: Colors.grey,
             ),
             dropdownStyleData: DropdownStyleData(
-              maxHeight: 250.h,
+              maxHeight: 350.h,
               width: dropDownWidth,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
@@ -97,7 +99,7 @@ class CustomDropdownButton extends StatelessWidget {
               ),
             ),
             menuItemStyleData: MenuItemStyleData(
-              height: 50.h,
+              height: 70.h,
               padding: EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14)),
             ),
           ),
