@@ -38,8 +38,10 @@ class FacCreatingSubGrpBatchSecController extends GetxController {
       _facultyCreatingSubGrpBatchSecData =
           FacultyCreatingSubGrpBatchSecModel.fromJson(response.responseJson!)
               .data!;
+      _message = 'Added';
       return true;
     } else {
+      _message = "Couldn't add!!";
       return false;
     }
   }

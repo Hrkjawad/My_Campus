@@ -8,9 +8,12 @@ class Urls {
       '$_facultyBaseUrl/RecoverVerifyEmail/$email';
   static String facultyVerifyOTP(String email, String otp) =>
       '$_facultyBaseUrl/RecoverVerifyOtp/$email/$otp';
-  static const String facultyPasswordChange = '$_facultyBaseUrl/RecoverResetPassword';
-  static const String facultyList = '$_facultyBaseUrl/availableCourseAndTeacher';
+  static const String facultyPasswordChange =
+      '$_facultyBaseUrl/RecoverResetPassword';
+  static const String facultyList =
+      '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
-  static const String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
-
+  static const String facultySubGrpBatchSec =
+      '$_facultyBaseUrl/createSubjectGroupBatchSections/65f6cbde91159aeba9d32433';
+  static const String facultyAnnouncement = '$_facultyBaseUrl/announcement';
 }

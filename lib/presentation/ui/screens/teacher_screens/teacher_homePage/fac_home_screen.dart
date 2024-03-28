@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_main_bottom_nav_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -35,6 +37,12 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     '56-A | Next Sunday is Tutorial ',
     '60-E | Next Sunday Class is Canceled ',
   ];
+
+  final Map<String, String> courseTitleAndCode = {
+    'CSE-1111': 'Introduction to Computer',
+    'CSE-1112': 'Introduction to Software',
+    'CSE-1113': 'Introduction to Hardware',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +131,47 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 const SizedBox(
                   height: 25,
                 ),
-                FacAnnouncementSlider(announcements: announcements),
+                //FacAnnouncementSlider(announcements: announcements),
+                GetBuilder<FacAnnouncementController>(
+                  builder: (facAnnouncementController) {
+                    if (facAnnouncementController.facAnnouncementInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(color: Colors.teal),
+                      );
+                    }
+                    if (facAnnouncementController
+                            .facAnnouncementModel.data?.isEmpty ??
+                        true) {
+                      return Container(
+                        width: 323,
+                        height: MediaQuery.of(context).size.width / 3,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: const Color(0x999B9B9B),
+                          ),
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'No Announcements',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.3,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else {
+                      return FacAnnouncementSlider(
+                        announcements: facAnnouncementController
+                                .facAnnouncementModel.data ??
+                            [],
+                      );
+                    }
+                  },
+                ),
                 const SizedBox(
                   height: 5,
                 ),
@@ -194,6 +242,22 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     width: 332,
                     height: 51,
                     dropDownWidth: 290,
+                    items: const ['57-A+B', '56-A', '56-B'],
+                    value: selectedBatch,
+                    hintText: 'Select Section',
+                    onChanged: (value) {
+                      setState(() {
+                        selectedBatch = value;
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: CustomDropdownButton(
+                    width: 332,
+                    height: 51,
+                    dropDownWidth: 290,
                     items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
                     value: selectedCourse,
                     hintText: 'Select Course',
@@ -207,37 +271,58 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
                 Center(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: const CircleBorder(
-                        side: BorderSide(
-                          color: Colors.grey,
-                          width: 2,
+                  child: GetBuilder<FacCreatingSubGrpBatchSecController>(
+                      builder: (facCreatingSubGrpBatchSecController) {
+                    if (facCreatingSubGrpBatchSecController
+                        .facCreatingSubGrpBatchSecInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(color: Colors.teal),
+                      );
+                    }
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: const CircleBorder(
+                          side: BorderSide(
+                            color: Colors.grey,
+                            width: 2,
+                          ),
+                        ),
+                        backgroundColor: const Color(0xFFFFE8D2),
+                        foregroundColor: const Color(0x999B9B9B),
+                      ),
+                      onPressed: () async {
+                        if (selectedBatch != null && selectedCourse != null) {
+                          final result =
+                              await facCreatingSubGrpBatchSecController
+                                  .facCreatingSubGrpBatchSec(
+                                      '57', 'A+B', 'CSE-1111', 'CSE');
+                          if (result) {
+                            Get.snackbar('Successful!',
+                                facCreatingSubGrpBatchSecController.message);
+                            setState(() {
+                              tableData.add({
+                                'Batch': selectedBatch!,
+                                'Course': selectedCourse!,
+                              });
+                              selectedBatch = null;
+                              selectedCourse = null;
+                            });
+                          } else {
+                            Get.snackbar('Failed!',
+                                facCreatingSubGrpBatchSecController.message,
+                                colorText: Colors.redAccent);
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "ADD",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
-                      backgroundColor: const Color(0xFFFFE8D2),
-                      foregroundColor: const Color(0x999B9B9B),
-                    ),
-                    onPressed: () {
-                      if (selectedBatch != null && selectedCourse != null) {
-                        setState(() {
-                          tableData.add({
-                            'Batch': selectedBatch!,
-                            'Course': selectedCourse!,
-                          });
-                          selectedBatch = null;
-                          selectedCourse = null;
-                        });
-                      }
-                    },
-                    child: const Text(
-                      "ADD",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),

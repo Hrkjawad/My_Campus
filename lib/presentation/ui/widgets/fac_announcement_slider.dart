@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:my_campus/data/models/faculty_model/fac_announcement_model.dart';
 
 class FacAnnouncementSlider extends StatefulWidget {
   const FacAnnouncementSlider({
@@ -7,7 +8,7 @@ class FacAnnouncementSlider extends StatefulWidget {
     required this.announcements,
   });
 
-  final List<String> announcements;
+  final List<FacAnnouncementData> announcements;
 
   @override
   State<FacAnnouncementSlider> createState() => _FacAnnouncementSliderState();
@@ -33,7 +34,9 @@ class _FacAnnouncementSliderState extends State<FacAnnouncementSlider> {
               return Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: const Color(0x999B9B9B)),
+                  border: Border.all(
+                    color: const Color(0x999B9B9B),
+                  ),
                   borderRadius: BorderRadius.circular(24),
                 ),
                 child: Center(
@@ -41,7 +44,8 @@ class _FacAnnouncementSliderState extends State<FacAnnouncementSlider> {
                     child: Padding(
                       padding: const EdgeInsets.all(25.0),
                       child: Text(
-                        announcement,
+                        announcement.batch.toString() +
+                            announcement.announcement.toString(),
                         style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w700,

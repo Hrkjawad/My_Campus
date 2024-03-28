@@ -5,7 +5,9 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signup_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
+import '../presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 
 class GetXBindings extends Bindings {
   @override
@@ -18,6 +20,8 @@ class GetXBindings extends Bindings {
     Get.put(FacVerifyOTPController());
     Get.put(FacPasswordChangeController());
     Get.put(FacultyListController());
+    Get.put(FacCreatingSubGrpBatchSecController());
+    Get.put(FacAnnouncementController());
     //Get.put(FacProfileDetailsController());
   }
 }
