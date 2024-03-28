@@ -32,7 +32,7 @@ class AuthController {
     designation0 = designation1;
     department0 = designation1;
 
-  } //
+  }
 
   static Future<void> getProfileDetails() async {
     final SharedPreferences sharedPreferences =
