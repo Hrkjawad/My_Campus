@@ -11,7 +11,7 @@ class StuAvailabilityCheckScreen extends StatefulWidget {
   @override
   State<StuAvailabilityCheckScreen> createState() =>
       _StuAvailabilityCheckScreenState();
-}
+} //
 
 class _StuAvailabilityCheckScreenState
     extends State<StuAvailabilityCheckScreen> {
