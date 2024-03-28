@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -134,9 +135,9 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
     );
     if (result) {
       Get.snackbar('Successful!', stuSignUpController.message);
-      // Get.to(
-      //       () => const StuSignInScreen(),
-      // );
+      Get.to(
+            () => const StuSignInScreen(),
+      );
     } else {
       Get.snackbar('Failed!', stuSignUpController.message,
           colorText: Colors.redAccent);

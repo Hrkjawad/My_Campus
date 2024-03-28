@@ -6,7 +6,7 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/text_fields.dart';
-import '../../../../widgets/fac_main_bottom_nav_screen.dart';
+import '../../../../widgets/bottom_nav.dart';
 
 class FacAddTask extends StatefulWidget {
   const FacAddTask({super.key});
@@ -543,7 +543,7 @@ class _FacAddTaskState extends State<FacAddTask> {
             ],
           ),
         ),
-        bottomNavigationBar: const FacBottomNavScreen(),
+        bottomNavigationBar: const BottomNav(),
       ),
     );
   }

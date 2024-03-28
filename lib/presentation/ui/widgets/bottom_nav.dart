@@ -6,8 +6,8 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePa
 
 import 'file_upload.dart';
 
-class FacBottomNavScreen extends StatelessWidget {
-  const FacBottomNavScreen({super.key});
+class BottomNav extends StatelessWidget {
+  const BottomNav({super.key});
 
   @override
   Widget build(BuildContext context) {

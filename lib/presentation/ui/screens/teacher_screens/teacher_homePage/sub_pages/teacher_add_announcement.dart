@@ -6,7 +6,7 @@ import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
-import '../../../../widgets/fac_main_bottom_nav_screen.dart';
+import '../../../../widgets/bottom_nav.dart';
 
 class TeacherAddAnnouncement extends StatefulWidget {
   const TeacherAddAnnouncement({super.key});
@@ -400,7 +400,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
             ],
           ),
         ),
-        bottomNavigationBar: const FacBottomNavScreen(),
+        bottomNavigationBar: const BottomNav(),
       ),
     );
   }

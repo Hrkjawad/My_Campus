@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'appbar_method.dart';
 import 'fac_drawer_method.dart';
-import 'fac_main_bottom_nav_screen.dart';
+import 'bottom_nav.dart';
 
 class FileUpload extends StatefulWidget {
   const FileUpload({super.key});
@@ -73,7 +73,7 @@ class _FileUploadState extends State<FileUpload> {
                   ),
                 ),
               ),
-              const FacBottomNavScreen(),
+              const BottomNav(),
             ],
           ),
         ),

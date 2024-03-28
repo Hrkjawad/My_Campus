@@ -5,7 +5,7 @@ import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
-import '../../../../widgets/fac_main_bottom_nav_screen.dart';
+import '../../../../widgets/bottom_nav.dart';
 
 class FacMyTodo extends StatefulWidget {
   const FacMyTodo({super.key});
@@ -397,7 +397,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
             ],
           ),
         ),
-        bottomNavigationBar: const FacBottomNavScreen(),
+        bottomNavigationBar: const BottomNav(),
       ),
     );
   }
