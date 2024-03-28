@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthController {
   static String? _accessToken;
   static String? email0, fullName0, designation0, department0;
-
   static String? get accessToken => _accessToken;
 
   static Future<void> setAccessToken(String token, {String? email2}) async {
