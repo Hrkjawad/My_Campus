@@ -13,6 +13,7 @@ class NetworkCaller {
       Response response = await get(
         Uri.parse(url),
         headers: {
+          'Content-Type': 'application/json',
           'token': AuthController.accessToken.toString(),
         },
       );
@@ -27,7 +28,8 @@ class NetworkCaller {
           jsonDecode(response.body),
         );
       } else if (response.statusCode == 401) {
-        gotoLogin();
+        //print('object');
+        //gotoLogin();
       } else {
         return NetworkResponse(
           false,

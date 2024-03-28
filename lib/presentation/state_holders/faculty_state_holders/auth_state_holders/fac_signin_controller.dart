@@ -19,17 +19,13 @@ class FacSignInController extends GetxController {
     _facSignInInProgress = true;
     update();
     final NetworkResponse response =
-        await NetworkCaller.postRequest(Urls.facultySignIn, {
-      "email": email,
-      "password": password,
-    });
+        await NetworkCaller.getRequest(Urls.facultySignIn(email,password));
     _facSignInInProgress = false;
     update();
     if (response.isSuccess) {
       _facSignInModel = FacSignInModel.fromJson(response.responseJson!);
       await AuthController.setAccessToken(response.responseJson?['token']);
       _message = 'Signed In';
-
       return true;
     } else {
       _message = 'No user found. Try again!!';

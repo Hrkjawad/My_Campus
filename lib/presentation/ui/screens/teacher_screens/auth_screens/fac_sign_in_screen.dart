@@ -65,9 +65,9 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                         if (_formKey.currentState!.validate()) {
                           facSignIn(facLoginController);
                         }
-                        Get.to(
-                          () => const FacHomeScreen(),
-                        );
+                        // Get.to(
+                        //   () => const FacHomeScreen(),
+                        // );
                       },
                       text: 'SIGN IN',
                     );
