@@ -85,33 +85,34 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       color: 0xFFFFE8D2,
                       onTap: () {
                         showDialog(
-                            context: context,
-                            builder: (context) {
-                              return SizedBox(
-                                height: 300,
-                                width: 500,
-                                child: AlertDialog(
-                                  title: const Center(
-                                    child: Text(
-                                      "Exam Routine",
-                                      style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  content: InteractiveViewer(
-                                    maxScale: 7.0,
-                                    minScale: 0.1,
-                                    child: Image.asset(
-                                      "assets/images/Bus Time.jpg",
-                                      width: 500,
-                                      height: 300,
-                                      fit: BoxFit.fill,
-                                    ),
+                          context: context,
+                          builder: (context) {
+                            return SizedBox(
+                              height: 300,
+                              width: 500,
+                              child: AlertDialog(
+                                title: const Center(
+                                  child: Text(
+                                    "Exam Routine",
+                                    style: TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                              );
-                            });
+                                content: InteractiveViewer(
+                                  maxScale: 7.0,
+                                  minScale: 0.1,
+                                  child: Image.asset(
+                                    "assets/images/Bus Time.jpg",
+                                    width: 500,
+                                    height: 300,
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        );
                       },
                     ),
                   ],
@@ -181,7 +182,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(20),
                     onTap: () {
-                      Get.to(const TeacherAddAnnouncement());
+                      Get.to(
+                        const TeacherAddAnnouncement(),
+                      );
                     },
                     child: const CircleAvatar(
                       radius: 26,

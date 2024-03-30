@@ -1,15 +1,15 @@
-class FacAnnouncementModel {
+class FacAddTaskModel {
   String? status;
-  List<FacAnnouncementData>? data;
+  List<FacAddTaskData>? data;
 
-  FacAnnouncementModel({this.status, this.data});
+  FacAddTaskModel({this.status, this.data});
 
-  FacAnnouncementModel.fromJson(Map<String, dynamic> json) {
+  FacAddTaskModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <FacAnnouncementData>[];
+      data = <FacAddTaskData>[];
       json['data'].forEach((v) {
-        data!.add(FacAnnouncementData.fromJson(v));
+        data!.add(FacAddTaskData.fromJson(v));
       });
     }
   }
@@ -24,20 +24,28 @@ class FacAnnouncementModel {
   }
 }
 
-class FacAnnouncementData {
+class FacAddTaskData {
   String? sId;
   String? email;
-  String? announcement;
   String? batch;
+  String? section;
+  String? taskType;
   String? timestamp;
 
-  FacAnnouncementData({this.sId, this.email, this.announcement, this.batch, this.timestamp});
+  FacAddTaskData(
+      {this.sId,
+        this.email,
+        this.batch,
+        this.section,
+        this.taskType,
+        this.timestamp});
 
-  FacAnnouncementData.fromJson(Map<String, dynamic> json) {
+  FacAddTaskData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     email = json['email'];
-    announcement = json['announcement'];
     batch = json['batch'];
+    section = json['section'];
+    taskType = json['taskType'];
     timestamp = json['timestamp'];
   }
 
@@ -45,8 +53,9 @@ class FacAnnouncementData {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = sId;
     data['email'] = email;
-    data['announcement'] = announcement;
     data['batch'] = batch;
+    data['section'] = section;
+    data['taskType'] = taskType;
     data['timestamp'] = timestamp;
     return data;
   }

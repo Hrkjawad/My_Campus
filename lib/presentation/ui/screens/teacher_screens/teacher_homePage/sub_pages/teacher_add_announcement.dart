@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/appbar_method.dart';
-import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
@@ -16,7 +17,7 @@ class TeacherAddAnnouncement extends StatefulWidget {
 
 class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  String? selectedDate, selectedAnnouncement, selectedBatch;
+  String? selectedDate, selectedAnnouncement, selectedBatch, selectedCourse;
   List<Map<String, String>> tableData = [];
   late TextEditingController dateInput;
   late TextEditingController taskController;
@@ -100,6 +101,10 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         const SizedBox(
                           height: 10,
                         ),
+
+                        /*const SizedBox(
+                          height: 10,
+                        ),
                         CustomDatePicker(
                           controller: dateInput,
                           width: 360,
@@ -109,7 +114,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                               selectedDate = value;
                             });
                           },
-                        ),
+                        ),*/
                       ],
                     ),
                   ),
@@ -118,40 +123,59 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                     child: SizedBox(
                       width: 360,
                       height: 55,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (selectedAnnouncement != null &&
-                              selectedDate != null &&
-                              selectedBatch != null) {
-                            setState(() {
-                              tableData.add({
-                                'announcement':
-                                    "${selectedDate!} -> ${selectedAnnouncement!}",
-                                'Batch': selectedBatch!
-                              });
-                              selectedDate = null;
-                              selectedAnnouncement = null;
-                              selectedBatch = null;
-                              dateInput.clear();
-                              taskController.clear();
-                            });
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF8FFAC),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            side: const BorderSide(color: Color(0x999B9B9B)),
+                      child: GetBuilder<FacAnnouncementController>(
+                          builder: (facAnnouncementController) {
+                        if (facAnnouncementController
+                            .facAnnouncementInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.teal,
+                            ),
+                          );
+                        }
+                        return ElevatedButton(
+                          onPressed: () async {
+                            if (selectedAnnouncement != null &&
+                                selectedBatch != null) {
+                              final result = await facAnnouncementController
+                                  .facAnnouncement(
+                                selectedAnnouncement.toString(),
+                                selectedBatch.toString(),
+                              );
+                              if (result) {
+                                setState(() {
+                                  tableData.add({
+                                    'announcement':
+                                        "${selectedDate!} -> ${selectedAnnouncement!}",
+                                    'Batch': selectedBatch!
+                                  });
+                                  selectedDate = null;
+                                  selectedAnnouncement = null;
+                                  selectedBatch = null;
+                                  dateInput.clear();
+                                  taskController.clear();
+                                });
+                              } else {
+                                print('failed');
+                              }
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFF8FFAC),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              side: const BorderSide(color: Color(0x999B9B9B)),
+                            ),
                           ),
-                        ),
-                        child: const Text(
-                          "ADD",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                          child: const Text(
+                            "ADD",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ),
+                        );
+                      }),
                     ),
                   ),
                   const SizedBox(height: 20),

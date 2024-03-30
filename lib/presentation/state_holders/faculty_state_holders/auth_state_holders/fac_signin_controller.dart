@@ -12,9 +12,7 @@ class FacSignInController extends GetxController {
   FacSignInModel _facSignInModel = FacSignInModel();
 
   bool get facSignInInProgress => _facSignInInProgress;
-
   String get message => _message;
-
   FacSignInModel get facLoginModel => _facSignInModel;
 
   Future<bool> facSignIn(String email, String password) async {

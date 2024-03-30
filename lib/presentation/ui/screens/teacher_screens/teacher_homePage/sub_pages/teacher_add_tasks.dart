@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_add_task_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/text_fields.dart';
 import '../../../../widgets/fac_main_bottom_nav_screen.dart';
@@ -82,6 +83,34 @@ class _FacAddTaskState extends State<FacAddTask> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
+                    "SECTION :  ",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  CustomDropdownButton(
+                    width: 258,
+                    height: 44.50,
+                    dropDownWidth: 258,
+                    items: const ['57-A+B', '56-A', '56-B'],
+                    value: selectedBatch,
+                    hintText: 'Select',
+                    onChanged: (value) {
+                      setState(() {
+                        selectedBatch = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
                     "SUBJECT :  ",
                     style: TextStyle(
                       fontSize: 24,
@@ -129,7 +158,7 @@ class _FacAddTaskState extends State<FacAddTask> {
                   )
                 ],
               ),
-              const SizedBox(
+              /*const SizedBox(
                 height: 20,
               ),
               Row(
@@ -153,7 +182,7 @@ class _FacAddTaskState extends State<FacAddTask> {
                     },
                   ),
                 ],
-              ),
+              ),*/
               const SizedBox(
                 height: 15,
               ),
@@ -161,42 +190,65 @@ class _FacAddTaskState extends State<FacAddTask> {
                 child: SizedBox(
                   width: 258,
                   height: 55,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0),
-                        side: const BorderSide(color: Color(0x999B9B9B)),
+                  child: GetBuilder<FacAddTaskController>(
+                      builder: (facAddTaskController) {
+                    if (facAddTaskController.facAddTaskInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
+                      );
+                    }
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                          side: const BorderSide(
+                            color: Color(0x999B9B9B),
+                          ),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      if (selectedBatch != null &&
-                          selectedSubject != null &&
-                          selectedTask != null &&
-                          selectedDate != null) {
-                        setState(() {
-                          tableData.add({
-                            'Batch': selectedBatch!,
-                            'Exam&Task':
-                                "${selectedSubject!} -> ${selectedTask!}",
-                            'Date': selectedDate!
-                          });
-                          selectedBatch = null;
-                          selectedSubject = null;
-                          selectedDate = null;
-                          selectedTask = null;
-                          dateInput.clear();
-                          taskController.clear();
-                        });
-                      }
-                    },
-                    child: const Text(
-                      "SUBMIT",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                      onPressed: () async {
+                        if (selectedBatch != null &&
+                            selectedSubject != null &&
+                            selectedTask != null) {
+                          final result = await facAddTaskController.facAddTask(
+                            selectedBatch!,
+                            selectedBatch,
+                            selectedSubject,
+                            selectedTask.toString().trim(),
+                          );
+                          if (result) {
+                            setState(() {
+                              tableData.add({
+                                'Batch': selectedBatch!,
+                                'Exam&Task':
+                                    "${selectedSubject!} -> ${selectedTask!}",
+                                //'Date': selectedDate!
+                              });
+                              selectedBatch = null;
+                              selectedSubject = null;
+                              selectedDate = null;
+                              selectedTask = null;
+                              //dateInput.clear();
+                              taskController.clear();
+                            });
+                          } else {
+                            Get.snackbar(
+                                'Failed!', facAddTaskController.message,
+                                colorText: Colors.redAccent);
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "SUBMIT",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ),
               const SizedBox(
@@ -299,7 +351,7 @@ class _FacAddTaskState extends State<FacAddTask> {
                                   ),
                                 ),
                               ),
-                              DataColumn(
+                              /*DataColumn(
                                 label: Text(
                                   'Date',
                                   style: TextStyle(
@@ -308,7 +360,7 @@ class _FacAddTaskState extends State<FacAddTask> {
                                     fontSize: 26,
                                   ),
                                 ),
-                              ),
+                              ),*/
                             ],
                             rows: tableData.map(
                               (data) {
@@ -458,7 +510,7 @@ class _FacAddTaskState extends State<FacAddTask> {
                                         ),
                                       ),
                                     ),
-                                    DataCell(
+                                    /*DataCell(
                                       GestureDetector(
                                         onLongPress: () {
                                           showDialog(
@@ -529,7 +581,7 @@ class _FacAddTaskState extends State<FacAddTask> {
                                           ),
                                         ),
                                       ),
-                                    ),
+                                    ),*/
                                   ],
                                 );
                               },
