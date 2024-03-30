@@ -15,6 +15,7 @@ class FacAddTask extends StatefulWidget {
   State<FacAddTask> createState() => _FacAddTaskState();
 }
 
+
 class _FacAddTaskState extends State<FacAddTask> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedBatch, selectedSubject, selectedDate, selectedTask;
@@ -25,6 +26,9 @@ class _FacAddTaskState extends State<FacAddTask> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<FacAddTaskController>().facAddTaskData;
+    });
     dateInput = TextEditingController();
     taskController = TextEditingController();
   }
@@ -191,64 +195,70 @@ class _FacAddTaskState extends State<FacAddTask> {
                   width: 258,
                   height: 55,
                   child: GetBuilder<FacAddTaskController>(
-                      builder: (facAddTaskController) {
-                    if (facAddTaskController.facAddTaskInProgress) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.teal,
-                        ),
-                      );
-                    }
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          side: const BorderSide(
-                            color: Color(0x999B9B9B),
+                    builder: (facAddTaskController) {
+                      if (facAddTaskController.facAddTaskInProgress) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: Colors.teal,
+                          ),
+                        );
+                      }
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                            side: const BorderSide(
+                              color: Color(0x999B9B9B),
+                            ),
                           ),
                         ),
-                      ),
-                      onPressed: () async {
-                        if (selectedBatch != null &&
-                            selectedSubject != null &&
-                            selectedTask != null) {
-                          final result = await facAddTaskController.facAddTask(
-                            selectedBatch!,
-                            selectedBatch,
-                            selectedSubject,
-                            selectedTask.toString().trim(),
-                          );
-                          if (result) {
-                            setState(() {
-                              tableData.add({
-                                'Batch': selectedBatch!,
-                                'Exam&Task':
-                                    "${selectedSubject!} -> ${selectedTask!}",
-                                //'Date': selectedDate!
+                        onPressed: () async {
+                          if (selectedBatch != null &&
+                              selectedSubject != null &&
+                              selectedTask != null) {
+                            final result =
+                                await facAddTaskController.facAddTask(
+                              selectedBatch!,
+                              selectedBatch,
+                              selectedSubject,
+                              selectedTask.toString().trim(),
+                            );
+                            if (result) {
+                              setState(() {
+                                tableData.add({
+                                  'Batch': facAddTaskController.facAddTaskModel.data.toString() +
+                                      facAddTaskController
+                                          .facAddTaskData.section
+                                          .toString(),
+                                  'Exam&Task': facAddTaskController
+                                      .facAddTaskData.taskType
+                                      .toString(),
+                                  //'Date': selectedDate!
+                                });
+                                selectedBatch = null;
+                                selectedSubject = null;
+                                selectedDate = null;
+                                selectedTask = null;
+                                //dateInput.clear();
+                                taskController.clear();
                               });
-                              selectedBatch = null;
-                              selectedSubject = null;
-                              selectedDate = null;
-                              selectedTask = null;
-                              //dateInput.clear();
-                              taskController.clear();
-                            });
-                          } else {
-                            Get.snackbar(
-                                'Failed!', facAddTaskController.message,
-                                colorText: Colors.redAccent);
+                            } else {
+                              Get.snackbar(
+                                  'Failed!', facAddTaskController.message,
+                                  colorText: Colors.redAccent);
+                            }
                           }
-                        }
-                      },
-                      child: const Text(
-                        "SUBMIT",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+                        },
+                        child: const Text(
+                          "SUBMIT",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    );
-                  }),
+                      );
+                    },
+                  ),
                 ),
               ),
               const SizedBox(

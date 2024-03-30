@@ -25,7 +25,7 @@ class FacAddTaskController extends GetxController {
     update();
     if (response.isSuccess) {
       _facAddTaskModel = FacAddTaskModel.fromJson(response.responseJson!);
-      //_facAddTaskData= FacAddTaskModel.fromJson(response.responseJson!).data as FacAddTaskData;
+      // _facAddTaskData= FacAddTaskModel.fromJson(response.responseJson!).data!;
       _message = 'Task added';
       return true;
     } else {
