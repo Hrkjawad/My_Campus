@@ -3,6 +3,7 @@ import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/appbar_method.dart';
+import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
 import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/text_fields.dart';
@@ -101,8 +102,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         const SizedBox(
                           height: 10,
                         ),
-
-                        /*const SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         CustomDatePicker(
@@ -114,7 +114,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                               selectedDate = value;
                             });
                           },
-                        ),*/
+                        ),
                       ],
                     ),
                   ),
@@ -136,11 +136,14 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                         return ElevatedButton(
                           onPressed: () async {
                             if (selectedAnnouncement != null &&
-                                selectedBatch != null) {
+                                selectedBatch != null &&
+                                selectedDate != null) {
                               final result = await facAnnouncementController
                                   .facAnnouncement(
                                 selectedAnnouncement.toString(),
                                 selectedBatch.toString(),
+                                selectedBatch.toString(),
+                                selectedDate.toString(),
                               );
                               if (result) {
                                 setState(() {

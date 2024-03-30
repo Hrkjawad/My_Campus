@@ -11,11 +11,11 @@ class FacAnnouncementController extends GetxController {
   FacAnnouncementModel get facAnnouncementModel => _facAnnouncementModel;
   bool get facAnnouncementInProgress => _facAnnouncementInProgress;
 
-  Future<bool> facAnnouncement(String task, batch) async {
+  Future<bool> facAnnouncement(String task, batch, section, date) async {
     _facAnnouncementInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultyAnnouncement(task, batch),
+      Urls.facultyAnnouncement(task, batch, section, date),
     );
     _facAnnouncementInProgress = false;
     update();

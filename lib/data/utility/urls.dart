@@ -16,8 +16,8 @@ class Urls {
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
   static const String facultySubGrpBatchSec =
       '$_facultyBaseUrl/createSubjectGroupBatchSections/65f6cbde91159aeba9d32433';
-  static String facultyAnnouncement(String task, String batch) =>
-      '$_facultyBaseUrl/announcement/$task/$batch';
+  static String facultyAnnouncement(String task, String batch, section, date) =>
+      '$_facultyBaseUrl/announcement/$task/$batch/$section/$date';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
 }
