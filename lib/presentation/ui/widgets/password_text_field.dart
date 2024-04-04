@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PasswordTextField extends StatefulWidget {
   PasswordTextField({
@@ -19,7 +20,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 323,
+      width: 323.w,
       child: TextFormField(
         controller: widget._passwordTEController,
         keyboardType: TextInputType.visiblePassword,
@@ -37,10 +38,10 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 ? Icons.visibility_off_outlined
                 : Icons.visibility_outlined),
           ),
-          errorStyle: const TextStyle(
+          errorStyle:  TextStyle(
             color: Colors.red,
             fontWeight: FontWeight.bold,
-            fontSize: 15,
+            fontSize: 15.sp,
           ),
         ),
         validator: (String? value) {

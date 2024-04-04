@@ -1,5 +1,7 @@
 class Urls {
   static const String _facultyBaseUrl = 'http://10.0.2.2:2006/api/teacher';
+  static const String _studentBaseUrl = 'http://10.0.2.2:2006/api/teacher';
+
   static const String availableFaculty = '$_facultyBaseUrl/AvailableTeachers';
   static const String facultyReg = '$_facultyBaseUrl/Registration';
   static String facultySignIn(email, password) =>
@@ -20,4 +22,14 @@ class Urls {
       '$_facultyBaseUrl/announcement/$task/$batch/$section/$date';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
+
+  static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
+  static const String studentReg = '$_studentBaseUrl/Registration';
+  static const String studentSignIn = '$_studentBaseUrl/Login';
+  static const String studentSignup = '$_studentBaseUrl/ProfileUpdate';
+  static String studentVerifyEmail(String email) =>
+      '$_studentBaseUrl/RecoverVerifyEmail/$email';
+  static String studentVerifyOTP(String email, String otp) =>
+      '$_studentBaseUrl/RecoverVerifyOtp/$email/$otp';
+  static String studentPasswordChange = '$_studentBaseUrl/RecoverResetPassword';
 }

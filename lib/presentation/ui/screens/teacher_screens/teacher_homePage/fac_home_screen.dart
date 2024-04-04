@@ -1,15 +1,13 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
-import 'package:my_campus/presentation/ui/widgets/fac_main_bottom_nav_screen.dart';
+import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../widgets/appbar_method.dart';
-import '../../../widgets/classes_exams_todo.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/dropdown_button.dart';
-import '../../../widgets/fac_announcement_slider.dart';
 import '../../../widgets/fac_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
 
@@ -26,11 +24,43 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   List<Map<String, String>> tableData = [];
   String? selectedBatch, selectedCourse;
 
+  int _currentAnnouncement = 0;
+  late Timer _timer;
+  late PageController _announcementPageController;
+
+  @override
+  void initState() {
+    super.initState();
+    _announcementPageController =
+        PageController(initialPage: _currentAnnouncement);
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _announcementPageController.dispose();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_announcementPageController.page == null) return;
+      final nextPage = (_announcementPageController.page!.toInt() + 1) %
+          announcements.length;
+      _announcementPageController.animateToPage(
+        nextPage,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
   //api table data fetch
   String? classAndTime = "Room: 302, RAB - 10.30 AM";
-  String classes = "4";
-  String exams = "1";
-  String myTodo = "3";
+  String? classes = "4";
+  String? exams = "1";
+  String? myTodo = "3";
 
   final List<String> announcements = [
     '57-A+B | Next Sunday is Viva ',
@@ -38,16 +68,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     '60-E | Next Sunday Class is Canceled ',
   ];
 
-  final Map<String, String> courseTitleAndCode = {
-    'CSE-1111': 'Introduction to Computer',
-    'CSE-1112': 'Introduction to Software',
-    'CSE-1113': 'Introduction to Hardware',
-  };
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey),
+      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -56,155 +80,289 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClassesExamsToDo(
-                    classes: classes,
-                    exams: exams,
-                    myTodo: myTodo,
-                    classAndTime: classAndTime),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Stack(
+                  alignment: Alignment(
+                    ScreenUtil().setWidth(0),
+                    ScreenUtil().setHeight(0),
+                  ),
+                  children: [
+                    SizedBox(
+                      width: 355.w,
+                      height: 150.h,
+                      child: Card(
+                        elevation: 3,
+                        margin: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            bottomLeft:
+                                Radius.circular(ScreenUtil().setWidth(0)),
+                            bottomRight:
+                                Radius.circular(ScreenUtil().setWidth(0)),
+                            topLeft:
+                                Radius.circular(ScreenUtil().setWidth(40)),
+                            topRight:
+                                Radius.circular(ScreenUtil().setWidth(40)),
+                          ),
+                          side: BorderSide(
+                              color: const Color(0x999B9B9B), width: 1.w),
+                        ),
+                        color: const Color(0xFFCBD0F9),
+                      ),
+                    ),
+                    Positioned(
+                      top: 10.h, // Adjust top position as needed
+                      child: Text(
+                        "Today's Schedule",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w900,
+                          fontSize: 24.sp,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 50.h,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipOval(
+                            child: Container(
+                              color: Colors.white,
+                              width: 80.w,
+                              height: 80.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    classes!,
+                                    style: TextStyle(
+                                        fontSize: 30.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  Text(
+                                    "Classes",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 26.w,
+                          ),
+                          ClipOval(
+                            child: Container(
+                              color: Colors.white,
+                              width: 80.w,
+                              height: 80.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    exams!,
+                                    style: TextStyle(
+                                        fontSize: 30.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  Text(
+                                    "Exams",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 26.w,
+                          ),
+                          ClipOval(
+                            child: Container(
+                              color: Colors.white,
+                              width: 80.w,
+                              height: 80.h,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    myTodo!,
+                                    style: TextStyle(
+                                        fontSize: 30.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
+                                  Text(
+                                    "My ToDo",
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: 355.w,
+                  height: 45.h,
+                  child: Card(
+                    margin: EdgeInsets.zero,
+                    elevation: 3,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft:
+                            Radius.circular(ScreenUtil().setWidth(40)),
+                        bottomRight:
+                            Radius.circular(ScreenUtil().setWidth(40)),
+                        topLeft: Radius.circular(ScreenUtil().setWidth(0)),
+                        topRight: Radius.circular(ScreenUtil().setWidth(0)),
+                      ),
+                      side: BorderSide(
+                          color: const Color(0x999B9B9B), width: 1.w),
+                    ),
+                    color: Colors.white,
+                    child: Center(
+                        child: Text(
+                      classAndTime!,
+                      style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.w900,
+                          color: const Color(0xFF393939)),
+                    )),
+                  ),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
                 const Date(),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CardElevatedButton(
-                      width: 142,
-                      height: 102,
+                      width: 142.w,
+                      height: 102.h,
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {},
                     ),
-                    const SizedBox(
-                      width: 71,
+                    SizedBox(
+                      width: 71.w,
                     ),
                     CardElevatedButton(
-                      width: 142,
-                      height: 102,
+                      width: 142.w,
+                      height: 102.h,
                       text: '  Exam\nRoutine',
                       color: 0xFFFFE8D2,
                       onTap: () {
                         showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SizedBox(
-                              height: 300,
-                              width: 500,
-                              child: AlertDialog(
-                                title: const Center(
-                                  child: Text(
-                                    "Exam Routine",
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w600),
+                            context: context,
+                            builder: (context) {
+                              return SizedBox(
+                                height: 300.h,
+                                width: 500.w,
+                                child: AlertDialog(
+                                  title: Center(
+                                    child: Text(
+                                      "Exam Routine",
+                                      style: TextStyle(
+                                          fontSize: 24.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  content: InteractiveViewer(
+                                    maxScale: 7.0,
+                                    minScale: 0.1,
+                                    child: Image.asset(
+                                      "assets/images/Bus Time.jpg",
+                                      width: 500.w,
+                                      height: 300.h,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
-                                content: InteractiveViewer(
-                                  maxScale: 7.0,
-                                  minScale: 0.1,
-                                  child: Image.asset(
-                                    "assets/images/Bus Time.jpg",
-                                    width: 500,
-                                    height: 300,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        );
+                              );
+                            });
                       },
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.h,
                 ),
                 CardElevatedButton(
-                  width: 355,
-                  height: 84,
+                  width: 355.w,
+                  height: 84.h,
                   text: 'Batches & Courses',
                   color: 0xFFF8FFAC,
                   onTap: () {
                     facultyBatchesAndCourses(context);
                   },
                 ),
-                const SizedBox(
-                  height: 25,
+                SizedBox(
+                  height: 25.w,
                 ),
-                //FacAnnouncementSlider(announcements: announcements),
-                GetBuilder<FacAnnouncementController>(
-                  builder: (facAnnouncementController) {
-                    if (facAnnouncementController.facAnnouncementInProgress) {
-                      return const Center(
-                        child: CircularProgressIndicator(color: Colors.teal),
-                      );
-                    }
-                    if (facAnnouncementController
-                            .facAnnouncementModel.data?.isEmpty ??
-                        true) {
-                      return Container(
-                        width: 323,
-                        height: MediaQuery.of(context).size.width / 3,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(
-                            color: const Color(0x999B9B9B),
-                          ),
-                          borderRadius: BorderRadius.circular(24),
-                        ),
-                        child: const Center(
-                          child: Text(
-                            'No Announcements',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 0.3,
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return FacAnnouncementSlider(
-                        announcements: facAnnouncementController
-                                .facAnnouncementModel.data ??
-                            [],
-                      );
-                    }
-                  },
+                SizedBox(
+                  height: 200.h,
+                  width: 375.w,
+                  child: PageView.builder(
+                    itemCount: announcements.length,
+                    controller: _announcementPageController,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentAnnouncement = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return buildAnnouncementCard(announcements[index]);
+                    },
+                  ),
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: 5.h,
                 ),
                 CircleAvatar(
-                  radius: 27,
+                  radius: 17,
                   backgroundColor: Colors.black,
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius:
+                        BorderRadius.circular(ScreenUtil().setWidth(20)),
                     onTap: () {
-                      Get.to(
-                        const TeacherAddAnnouncement(),
-                      );
+                      Get.to(const TeacherAddAnnouncement());
                     },
-                    child: const CircleAvatar(
-                      radius: 26,
-                      backgroundColor: Color(0xFFF8FFAC),
+                    child: CircleAvatar(
+                      radius: 16,
+                      backgroundColor: const Color(0xFFF8FFAC),
                       child: Icon(
                         Icons.add,
-                        size: 50,
+                        size: 30.sp,
                         color: Colors.black,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 6,
-                ),
-                const FacBottomNavScreen(),
               ],
             ),
           ),
         ),
+        bottomNavigationBar:    const BottomNav(home: FacHomeScreen()),
       ),
     );
   }
@@ -216,19 +374,20 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
             return AlertDialog(
-              title: const Center(
+              title: Center(
                 child: Text(
                   "SELECT BATCH & COURSES",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+                  style:
+                      TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w900),
                 ),
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
                   child: CustomDropdownButton(
-                    width: 332,
-                    height: 51,
-                    dropDownWidth: 290,
+                    width: 332.w,
+                    height: 51.h,
+                    dropDownWidth: 290.w,
                     items: const ['57-A+B', '56-A', '56-B'],
                     value: selectedBatch,
                     hintText: 'Select Batch',
@@ -240,27 +399,11 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(12.w),
                   child: CustomDropdownButton(
-                    width: 332,
-                    height: 51,
-                    dropDownWidth: 290,
-                    items: const ['57-A+B', '56-A', '56-B'],
-                    value: selectedBatch,
-                    hintText: 'Select Section',
-                    onChanged: (value) {
-                      setState(() {
-                        selectedBatch = value;
-                      });
-                    },
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: CustomDropdownButton(
-                    width: 332,
-                    height: 51,
-                    dropDownWidth: 290,
+                    width: 332.w,
+                    height: 51.h,
+                    dropDownWidth: 290.w,
                     items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
                     value: selectedCourse,
                     hintText: 'Select Course',
@@ -274,84 +417,63 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
                 Center(
-                  child: GetBuilder<FacCreatingSubGrpBatchSecController>(
-                      builder: (facCreatingSubGrpBatchSecController) {
-                    if (facCreatingSubGrpBatchSecController
-                        .facCreatingSubGrpBatchSecInProgress) {
-                      return const Center(
-                        child: CircularProgressIndicator(color: Colors.teal),
-                      );
-                    }
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(
-                          side: BorderSide(
-                            color: Colors.grey,
-                            width: 2,
-                          ),
-                        ),
-                        backgroundColor: const Color(0xFFFFE8D2),
-                        foregroundColor: const Color(0x999B9B9B),
-                      ),
-                      onPressed: () async {
-                        if (selectedBatch != null && selectedCourse != null) {
-                          final result =
-                              await facCreatingSubGrpBatchSecController
-                                  .facCreatingSubGrpBatchSec(
-                                      '57', 'A+Bdd', 'CSE-1111', 'CSE');
-                          if (result) {
-                            Get.snackbar('Successful!',
-                                facCreatingSubGrpBatchSecController.message);
-                            setState(() {
-                              tableData.add({
-                                'Batch': selectedBatch!,
-                                'Course': selectedCourse!,
-                              });
-                              selectedBatch = null;
-                              selectedCourse = null;
-                            });
-                          } else {
-                            Get.snackbar('Failed!',
-                                facCreatingSubGrpBatchSecController.message,
-                                colorText: Colors.redAccent);
-                          }
-                        }
-                      },
-                      child: const Text(
-                        "ADD",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(
+                        side: BorderSide(
+                          color: Colors.grey,
+                          width: 2.w,
                         ),
                       ),
-                    );
-                  }),
+                      backgroundColor: const Color(0xFFFFE8D2),
+                      foregroundColor: const Color(0x999B9B9B),
+                    ),
+                    onPressed: () {
+                      if (selectedBatch != null && selectedCourse != null) {
+                        setState(() {
+                          tableData.add({
+                            'Batch': selectedBatch!,
+                            'Course': selectedCourse!,
+                          });
+                          selectedBatch = null;
+                          selectedCourse = null;
+                        });
+                      }
+                    },
+                    child: const Text(
+                      "ADD",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: EdgeInsets.all(12.w),
                   child: Container(
-                    height: 320,
-                    width: 343,
-                    padding: const EdgeInsets.all(10),
+                    height: 320.h,
+                    width: 343.w,
+                    padding: EdgeInsets.all(10.w),
                     decoration: BoxDecoration(
                       color: const Color(0xFFF8FFAC),
                       border: Border.all(
                         color: const Color(0x999B9B9B),
                       ),
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20.w),
                       ),
                     ),
                     child: SingleChildScrollView(
                       child: DataTable(
-                        columns: const [
+                        columns: [
                           DataColumn(
                             label: Text(
                               'Batch',
                               style: TextStyle(
-                                color: Color(0xFF0D6858),
+                                color: const Color(0xFF0D6858),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 26,
+                                fontSize: 26.sp,
                               ),
                             ),
                           ),
@@ -359,9 +481,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             label: Text(
                               'Course',
                               style: TextStyle(
-                                color: Color(0xFF0D6858),
+                                color: const Color(0xFF0D6858),
                                 fontWeight: FontWeight.w500,
-                                fontSize: 26,
+                                fontSize: 26.sp,
                               ),
                             ),
                           ),
@@ -373,20 +495,20 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                 DataCell(
                                   Text(
                                     data['Batch']!,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22,
+                                      fontSize: 22.sp,
                                     ),
                                   ),
                                 ),
                                 DataCell(
                                   Text(
                                     data['Course']!,
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 22,
+                                      fontSize: 22.sp,
                                     ),
                                   ),
                                 ),
@@ -403,6 +525,40 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
           },
         );
       },
+    );
+  }
+
+  Widget buildAnnouncementCard(String announcement) {
+    return GestureDetector(
+      onLongPress: () {
+        _timer.cancel();
+      },
+      onLongPressEnd: (_){
+        _startTimer();
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.0.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: const Color(0x999B9B9B)),
+          borderRadius: BorderRadius.circular(33.w),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(33.w),
+              child: Text(
+                announcement,
+                style: TextStyle(
+                  fontSize: 26.sp,
+                  fontWeight: FontWeight.w700,
+                  color: const Color(0xFF0D6858),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

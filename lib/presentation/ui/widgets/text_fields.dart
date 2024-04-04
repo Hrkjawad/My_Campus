@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -23,27 +24,27 @@ class CustomTextField extends StatelessWidget {
       width: width,
       child: Material(
         elevation: 3,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
         child: TextField(
           textAlign: TextAlign.center,
           controller: controller,
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: const TextStyle(
-              fontSize: 24,
+            hintStyle:  TextStyle(
+              fontSize: 24.sp,
               fontWeight: FontWeight.bold,
               color: Colors.grey,
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 14),
+            contentPadding:  EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(14)),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
               borderSide: const BorderSide(
                 color: Color(0x999B9B9B),
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24),
+              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
               borderSide: const BorderSide(
                 color: Colors.grey,
               ),
@@ -51,8 +52,8 @@ class CustomTextField extends StatelessWidget {
             filled: true,
             fillColor: const Color(0xFFF0FFF8),
           ),
-          style: const TextStyle(
-            fontSize: 24,
+          style:  TextStyle(
+            fontSize: 24.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),

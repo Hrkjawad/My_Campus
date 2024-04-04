@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void facultyMembers(BuildContext context) {
   showDialog(
@@ -13,20 +14,20 @@ void facultyMembers(BuildContext context) {
           builder: (context, StateSetter setState) {
             return SingleChildScrollView(
               child: AlertDialog(
-                title: const Center(
+                title: Center(
                   child: Column(
                     children: [
                       Text(
                         "Faculty",
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: ScreenUtil().setSp(26),
                           fontWeight: FontWeight.w800,
                         ),
                       ),
                       SizedBox(
-                        height: 6,
+                        height: ScreenUtil().setHeight(6),
                       ),
-                      LinearProgressIndicator(
+                      const LinearProgressIndicator(
                         value: .5,
                       )
                     ],
@@ -34,13 +35,13 @@ void facultyMembers(BuildContext context) {
                 ),
                 actions: [
                   for (int i = 0; i < 20; i++)
-                    const Column(
+                    Column(
                       children: [
                         ListTile(
                           leading: CircleAvatar(
                             child: Icon(
                               Icons.person,
-                              size: 35,
+                              size: ScreenUtil().setWidth(35),
                               color: Colors.blueGrey,
                             ),
                           ),
@@ -48,7 +49,7 @@ void facultyMembers(BuildContext context) {
                             'Pritiraj Battacharje',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
-                                fontSize: 20,
+                                fontSize: ScreenUtil().setSp(20),
                                 letterSpacing: .6),
                           ),
                           subtitle: Column(
@@ -56,38 +57,38 @@ void facultyMembers(BuildContext context) {
                             CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                height: 6,
+                                height: ScreenUtil().setHeight(6),
                               ),
                               Text(
                                 'Lecturer',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                               SizedBox(
-                                height: 8,
+                                height: ScreenUtil().setHeight(8),
                               ),
                               Text(
                                 'CSE Department',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                               SizedBox(
-                                height: 8,
+                                height: ScreenUtil().setHeight(8),
                               ),
                               Text(
                                 'Email: prb@lus.ac.bd',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                               SizedBox(
-                                height: 8,
+                                height: ScreenUtil().setHeight(8),
                               ),
                               Text(
                                 'Mobile Number',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                             ],
                           ),
                         ),
                         Divider(
-                          thickness: 3,
+                          thickness: ScreenUtil().setWidth(3),
                         )
                       ],
                     )

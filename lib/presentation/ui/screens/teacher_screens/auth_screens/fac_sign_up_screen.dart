@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signup_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
@@ -38,11 +39,11 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                   const TitleAndSubtitle(
                       title: 'SIGN UP', subtitle: 'Join as a Faculty'),
                   const AppLogo(),
-                  const SizedBox(
-                    height: 77,
+                   SizedBox(
+                    height: 77.h,
                   ),
                   SizedBox(
-                    width: 323,
+                    width: 323.w,
                     child: TextFormField(
                       controller: _otpTEController,
                       keyboardType: TextInputType.number,
@@ -60,24 +61,24 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 12,
+                   SizedBox(
+                    height: 12.h,
                   ),
                   PasswordTextField(
                     emailTEController: _newPassTEController,
                     isObscure: true,
                     hintText: 'New Password',
                   ),
-                  const SizedBox(
-                    height: 12,
+                   SizedBox(
+                    height: 12.h,
                   ),
                   PasswordTextField(
                     emailTEController: _confirmPassTEController,
                     isObscure: true,
                     hintText: 'Confirm Password',
                   ),
-                  const SizedBox(
-                    height: 42,
+                   SizedBox(
+                    height: 42.h,
                   ),
                   GetBuilder<FacVerifyOTPController>(
                     builder: (facVerifyOTPController) {

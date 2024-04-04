@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_recovery_email_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
+import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
+import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
+import '../../../widgets/customised_elevated_button.dart';
+import '../../../widgets/text_field_with_trailing.dart';
+import '../student_homePage/stu_home_screen.dart';
 
 class StuSignInScreen extends StatefulWidget {
   const StuSignInScreen({super.key});
@@ -26,157 +34,79 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 112,
-                ),
-                const Text(
-                  'SIGN IN',
-                  style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 1,
-                  ),
-                ),
-                const Text(
-                  'Student',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF585858),
-                  ),
-                ),
-                const SizedBox(
-                  height: 46,
-                ),
+                const TitleAndSubtitle(
+                    title: 'SIGN IN', subtitle: 'Student'),
                 const AppLogo(),
-                const SizedBox(
-                  height: 65,
+                SizedBox(
+                  height: 76.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 205,
-                      child: TextFormField(
-                        controller: _emailTEController,
-                        keyboardType: TextInputType.emailAddress,
-                        textInputAction: TextInputAction.next,
-                        cursorColor: Colors.black,
-                        decoration: const InputDecoration(
-                          hintText: 'Type your email',
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              bottomLeft: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                        validator: (String? value) {
-                          if (value?.trim().isEmpty ?? true) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 72,
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          enabled: false,
-                          hintText: '@lus.ac.bd',
-                          hintStyle: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xFF000000),
-                              fontWeight: FontWeight.w700),
-                          fillColor: Color(0xFFFFFFFF),
-                          contentPadding: EdgeInsets.only(left: 4),
-                          disabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(20),
-                              bottomRight: Radius.circular(20),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your student email"'',),
+                SizedBox(
+                  height: 12.h,
                 ),
-                const SizedBox(
-                  height: 10,
+                PasswordTextField(
+                  emailTEController: _passTEController,
+                  isObscure: true,
+                  hintText: 'Confirm Password',
                 ),
                 SizedBox(
-                  width: 277,
-                  child: TextFormField(
-                    controller: _passTEController,
-                    keyboardType: TextInputType.visiblePassword,
-                    textInputAction: TextInputAction.done,
-                    decoration: const InputDecoration(hintText: 'Enter password'),
-                    validator: (String? value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Please enter your password';
-                      }
-                      if (value!.length < 6) {
-                        return 'Password length must be more than 6';
-                      }
-                      return null;
-                    },
-                  ),
+                  height: 30.h,
                 ),
-                const SizedBox(
-                  height: 35,
-                ),
-                SizedBox(
-                  width: 277,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
-                    },
-                    child: const Text('LOGIN'),
-                  ),
-                ),
-                const SizedBox(
-                  height: 29,
-                ),
-                TextButton(
-                  onPressed: () {
-                    Get.to(
-                      () => const FacRecoveryEmailScreen(),
+                GetBuilder<StuSignInController>(
+                  builder: (stuLoginController) {
+                    if (stuLoginController.stuSignInInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
+                      );
+                    }
+                    return CustomisedElevatedButton(
+                      onTap: () async {
+                        if (_formKey.currentState!.validate()) {
+                          Get.to(
+                                () => const StuHomeScreen(),
+                          );
+                          stuSignIn(stuLoginController);
+                        }
+                      },
+                      text: 'SIGN IN',
                     );
                   },
-                  child: const Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF505050),
-                    ),
-                  ),
                 ),
+                SizedBox(
+                  height: 34.h,
+                ),
+                CustomisedTextButton(
+                    onTap: () {
+                      Get.to(
+                            () => const StuRecoveryEmailScreen(),
+                      );
+                    },
+                    text: 'Forgot Password')
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> stuSignIn(StuSignInController stuLoginController) async {
+    final result = await stuLoginController.stuSignIn(
+      _emailTEController.text.trim(),
+      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+      _passTEController.text.trim(),
+    );
+
+    if (result) {
+      Get.snackbar('Successful!', stuLoginController.message);
+      Get.to(
+            () => const StuHomeScreen(),
+      );
+    } else {
+      Get.snackbar('Failed!', stuLoginController.message,
+          colorText: Colors.redAccent);
+    }
   }
 }

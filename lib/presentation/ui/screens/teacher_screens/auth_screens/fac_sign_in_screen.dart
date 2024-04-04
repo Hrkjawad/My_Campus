@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
@@ -36,20 +37,20 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 const TitleAndSubtitle(
                     title: 'SIGN IN', subtitle: 'Faculty Member'),
                 const AppLogo(),
-                const SizedBox(
-                  height: 76,
+                 SizedBox(
+                  height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController),
-                const SizedBox(
-                  height: 12,
+                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your teacher email"'',),
+                 SizedBox(
+                  height: 12.h,
                 ),
                 PasswordTextField(
                   emailTEController: _passTEController,
                   isObscure: true,
                   hintText: 'Password',
                 ),
-                const SizedBox(
-                  height: 41,
+                 SizedBox(
+                  height: 30.h,
                 ),
                 GetBuilder<FacSignInController>(
                   builder: (facLoginController) {
@@ -73,8 +74,8 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     );
                   },
                 ),
-                const SizedBox(
-                  height: 34,
+                 SizedBox(
+                  height: 34.h,
                 ),
                 CustomisedTextButton(
                     onTap: () {

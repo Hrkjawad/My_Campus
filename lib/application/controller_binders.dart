@@ -1,14 +1,16 @@
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_list_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_password_change_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signup_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_add_task_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_availability_checking_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
-import '../presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
+import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_password_change_controller.dart';
+import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
+import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_signup_controller.dart';
+import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_verify_email_controller.dart';
+import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_verify_otp_controller.dart';
 
 class GetXBindings extends Bindings {
   @override
@@ -20,10 +22,12 @@ class GetXBindings extends Bindings {
     Get.put(FacVerifyEmailController());
     Get.put(FacVerifyOTPController());
     Get.put(FacPasswordChangeController());
-    Get.put(FacultyListController());
-    Get.put(FacCreatingSubGrpBatchSecController());
-    Get.put(FacAnnouncementController());
-    Get.put(FacAddTaskController());
-    //Get.put(FacProfileDetailsController());
+
+    Get.put(StuAvailabilityCheckingController());
+    Get.put(StuSignInController());
+    Get.put(StuSignUpController());
+    Get.put(StuVerifyEmailController());
+    Get.put(StuVerifyOTPController());
+    Get.put(StuPasswordChangeController());
   }
 }

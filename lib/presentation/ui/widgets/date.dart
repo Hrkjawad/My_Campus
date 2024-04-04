@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
 class Date extends StatefulWidget {
@@ -15,8 +16,8 @@ class _DateState extends State<Date> {
     var formattedDate = DateFormat.yMMMMd().format(date);
     return Text(
       formattedDate,
-      style: const TextStyle(
-          fontWeight: FontWeight.w400, color: Colors.red, fontSize: 18),
+      style:  TextStyle(
+          fontWeight: FontWeight.w400, color: Colors.red, fontSize: 18.sp),
     );
   }
 }

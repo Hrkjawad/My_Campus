@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_password_change_screen.dart';
@@ -33,12 +34,12 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                     title: 'RECOVERY',
                     subtitle: 'A code will be send to your email'),
                 const AppLogo(),
-                const SizedBox(
-                  height: 76,
+                 SizedBox(
+                  height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController),
-                const SizedBox(
-                  height: 40,
+                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your teacher email"'',),
+                 SizedBox(
+                  height: 40.h,
                 ),
                 GetBuilder<FacVerifyEmailController>(
                   builder: (facVerifyEmailController) {

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/home_screen.dart';
 import 'app_logo.dart';
 
-AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
+AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey, String title) {
   return AppBar(
     automaticallyImplyLeading: false,
     backgroundColor: Colors.white,
@@ -13,17 +14,13 @@ AppBar customisedAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
         scaffoldKey.currentState!.openDrawer();
       },
     ),
-    title: Text(
-      AuthController.email0 ?? 'null',
-      style: const TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
-      ),
-    ),
+    title:  Text(title),
     actions: [
       IconButton(
-        onPressed: () async {
-          await AuthController.clear();
+        onPressed: () {
+          Get.to(
+                  () => const HomeScreen(),
+          );
         },
         icon: const Icon(
           Icons.logout_outlined,
