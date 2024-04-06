@@ -6,21 +6,21 @@ class AuthController {
   static String? accessToken;
   static String? email0, fullName0, designation0, department0;
 
-  //static String? get accessToken => _accessToken;
-
   static Future<void> setAccessToken(String token, {String? email2}) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', token);
     accessToken = token;
-  }//
+  }
 
   static Future<void> getAccessToken() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     accessToken = sharedPreferences.getString('token');
   }
 
-  static Future<void> setProfileDetails(String email1,String fullName1,String designation1,String department1) async {
+  static Future<void> setProfileDetails(String email1, String fullName1,
+      String designation1, String department1) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('email', email1);
@@ -31,7 +31,6 @@ class AuthController {
     fullName0 = fullName1;
     designation0 = designation1;
     department0 = designation1;
-
   }
 
   static Future<void> getProfileDetails() async {

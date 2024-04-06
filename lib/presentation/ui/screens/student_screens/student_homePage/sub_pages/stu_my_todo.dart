@@ -39,7 +39,7 @@ class _StuMyTodoState extends State<StuMyTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'ID: 2122020011'),
+      appBar: customisedAppBar(scaffoldKey),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedStudentDrawer(context),

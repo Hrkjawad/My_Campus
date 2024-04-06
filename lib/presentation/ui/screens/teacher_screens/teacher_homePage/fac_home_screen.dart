@@ -71,7 +71,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      appBar: customisedAppBar(scaffoldKey),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),

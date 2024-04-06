@@ -40,7 +40,7 @@ class _FacAddTaskState extends State<FacAddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher email'),
+      appBar: customisedAppBar(scaffoldKey),
       drawer: customisedFacultyDrawer(context),
       body: Scaffold(
         key: scaffoldKey,

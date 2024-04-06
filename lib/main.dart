@@ -11,6 +11,5 @@ void main() {
         builder: (context) => const MyCampus(),
       ),
     ),
-
   );
 }

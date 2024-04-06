@@ -40,7 +40,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'Teacher mail'),
+      appBar: customisedAppBar(scaffoldKey),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
