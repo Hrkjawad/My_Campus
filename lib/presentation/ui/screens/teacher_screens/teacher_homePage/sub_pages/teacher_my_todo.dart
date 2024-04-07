@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
@@ -19,22 +21,10 @@ class _FacMyTodoState extends State<FacMyTodo> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
-  late TextEditingController _dateInputTEController;
-  late TextEditingController _taskTEController;
+  final TextEditingController _dateInputTEController = TextEditingController();
+  final TextEditingController _todoTEController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    _dateInputTEController = TextEditingController();
-    _taskTEController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _dateInputTEController.dispose();
-    _taskTEController.dispose();
-    super.dispose();
-  }
+  //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +51,8 @@ class _FacMyTodoState extends State<FacMyTodo> {
                     ),
                   ),
                   CustomTextField(
-                    controller: _taskTEController,
-                    hintText: 'Enter Text',
+                    controller: _todoTEController,
+                    hintText: 'My todo',
                     height: 44.50.h,
                     width: 258.w,
                     onChanged: (value) {
@@ -70,7 +60,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
                         selectedTask = value;
                       });
                     },
-                  )
+                  ),
                 ],
               ),
               SizedBox(
@@ -101,39 +91,44 @@ class _FacMyTodoState extends State<FacMyTodo> {
               SizedBox(
                 height: 20.h,
               ),
-              Center(
-                child: SizedBox(
-                  width: 380.w,
-                  height: 58.h,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0.w),
-                        side: const BorderSide(color: Color(0x999B9B9B)),
+              SizedBox(
+                width: 380.w,
+                //height: 58.h,
+                child: GetBuilder<FacMyToDOController>(
+                  builder: (facMyToDOController) {
+                    if (facMyToDOController.facMyToDoInProgress) {
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.teal,
+                        ),
+                      );
+                    }
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0.w),
+                          side: const BorderSide(
+                            color: Color(0x999B9B9B),
+                          ),
+                        ),
                       ),
-                    ),
-                    onPressed: () {
-                      if (selectedTask != null && selectedDate != null) {
-                        setState(() {
-                          tableData.add({
-                            'Your_Note': selectedTask!,
-                            'Date': selectedDate!
-                          });
-                          selectedDate = null;
-                          selectedTask = null;
-                          _dateInputTEController.clear();
-                          _taskTEController.clear();
-                        });
-                      }
-                    },
-                    child: Text(
-                      "ADD",
-                      style: TextStyle(
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.bold,
+                      onPressed: () async {
+                        if (selectedTask != null && selectedDate != null) {
+                          print(selectedTask);
+                          print(selectedDate);
+
+                          facMyToDo(facMyToDOController);
+                        }
+                      },
+                      child: Text(
+                        "ADD",
+                        style: TextStyle(
+                          fontSize: 22.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
               SizedBox(
@@ -191,203 +186,212 @@ class _FacMyTodoState extends State<FacMyTodo> {
                         child: SingleChildScrollView(
                           child: Padding(
                             padding: EdgeInsets.only(left: 0.0.w),
-                            child: DataTable(
-                              dataRowMaxHeight: 105.h,
-                              columnSpacing: 25.w,
-                              horizontalMargin: 10.w,
-                              columns: [
-                                DataColumn(
-                                  label: SizedBox(
-                                    width: 250.w,
-                                    child: Center(
-                                      child: Text(
-                                        'Your Note',
-                                        style: TextStyle(
-                                          color: const Color(0xFF0D6858),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 26.sp,
+                            child: GetBuilder<FacMyToDOController>(
+                                builder: (facMyToDOController) {
+                              return DataTable(
+                                dataRowMaxHeight: 105.h,
+                                columnSpacing: 25.w,
+                                horizontalMargin: 10.w,
+                                columns: [
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 250.w,
+                                      child: Center(
+                                        child: Text(
+                                          'Your Note',
+                                          style: TextStyle(
+                                            color: const Color(0xFF0D6858),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 26.sp,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                DataColumn(
-                                  label: SizedBox(
-                                    width: 85.w,
-                                    child: Center(
-                                      child: Text(
-                                        'Date',
-                                        style: TextStyle(
-                                          color: const Color(0xFF0D6858),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 26.sp,
+                                  DataColumn(
+                                    label: SizedBox(
+                                      width: 85.w,
+                                      child: Center(
+                                        child: Text(
+                                          'Date',
+                                          style: TextStyle(
+                                            color: const Color(0xFF0D6858),
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 26.sp,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                              rows: tableData.map(
-                                    (data) {
-                                  return DataRow(
-                                    cells: [
-                                      DataCell(
-                                        GestureDetector(
-                                          onLongPress: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                    "Delete Data",
-                                                    style: TextStyle(
-                                                        fontSize: 24.sp,
-                                                        fontWeight:
-                                                        FontWeight.w900),
-                                                  ),
-                                                  content: Text(
-                                                      "Are you sure you want to delete this data?",
+                                ],
+                                rows: tableData.map(
+                                  (data) {
+                                    return DataRow(
+                                      cells: [
+                                        DataCell(
+                                          GestureDetector(
+                                            onLongPress: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                      "Delete Data",
                                                       style: TextStyle(
-                                                          fontSize: 20.sp,
+                                                          fontSize: 24.sp,
                                                           fontWeight:
-                                                          FontWeight.w500)),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text("NO",
-                                                          style: TextStyle(
-                                                              fontSize: 18.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w500,
-                                                              color: Colors
-                                                                  .green)),
+                                                              FontWeight.w900),
                                                     ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          tableData
-                                                              .remove(data);
-                                                        });
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text("YES",
-                                                          style: TextStyle(
-                                                              fontSize: 18.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w500,
-                                                              color:
-                                                              Colors.red)),
+                                                    content: Text(
+                                                        "Are you sure you want to delete this data?",
+                                                        style: TextStyle(
+                                                            fontSize: 20.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500)),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text("NO",
+                                                            style: TextStyle(
+                                                                fontSize: 18.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .green)),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            tableData
+                                                                .remove(data);
+                                                          });
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text("YES",
+                                                            style: TextStyle(
+                                                                fontSize: 18.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .red)),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: SizedBox(
+                                              width: 250.w,
+                                              child: Wrap(
+                                                children: [
+                                                  Text(
+                                                    data['Your_Note']!,
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 19.sp,
                                                     ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: SizedBox(
-                                            width: 250.w,
-                                            child: Wrap(
-                                              children: [
-                                                Text(
-                                                  data['Your_Note']!,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 19.sp,
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      DataCell(
-                                        GestureDetector(
-                                          onLongPress: () {
-                                            showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                    "Delete Data",
-                                                    style: TextStyle(
-                                                        fontSize: 24.sp,
-                                                        fontWeight:
-                                                        FontWeight.w900),
-                                                  ),
-                                                  content: Text(
-                                                      "Are you sure you want to delete this data?",
+                                        DataCell(
+                                          GestureDetector(
+                                            onLongPress: () {
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title: Text(
+                                                      "Delete Data",
                                                       style: TextStyle(
-                                                          fontSize: 20.sp,
+                                                          fontSize: 24.sp,
                                                           fontWeight:
-                                                          FontWeight.w500)),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text("NO",
-                                                          style: TextStyle(
-                                                              fontSize: 18.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w500,
-                                                              color: Colors
-                                                                  .green)),
+                                                              FontWeight.w900),
                                                     ),
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          tableData
-                                                              .remove(data);
-                                                        });
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text("YES",
-                                                          style: TextStyle(
-                                                              fontSize: 18.sp,
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .w500,
-                                                              color:
-                                                              Colors.red)),
+                                                    content: Text(
+                                                        "Are you sure you want to delete this data?",
+                                                        style: TextStyle(
+                                                            fontSize: 20.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500)),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text("NO",
+                                                            style: TextStyle(
+                                                                fontSize: 18.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .green)),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            tableData
+                                                                .remove(data);
+                                                          });
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text("YES",
+                                                            style: TextStyle(
+                                                                fontSize: 18.sp,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .red)),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            child: SizedBox(
+                                              width: 100.w,
+                                              child: Wrap(
+                                                children: [
+                                                  Text(
+                                                    data['Date']!,
+                                                    softWrap: true,
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontSize: 16.sp,
                                                     ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                          child: SizedBox(
-                                            width: 100.w,
-                                            child: Wrap(
-                                              children: [
-                                                Text(
-                                                  data['Date']!,
-                                                  softWrap: true,
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 16.sp,
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ).toList(),
-                            ),
+                                      ],
+                                    );
+                                  },
+                                ).toList(),
+                              );
+                            }),
                           ),
                         ),
                       ),
@@ -398,8 +402,20 @@ class _FacMyTodoState extends State<FacMyTodo> {
             ],
           ),
         ),
-        bottomNavigationBar:  const BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
       ),
     );
+  }
+
+  Future<void> facMyToDo(FacMyToDOController facMyToDOController) async {
+    final result = await facMyToDOController.facMyToDo(
+        _todoTEController.text.trim(), _dateInputTEController.text);
+    if (result) {
+      Get.snackbar('Successful!', facMyToDOController.message);
+      _todoTEController.clear();
+      _dateInputTEController.clear();
+    } else {
+      Get.snackbar('Failed!', facMyToDOController.message);
+    }
   }
 }

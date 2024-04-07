@@ -65,7 +65,12 @@ class CustomTextField extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-
+          validator: (String? value) {
+            if (value?.trim().isEmpty ?? true) {
+              return null;
+            }
+            return null;
+          },
         ),
       ),
     );

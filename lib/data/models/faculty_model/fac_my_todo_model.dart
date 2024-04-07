@@ -26,14 +26,16 @@ class FacMyToDoModel {
 
 class FacMyToDoData {
   String? sId;
+  String? email;
   String? title;
   String? date;
   String? timestamp;
 
-  FacMyToDoData({this.sId, this.title, this.date, this.timestamp});
+  FacMyToDoData({this.sId, this.email, this.title, this.date, this.timestamp});
 
   FacMyToDoData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
+    email = json['email'];
     title = json['title'];
     date = json['date'];
     timestamp = json['timestamp'];
@@ -42,6 +44,7 @@ class FacMyToDoData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['_id'] = sId;
+    data['email'] = email;
     data['title'] = title;
     data['date'] = date;
     data['timestamp'] = timestamp;

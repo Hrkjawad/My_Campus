@@ -22,6 +22,8 @@ class Urls {
       '$_facultyBaseUrl/announcement/$task/$batch/$section/$date';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
+  static String facultyMyToDo(String todo, date) =>
+      '$_facultyBaseUrl/facultyMeeting/$todo/$date';
 
   static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
   static const String studentReg = '$_studentBaseUrl/Registration';
