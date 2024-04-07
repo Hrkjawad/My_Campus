@@ -223,7 +223,44 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                       .facAnnouncementModel.data?.length ??
                                   0,
                               itemBuilder: (context, index) {
-                                return Row(
+                                return ListTile(
+                                  leading: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '${facAnnouncementController.facAnnouncementModel.data![index].batch!}-${facAnnouncementController.facAnnouncementModel.data![index].batch!}:  ',
+                                        style: TextStyle(
+                                          color: const Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  title: Text(
+                                    facAnnouncementController
+                                        .facAnnouncementModel
+                                        .data![index]
+                                        .announcement!,
+                                    style: TextStyle(
+                                      color: const Color(0xFF0D6858),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20.sp,
+                                      height: 2,
+                                    ),
+                                  ),
+                                  subtitle: Text(
+                                    'Date: ${facAnnouncementController.facAnnouncementModel.data![index].announcement!}',
+                                    style: TextStyle(
+                                      color: const Color(0xFF0D6858),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 20.sp,
+                                      height: 2,
+                                    ),
+                                  ),
+                                );
+
+                                /*Row(
                                   children: [
                                     Text(
                                       '${facAnnouncementController.facAnnouncementModel.data![index].batch!} ${facAnnouncementController.facAnnouncementModel.data![index].batch!}',
@@ -246,7 +283,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                       ),
                                     )
                                   ],
-                                );
+                                );*/
                               },
                               separatorBuilder: (context, index) {
                                 return const Divider();
@@ -280,6 +317,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
       selectedSection = null;
       dateInput.clear();
       _taskTEController.clear();
+      setState(() {});
     } else {
       Get.snackbar('Failed!', "Couldn't add announcement!!",
           colorText: Colors.redAccent);
