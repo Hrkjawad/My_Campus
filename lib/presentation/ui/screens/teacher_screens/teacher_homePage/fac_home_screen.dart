@@ -101,8 +101,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                 Radius.circular(ScreenUtil().setWidth(0)),
                             bottomRight:
                                 Radius.circular(ScreenUtil().setWidth(0)),
-                            topLeft:
-                                Radius.circular(ScreenUtil().setWidth(40)),
+                            topLeft: Radius.circular(ScreenUtil().setWidth(40)),
                             topRight:
                                 Radius.circular(ScreenUtil().setWidth(40)),
                           ),
@@ -225,10 +224,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     elevation: 3,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                        bottomLeft:
-                            Radius.circular(ScreenUtil().setWidth(40)),
-                        bottomRight:
-                            Radius.circular(ScreenUtil().setWidth(40)),
+                        bottomLeft: Radius.circular(ScreenUtil().setWidth(40)),
+                        bottomRight: Radius.circular(ScreenUtil().setWidth(40)),
                         topLeft: Radius.circular(ScreenUtil().setWidth(0)),
                         topRight: Radius.circular(ScreenUtil().setWidth(0)),
                       ),
@@ -342,10 +339,13 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   radius: 17,
                   backgroundColor: Colors.black,
                   child: InkWell(
-                    borderRadius:
-                        BorderRadius.circular(ScreenUtil().setWidth(20)),
+                    borderRadius: BorderRadius.circular(
+                      ScreenUtil().setWidth(20),
+                    ),
                     onTap: () {
-                      Get.to(const TeacherAddAnnouncement());
+                      Get.to(
+                        () => const TeacherAddAnnouncement(),
+                      );
                     },
                     child: CircleAvatar(
                       radius: 16,
@@ -362,7 +362,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
             ),
           ),
         ),
-        bottomNavigationBar:    const BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
       ),
     );
   }
@@ -533,7 +533,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       onLongPress: () {
         _timer.cancel();
       },
-      onLongPressEnd: (_){
+      onLongPressEnd: (_) {
         _startTimer();
       },
       child: Container(
