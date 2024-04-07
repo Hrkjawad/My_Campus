@@ -11,6 +11,7 @@ class CustomDropdownButton extends StatelessWidget {
   final double width;
   final double dropDownWidth;
 
+
   const CustomDropdownButton({
     super.key,
     required this.items,
@@ -66,9 +67,9 @@ class CustomDropdownButton extends StatelessWidget {
             buttonStyleData: ButtonStyleData(
               height: height,
               width: width,
-              padding:  EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14)),
+              padding:  EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14),),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24),),
                 border: Border.all(
                   color: const Color(0x999B9B9B),
                 ),
@@ -88,19 +89,19 @@ class CustomDropdownButton extends StatelessWidget {
               maxHeight: 350.h,
               width: dropDownWidth,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24),),
                 color: const Color(0xFFF0FFF8),
               ),
               offset: const Offset(0, 0),
               scrollbarTheme: ScrollbarThemeData(
-                radius:  Radius.circular(ScreenUtil().setWidth(40)),
+                radius:  Radius.circular(ScreenUtil().setWidth(40),),
                 thickness: MaterialStateProperty.all(6),
                 thumbVisibility: MaterialStateProperty.all(true),
               ),
             ),
             menuItemStyleData: MenuItemStyleData(
               height: 70.h,
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14)),
+              padding: EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14),),
             ),
           ),
         ),

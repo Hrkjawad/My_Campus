@@ -24,27 +24,35 @@ class CustomTextField extends StatelessWidget {
       width: width,
       child: Material(
         elevation: 3,
-        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
-        child: TextField(
+        borderRadius: BorderRadius.circular(
+          ScreenUtil().setWidth(24),
+        ),
+        child: TextFormField(
           textAlign: TextAlign.center,
           controller: controller,
           onChanged: onChanged,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle:  TextStyle(
+            hintStyle: TextStyle(
               fontSize: 24.sp,
               fontWeight: FontWeight.bold,
               color: Colors.grey,
             ),
-            contentPadding:  EdgeInsets.symmetric(horizontal: ScreenUtil().setWidth(14)),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: ScreenUtil().setWidth(14),
+            ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
+              borderRadius: BorderRadius.circular(
+                ScreenUtil().setWidth(24),
+              ),
               borderSide: const BorderSide(
                 color: Color(0x999B9B9B),
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24)),
+              borderRadius: BorderRadius.circular(
+                ScreenUtil().setWidth(24),
+              ),
               borderSide: const BorderSide(
                 color: Colors.grey,
               ),
@@ -52,11 +60,12 @@ class CustomTextField extends StatelessWidget {
             filled: true,
             fillColor: const Color(0xFFF0FFF8),
           ),
-          style:  TextStyle(
+          style: TextStyle(
             fontSize: 24.sp,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
+
         ),
       ),
     );

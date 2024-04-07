@@ -30,8 +30,17 @@ class FacAnnouncementData {
   String? announcement;
   String? batch;
   String? timestamp;
+  String? section;
+  String? date;
 
-  FacAnnouncementData({this.sId, this.email, this.announcement, this.batch, this.timestamp});
+  FacAnnouncementData(
+      {this.sId,
+      this.email,
+      this.announcement,
+      this.batch,
+      this.timestamp,
+      this.section,
+      this.date});
 
   FacAnnouncementData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -39,6 +48,8 @@ class FacAnnouncementData {
     announcement = json['announcement'];
     batch = json['batch'];
     timestamp = json['timestamp'];
+    section = json['section'];
+    date = json['date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -48,6 +59,8 @@ class FacAnnouncementData {
     data['announcement'] = announcement;
     data['batch'] = batch;
     data['timestamp'] = timestamp;
+    data['section'] = section;
+    data['date'] = date;
     return data;
   }
 }
