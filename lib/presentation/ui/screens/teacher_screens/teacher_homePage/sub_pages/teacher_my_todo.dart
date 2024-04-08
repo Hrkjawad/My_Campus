@@ -309,11 +309,11 @@ class _FacMyTodoState extends State<FacMyTodo> {
     final result = await facMyToDOController.facMyToDo(
         _todoTEController.text.trim(), _dateInputTEController.text);
     if (result) {
-      Get.snackbar('Successful!', facMyToDOController.message);
+      Get.snackbar('Successful!', 'jhg');
       _todoTEController.clear();
       _dateInputTEController.clear();
     } else {
-      Get.snackbar('Failed!', facMyToDOController.message);
+      Get.snackbar('Failed!', 'jhghjh');
     }
   }
 

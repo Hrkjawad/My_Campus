@@ -16,15 +16,18 @@ class Urls {
   static const String facultyList =
       '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
-  static const String facultySubGrpBatchSec =
-      '$_facultyBaseUrl/createSubjectGroupBatchSections/65f6cbde91159aeba9d32433';
+  static String facultySubGrpBatchSec(String id) =>
+      '$_facultyBaseUrl/createSubjectGroupBatchSections/$id';
   static String facultyAnnouncement(String task, String batch, section, date) =>
       '$_facultyBaseUrl/announcement/$task/$batch/$section/$date';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
   static String facultyMyToDo(String todo, date) =>
       '$_facultyBaseUrl/facultyMeeting/$todo/$date';
-  static String facultyDeleteMyToDo(String id) => '$_facultyBaseUrl/deleteFacultyMeeting/$id';
+  static String facultyDeleteMyToDo(String id) =>
+      '$_facultyBaseUrl/deleteFacultyMeeting/$id';
+  static String facultyDeleteAnnouncementToDo(String id) =>
+      '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
 
   static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
   static const String studentReg = '$_studentBaseUrl/Registration';

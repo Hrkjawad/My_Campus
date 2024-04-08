@@ -42,255 +42,319 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
         body: ScreenBackground(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formKey,
+          child: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Stack(
+                  Column(
                     children: [
-                      Positioned(
-                        top: 15.h,
-                        left: 20.w,
-                        child: Container(
-                          width: 380.w,
-                          height: 320.h,
-                          decoration: BoxDecoration(
-                            color: const Color(0xBBB2FF9E),
-                            border: Border.all(
-                              color: const Color(0x999B9B9B),
-                            ),
-                            borderRadius: BorderRadius.circular(20.w),
-                          ),
-                        ),
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                      Stack(
                         children: [
-                          SizedBox(
-                            height: 23.h,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                CustomTextField(
-                                  controller: _taskTEController,
-                                  hintText: 'Type Announcement',
-                                  height: 45.h,
-                                  width: 360.w,
+                          Positioned(
+                            top: 15.h,
+                            left: 20.w,
+                            child: Container(
+                              width: 380.w,
+                              height: 320.h,
+                              decoration: BoxDecoration(
+                                color: const Color(0xBBB2FF9E),
+                                border: Border.all(
+                                  color: const Color(0x999B9B9B),
                                 ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                CustomDropdownButton(
-                                  width: 360.w,
-                                  height: 45.h,
-                                  dropDownWidth: 360.w,
-                                  items: const ['56', '57', '58'],
-                                  value: selectedBatch,
-                                  hintText: 'Select Batch',
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedBatch = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                CustomDropdownButton(
-                                  width: 360.w,
-                                  height: 45.h,
-                                  dropDownWidth: 360.w,
-                                  items: const ['A', 'B', 'C'],
-                                  value: selectedSection,
-                                  hintText: 'Select Section',
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedSection = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                CustomDatePicker(
-                                  controller: dateInput,
-                                  width: 360.w,
-                                  height: 45.h,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      selectedDate = value;
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              width: 360,
-                              height: 55,
-                              child: GetBuilder<FacAnnouncementController>(
-                                builder: (facAnnouncementController) {
-                                  if (facAnnouncementController
-                                      .facAnnouncementInProgress) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(
-                                        color: Colors.teal,
-                                      ),
-                                    );
-                                  }
-                                  return ElevatedButton(
-                                    onPressed: () async {
-                                      if (_formKey.currentState!.validate() &&
-                                          selectedBatch != null &&
-                                          selectedSection != null &&
-                                          selectedDate != null) {
-                                        facAddAnnouncement(
-                                            facAnnouncementController);
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xFFF8FFAC),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50.0.w),
-                                        side: const BorderSide(
-                                          color: Color(0x999B9B9B),
-                                        ),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      'ADD',
-                                      style: TextStyle(
-                                        fontSize: 24.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  );
-                                },
+                                borderRadius: BorderRadius.circular(20.w),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 50.h,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 23.h,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(8.0.w),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    CustomTextField(
+                                      controller: _taskTEController,
+                                      hintText: 'Type Announcement',
+                                      height: 45.h,
+                                      width: 360.w,
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    CustomDropdownButton(
+                                      width: 360.w,
+                                      height: 45.h,
+                                      dropDownWidth: 360.w,
+                                      items: const ['56', '57', '58'],
+                                      value: selectedBatch,
+                                      hintText: 'Select Batch',
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedBatch = value;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    CustomDropdownButton(
+                                      width: 360.w,
+                                      height: 45.h,
+                                      dropDownWidth: 360.w,
+                                      items: const ['A', 'B', 'C'],
+                                      value: selectedSection,
+                                      hintText: 'Select Section',
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedSection = value;
+                                        });
+                                      },
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    CustomDatePicker(
+                                      controller: dateInput,
+                                      width: 360.w,
+                                      height: 45.h,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          selectedDate = value;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width: 360,
+                                  height: 55,
+                                  child: GetBuilder<FacAnnouncementController>(
+                                    builder: (facAnnouncementController) {
+                                      if (facAnnouncementController
+                                          .facAnnouncementInProgress) {
+                                        return const Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.teal,
+                                          ),
+                                        );
+                                      }
+                                      return ElevatedButton(
+                                        onPressed: () async {
+                                          if (_formKey.currentState!
+                                                  .validate() &&
+                                              selectedBatch != null &&
+                                              selectedSection != null &&
+                                              selectedDate != null) {
+                                            facAddAnnouncement(
+                                                facAnnouncementController);
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFFF8FFAC),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50.0.w),
+                                            side: const BorderSide(
+                                              color: Color(0x999B9B9B),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'ADD',
+                                          style: TextStyle(
+                                            fontSize: 24.sp,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
                           ),
                         ],
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 26.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        'Batch',
+                        style: TextStyle(
+                          color: const Color(0xFF0D6858),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                      Text(
+                        'Announcement',
+                        style: TextStyle(
+                          color: const Color(0xFF0D6858),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.sp,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 8.h,
+                  ),
                   Padding(
-                    padding: EdgeInsets.only(right: 20.0.w, left: 20.0.w),
-                    child: Column(
+                    padding: EdgeInsets.only(left: 3.0.w),
+                    child: Stack(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Batch',
-                              style: TextStyle(
-                                color: const Color(0xFF0D6858),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 26.sp,
+                        Container(
+                          width: 380.w,
+                          height: 430.h,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFF8FFAC),
+                            border: Border.all(
+                              color: const Color(0x999B9B9B),
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20.w),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 95.w,
+                          height: 430.h,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20.w),
+                              bottomLeft: Radius.circular(20.w),
+                            ),
+                            border: const Border(
+                              left: BorderSide(
+                                color: Color(0x999B9B9B),
+                              ),
+                              top: BorderSide(
+                                color: Color(0x999B9B9B),
+                              ),
+                              bottom: BorderSide(
+                                color: Color(0x999B9B9B),
                               ),
                             ),
-                            Text(
-                              'Announcements',
-                              style: TextStyle(
-                                color: const Color(0xFF0D6858),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 26.sp,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                         SizedBox(
-                          height: 20.h,
-                        ),
-                        GetBuilder<FacAnnouncementController>(
+                          width: 380.w,
+                          height: 430.h,
+                          child: GetBuilder<FacAnnouncementController>(
                             builder: (facAnnouncementController) {
-                          return SizedBox(
-                            height: 400,
-                            child: ListView.separated(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              reverse: true,
-                              itemCount: facAnnouncementController
-                                      .facAnnouncementModel.data?.length ??
-                                  0,
-                              itemBuilder: (context, index) {
-                                return ListTile(
-                                  leading: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '${facAnnouncementController.facAnnouncementModel.data![index].batch!}-${facAnnouncementController.facAnnouncementModel.data![index].section!}:  ',
+                              return ListView.separated(
+                                itemCount: facAnnouncementController
+                                        .facAnnouncementModel.data?.length ??
+                                    0,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "Delete Data",
+                                              style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                            content: Text(
+                                              "Are you sure you want to delete this data?",
+                                              style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text(
+                                                  "NO",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.green),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {},
+                                                child: Text(
+                                                  "YES",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: ListTile(
+                                      leading: Text(
+                                        '${facAnnouncementController.facAnnouncementModel.data![index].batch!}-${facAnnouncementController.facAnnouncementModel.data![index].section} :    ',
                                         style: TextStyle(
                                           color: const Color(0xFF0D6858),
                                           fontWeight: FontWeight.w500,
                                           fontSize: 20.sp,
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  title: Text(
-                                    facAnnouncementController
-                                        .facAnnouncementModel
-                                        .data![index]
-                                        .announcement!,
-                                    style: TextStyle(
-                                      color: const Color(0xFF0D6858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20.sp,
-                                      height: 2,
-                                    ),
-                                  ),
-                                  subtitle: Text(
-                                    'Date: ${facAnnouncementController.facAnnouncementModel.data![index].date!}',
-                                    style: TextStyle(
-                                      color: const Color(0xFF0D6858),
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20.sp,
-                                      height: 2,
-                                    ),
-                                  ),
-                                );
-
-                                /*Row(
-                                  children: [
-                                    Text(
-                                      '${facAnnouncementController.facAnnouncementModel.data![index].batch!} ${facAnnouncementController.facAnnouncementModel.data![index].batch!}',
-                                      style: TextStyle(
-                                        color: const Color(0xFF0D6858),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20.sp,
+                                      title: Text(
+                                        facAnnouncementController
+                                            .facAnnouncementModel
+                                            .data![index]
+                                            .announcement!,
+                                        style: TextStyle(
+                                          color: const Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20.sp,
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                        'At: ${facAnnouncementController.facAnnouncementModel.data![index].date!}',
+                                        style: TextStyle(
+                                          color: const Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20.sp,
+                                        ),
                                       ),
                                     ),
-                                    SizedBox(
-                                      width: 30.w,
-                                    ),
-                                    Text(
-                                      '${facAnnouncementController.facAnnouncementModel.data![index].announcement!} \nDate: ${facAnnouncementController.facAnnouncementModel.data![index].announcement!}',
-                                      style: TextStyle(
-                                        color: const Color(0xFF0D6858),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20.sp,
-                                        height: 2,
-                                      ),
-                                    )
-                                  ],
-                                );*/
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Divider();
-                              },
-                            ),
-                          );
-                        })
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    thickness: 1,
+                                    indent: 10,
+                                    endIndent: 10,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),

@@ -20,12 +20,12 @@ class FacCreatingSubGrpBatchSecController extends GetxController {
       _facultyCreatingSubGrpBatchSecData;
 
   Future<bool> facCreatingSubGrpBatchSec(
-      String batch, section, courseCode, courseTitle) async {
+      String batch, section, courseCode, courseTitle, id) async {
     _facCreatingSubGrpBatchSecInProgress = true;
     update();
 
     NetworkResponse response = await NetworkCaller.postRequest(
-      Urls.facultySubGrpBatchSec,
+      Urls.facultySubGrpBatchSec(id),
       {
         "batch": batch,
         "section": section,
