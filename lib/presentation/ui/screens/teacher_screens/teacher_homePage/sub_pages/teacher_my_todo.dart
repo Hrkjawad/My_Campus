@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_my_todo_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
@@ -114,9 +114,6 @@ class _FacMyTodoState extends State<FacMyTodo> {
                       ),
                       onPressed: () async {
                         if (selectedTask != null && selectedDate != null) {
-                          print(selectedTask);
-                          print(selectedDate);
-
                           facMyToDo(facMyToDOController);
                         }
                       },
@@ -141,7 +138,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
                     'Date',
                     style: TextStyle(
                       color: const Color(0xFF0D6858),
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       fontSize: 20.sp,
                     ),
                   ),
@@ -149,7 +146,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
                     'ToDo',
                     style: TextStyle(
                       color: const Color(0xFF0D6858),
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       fontSize: 20.sp,
                     ),
                   )
@@ -165,7 +162,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
                     children: [
                       Container(
                         width: 380.w,
-                        height: 500.h,
+                        height: 480.h,
                         decoration: BoxDecoration(
                           color: const Color(0xFFF8FFAC),
                           border: Border.all(
@@ -177,8 +174,8 @@ class _FacMyTodoState extends State<FacMyTodo> {
                         ),
                       ),
                       Container(
-                        width: 105.w,
-                        height: 500.h,
+                        width: 108.w,
+                        height: 480.h,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.only(
@@ -199,42 +196,100 @@ class _FacMyTodoState extends State<FacMyTodo> {
                         ),
                       ),
                       SizedBox(
-                        height: 500.h,
+                        height: 478.h,
                         width: 380.w,
                         child: GetBuilder<FacMyToDOController>(
-                            builder: (facMyToDOController) {
-                          return ListView.separated(
-                            reverse: true,
-                            itemCount: facMyToDOController
-                                    .facMyToDoModel.data?.length ??
-                                0,
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                leading: Text(
-                                  facMyToDOController
-                                      .facMyToDoModel.data![index].date!,
-                                  style: TextStyle(
-                                    color: const Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 16.sp,
+                          builder: (facMyToDOController) {
+                            return ListView.separated(
+                              itemCount: facMyToDOController
+                                      .facMyToDoModel.data?.length ??
+                                  0,
+                              itemBuilder: (context, index) {
+                                return InkWell(
+                                  onLongPress: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                            "Delete Data",
+                                            style: TextStyle(
+                                                fontSize: 24.sp,
+                                                fontWeight: FontWeight.w900),
+                                          ),
+                                          content: Text(
+                                            "Are you sure you want to delete this data?",
+                                            style: TextStyle(
+                                                fontSize: 20.sp,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                "NO",
+                                                style: TextStyle(
+                                                    fontSize: 18.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.green),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                /*facMyToDOController
+                                                    .facDeleteMyToDo(
+                                                        facMyToDOController
+                                                            .facMyToDoModel
+                                                            .data![index]
+                                                            .sId!);*/
+                                              },
+                                              child: Text(
+                                                "YES",
+                                                style: TextStyle(
+                                                    fontSize: 18.sp,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Colors.red),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: ListTile(
+                                    leading: Text(
+                                      facMyToDOController
+                                          .facMyToDoModel.data![index].date!,
+                                      style: TextStyle(
+                                        color: const Color(0xFF0D6858),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      facMyToDOController
+                                          .facMyToDoModel.data![index].title!,
+                                      style: TextStyle(
+                                        color: const Color(0xFF0D6858),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 20.sp,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                title: Text(
-                                  facMyToDOController
-                                      .facMyToDoModel.data![index].title!,
-                                  style: TextStyle(
-                                    color: const Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 20.sp,
-                                  ),
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) {
-                              return const Divider();
-                            },
-                          );
-                        }),
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const Divider(
+                                  thickness: 1,
+                                  indent: 10,
+                                  endIndent: 10,
+                                );
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
@@ -243,7 +298,9 @@ class _FacMyTodoState extends State<FacMyTodo> {
             ],
           ),
         ),
-        bottomNavigationBar: const BottomNav(home: FacHomeScreen()),
+        bottomNavigationBar: const BottomNav(
+          home: FacHomeScreen(),
+        ),
       ),
     );
   }
@@ -259,4 +316,48 @@ class _FacMyTodoState extends State<FacMyTodo> {
       Get.snackbar('Failed!', facMyToDOController.message);
     }
   }
+
+/*  Future<void> deleteDataRow(FacMyToDOController facMyToDOController) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            "Delete Data",
+            style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900),
+          ),
+          content: Text(
+            "Are you sure you want to delete this data?",
+            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "NO",
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.green),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                facMyToDOController.facDeleteMyToDo(facMyToDOController.facMyToDoModel.data!);
+              },
+              child: Text(
+                "YES",
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.red),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }*/
 }
