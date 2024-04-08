@@ -7,12 +7,12 @@ import '../../../data/utility/urls.dart';
 
 class FacMyToDOController extends GetxController {
   bool _facMyToDoInProgress = false;
-  String _message = '';
+  //String _message = '';
   FacMyToDoModel _facMyToDoModel = FacMyToDoModel();
   FacDeleteMyToDoModel _facDeleteMyToDoModel = FacDeleteMyToDoModel();
 
   bool get facMyToDoInProgress => _facMyToDoInProgress;
-  String get message => _message;
+  //String get message => _message;
   FacMyToDoModel get facMyToDoModel => _facMyToDoModel;
   FacDeleteMyToDoModel get facDeleteMyToDoModel => _facDeleteMyToDoModel;
 
@@ -26,10 +26,8 @@ class FacMyToDOController extends GetxController {
     update();
     if (response.isSuccess) {
       _facMyToDoModel = FacMyToDoModel.fromJson(response.responseJson!);
-      //_message = 'Todo added';
       return true;
     } else {
-      //_message = "Couldn't add todo";
       return false;
     }
   }
