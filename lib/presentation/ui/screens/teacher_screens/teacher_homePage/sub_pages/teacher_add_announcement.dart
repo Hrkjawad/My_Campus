@@ -228,7 +228,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        '${facAnnouncementController.facAnnouncementModel.data![index].batch!}-${facAnnouncementController.facAnnouncementModel.data![index].batch!}:  ',
+                                        '${facAnnouncementController.facAnnouncementModel.data![index].batch!}-${facAnnouncementController.facAnnouncementModel.data![index].section!}:  ',
                                         style: TextStyle(
                                           color: const Color(0xFF0D6858),
                                           fontWeight: FontWeight.w500,
@@ -250,7 +250,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                     ),
                                   ),
                                   subtitle: Text(
-                                    'Date: ${facAnnouncementController.facAnnouncementModel.data![index].announcement!}',
+                                    'Date: ${facAnnouncementController.facAnnouncementModel.data![index].date!}',
                                     style: TextStyle(
                                       color: const Color(0xFF0D6858),
                                       fontWeight: FontWeight.w500,
@@ -308,7 +308,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
     final result = await facAnnouncementController.facAnnouncement(
       _taskTEController.text.trim(),
       selectedBatch.toString(),
-      selectedBatch.toString(),
+      selectedSection.toString(),
       selectedDate.toString(),
     );
     if (result) {
