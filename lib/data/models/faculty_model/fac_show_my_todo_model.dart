@@ -1,15 +1,15 @@
-class FacMyToDoModel {
+class FacShowMyToDoModel {
   String? status;
-  List<FacMyToDoData>? data;
+  List<FacShowMyToDoData>? data;
 
-  FacMyToDoModel({this.status, this.data});
+  FacShowMyToDoModel({this.status, this.data});
 
-  FacMyToDoModel.fromJson(Map<String, dynamic> json) {
+  FacShowMyToDoModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     if (json['data'] != null) {
-      data = <FacMyToDoData>[];
+      data = <FacShowMyToDoData>[];
       json['data'].forEach((v) {
-        data!.add(FacMyToDoData.fromJson(v));
+        data!.add(FacShowMyToDoData.fromJson(v));
       });
     }
   }
@@ -24,16 +24,17 @@ class FacMyToDoModel {
   }
 }
 
-class FacMyToDoData {
+class FacShowMyToDoData {
   String? sId;
   String? email;
   String? title;
   String? date;
   String? timestamp;
 
-  FacMyToDoData({this.sId, this.email, this.title, this.date, this.timestamp});
+  FacShowMyToDoData(
+      {this.sId, this.email, this.title, this.date, this.timestamp});
 
-  FacMyToDoData.fromJson(Map<String, dynamic> json) {
+  FacShowMyToDoData.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
     email = json['email'];
     title = json['title'];

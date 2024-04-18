@@ -27,6 +27,14 @@ class _FacMyTodoState extends State<FacMyTodo> {
   //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<FacMyToDoController>().facShowMyToDo();
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customisedAppBar(scaffoldKey),
@@ -94,9 +102,9 @@ class _FacMyTodoState extends State<FacMyTodo> {
               SizedBox(
                 width: 380.w,
                 //height: 58.h,
-                child: GetBuilder<FacMyToDOController>(
-                  builder: (facMyToDOController) {
-                    if (facMyToDOController.facMyToDoInProgress) {
+                child: GetBuilder<FacMyToDoController>(
+                  builder: (facMyToDoController) {
+                    if (facMyToDoController.facMyToDoInProgress) {
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.teal,
@@ -114,7 +122,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
                       ),
                       onPressed: () async {
                         if (selectedTask != null && selectedDate != null) {
-                          facMyToDo(facMyToDOController);
+                          facAddMyToDo(facMyToDoController);
                         }
                       },
                       child: Text(
@@ -198,11 +206,11 @@ class _FacMyTodoState extends State<FacMyTodo> {
                       SizedBox(
                         height: 478.h,
                         width: 380.w,
-                        child: GetBuilder<FacMyToDOController>(
-                          builder: (facMyToDOController) {
+                        child: GetBuilder<FacMyToDoController>(
+                          builder: (facShowMyToDoController) {
                             return ListView.separated(
-                              itemCount: facMyToDOController
-                                      .facMyToDoModel.data?.length ??
+                              itemCount: facShowMyToDoController
+                                      .facShowMyToDoModel.data?.length ??
                                   0,
                               itemBuilder: (context, index) {
                                 return InkWell(
@@ -260,8 +268,8 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                   },
                                   child: ListTile(
                                     leading: Text(
-                                      facMyToDOController
-                                          .facMyToDoModel.data![index].date!,
+                                      facShowMyToDoController.facShowMyToDoModel
+                                          .data![index].date!,
                                       style: TextStyle(
                                         color: const Color(0xFF0D6858),
                                         fontWeight: FontWeight.w500,
@@ -269,8 +277,8 @@ class _FacMyTodoState extends State<FacMyTodo> {
                                       ),
                                     ),
                                     title: Text(
-                                      facMyToDOController
-                                          .facMyToDoModel.data![index].title!,
+                                      facShowMyToDoController.facShowMyToDoModel
+                                          .data![index].title!,
                                       style: TextStyle(
                                         color: const Color(0xFF0D6858),
                                         fontWeight: FontWeight.w500,
@@ -305,15 +313,16 @@ class _FacMyTodoState extends State<FacMyTodo> {
     );
   }
 
-  Future<void> facMyToDo(FacMyToDOController facMyToDOController) async {
-    final result = await facMyToDOController.facMyToDo(
+  Future<void> facAddMyToDo(FacMyToDoController facAddMyToDoController) async {
+    final result = await facAddMyToDoController.facAddMyToDo(
         _todoTEController.text.trim(), _dateInputTEController.text);
     if (result) {
-      Get.snackbar('Successful!', 'jhg');
+      Get.snackbar('Successful!', 'My todo added');
       _todoTEController.clear();
       _dateInputTEController.clear();
+      facAddMyToDoController.facShowMyToDo();
     } else {
-      Get.snackbar('Failed!', 'jhghjh');
+      Get.snackbar('Failed!', "Couldn't added my todo");
     }
   }
 
