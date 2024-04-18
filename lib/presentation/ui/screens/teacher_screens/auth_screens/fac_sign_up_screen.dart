@@ -5,9 +5,9 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_otp_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
-import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
+import '../../../widgets/new_confirm_password_text_field.dart';
 import '../../../widgets/customised_elevated_button.dart';
 
 class FacSignUpScreen extends StatefulWidget {
@@ -39,7 +39,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                   const TitleAndSubtitle(
                       title: 'SIGN UP', subtitle: 'Join as a Faculty'),
                   const AppLogo(),
-                   SizedBox(
+                  SizedBox(
                     height: 77.h,
                   ),
                   SizedBox(
@@ -61,23 +61,17 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                       },
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 12.h,
                   ),
-                  PasswordTextField(
-                    emailTEController: _newPassTEController,
+                  NewAndConfirmPasswordTextField(
+                    passwordTEController: _newPassTEController,
+                    confirmPasswordTEController: _confirmPassTEController,
                     isObscure: true,
-                    hintText: 'New Password',
+                    password: 'Password',
+                    confirmPassword: 'Confirm Password',
                   ),
-                   SizedBox(
-                    height: 12.h,
-                  ),
-                  PasswordTextField(
-                    emailTEController: _confirmPassTEController,
-                    isObscure: true,
-                    hintText: 'Confirm Password',
-                  ),
-                   SizedBox(
+                  SizedBox(
                     height: 42.h,
                   ),
                   GetBuilder<FacVerifyOTPController>(
@@ -93,8 +87,10 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
                         builder: (facSignUpController) {
                           return CustomisedElevatedButton(
                             onTap: () async {
-                              verifyOTP(
-                                  facVerifyOTPController, facSignUpController);
+                              if (_formKey.currentState!.validate()) {
+                                verifyOTP(facVerifyOTPController,
+                                    facSignUpController);
+                              }
                             },
                             text: 'SIGN UP',
                           );
@@ -126,8 +122,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
     }
   }
 
-  Future<void> changePassword(
-      FacSignUpController facSignUpController) async {
+  Future<void> changePassword(FacSignUpController facSignUpController) async {
     final result = await facSignUpController.facSignUp(
       widget.email,
       _otpTEController.text.trim(),
@@ -136,7 +131,7 @@ class _FacSignUpScreenState extends State<FacSignUpScreen> {
     if (result) {
       Get.snackbar('Successful!', facSignUpController.message);
       Get.to(
-            () => const FacSignInScreen(),
+        () => const FacSignInScreen(),
       );
     } else {
       Get.snackbar('Failed!', facSignUpController.message,

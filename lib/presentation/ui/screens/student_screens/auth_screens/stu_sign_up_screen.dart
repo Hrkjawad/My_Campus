@@ -65,7 +65,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
                     height: 12.h,
                   ),
                   PasswordTextField(
-                    emailTEController: _newPassTEController,
+                    passwordTEController: _newPassTEController,
                     isObscure: true,
                     hintText: 'New Password',
                   ),
@@ -73,7 +73,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
                     height: 12.h,
                   ),
                   PasswordTextField(
-                    emailTEController: _confirmPassTEController,
+                    passwordTEController: _confirmPassTEController,
                     isObscure: true,
                     hintText: 'Confirm Password',
                   ),

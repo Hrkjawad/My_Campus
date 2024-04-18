@@ -39,11 +39,14 @@ class _FacAvailabilityCheckScreenState
                   subtitle: 'Join as a Faculty',
                 ),
                 const AppLogo(),
-                 SizedBox(
+                SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your teacher email",),
-                 SizedBox(
+                TextFieldWithTrailing(
+                  emailTEController: _emailTEController,
+                  hintText: "Email",
+                ),
+                SizedBox(
                   height: 47.h,
                 ),
                 GetBuilder<FacAvailabilityCheckingController>(
@@ -67,7 +70,7 @@ class _FacAvailabilityCheckScreenState
                     );
                   },
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 30.h,
                 ),
                 CustomisedTextButton(
@@ -101,6 +104,7 @@ class _FacAvailabilityCheckScreenState
         ),
       );
     } else {
+      _emailTEController.clear();
       Get.snackbar('Failed!', facAvailabilityCheckingController.message,
           colorText: Colors.redAccent);
     }

@@ -21,7 +21,6 @@ class FacPasswordChangeScreen extends StatefulWidget {
 
 class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
   final TextEditingController _newPassTEController = TextEditingController();
-  final TextEditingController _confirmTEController = TextEditingController();
   final TextEditingController _otpTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -38,7 +37,7 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                   const TitleAndSubtitle(
                       title: 'CHANGE', subtitle: 'Set your password'),
                   const AppLogo(),
-                   SizedBox(
+                  SizedBox(
                     height: 76.h,
                   ),
                   SizedBox(
@@ -57,21 +56,16 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                       },
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 13.h,
                   ),
                   PasswordTextField(
-                    emailTEController: _newPassTEController,
+                    passwordTEController: _newPassTEController,
                     isObscure: true,
                     hintText: 'New Password',
                   ),
                   SizedBox(
                     height: 13.h,
-                  ),
-                  PasswordTextField(
-                    emailTEController: _confirmTEController,
-                    isObscure: true,
-                    hintText: 'Confirm Password',
                   ),
                   SizedBox(
                     height: 40.h,

@@ -37,19 +37,22 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                 const TitleAndSubtitle(
                     title: 'SIGN IN', subtitle: 'Faculty Member'),
                 const AppLogo(),
-                 SizedBox(
+                SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your teacher email"'',),
-                 SizedBox(
+                TextFieldWithTrailing(
+                  emailTEController: _emailTEController,
+                  hintText: 'Email',
+                ),
+                SizedBox(
                   height: 12.h,
                 ),
                 PasswordTextField(
-                  emailTEController: _passTEController,
+                  passwordTEController: _passTEController,
                   isObscure: true,
                   hintText: 'Password',
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 30.h,
                 ),
                 GetBuilder<FacSignInController>(
@@ -74,7 +77,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                     );
                   },
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 34.h,
                 ),
                 CustomisedTextButton(

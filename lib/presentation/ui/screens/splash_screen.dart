@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_campus/presentation/ui/screens/home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_home_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => const FacSignInScreen(),
+              builder: (context) => const HomeScreen(),
             ),
             (route) => false);
       }

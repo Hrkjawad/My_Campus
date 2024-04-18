@@ -34,11 +34,14 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                     title: 'RECOVERY',
                     subtitle: 'A code will be send to your email'),
                 const AppLogo(),
-                 SizedBox(
+                SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your teacher email"'',),
-                 SizedBox(
+                TextFieldWithTrailing(
+                  emailTEController: _emailTEController,
+                  hintText: 'Email',
+                ),
+                SizedBox(
                   height: 40.h,
                 ),
                 GetBuilder<FacVerifyEmailController>(

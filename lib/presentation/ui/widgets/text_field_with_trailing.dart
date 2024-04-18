@@ -4,12 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class TextFieldWithTrailing extends StatelessWidget {
   const TextFieldWithTrailing({
     super.key,
-    required TextEditingController emailTEController, required this.hintText,
+    required TextEditingController emailTEController,
+    required this.hintText,
   }) : _emailTEController = emailTEController;
 
   final TextEditingController _emailTEController;
   final String hintText;
-
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TextFieldWithTrailing extends StatelessWidget {
                 height: 59.h,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius:  BorderRadius.only(
+                  borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(ScreenUtil().setWidth(0)),
                     topRight: Radius.circular(ScreenUtil().setWidth(21)),
                     bottomLeft: Radius.circular(ScreenUtil().setWidth(0)),
@@ -39,7 +39,7 @@ class TextFieldWithTrailing extends StatelessWidget {
                     color: const Color(0x999B9B9B),
                   ),
                 ),
-                child:  Center(
+                child: Center(
                   child: Text(
                     '@lus.ac.bd',
                     style: TextStyle(

@@ -26,7 +26,7 @@ class TitleAndSubtitle extends StatelessWidget {
            subtitle,
             style: TextStyle(
               fontSize: 19.sp,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
               color: const Color(0xFF585858),
             ),
           ),

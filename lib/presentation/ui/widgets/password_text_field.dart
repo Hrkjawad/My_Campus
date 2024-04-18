@@ -4,10 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class PasswordTextField extends StatefulWidget {
   PasswordTextField({
     super.key,
-    required TextEditingController emailTEController,
+    required TextEditingController passwordTEController,
     required this.isObscure,
     required this.hintText,
-  }) : _passwordTEController = emailTEController;
+  }) : _passwordTEController = passwordTEController;
 
   final TextEditingController _passwordTEController;
   final String hintText;
@@ -38,7 +38,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                 ? Icons.visibility_off_outlined
                 : Icons.visibility_outlined),
           ),
-          errorStyle:  TextStyle(
+          errorStyle: TextStyle(
             color: Colors.red,
             fontWeight: FontWeight.bold,
             fontSize: 15.sp,
@@ -48,7 +48,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           if (value!.length < 6) {
             return 'Password too short';
           }
-
           return null;
         },
       ),

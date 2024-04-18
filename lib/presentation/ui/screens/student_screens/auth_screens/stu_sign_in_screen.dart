@@ -45,7 +45,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                   height: 12.h,
                 ),
                 PasswordTextField(
-                  emailTEController: _passTEController,
+                  passwordTEController: _passTEController,
                   isObscure: true,
                   hintText: 'Confirm Password',
                 ),
