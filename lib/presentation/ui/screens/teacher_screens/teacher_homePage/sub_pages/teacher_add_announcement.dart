@@ -29,7 +29,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<FacAnnouncementController>().facAnnouncementModel.data;
+      Get.find<FacAnnouncementController>().facShowAnnouncement();
     });
     super.initState();
   }
@@ -262,7 +262,9 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                             builder: (facAnnouncementController) {
                               return ListView.separated(
                                 itemCount: facAnnouncementController
-                                        .facAnnouncementModel.data?.length ??
+                                        .facShowAnnouncementModel
+                                        .data
+                                        ?.length ??
                                     0,
                                 itemBuilder: (context, index) {
                                   return InkWell(
@@ -315,7 +317,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                     },
                                     child: ListTile(
                                       leading: Text(
-                                        '${facAnnouncementController.facAnnouncementModel.data![index].batch!}-${facAnnouncementController.facAnnouncementModel.data![index].section} :    ',
+                                        '${facAnnouncementController.facShowAnnouncementModel.data![index].batch!}-${facAnnouncementController.facShowAnnouncementModel.data![index].section}       ',
                                         style: TextStyle(
                                           color: const Color(0xFF0D6858),
                                           fontWeight: FontWeight.w500,
@@ -324,7 +326,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                       ),
                                       title: Text(
                                         facAnnouncementController
-                                            .facAnnouncementModel
+                                            .facShowAnnouncementModel
                                             .data![index]
                                             .announcement!,
                                         style: TextStyle(
@@ -334,7 +336,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                                         ),
                                       ),
                                       subtitle: Text(
-                                        'At: ${facAnnouncementController.facAnnouncementModel.data![index].date!}',
+                                        'At: ${facAnnouncementController.facShowAnnouncementModel.data![index].date!}',
                                         style: TextStyle(
                                           color: const Color(0xFF0D6858),
                                           fontWeight: FontWeight.w500,
@@ -369,11 +371,11 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
 
   Future<void> facAddAnnouncement(
       FacAnnouncementController facAnnouncementController) async {
-    final result = await facAnnouncementController.facAnnouncement(
+    final result = await facAnnouncementController.facAddAnnouncement(
       _taskTEController.text.trim(),
-      selectedBatch.toString(),
-      selectedSection.toString(),
-      selectedDate.toString(),
+      selectedBatch,
+      selectedSection,
+      selectedDate,
     );
     if (result) {
       Get.snackbar('Successful!', 'Announcement has been added');
@@ -382,6 +384,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
       dateInput.clear();
       _taskTEController.clear();
       setState(() {});
+      facAnnouncementController.facShowAnnouncement();
     } else {
       Get.snackbar('Failed!', "Couldn't add announcement!!",
           colorText: Colors.redAccent);
