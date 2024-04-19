@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -429,7 +430,10 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       foregroundColor: const Color(0x999B9B9B),
                     ),
                     onPressed: () {
-                      if (selectedBatch != null && selectedCourse != null) {
+                      Get.to(
+                        () => const FacChatScreen(),
+                      );
+                      /*if (selectedBatch != null && selectedCourse != null) {
                         setState(() {
                           tableData.add({
                             'Batch': selectedBatch!,
@@ -438,7 +442,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                           selectedBatch = null;
                           selectedCourse = null;
                         });
-                      }
+                      }*/
                     },
                     child: const Text(
                       "ADD",
