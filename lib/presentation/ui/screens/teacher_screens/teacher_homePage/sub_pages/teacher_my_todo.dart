@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import 'package:my_campus/presentation/ui/widgets/table_title.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/fac_drawer_method.dart';
@@ -45,124 +46,8 @@ class _FacMyTodoState extends State<FacMyTodo> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                height: 23.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "TITLE       :  ",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomTextField(
-                    controller: _todoTEController,
-                    hintText: 'My todo',
-                    height: 44.50.h,
-                    width: 258.w,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedTask = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "DATE        :  ",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomDatePicker(
-                    controller: _dateInputTEController,
-                    width: 258.w,
-                    height: 44.50.h,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedDate = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              SizedBox(
-                width: 380.w,
-                //height: 58.h,
-                child: GetBuilder<FacMyToDoController>(
-                  builder: (facMyToDoController) {
-                    if (facMyToDoController.facMyToDoInProgress) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.teal,
-                        ),
-                      );
-                    }
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0.w),
-                          side: const BorderSide(
-                            color: Color(0x999B9B9B),
-                          ),
-                        ),
-                      ),
-                      onPressed: () async {
-                        if (selectedTask != null && selectedDate != null) {
-                          facAddMyToDo(facMyToDoController);
-                        }
-                      },
-                      child: Text(
-                        "ADD",
-                        style: TextStyle(
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 26.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'Date',
-                    style: TextStyle(
-                      color: const Color(0xFF0D6858),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
-                    ),
-                  ),
-                  Text(
-                    'ToDo',
-                    style: TextStyle(
-                      color: const Color(0xFF0D6858),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
+              addToDoMethod,
+              const TableTitle(title1: 'Date', title2: 'ToDo'),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 3.0.w),
@@ -203,100 +88,128 @@ class _FacMyTodoState extends State<FacMyTodo> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 478.h,
-                        width: 380.w,
-                        child: GetBuilder<FacMyToDoController>(
-                          builder: (facShowMyToDoController) {
-                            return ListView.separated(
-                              itemCount: facShowMyToDoController
-                                      .facShowMyToDoModel.data?.length ??
-                                  0,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                  onLongPress: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            "Delete Data",
-                                            style: TextStyle(
-                                                fontSize: 24.sp,
-                                                fontWeight: FontWeight.w900),
-                                          ),
-                                          content: Text(
-                                            "Are you sure you want to delete this data?",
-                                            style: TextStyle(
-                                                fontSize: 20.sp,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text(
-                                                "NO",
-                                                style: TextStyle(
-                                                    fontSize: 18.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.green),
-                                              ),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {
-                                                /*facMyToDOController
-                                                    .facDeleteMyToDo(
-                                                        facMyToDOController
-                                                            .facMyToDoModel
-                                                            .data![index]
-                                                            .sId!);*/
-                                              },
-                                              child: Text(
-                                                "YES",
-                                                style: TextStyle(
-                                                    fontSize: 18.sp,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.red),
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: ListTile(
-                                    leading: Text(
-                                      facShowMyToDoController.facShowMyToDoModel
-                                          .data![index].date!,
-                                      style: TextStyle(
-                                        color: const Color(0xFF0D6858),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16.sp,
-                                      ),
-                                    ),
-                                    title: Text(
-                                      facShowMyToDoController.facShowMyToDoModel
-                                          .data![index].title!,
-                                      style: TextStyle(
-                                        color: const Color(0xFF0D6858),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 20.sp,
-                                      ),
-                                    ),
+                      RefreshIndicator(
+                        onRefresh: () async {
+                          Get.find<FacMyToDoController>().facShowMyToDo();
+                        },
+                        child: SizedBox(
+                          height: 478.h,
+                          width: 380.w,
+                          child: GetBuilder<FacMyToDoController>(
+                            builder: (facShowMyToDoController) {
+                              if (facShowMyToDoController
+                                  .facShowMyToDoInProgress) {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.teal,
                                   ),
                                 );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const Divider(
-                                  thickness: 1,
-                                  indent: 10,
-                                  endIndent: 10,
+                              }
+                              if (facShowMyToDoController
+                                      .facShowMyToDoModel.data?.isEmpty ??
+                                  true) {
+                                return const Center(
+                                  child: Text('Nothing to show'),
                                 );
-                              },
-                            );
-                          },
+                              }
+                              return ListView.separated(
+                                itemCount: facShowMyToDoController
+                                        .facShowMyToDoModel.data?.length ??
+                                    0,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onLongPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                              "Delete Data",
+                                              style: TextStyle(
+                                                  fontSize: 24.sp,
+                                                  fontWeight: FontWeight.w900),
+                                            ),
+                                            content: Text(
+                                              "Are you sure you want to delete this data?",
+                                              style: TextStyle(
+                                                  fontSize: 20.sp,
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: Text(
+                                                  "NO",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.green),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.find<
+                                                          FacMyToDoController>()
+                                                      .facDeleteMyToDo(
+                                                          facShowMyToDoController
+                                                              .facShowMyToDoModel
+                                                              .data![index]
+                                                              .sId!);
+                                                  Get.back();
+                                                },
+                                                child: Text(
+                                                  "YES",
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.red),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: ListTile(
+                                      leading: Text(
+                                        facShowMyToDoController
+                                            .facShowMyToDoModel
+                                            .data![index]
+                                            .date!,
+                                        style: TextStyle(
+                                          color: const Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                      title: Text(
+                                        facShowMyToDoController
+                                            .facShowMyToDoModel
+                                            .data![index]
+                                            .title!,
+                                        style: TextStyle(
+                                          color: const Color(0xFF0D6858),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 20.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const Divider(
+                                    thickness: 1,
+                                    indent: 10,
+                                    endIndent: 10,
+                                  );
+                                },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ],
@@ -313,6 +226,104 @@ class _FacMyTodoState extends State<FacMyTodo> {
     );
   }
 
+  Column get addToDoMethod {
+    return Column(
+      children: [
+        SizedBox(
+          height: 23.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "TITLE       :  ",
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            CustomTextField(
+              controller: _todoTEController,
+              hintText: 'My todo',
+              height: 44.50.h,
+              width: 258.w,
+              onChanged: (value) {
+                setState(() {
+                  selectedTask = value;
+                });
+              },
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "DATE        :  ",
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            CustomDatePicker(
+              controller: _dateInputTEController,
+              width: 258.w,
+              height: 44.50.h,
+              onChanged: (value) {
+                setState(() {
+                  selectedDate = value;
+                });
+              },
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20.h,
+        ),
+        SizedBox(
+          width: 380.w,
+          //height: 58.h,
+          child: GetBuilder<FacMyToDoController>(
+            builder: (facMyToDoController) {
+              if (facMyToDoController.facAddMyToDoInProgress) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.teal,
+                  ),
+                );
+              }
+              return ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0.w),
+                    side: const BorderSide(
+                      color: Color(0x999B9B9B),
+                    ),
+                  ),
+                ),
+                onPressed: () async {
+                  if (selectedTask != null && selectedDate != null) {
+                    facAddMyToDo(facMyToDoController);
+                  }
+                },
+                child: Text(
+                  "ADD",
+                  style: TextStyle(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<void> facAddMyToDo(FacMyToDoController facAddMyToDoController) async {
     final result = await facAddMyToDoController.facAddMyToDo(
         _todoTEController.text.trim(), _dateInputTEController.text);
@@ -325,48 +336,4 @@ class _FacMyTodoState extends State<FacMyTodo> {
       Get.snackbar('Failed!', "Couldn't added my todo");
     }
   }
-
-/*  Future<void> deleteDataRow(FacMyToDOController facMyToDOController) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(
-            "Delete Data",
-            style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w900),
-          ),
-          content: Text(
-            "Are you sure you want to delete this data?",
-            style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                "NO",
-                style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.green),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                facMyToDOController.facDeleteMyToDo(facMyToDOController.facMyToDoModel.data!);
-              },
-              child: Text(
-                "YES",
-                style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.red),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }*/
 }

@@ -7,27 +7,29 @@ import 'package:my_campus/data/services/network_caller.dart';
 import '../../../data/utility/urls.dart';
 
 class FacMyToDoController extends GetxController {
-  bool _facMyToDoInProgress = false;
+  bool _facAddMyToDoInProgress = false;
+  bool _facShowMyToDoInProgress = false;
   //String _message = '';
   FacAddMyToDoModel _facAddMyToDoModel = FacAddMyToDoModel();
   FacShowMyToDoModel _facShowMyToDoModel = FacShowMyToDoModel();
   FacDeleteMyToDoModel _facDeleteMyToDoModel = FacDeleteMyToDoModel();
 
-  bool get facMyToDoInProgress => _facMyToDoInProgress;
+  bool get facAddMyToDoInProgress => _facAddMyToDoInProgress;
+  bool get facShowMyToDoInProgress => _facShowMyToDoInProgress;
   //String get message => _message;
   FacAddMyToDoModel get facAddMyToDoModel => _facAddMyToDoModel;
   FacShowMyToDoModel get facShowMyToDoModel => _facShowMyToDoModel;
   FacDeleteMyToDoModel get facDeleteMyToDoModel => _facDeleteMyToDoModel;
 
   Future<bool> facAddMyToDo(String todo, date) async {
-    _facMyToDoInProgress = true;
+    _facAddMyToDoInProgress = true;
     update();
     NetworkResponse response =
         await NetworkCaller.postRequest(Urls.facultyAddMyToDo, {
       "title": todo,
       "date": date,
     });
-    _facMyToDoInProgress = false;
+    _facAddMyToDoInProgress = false;
     update();
     if (response.isSuccess) {
       _facAddMyToDoModel = FacAddMyToDoModel.fromJson(response.responseJson!);
@@ -38,11 +40,11 @@ class FacMyToDoController extends GetxController {
   }
 
   Future<bool> facShowMyToDo() async {
-    _facMyToDoInProgress = true;
+    _facShowMyToDoInProgress = true;
     update();
     NetworkResponse response =
         await NetworkCaller.getRequest(Urls.facultyShowMyToDo);
-    _facMyToDoInProgress = false;
+    _facShowMyToDoInProgress = false;
     update();
     if (response.isSuccess) {
       _facShowMyToDoModel = FacShowMyToDoModel.fromJson(response.responseJson!);
@@ -53,13 +55,13 @@ class FacMyToDoController extends GetxController {
   }
 
   Future<bool> facDeleteMyToDo(String id) async {
-    _facMyToDoInProgress = true;
-    update();
+    /*_facAddMyToDoInProgress = true;
+    update();*/
     NetworkResponse response = await NetworkCaller.getRequest(
       Urls.facultyDeleteMyToDo(id),
     );
-    _facMyToDoInProgress = false;
-    update();
+    /*_facAddMyToDoInProgress = false;
+    update();*/
     if (response.isSuccess) {
       _facDeleteMyToDoModel =
           FacDeleteMyToDoModel.fromJson(response.responseJson!);
