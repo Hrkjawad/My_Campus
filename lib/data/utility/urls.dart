@@ -18,8 +18,11 @@ class Urls {
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
   static String facultySubGrpBatchSec(String id) =>
       '$_facultyBaseUrl/createSubjectGroupBatchSections/$id';
-  static String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
-  static String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
+  static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
+  static const String facultyShowAnnouncement =
+      '$_facultyBaseUrl/showAnnouncement';
+  static String facultyDeleteAnnouncement(String id) =>
+      '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
   static String facultyAddMyToDo = '$_facultyBaseUrl/facultyMeeting';
