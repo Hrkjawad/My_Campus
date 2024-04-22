@@ -38,18 +38,21 @@ class _FacMyTodoState extends State<FacMyTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(context),
+      appBar: customisedAppBar(scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
         body: ScreenBackground(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              addToDoMethod,
-              const TableTitle(title1: 'Date', title2: 'ToDo'),
-              showTable(),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                addToDoMethod,
+                const TableTitle(title1: 'Date', title2: 'ToDo'),
+                showTable(),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: const BottomNav(

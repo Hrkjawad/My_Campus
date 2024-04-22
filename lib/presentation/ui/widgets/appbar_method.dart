@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
-import '../screens/student_screens/student_homePage/stu_home_screen.dart';
 import 'app_logo.dart';
 
-AppBar customisedAppBar(BuildContext context) {
+AppBar customisedAppBar(
+    GlobalKey<ScaffoldState> scaffoldKey, BuildContext context) {
   return AppBar(
     automaticallyImplyLeading: false,
     backgroundColor: Colors.white,

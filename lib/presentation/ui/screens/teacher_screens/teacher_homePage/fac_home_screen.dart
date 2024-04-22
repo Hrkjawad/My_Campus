@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_announcement.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
@@ -73,7 +73,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: //customisedAppBar(scaffoldKey),
-          customisedAppBar(context),
+          customisedAppBar(scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -360,7 +360,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     ),
                     onTap: () {
                       Get.to(
-                        () => const TeacherAddAnnouncement(),
+                        () => const FacAnnouncementScreen(),
                       );
                     },
                     child: CircleAvatar(

@@ -10,14 +10,14 @@ import '../../../../widgets/fac_drawer_method.dart';
 import '../../../../widgets/table_title.dart';
 import '../../../../widgets/text_fields.dart';
 
-class TeacherAddAnnouncement extends StatefulWidget {
-  const TeacherAddAnnouncement({super.key});
+class FacAnnouncementScreen extends StatefulWidget {
+  const FacAnnouncementScreen({super.key});
 
   @override
-  State<TeacherAddAnnouncement> createState() => _TeacherAddAnnouncementState();
+  State<FacAnnouncementScreen> createState() => _FacAnnouncementScreenState();
 }
 
-class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
+class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   String? selectedDate, selectedAnnouncement, selectedBatch, selectedSection;
@@ -38,7 +38,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(context),
+      appBar: customisedAppBar(scaffoldKey, context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
