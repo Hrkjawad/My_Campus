@@ -97,6 +97,23 @@ class _FacChatScreenState extends State<FacChatScreen> {
         text: 'asho kotha boli amra',
         date: DateTime.now().subtract(const Duration(minutes: 1)),
         isSentByMe: false),
+    Message(
+        text: 'Hii...',
+        date: DateTime.now().add(Duration(days: 1)),
+        isSentByMe: false),
+    Message(
+        text: 'Hii...',
+        date: DateTime.now().add(Duration(days: 2)),
+        isSentByMe: false),
+    Message(
+        text: 'Hii...',
+        date: DateTime.now().add(Duration(days: 2, hours: 2)),
+        isSentByMe: false),
+    Message(
+        text:
+            'reply dew na kene bujhlam na, reply dile kita oy tmr? besi vab mario na amr loge...',
+        date: DateTime.now().add(Duration(days: 2, hours: 2)),
+        isSentByMe: false),
   ];
   @override
   Widget build(BuildContext context) {
@@ -115,12 +132,12 @@ class _FacChatScreenState extends State<FacChatScreen> {
                     floatingHeader: true,
                     elements: messages,
                     groupBy: (message) => DateTime(
-                      message.date.year,
-                      message.date.month,
-                      message.date.day,
-                    ),
+                        message.date.year,
+                        message.date.month,
+                        message.date.day,
+                        message.date.hour),
                     groupHeaderBuilder: (Message message) => SizedBox(
-                      height: 40,
+                      height: 50,
                       child: Center(
                         child: Card(
                           color: AppColors.primaryColor.withOpacity(0.8),
@@ -134,34 +151,48 @@ class _FacChatScreenState extends State<FacChatScreen> {
                         ),
                       ),
                     ),
-                    itemBuilder: (context, Message message) => Align(
-                      alignment: message.isSentByMe
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: message.isSentByMe
-                              ? const BorderRadius.only(
-                                  bottomLeft: Radius.circular(16),
-                                  bottomRight: Radius.circular(16),
-                                  topLeft: Radius.circular(16),
-                                  topRight: Radius.circular(0))
-                              : const BorderRadius.only(
-                                  bottomLeft: Radius.circular(16),
-                                  bottomRight: Radius.circular(16),
-                                  topLeft: Radius.circular(0),
-                                  topRight: Radius.circular(16),
-                                ),
-                        ),
-                        color: Colors.teal.shade100,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(message.text),
+                    itemBuilder: (context, Message message) => SizedBox(
+                      width: 250,
+                      child: Align(
+                        alignment: message.isSentByMe
+                            ? Alignment.centerRight
+                            : Alignment.centerLeft,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                          ),
+                          color: Colors.teal.shade100,
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Text(message.text),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
+                /*Align(
+                      alignment: message.isSentByMe
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                      child: Container(
+                        padding: EdgeInsets.all(12),
+                        child: Card(
+                          color: Colors.teal.shade100,
+
+                          child: Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Text(message.text),
+                          ),
+                        ),
+
+
+
+                      ),
+                    ),*/
+
                 TextField(
                   decoration: const InputDecoration(hintText: 'Type Message'),
                   onSubmitted: (text) {
