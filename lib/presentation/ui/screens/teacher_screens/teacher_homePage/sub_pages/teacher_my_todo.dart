@@ -38,7 +38,7 @@ class _FacMyTodoState extends State<FacMyTodo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey),
+      appBar: customisedAppBar(context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),

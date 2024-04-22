@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
@@ -544,8 +545,9 @@ class _FacAddTaskState extends State<FacAddTask> {
             ],
           ),
         ),
-        bottomNavigationBar:  const BottomNav(home: FacHomeScreen()),
+       // bottomNavigationBar:  const BottomNav(home: FacHomeScreen()),
       ),
     );
   }
 }
+*/

@@ -12,6 +12,8 @@ class FacChatScreen extends StatefulWidget {
 }
 
 class _FacChatScreenState extends State<FacChatScreen> {
+  final TextEditingController _messageTEController = TextEditingController();
+
   List<Message> messages = [
     Message(
         text: 'hii',
@@ -34,85 +36,12 @@ class _FacChatScreenState extends State<FacChatScreen> {
         date: DateTime.now().subtract(const Duration(minutes: 1)),
         isSentByMe: false),
     Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'asho kotha boli amra',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
+        text: 'Hii...',
+        date: DateTime.now().add(const Duration(days: 2)),
         isSentByMe: false),
     Message(
         text: 'Hii...',
-        date: DateTime.now().add(Duration(days: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'Hii...',
-        date: DateTime.now().add(Duration(days: 2)),
-        isSentByMe: false),
-    Message(
-        text: 'Hii...',
-        date: DateTime.now().add(Duration(days: 2, hours: 2)),
-        isSentByMe: false),
-    Message(
-        text:
-            'reply dew na kene bujhlam na, reply dile kita oy tmr? besi vab mario na amr loge...',
-        date: DateTime.now().add(Duration(days: 2, hours: 2)),
+        date: DateTime.now().add(const Duration(days: 2, hours: 2)),
         isSentByMe: false),
   ];
   @override
@@ -158,7 +87,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                             ? Alignment.centerRight
                             : Alignment.centerLeft,
                         child: Card(
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(
                               Radius.circular(16),
                             ),
@@ -173,35 +102,30 @@ class _FacChatScreenState extends State<FacChatScreen> {
                     ),
                   ),
                 ),
-                /*Align(
-                      alignment: message.isSentByMe
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Container(
-                        padding: EdgeInsets.all(12),
-                        child: Card(
-                          color: Colors.teal.shade100,
-
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Text(message.text),
-                          ),
-                        ),
-
-
-
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: TextField(
+                        controller: _messageTEController,
+                        decoration:
+                            const InputDecoration(hintText: 'Type Message'),
                       ),
-                    ),*/
-
-                TextField(
-                  decoration: const InputDecoration(hintText: 'Type Message'),
-                  onSubmitted: (text) {
-                    final message = Message(
-                        text: text, date: DateTime.now(), isSentByMe: true);
-                    setState(() {
-                      messages.add(message);
-                    });
-                  },
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        final message = Message(
+                            text: _messageTEController.text,
+                            date: DateTime.now(),
+                            isSentByMe: true);
+                        setState(() {
+                          messages.add(message);
+                        });
+                        _messageTEController.clear();
+                      },
+                      icon: const Icon(Icons.send_outlined),
+                    ),
+                  ],
                 ),
               ],
             ),

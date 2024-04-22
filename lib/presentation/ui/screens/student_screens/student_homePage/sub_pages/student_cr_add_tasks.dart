@@ -40,7 +40,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey),
+      appBar: customisedAppBar(context),
       drawer: customisedFacultyDrawer(context),
       body: Scaffold(
         key: scaffoldKey,

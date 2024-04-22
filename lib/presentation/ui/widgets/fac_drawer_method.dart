@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_add_tasks.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/teacher_my_todo.dart';
 import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
-
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
 
@@ -22,7 +20,8 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 title: Center(
                   child: Text(
                     'Departments Faculty',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
@@ -34,8 +33,9 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Departments CR',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                    "Department's CR",
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
@@ -47,8 +47,9 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'Bus Schedules',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                    'Bus Schedule',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
@@ -63,11 +64,13 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                           title: Center(
                             child: Text(
                               "Bus Schedules",
-                              style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontSize: 24.sp, fontWeight: FontWeight.w600),
                             ),
                           ),
                           content: InteractiveViewer(
-                            boundaryMargin: EdgeInsets.all(ScreenUtil().setWidth(20)),
+                            boundaryMargin:
+                                EdgeInsets.all(ScreenUtil().setWidth(20)),
                             minScale: 0.1,
                             maxScale: 6.0,
                             child: Image.asset(
@@ -88,7 +91,8 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 title: Center(
                   child: Text(
                     'My ToDo',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
@@ -97,7 +101,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 },
               ),
               divider(),
-              ListTile(
+              /*ListTile(
                 title: Center(
                   child: Text(
                     'Add Tasks',
@@ -109,12 +113,13 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                   Get.to(() => const FacAddTask());
                 },
               ),
-              divider(),
+              divider(),*/
               ListTile(
                 title: Center(
                   child: Text(
                     'Blood Downers',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
                   ),
                 ),
                 hoverColor: Colors.grey,
@@ -123,8 +128,6 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 },
               ),
               divider(),
-
-
             ],
           ),
         ),

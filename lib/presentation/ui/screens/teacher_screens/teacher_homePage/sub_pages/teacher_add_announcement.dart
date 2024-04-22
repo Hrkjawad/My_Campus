@@ -38,7 +38,7 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey),
+      appBar: customisedAppBar(context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -65,183 +65,170 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
 
   Padding showTable() {
     return Padding(
-                  padding: EdgeInsets.only(left: 3.0.w),
-                  child: Stack(
-                    children: [
-                      Container(
-                        width: 380.w,
-                        height: 430.h,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF8FFAC),
-                          border: Border.all(
-                            color: const Color(0x999B9B9B),
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20.w),
-                          ),
-                        ),
+      padding: EdgeInsets.only(left: 3.0.w),
+      child: Stack(
+        children: [
+          Container(
+            width: 380.w,
+            height: 430.h,
+            decoration: BoxDecoration(
+              color: const Color(0xFFF8FFAC),
+              border: Border.all(
+                color: const Color(0x999B9B9B),
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.w),
+              ),
+            ),
+          ),
+          Container(
+            width: 95.w,
+            height: 430.h,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.w),
+                bottomLeft: Radius.circular(20.w),
+              ),
+              border: const Border(
+                left: BorderSide(
+                  color: Color(0x999B9B9B),
+                ),
+                top: BorderSide(
+                  color: Color(0x999B9B9B),
+                ),
+                bottom: BorderSide(
+                  color: Color(0x999B9B9B),
+                ),
+              ),
+            ),
+          ),
+          RefreshIndicator(
+            onRefresh: () async {
+              Get.find<FacAnnouncementController>().facShowAnnouncement();
+            },
+            child: SizedBox(
+              width: 380.w,
+              height: 430.h,
+              child: GetBuilder<FacAnnouncementController>(
+                builder: (facAnnouncementController) {
+                  if (facAnnouncementController.facShowAnnouncementInProgress) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.teal,
                       ),
-                      Container(
-                        width: 95.w,
-                        height: 430.h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.w),
-                            bottomLeft: Radius.circular(20.w),
-                          ),
-                          border: const Border(
-                            left: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            top: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                            bottom: BorderSide(
-                              color: Color(0x999B9B9B),
-                            ),
-                          ),
-                        ),
-                      ),
-                      RefreshIndicator(
-                        onRefresh: () async {
-                          Get.find<FacAnnouncementController>()
-                              .facShowAnnouncement();
-                        },
-                        child: SizedBox(
-                          width: 380.w,
-                          height: 430.h,
-                          child: GetBuilder<FacAnnouncementController>(
-                            builder: (facAnnouncementController) {
-                              if (facAnnouncementController
-                                  .facShowAnnouncementInProgress) {
-                                return const Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.teal,
-                                  ),
-                                );
-                              }
-                              if (facAnnouncementController
-                                      .facShowAnnouncementModel
-                                      .data
-                                      ?.isEmpty ??
-                                  true) {
-                                return const Center(
-                                  child: Text('Nothing to show'),
-                                );
-                              }
-                              return ListView.separated(
-                                itemCount: facAnnouncementController
-                                        .facShowAnnouncementModel
-                                        .data
-                                        ?.length ??
-                                    0,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onLongPress: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text(
-                                              "Delete Data",
-                                              style: TextStyle(
-                                                  fontSize: 24.sp,
-                                                  fontWeight:
-                                                      FontWeight.w900),
-                                            ),
-                                            content: Text(
-                                              "Are you sure you want to delete this data?",
-                                              style: TextStyle(
-                                                  fontSize: 20.sp,
-                                                  fontWeight:
-                                                      FontWeight.w500),
-                                            ),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Get.back();
-                                                },
-                                                child: Text(
-                                                  "NO",
-                                                  style: TextStyle(
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.green),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Get.find<
-                                                          FacAnnouncementController>()
-                                                      .facDeleteAnnouncement(
-                                                          facAnnouncementController
-                                                              .facShowAnnouncementModel
-                                                              .data![index]
-                                                              .sId!);
-                                                  Get.back();
-                                                },
-                                                child: Text(
-                                                  "YES",
-                                                  style: TextStyle(
-                                                      fontSize: 18.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Colors.red),
-                                                ),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
+                    );
+                  }
+                  if (facAnnouncementController
+                          .facShowAnnouncementModel.data?.isEmpty ??
+                      true) {
+                    return const Center(
+                      child: Text('Nothing to show'),
+                    );
+                  }
+                  return ListView.separated(
+                    itemCount: facAnnouncementController
+                            .facShowAnnouncementModel.data?.length ??
+                        0,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onLongPress: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text(
+                                  "Delete Data",
+                                  style: TextStyle(
+                                      fontSize: 24.sp,
+                                      fontWeight: FontWeight.w900),
+                                ),
+                                content: Text(
+                                  "Are you sure you want to delete this data?",
+                                  style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Get.back();
                                     },
-                                    child: ListTile(
-                                      leading: Text(
-                                        '${facAnnouncementController.facShowAnnouncementModel.data![index].batch!}-${facAnnouncementController.facShowAnnouncementModel.data![index].section}       ',
-                                        style: TextStyle(
-                                          color: const Color(0xFF0D6858),
+                                    child: Text(
+                                      "NO",
+                                      style: TextStyle(
+                                          fontSize: 18.sp,
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 20.sp,
-                                        ),
-                                      ),
-                                      title: Text(
-                                        facAnnouncementController
-                                            .facShowAnnouncementModel
-                                            .data![index]
-                                            .announcement!,
-                                        style: TextStyle(
-                                          color: const Color(0xFF0D6858),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20.sp,
-                                        ),
-                                      ),
-                                      subtitle: Text(
-                                        'At: ${facAnnouncementController.facShowAnnouncementModel.data![index].date!}',
-                                        style: TextStyle(
-                                          color: const Color(0xFF0D6858),
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 20.sp,
-                                        ),
-                                      ),
+                                          color: Colors.green),
                                     ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) {
-                                  return const Divider(
-                                    thickness: 1,
-                                    indent: 10,
-                                    endIndent: 10,
-                                  );
-                                },
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      Get.find<FacAnnouncementController>()
+                                          .facDeleteAnnouncement(
+                                              facAnnouncementController
+                                                  .facShowAnnouncementModel
+                                                  .data![index]
+                                                  .sId!);
+                                      Get.back();
+                                    },
+                                    child: Text(
+                                      "YES",
+                                      style: TextStyle(
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.red),
+                                    ),
+                                  ),
+                                ],
                               );
                             },
+                          );
+                        },
+                        child: ListTile(
+                          leading: Text(
+                            '${facAnnouncementController.facShowAnnouncementModel.data![index].batch!}-${facAnnouncementController.facShowAnnouncementModel.data![index].section}       ',
+                            style: TextStyle(
+                              color: const Color(0xFF0D6858),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.sp,
+                            ),
+                          ),
+                          title: Text(
+                            facAnnouncementController.facShowAnnouncementModel
+                                .data![index].announcement!,
+                            style: TextStyle(
+                              color: const Color(0xFF0D6858),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.sp,
+                            ),
+                          ),
+                          subtitle: Text(
+                            'At: ${facAnnouncementController.facShowAnnouncementModel.data![index].date!}',
+                            style: TextStyle(
+                              color: const Color(0xFF0D6858),
+                              fontWeight: FontWeight.w500,
+                              fontSize: 20.sp,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return const Divider(
+                        thickness: 1,
+                        indent: 10,
+                        endIndent: 10,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Column get addAnnouncementMethod {
@@ -306,14 +293,15 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
                   });
                 },
               ),
-              SizedBox(height: 16.h,),
+              SizedBox(
+                height: 16.h,
+              ),
               SizedBox(
                 width: 360.w,
                 height: 55.h,
                 child: GetBuilder<FacAnnouncementController>(
                   builder: (facAnnouncementController) {
-                    if (facAnnouncementController
-                        .facAnnouncementInProgress) {
+                    if (facAnnouncementController.facAnnouncementInProgress) {
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.teal,
@@ -351,7 +339,6 @@ class _TeacherAddAnnouncementState extends State<TeacherAddAnnouncement> {
             ],
           ),
         ),
-
         const SizedBox(
           height: 10,
         ),

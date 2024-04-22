@@ -72,7 +72,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey),
+      appBar: //customisedAppBar(scaffoldKey),
+          customisedAppBar(context),
       body: Scaffold(
         key: scaffoldKey,
         drawer: customisedFacultyDrawer(context),
@@ -98,13 +99,18 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                         margin: EdgeInsets.zero,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            bottomLeft:
-                                Radius.circular(ScreenUtil().setWidth(0)),
-                            bottomRight:
-                                Radius.circular(ScreenUtil().setWidth(0)),
-                            topLeft: Radius.circular(ScreenUtil().setWidth(40)),
-                            topRight:
-                                Radius.circular(ScreenUtil().setWidth(40)),
+                            bottomLeft: Radius.circular(
+                              ScreenUtil().setWidth(0),
+                            ),
+                            bottomRight: Radius.circular(
+                              ScreenUtil().setWidth(0),
+                            ),
+                            topLeft: Radius.circular(
+                              ScreenUtil().setWidth(40),
+                            ),
+                            topRight: Radius.circular(
+                              ScreenUtil().setWidth(40),
+                            ),
                           ),
                           side: BorderSide(
                               color: const Color(0x999B9B9B), width: 1.w),
@@ -225,23 +231,32 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     elevation: 3,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(ScreenUtil().setWidth(40)),
-                        bottomRight: Radius.circular(ScreenUtil().setWidth(40)),
-                        topLeft: Radius.circular(ScreenUtil().setWidth(0)),
-                        topRight: Radius.circular(ScreenUtil().setWidth(0)),
+                        bottomLeft: Radius.circular(
+                          ScreenUtil().setWidth(40),
+                        ),
+                        bottomRight: Radius.circular(
+                          ScreenUtil().setWidth(40),
+                        ),
+                        topLeft: Radius.circular(
+                          ScreenUtil().setWidth(0),
+                        ),
+                        topRight: Radius.circular(
+                          ScreenUtil().setWidth(0),
+                        ),
                       ),
                       side: BorderSide(
                           color: const Color(0x999B9B9B), width: 1.w),
                     ),
                     color: Colors.white,
                     child: Center(
-                        child: Text(
-                      classAndTime!,
-                      style: TextStyle(
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w900,
-                          color: const Color(0xFF393939)),
-                    )),
+                      child: Text(
+                        classAndTime!,
+                        style: TextStyle(
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w900,
+                            color: const Color(0xFF393939)),
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
