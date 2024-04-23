@@ -8,7 +8,6 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../../state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
 import '../../../widgets/customised_text_button.dart';
-import '../../../widgets/text_field_with_trailing.dart';
 import 'fac_sign_in_screen.dart';
 
 class FacAvailabilityCheckScreen extends StatefulWidget {
@@ -42,9 +41,21 @@ class _FacAvailabilityCheckScreenState
                 SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(
-                  emailTEController: _emailTEController,
-                  hintText: "Email",
+                SizedBox(
+                  width: 323.w,
+                  child: TextFormField(
+                    controller: _emailTEController,
+                    decoration: const InputDecoration(hintText: 'Email'),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your email';
+                      }
+                      if (value!.isEmail == false) {
+                        return 'Enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 47.h,

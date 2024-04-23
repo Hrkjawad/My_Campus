@@ -7,7 +7,6 @@ import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
-import '../../../widgets/text_field_with_trailing.dart';
 
 class FacRecoveryEmailScreen extends StatefulWidget {
   const FacRecoveryEmailScreen({super.key});
@@ -37,9 +36,21 @@ class _FacRecoveryEmailScreenState extends State<FacRecoveryEmailScreen> {
                 SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(
-                  emailTEController: _emailTEController,
-                  hintText: 'Email',
+                SizedBox(
+                  width: 323.w,
+                  child: TextFormField(
+                    controller: _emailTEController,
+                    decoration: const InputDecoration(hintText: 'Email'),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your email';
+                      }
+                      if (value!.isEmail == false) {
+                        return 'Enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: 40.h,
