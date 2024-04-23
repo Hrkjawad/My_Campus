@@ -43,6 +43,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
                   width: 323.w,
                   child: TextFormField(
                     controller: _emailTEController,
+                    textInputAction: TextInputAction.next,
                     decoration: const InputDecoration(hintText: 'Email'),
                     validator: (String? value) {
                       if (value?.trim().isEmpty ?? true) {

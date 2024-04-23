@@ -45,6 +45,7 @@ class _FacAvailabilityCheckScreenState
                   width: 323.w,
                   child: TextFormField(
                     controller: _emailTEController,
+                    textInputAction: TextInputAction.next,
                     decoration: const InputDecoration(hintText: 'Email'),
                     validator: (String? value) {
                       if (value?.trim().isEmpty ?? true) {
