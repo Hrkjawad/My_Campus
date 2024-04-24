@@ -1,14 +1,21 @@
 class FacultyCreatingSubGrpBatchSecModel {
   String? status;
-  FacultyCreatingSubGrpBatchSecData? data;
+  dynamic data;
 
   FacultyCreatingSubGrpBatchSecModel({this.status, this.data});
 
   FacultyCreatingSubGrpBatchSecModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    data = json['data'] != null
-        ? FacultyCreatingSubGrpBatchSecData.fromJson(json['data'])
-        : null;
+    dynamic jsonData = json['data'];
+    if (jsonData != null) {
+      if (jsonData is List) {
+        // If data is a list, loop through each item and parse it as FacultyCreatingSubGrpBatchSecData
+        data = jsonData.map((item) => FacultyCreatingSubGrpBatchSecData.fromJson(item)).toList();
+      } else {
+        // If data is a map, parse it directly as FacultyCreatingSubGrpBatchSecData
+        data = FacultyCreatingSubGrpBatchSecData.fromJson(jsonData);
+      }
+    }
   }
 
   Map<String, dynamic> toJson() {

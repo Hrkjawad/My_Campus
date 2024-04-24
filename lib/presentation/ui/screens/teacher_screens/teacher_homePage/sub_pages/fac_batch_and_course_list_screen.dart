@@ -51,8 +51,8 @@ class _FacBatchAndCourseListScreenState
                         onTap: () {
                           Get.to(
                             () => FacChatScreen(
-                              id: batch[index],
-                              courseCode: courseCode[index],
+                              batch: batch[index],
+                              courseCode: courseCode[index], section: '',
                             ),
                           );
                         },

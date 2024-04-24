@@ -16,8 +16,8 @@ class Urls {
   static const String facultyList =
       '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
-  static String facultySubGrpBatchSec(String id) =>
-      '$_facultyBaseUrl/createSubjectGroupBatchSections/$id';
+  static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
+  static String showFacultySubGrpBatchSec = '$_facultyBaseUrl/showFacultySubGrpBatchSec';
   static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
   static const String facultyShowAnnouncement =
       '$_facultyBaseUrl/showAnnouncement';

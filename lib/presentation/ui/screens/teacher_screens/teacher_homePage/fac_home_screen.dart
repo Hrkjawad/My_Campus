@@ -2,9 +2,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
+import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/dropdown_button.dart';
@@ -319,15 +323,33 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 SizedBox(
                   height: 25.h,
                 ),
-                CardElevatedButton(
-                  width: 355.w,
-                  height: 84.h,
-                  text: 'Batches & Courses',
-                  color: 0xFFF8FFAC,
-                  onTap: () {
-                    facultyBatchesAndCourses(context);
-                  },
-                ),
+                GetBuilder<FacShowGroupBatchSectionCourseController>(
+                    builder: (facShowGroupBatchSectionCourseController) {
+                  return CardElevatedButton(
+                    width: 355.w,
+                    height: 84.h,
+                    text: 'Batches & Courses',
+                    color: 0xFFF8FFAC,
+                    onTap: () async {
+                      final result =
+                          await facShowGroupBatchSectionCourseController
+                              .showGroups();
+                      if (result) {
+                        final dataList =
+                            facShowGroupBatchSectionCourseController
+                                .facultyCreatingSubGrpBatchSecDataList;
+                        final List<Map<String, String>> batchCoursePairs = [];
+
+                        for (final data in dataList!) {
+                          final a = data.batch!;
+                          final b = data.courseCode!;
+                          batchCoursePairs.add({'batch': a, 'courseCode': b});
+                        }
+                        facultyBatchesAndCourses(context, batchCoursePairs);
+                      }
+                    },
+                  );
+                }),
                 SizedBox(
                   height: 25.w,
                 ),
@@ -382,7 +404,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     );
   }
 
-  void facultyBatchesAndCourses(BuildContext context) {
+  void facultyBatchesAndCourses(BuildContext context, List courses) {
     showDialog(
       context: context,
       builder: (context) {
@@ -435,26 +457,56 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                   ),
                 ),
                 Center(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(
-                        side: BorderSide(
-                          color: Colors.grey,
-                          width: 2.w,
+                  child: GetBuilder<FacCreatingSubGrpBatchSecController>(
+                      builder: (facCreatingSubGrpBatchSecController) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(
+                          side: BorderSide(
+                            color: Colors.grey,
+                            width: 2.w,
+                          ),
+                        ),
+                        backgroundColor: const Color(0xFFFFE8D2),
+                        foregroundColor: const Color(0x999B9B9B),
+                      ),
+                      onPressed: () async {
+                        if (facCreatingSubGrpBatchSecController
+                            .facCreatingSubGrpBatchSecInProgress) {
+                          const Center(
+                            child: LinearProgressIndicator(),
+                          );
+                        } else {
+                          final result =
+                              await facCreatingSubGrpBatchSecController
+                                  .facCreatingSubGrpBatchSec(
+                            selectedBatch.toString(),
+                            selectedBatch.toString(),
+                            selectedCourse.toString(),
+                            selectedCourse.toString(),
+                            AuthController.email0.toString(),
+                            AuthController.fullName0.toString(),
+                            AuthController.designation0.toString(),
+                            AuthController.department0.toString(),
+                          );
+
+                          if (result) {
+                            Get.snackbar('Successful!', 'Group Created');
+                          } else {
+                            Get.snackbar('Failed!', 'Group Already Created',
+                                colorText: Colors.redAccent);
+                          }
+                        }
+                      },
+                      child: const Text(
+                        "ADD",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
-                      backgroundColor: const Color(0xFFFFE8D2),
-                      foregroundColor: const Color(0x999B9B9B),
-                    ),
-                    onPressed: () async {},
-                    child: const Text(
-                      "ADD",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
                 SizedBox(
                   height: 24.h,
@@ -473,20 +525,22 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                           ),
                         ),
                         child: ListView.separated(
-                          itemCount: batch.length,
+                          itemCount: courses.length,
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
-                                /*print(batch[index]);
+                              onTap: () async {
+                                Navigator.pop(context);
                                 Get.to(
                                   () => FacChatScreen(
-                                    id: batch[index],
+                                    batch: courses[index]['batch'],
+                                    section: courses[index]['batch'], // section hobe
+                                    courseCode: courses[index]['courseCode'],
                                   ),
-                                );*/
+                                );
                               },
                               child: ListTile(
                                 leading: Text(
-                                  batch[index].toString(),
+                                  courses[index]['batch'] ?? 'Unknown',
                                   style: TextStyle(
                                     color: const Color(0xFF0D6858),
                                     fontWeight: FontWeight.w500,
@@ -494,7 +548,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                   ),
                                 ),
                                 title: Text(
-                                  '',
+                                  courses[index]['courseCode'] ?? 'Unknown',
                                   style: TextStyle(
                                     color: const Color(0xFF0D6858),
                                     fontWeight: FontWeight.w500,
@@ -512,7 +566,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             );
                           },
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),

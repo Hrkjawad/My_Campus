@@ -5,8 +5,8 @@ import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
 class FacChatScreen extends StatefulWidget {
-  const FacChatScreen({super.key, required this.id, required this.courseCode});
-  final String id, courseCode;
+  const FacChatScreen({super.key, required this.batch, required this.courseCode, required this.section});
+  final String batch, section, courseCode;
 
   @override
   State<FacChatScreen> createState() => _FacChatScreenState();
@@ -40,7 +40,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
         leading: const BackButton(
           color: Colors.black,
         ),
-        title: Text('Batch ${widget.id}, ${widget.courseCode} Fac'),
+        title: Text('Batch ${widget.batch}, ${widget.courseCode} Fac'),
         centerTitle: true,
         backgroundColor: AppColors.primaryColor.withOpacity(0.7),
         elevation: 0,
