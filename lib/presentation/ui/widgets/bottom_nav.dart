@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_batch_and_course_list_screen.dart';
 import 'file_upload.dart';
 
 class BottomNav extends StatelessWidget {
@@ -42,7 +43,9 @@ class BottomNav extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    // Handle onTap for chat
+                    Get.to(
+                      () => const FacBatchAndCourseListScreen(),
+                    );
                   },
                   child: Column(
                     children: [

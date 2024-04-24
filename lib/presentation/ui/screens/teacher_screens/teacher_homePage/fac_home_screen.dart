@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -390,6 +389,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
         return StatefulBuilder(
           builder: (context, StateSetter setState) {
             return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
               title: Center(
                 child: Text(
                   "SELECT BATCH & COURSES",
@@ -444,21 +446,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       backgroundColor: const Color(0xFFFFE8D2),
                       foregroundColor: const Color(0x999B9B9B),
                     ),
-                    onPressed: () {
-                      Get.to(
-                        () => const FacChatScreen(),
-                      );
-                      /*if (selectedBatch != null && selectedCourse != null) {
-                        setState(() {
-                          tableData.add({
-                            'Batch': selectedBatch!,
-                            'Course': selectedCourse!,
-                          });
-                          selectedBatch = null;
-                          selectedCourse = null;
-                        });
-                      }*/
-                    },
+                    onPressed: () async {},
                     child: const Text(
                       "ADD",
                       style: TextStyle(
@@ -468,75 +456,64 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 24.h,
+                ),
                 Padding(
-                  padding: EdgeInsets.all(12.w),
-                  child: Container(
-                    height: 320.h,
-                    width: 343.w,
-                    padding: EdgeInsets.all(10.w),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFF8FFAC),
-                      border: Border.all(
-                        color: const Color(0x999B9B9B),
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20.w),
-                      ),
-                    ),
-                    child: SingleChildScrollView(
-                      child: DataTable(
-                        columns: [
-                          DataColumn(
-                            label: Text(
-                              'Batch',
-                              style: TextStyle(
-                                color: const Color(0xFF0D6858),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 26.sp,
-                              ),
-                            ),
+                  padding: EdgeInsets.only(left: 3.0.w),
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 380.w,
+                        height: 380.h,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFF8FFAC),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
                           ),
-                          DataColumn(
-                            label: Text(
-                              'Course',
-                              style: TextStyle(
-                                color: const Color(0xFF0D6858),
-                                fontWeight: FontWeight.w500,
-                                fontSize: 26.sp,
-                              ),
-                            ),
-                          ),
-                        ],
-                        rows: tableData.map(
-                          (data) {
-                            return DataRow(
-                              cells: [
-                                DataCell(
-                                  Text(
-                                    data['Batch']!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22.sp,
-                                    ),
+                        ),
+                        child: ListView.separated(
+                          itemCount: batch.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                /*print(batch[index]);
+                                Get.to(
+                                  () => FacChatScreen(
+                                    id: batch[index],
+                                  ),
+                                );*/
+                              },
+                              child: ListTile(
+                                leading: Text(
+                                  batch[index].toString(),
+                                  style: TextStyle(
+                                    color: const Color(0xFF0D6858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20.sp,
                                   ),
                                 ),
-                                DataCell(
-                                  Text(
-                                    data['Course']!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 22.sp,
-                                    ),
+                                title: Text(
+                                  '',
+                                  style: TextStyle(
+                                    color: const Color(0xFF0D6858),
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20.sp,
                                   ),
                                 ),
-                              ],
+                              ),
                             );
                           },
-                        ).toList(),
+                          separatorBuilder: (context, index) {
+                            return const Divider(
+                              thickness: 1,
+                              indent: 10,
+                              endIndent: 10,
+                            );
+                          },
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
               ],
@@ -580,4 +557,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       ),
     );
   }
+
+  List<String> batch = ['57', '58', '59', '60'];
 }

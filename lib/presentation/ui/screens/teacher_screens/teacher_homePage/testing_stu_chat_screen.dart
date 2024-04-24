@@ -4,15 +4,16 @@ import 'package:intl/intl.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
-class FacChatScreen extends StatefulWidget {
-  const FacChatScreen({super.key, required this.id, required this.courseCode});
+class TestStuChatScreen extends StatefulWidget {
+  const TestStuChatScreen(
+      {super.key, required this.id, required this.courseCode});
   final String id, courseCode;
 
   @override
-  State<FacChatScreen> createState() => _FacChatScreenState();
+  State<TestStuChatScreen> createState() => _TestStuChatScreenState();
 }
 
-class _FacChatScreenState extends State<FacChatScreen> {
+class _TestStuChatScreenState extends State<TestStuChatScreen> {
   final TextEditingController _messageTEController = TextEditingController();
 
   List<Message> messages = [
@@ -40,7 +41,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
         leading: const BackButton(
           color: Colors.black,
         ),
-        title: Text('Batch ${widget.id}, ${widget.courseCode} Fac'),
+        title: Text('Batch ${widget.id}, ${widget.courseCode} Stu'),
         centerTitle: true,
         backgroundColor: AppColors.primaryColor.withOpacity(0.7),
         elevation: 0,
