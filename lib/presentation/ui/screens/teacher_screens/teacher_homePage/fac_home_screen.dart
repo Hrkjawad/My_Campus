@@ -39,7 +39,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
-  }
+  }//
 
   @override
   void dispose() {
