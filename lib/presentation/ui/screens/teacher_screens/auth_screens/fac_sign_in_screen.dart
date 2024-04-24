@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_recovery_email_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
@@ -117,7 +118,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
     if (result) {
       Get.snackbar('Successful!', facLoginController.message);
       Get.to(
-        () => const FacHomeScreen(),
+        () => const FacMainBottomNavBarScreen(),
       );
     } else {
       Get.snackbar('Failed!', facLoginController.message,

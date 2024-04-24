@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_signin_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_password_change_controller.dart';
@@ -30,6 +31,7 @@ class GetXBindings extends Bindings {
     Get.put(FacMyToDoController());
     Get.put(FacCreatingSubGrpBatchSecController());
     Get.put(FacShowGroupBatchSectionCourseController());
+    Get.put(FacMainBottomNavController());
 
     Get.put(StuAvailabilityCheckingController());
     Get.put(StuSignInController());

@@ -30,7 +30,6 @@ class FacultyCreatingSubGrpBatchSecModel {
 
 class FacultyCreatingSubGrpBatchSecData {
   String? batch;
-  String? section;
   String? courseCode;
   String? courseTitle;
   List<Member>? member;
@@ -39,7 +38,6 @@ class FacultyCreatingSubGrpBatchSecData {
 
   FacultyCreatingSubGrpBatchSecData(
       {this.batch,
-      this.section,
       this.courseCode,
       this.courseTitle,
       this.member,
@@ -48,7 +46,6 @@ class FacultyCreatingSubGrpBatchSecData {
 
   FacultyCreatingSubGrpBatchSecData.fromJson(Map<String, dynamic> json) {
     batch = json['batch'];
-    section = json['section'];
     courseCode = json['courseCode'];
     courseTitle = json['courseTitle'];
     if (json['member'] != null) {
@@ -64,7 +61,6 @@ class FacultyCreatingSubGrpBatchSecData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['batch'] = batch;
-    data['section'] = section;
     data['courseCode'] = courseCode;
     data['courseTitle'] = courseTitle;
     if (member != null) {

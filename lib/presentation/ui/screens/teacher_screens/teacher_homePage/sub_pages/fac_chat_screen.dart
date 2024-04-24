@@ -5,8 +5,13 @@ import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
 class FacChatScreen extends StatefulWidget {
-  const FacChatScreen({super.key, required this.batch, required this.courseCode, required this.section});
-  final String batch, section, courseCode;
+  const FacChatScreen(
+      {super.key,
+      required this.batch,
+      required this.courseCode,
+      required this.courseTitle});
+
+  final String batch, courseCode, courseTitle;
 
   @override
   State<FacChatScreen> createState() => _FacChatScreenState();
@@ -33,6 +38,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
         date: DateTime.now().subtract(const Duration(minutes: 1)),
         isSentByMe: true),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +46,36 @@ class _FacChatScreenState extends State<FacChatScreen> {
         leading: const BackButton(
           color: Colors.black,
         ),
-        title: Text('Batch ${widget.batch}, ${widget.courseCode} Fac'),
-        centerTitle: true,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.courseCode,
+              style: const TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 0.1),
+            ),
+            Text(
+              widget.courseTitle,
+              style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  letterSpacing: 0.2),
+            ),
+          ],
+        ),
+        actions: [
+          Text(
+            '\nBatch: ${widget.batch}  ',
+            style: const TextStyle(
+                fontSize: 17, fontWeight: FontWeight.w500, letterSpacing: 0.1),
+          ),
+        ],
+
+        //centerTitle: true,
         backgroundColor: AppColors.primaryColor.withOpacity(0.7),
-        elevation: 0,
+        elevation: 0.5,
       ),
       body: ScreenBackground(
         child: Padding(

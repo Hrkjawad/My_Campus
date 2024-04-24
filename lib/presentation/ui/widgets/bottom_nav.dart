@@ -102,7 +102,7 @@ class BottomNav extends StatelessWidget {
                                                     Get.to(
                                                           () => FacChatScreen(
                                                         batch: batchCoursePairs[index]['batch'].toString(),
-                                                        section: batchCoursePairs[index]['batch'].toString(), // section hobe
+                                                        courseTitle: batchCoursePairs[index]['batch'].toString(), // section hobe
                                                         courseCode: batchCoursePairs[index]['courseCode'].toString(),
                                                       ),
                                                     );

@@ -21,9 +21,8 @@ class FacCreatingSubGrpBatchSecController extends GetxController {
 
   Future<bool> facCreatingSubGrpBatchSec(
     String batch,
-    String section,
-    String courseCode,
     String courseTitle,
+    String courseCode,
     String email,
     String facultyName,
     String facultyDesignation,
@@ -36,7 +35,6 @@ class FacCreatingSubGrpBatchSecController extends GetxController {
       Urls.facultySubGrpBatchSec,
       {
         "batch": batch,
-        "section": section,
         "courseCode": courseCode,
         "courseTitle": courseTitle,
         "email": email,

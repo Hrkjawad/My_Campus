@@ -44,7 +44,6 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
         _message = "Couldn't add!!";
         return false;
       }
-
       return true;
     } else {
       _message = "Couldn't add!!";

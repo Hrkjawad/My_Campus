@@ -52,7 +52,7 @@ class _FacBatchAndCourseListScreenState
                           Get.to(
                             () => FacChatScreen(
                               batch: batch[index],
-                              courseCode: courseCode[index], section: '',
+                              courseCode: courseCode[index], courseTitle: '',
                             ),
                           );
                         },

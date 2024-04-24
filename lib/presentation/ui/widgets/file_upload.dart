@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../screens/home_screen.dart';
 import 'app_logo.dart';
@@ -93,8 +94,14 @@ class _FileUploadState extends State<FileUpload> {
             ],
           ),
         ),
-        bottomNavigationBar: const ColoredBox( color: Color(0xFFCBD0F9),
-            child: BackButton(),
+        bottomNavigationBar: ColoredBox( color: const Color(0xFFCBD0F9),
+            child: GetBuilder<FacMainBottomNavController>(
+              builder: (facMainBottomNavController) {
+                return BackButton(
+                    onPressed: facMainBottomNavController.backToHome
+                );
+              }
+            ),
       ),
       ),
     );
