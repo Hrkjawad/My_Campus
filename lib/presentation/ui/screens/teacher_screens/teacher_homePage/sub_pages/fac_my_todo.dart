@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_my_todo_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/table_title.dart';
@@ -37,27 +38,30 @@ class _FacMyTodoState extends State<FacMyTodo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, context),
-      body: Scaffold(
-        key: scaffoldKey,
-        drawer: customisedFacultyDrawer(context),
-        body: ScreenBackground(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                addToDoMethod,
-                const TableTitle(title1: 'Date', title2: 'ToDo'),
-                showTable(),
-              ],
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (_){
+        Get.find<FacMainBottomNavController>().backToHome();
+      },
+      child: Scaffold(
+        appBar: customisedAppBar(scaffoldKey, context),
+        body: Scaffold(
+          key: scaffoldKey,
+          drawer: customisedFacultyDrawer(context),
+          body: ScreenBackground(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  addToDoMethod,
+                  const TableTitle(title1: 'Date', title2: 'ToDo'),
+                  showTable(),
+                ],
+              ),
             ),
           ),
-        ),
-        bottomNavigationBar: const BottomNav(
-          home: FacHomeScreen(),
-        ),
+         ),
       ),
     );
   }

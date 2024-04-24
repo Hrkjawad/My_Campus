@@ -117,7 +117,7 @@ class _FacSignInScreenState extends State<FacSignInScreen> {
 
     if (result) {
       Get.snackbar('Successful!', facLoginController.message);
-      Get.to(
+      Get.offAll(
         () => const FacMainBottomNavBarScreen(),
       );
     } else {

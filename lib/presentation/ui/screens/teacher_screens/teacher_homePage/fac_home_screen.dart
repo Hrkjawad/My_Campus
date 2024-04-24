@@ -388,6 +388,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       ),
     );
   }
+
+
   Widget buildAnnouncementCard(String announcement) {
     return GestureDetector(
       onLongPress: () {

@@ -8,6 +8,7 @@ import '../../../utility/app_colors.dart';
 import '../../../widgets/file_upload.dart';
 import 'fac_available_chat_screen.dart';
 import 'fac_home_screen.dart';
+import 'sub_pages/fac_my_todo.dart';
 
 class FacMainBottomNavBarScreen extends StatefulWidget {
   const FacMainBottomNavBarScreen({super.key});
@@ -22,6 +23,7 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
     FacHomeScreen(),
     FacAvailableChatScreen(),
     FileUpload(),
+    FacMyTodo()
   ];
 
   @override
@@ -61,6 +63,10 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
                   icon: Icon(Icons.my_library_books_rounded,
                       color: Colors.red, size: 30.w),
                   label: 'Resources'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.today_outlined,
+                      color: Colors.brown, size: 30.w),
+                  label: 'My Todo'),
             ]),
       );
     });
