@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import 'fac_show_group_batch_section_course_controller.dart';
 
 class FacMainBottomNavController extends GetxController {
@@ -21,7 +20,7 @@ class FacMainBottomNavController extends GetxController {
       }
       currentSelectedScreen = index;
       update();
-    }  else {
+    } else {
       currentSelectedScreen = index;
       batchCoursePairs.clear();
       update();

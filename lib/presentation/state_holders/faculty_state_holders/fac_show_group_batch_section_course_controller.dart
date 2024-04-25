@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import 'package:my_campus/data/utility/urls.dart';
-
 import '../../../data/models/faculty_model/fac_sub_grp_batch_sec_model.dart';
 
 class FacShowGroupBatchSectionCourseController extends GetxController {
@@ -10,16 +9,16 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
   String _message = '';
   FacultyCreatingSubGrpBatchSecData _facultyCreatingSubGrpBatchSecData =
       FacultyCreatingSubGrpBatchSecData();
-  List<FacultyCreatingSubGrpBatchSecData>? _facultyCreatingSubGrpBatchSecDataList;
+  List<FacultyCreatingSubGrpBatchSecData>?
+      _facultyCreatingSubGrpBatchSecDataList;
 
   bool get inProgress => _inProgress;
-
   String get message => _message;
-
   FacultyCreatingSubGrpBatchSecData get facultyCreatingSubGrpBatchSecData =>
       _facultyCreatingSubGrpBatchSecData;
-  List<FacultyCreatingSubGrpBatchSecData>? get facultyCreatingSubGrpBatchSecDataList =>
-      _facultyCreatingSubGrpBatchSecDataList;
+  List<FacultyCreatingSubGrpBatchSecData>?
+      get facultyCreatingSubGrpBatchSecDataList =>
+          _facultyCreatingSubGrpBatchSecDataList;
 
   Future<bool> showGroups() async {
     _inProgress = true;
@@ -31,7 +30,9 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
     update();
 
     if (response.isSuccess) {
-      dynamic responseData = FacultyCreatingSubGrpBatchSecModel.fromJson(response.responseJson!).data;
+      dynamic responseData =
+          FacultyCreatingSubGrpBatchSecModel.fromJson(response.responseJson!)
+              .data;
 
       if (responseData is List) {
         _facultyCreatingSubGrpBatchSecDataList =
