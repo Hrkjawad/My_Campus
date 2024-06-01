@@ -56,13 +56,12 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
           final a = data.batch!;
           final b = data.courseCode!;
           final c = data.courseTitle!;
-          batchCoursePairs
-              .add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
+          batchCoursePairs.add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
           batch.add(a);
           //senderId.addAll();
         }
       }
-      print('b  $groupId');
+      print('b  $batch');
     });
   }
 
@@ -288,7 +287,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                 width: 360.w,
                 height: 45.h,
                 dropDownWidth: 360.w,
-                items: groupId,
+                items: batch,
                 value: selectedBatch,
                 hintText: 'Select Batch',
                 onChanged: (value) {
