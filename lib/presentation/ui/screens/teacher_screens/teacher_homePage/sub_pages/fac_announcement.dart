@@ -25,43 +25,51 @@ class FacAnnouncementScreen extends StatefulWidget {
 class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate, selectedAnnouncement, selectedBatch;
+  String? selectedDate, selectedAnnouncement, selectedBatch, groupId;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final List<Map<String, String>> batchCoursePairs = [];
-  late List<String> groupId = [
-    '665affb922620c800a94e15b',
-    '665b074f22620c800a94e202'
-  ];
-  late List<String> batch = [];
-  late List<String> senderId = [];
+  dynamic c;
+  // final List<Map<String, String>> batchCoursePairs = [];
+  // late List<String> groupId = [
+  //   '665affb922620c800a94e15b',
+  //   '665b074f22620c800a94e202'
+  // ];
+  // List<String> batch = [];
+  // late List<String> senderId = [];
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       Get.find<FacAnnouncementController>().facShowAnnouncement();
-      Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
+      //await Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
 
-      final dataList = Get.find<FacShowGroupBatchSectionCourseController>()
-          .facultyCreatingSubGrpBatchSecDataList;
+      c = Get.find<FacShowGroupBatchSectionCourseController>()
+          .facultyCreatingSubGrpBatchSecDataList
+          ?.map((data) =>
+              {'batch': data.batch.toString(), 'sId': data.sId.toString()})
+          .toList();
+      //print('c $c');
 
-      if (dataList != null) {
-        for (final data in dataList) {
-          final d = data.sId!;
-          final a = data.batch!;
-          final b = data.courseCode!;
-          final c = data.courseTitle!;
-          batchCoursePairs.add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
-          batch.add(a);
-          //senderId.addAll();
-        }
-      }
-      print('b  $batch');
+      //  final dataList = Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList;
+      //  //batch.add(dataList.batch.toString());
+      //
+      //  if (dataList != null) {
+      //    for (final data in dataList) {
+      //      final d = data.sId!;
+      //      final a = data.batch!;
+      //      final b = data.courseCode!;
+      //      final c = data.courseTitle!;
+      //      batchCoursePairs.add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
+      //      batch.add(a);
+      //      //senderId.addAll();
+      //    }
+      // }
+      //  print('b  $batch');
     });
   }
 
@@ -287,12 +295,24 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                 width: 360.w,
                 height: 45.h,
                 dropDownWidth: 360.w,
-                items: batch,
+                items: Get.find<FacShowGroupBatchSectionCourseController>()
+                        .facultyCreatingSubGrpBatchSecDataList
+                        ?.map((data) => data.batch.toString())
+                        .toList() ??
+                    [],
                 value: selectedBatch,
                 hintText: 'Select Batch',
                 onChanged: (value) {
                   setState(() {
                     selectedBatch = value;
+                    if (c != null) {
+                      for (var item in c) {
+                        if (selectedBatch == item['batch']) {
+                          print(item['sId']);
+                        }
+                      }
+                    }
+
                   });
                 },
               ),

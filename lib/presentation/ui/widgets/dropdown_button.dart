@@ -45,6 +45,7 @@ class CustomDropdownButton extends StatelessWidget {
               (String item) {
                 return DropdownMenuItem<String>(
                   value: item,
+                  onTap: (){},
                   child: SingleChildScrollView(
                     child: Center(
                       child: Text(
