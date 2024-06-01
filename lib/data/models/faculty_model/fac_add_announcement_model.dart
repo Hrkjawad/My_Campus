@@ -34,11 +34,12 @@ class FacAddAnnouncementData {
     date = json['date'];
   }
 
+  int? get length => null;
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['announcement'] = announcement;
     data['batch'] = batch;
-    data['section'] = section;
     data['date'] = date;
     return data;
   }

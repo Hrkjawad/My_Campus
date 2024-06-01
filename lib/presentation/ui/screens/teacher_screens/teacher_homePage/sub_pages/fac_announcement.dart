@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
+import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
@@ -20,19 +25,44 @@ class FacAnnouncementScreen extends StatefulWidget {
 class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate, selectedAnnouncement, selectedBatch, selectedSection;
+  String? selectedDate, selectedAnnouncement, selectedBatch;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final List<Map<String, String>> batchCoursePairs = [];
+  late List<String> groupId = [];
+  late List<String> senderId = [
+    '665affb922620c800a94e15b',
+    '665b074f22620c800a94e202'
+  ];
+
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<FacAnnouncementController>().facShowAnnouncement();
+      Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
+
+      final dataList = Get.find<FacShowGroupBatchSectionCourseController>()
+          .facultyCreatingSubGrpBatchSecDataList;
+
+      if (dataList != null) {
+        for (final data in dataList) {
+          final d = data.sId!;
+          final a = data.batch!;
+          final b = data.courseCode!;
+          final c = data.courseTitle!;
+          batchCoursePairs
+              .add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
+          groupId.add(d);
+          //senderId.addAll();
+        }
+      }
+      print('b  $groupId');
     });
-    super.initState();
   }
 
   @override
@@ -51,7 +81,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                   addAnnouncementMethod,
                   const TableTitle(
                     title1: 'Batch',
-                    title2: 'Announcement',
+                    title2: 'Todo',
                   ),
                   showTable(),
                 ],
@@ -70,7 +100,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
         children: [
           Container(
             width: 380.w,
-            height: 430.h,
+            height: 450.h,
             decoration: BoxDecoration(
               color: const Color(0xFFF8FFAC),
               border: Border.all(
@@ -83,7 +113,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
           ),
           Container(
             width: 95.w,
-            height: 430.h,
+            height: 450.h,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -171,6 +201,8 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                                                   .data![index]
                                                   .sId!);
                                       Get.back();
+                                      facAnnouncementController
+                                          .facShowAnnouncement();
                                     },
                                     child: Text(
                                       "YES",
@@ -187,7 +219,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                         },
                         child: ListTile(
                           leading: Text(
-                            '${facAnnouncementController.facShowAnnouncementModel.data![index].batch!}-${facAnnouncementController.facShowAnnouncementModel.data![index].section}       ',
+                            '${facAnnouncementController.facShowAnnouncementModel.data![index].batch!}      ',
                             style: TextStyle(
                               color: const Color(0xFF0D6858),
                               fontWeight: FontWeight.w500,
@@ -251,32 +283,34 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
               SizedBox(
                 height: 10.h,
               ),
+              // Obx(() {
+              //   final items = batchCoursePairs;
+              //
+              //   return CustomDropdownButton(
+              //     width: 360.w,
+              //     height: 45.h,
+              //     dropDownWidth: 360.w,
+              //     items: items,
+              //     value: selectedBatch,
+              //     hintText: 'Select Batch',
+              //     onChanged: (value) {
+              //       setState(() {
+              //         selectedBatch = value;
+              //       });
+              //     },
+              //   );
+              // }),
+
               CustomDropdownButton(
                 width: 360.w,
                 height: 45.h,
                 dropDownWidth: 360.w,
-                items: const ['56', '57', '58'],
+                items: groupId,
                 value: selectedBatch,
                 hintText: 'Select Batch',
                 onChanged: (value) {
                   setState(() {
                     selectedBatch = value;
-                  });
-                },
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              CustomDropdownButton(
-                width: 360.w,
-                height: 45.h,
-                dropDownWidth: 360.w,
-                items: const ['A', 'B', 'C'],
-                value: selectedSection,
-                hintText: 'Select Section',
-                onChanged: (value) {
-                  setState(() {
-                    selectedSection = value;
                   });
                 },
               ),
@@ -312,7 +346,6 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate() &&
                             selectedBatch != null &&
-                            selectedSection != null &&
                             selectedDate != null) {
                           facAddAnnouncement(facAnnouncementController);
                         }
@@ -349,15 +382,16 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   Future<void> facAddAnnouncement(
       FacAnnouncementController facAnnouncementController) async {
     final result = await facAnnouncementController.facAddAnnouncement(
-      _taskTEController.text.trim(),
-      selectedBatch,
-      selectedSection,
-      selectedDate,
-    );
+        _taskTEController.text.trim(), selectedBatch, selectedDate);
+    // await Get.find<GroupChattingController>().groupChat(
+    //   batchCoursePairs2,
+    //   _taskTEController.text.trim(),
+    //   AuthController.fullName0.toString(),
+    //   selectedDate!,
+    // );
     if (result) {
       Get.snackbar('Successful!', 'Announcement has been added');
       selectedBatch = null;
-      selectedSection = null;
       dateInput.clear();
       _taskTEController.clear();
       setState(() {});

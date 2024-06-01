@@ -8,6 +8,7 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePa
 import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../../widgets/appbar_method.dart';
@@ -33,12 +34,25 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   late Timer _timer;
   late PageController _announcementPageController;
 
+  //api table data fetch
+  String? classAndTime = "Room: 302, RAB - 10.30 AM";
+  String? classes = "4";
+  String? exams = "1";
+  int? myTodo = 0;
+
+  final List<String> announcements = [
+    '57-A+B | Next Sunday is Viva ',
+    '56-A | Next Sunday is Tutorial ',
+    '60-E | Next Sunday Class is Canceled ',
+  ];
+
   @override
   void initState() {
     super.initState();
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
+    //Get.find<FacAnnouncementController>().facShowAnnouncement();
   }//
 
   @override
@@ -47,6 +61,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     _announcementPageController.dispose();
     super.dispose();
   }
+
+
 
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
@@ -61,17 +77,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     });
   }
 
-  //api table data fetch
-  String? classAndTime = "Room: 302, RAB - 10.30 AM";
-  String? classes = "4";
-  String? exams = "1";
-  String? myTodo = "3";
 
-  final List<String> announcements = [
-    '57-A+B | Next Sunday is Viva ',
-    '56-A | Next Sunday is Tutorial ',
-    '60-E | Next Sunday Class is Canceled ',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -196,29 +202,33 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                           SizedBox(
                             width: 26.w,
                           ),
-                          ClipOval(
-                            child: Container(
-                              color: Colors.white,
-                              width: 80.w,
-                              height: 80.h,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    myTodo!,
-                                    style: TextStyle(
-                                        fontSize: 30.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  Text(
-                                    "My ToDo",
-                                    style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
+                          InkWell(
+                            onTap: (){
+                              Get.find<FacMainBottomNavController>().changeScreen(3);
+                            },
+                            child: ClipOval(
+                              child: Container(
+                                color: Colors.white,
+                                width: 80.w,
+                                height: 80.h,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text('${Get.find<FacAnnouncementController>().facShowAnnouncementModel.data?.length ?? '0'}',
+                                      style: TextStyle(
+                                          fontSize: 30.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      "My ToDo",
+                                      style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

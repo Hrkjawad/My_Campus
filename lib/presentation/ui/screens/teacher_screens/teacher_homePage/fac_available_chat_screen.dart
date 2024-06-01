@@ -22,6 +22,8 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
 
   String? selectedBatch, selectedCourseTitle, selectedCourseCode;
 
+
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -77,8 +79,7 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
             },
             tileColor: AppColors.primaryColor.withOpacity(.7),
             title: Text(
-              facMainBottomNavController.batchCoursePairs[index]
-              ['batch']
+              facMainBottomNavController.batchCoursePairs[index]['batch']
                   .toString(),
               style: const TextStyle(
                   fontSize: 18,
@@ -86,8 +87,7 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                   letterSpacing: 0.1),
             ),
             subtitle: Text(
-              facMainBottomNavController.batchCoursePairs[index]
-              ['courseTitle']
+              facMainBottomNavController.batchCoursePairs[index]['courseTitle']
                   .toString(),
               style: const TextStyle(
                   fontSize: 14,

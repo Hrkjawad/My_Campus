@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
@@ -20,24 +24,7 @@ class FacChatScreen extends StatefulWidget {
 class _FacChatScreenState extends State<FacChatScreen> {
   final TextEditingController _messageTEController = TextEditingController();
 
-  List<Message> messages = [
-    Message(
-        text: 'hii',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'bye',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: true),
-    Message(
-        text: 'ami hasan, soft eng',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: false),
-    Message(
-        text: 'owww accha.....',
-        date: DateTime.now().subtract(const Duration(minutes: 1)),
-        isSentByMe: true),
-  ];
+  List<Message> messages = [];
 
   @override
   Widget build(BuildContext context) {

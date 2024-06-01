@@ -13,12 +13,16 @@ class FacMainBottomNavController extends GetxController {
       final dataList = Get.find<FacShowGroupBatchSectionCourseController>()
           .facultyCreatingSubGrpBatchSecDataList;
 
-      for (final data in dataList!) {
-        final a = data.batch!;
-        final b = data.courseCode!;
-        final c = data.courseTitle!;
-        batchCoursePairs.add({'batch': a, 'courseCode': b, 'courseTitle': c});
+      if (dataList != null) {
+        for (final data in dataList) {
+          final d = data.sId!;
+          final a = data.batch!;
+          final b = data.courseCode!;
+          final c = data.courseTitle!;
+          batchCoursePairs.add({'sId':d,'batch': a, 'courseCode': b, 'courseTitle': c});
+        }
       }
+
       currentSelectedScreen = index;
       update();
     }  else {

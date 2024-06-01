@@ -30,7 +30,7 @@ class _TestStuChatScreenState extends State<TestStuChatScreen> {
         date: DateTime.now().subtract(const Duration(minutes: 1)),
         isSentByMe: false),
     Message(
-        text: 'owww accha.....',
+        text: 'owww accha',
         date: DateTime.now().subtract(const Duration(minutes: 1)),
         isSentByMe: true),
   ];

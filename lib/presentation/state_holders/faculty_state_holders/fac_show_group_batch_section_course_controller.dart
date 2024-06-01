@@ -8,6 +8,7 @@ import '../../../data/models/faculty_model/fac_sub_grp_batch_sec_model.dart';
 class FacShowGroupBatchSectionCourseController extends GetxController {
   bool _inProgress = false;
   String _message = '';
+
   FacultyCreatingSubGrpBatchSecData _facultyCreatingSubGrpBatchSecData =
       FacultyCreatingSubGrpBatchSecData();
   List<FacultyCreatingSubGrpBatchSecData>? _facultyCreatingSubGrpBatchSecDataList;
