@@ -283,23 +283,6 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
               SizedBox(
                 height: 10.h,
               ),
-              // Obx(() {
-              //   final items = batchCoursePairs;
-              //
-              //   return CustomDropdownButton(
-              //     width: 360.w,
-              //     height: 45.h,
-              //     dropDownWidth: 360.w,
-              //     items: items,
-              //     value: selectedBatch,
-              //     hintText: 'Select Batch',
-              //     onChanged: (value) {
-              //       setState(() {
-              //         selectedBatch = value;
-              //       });
-              //     },
-              //   );
-              // }),
 
               CustomDropdownButton(
                 width: 360.w,
