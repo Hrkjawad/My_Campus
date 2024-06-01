@@ -25,7 +25,7 @@ class FacAnnouncementScreen extends StatefulWidget {
 class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate, selectedAnnouncement, selectedBatch, groupId;
+  String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
@@ -51,9 +51,9 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       c = Get.find<FacShowGroupBatchSectionCourseController>()
           .facultyCreatingSubGrpBatchSecDataList
           ?.map((data) =>
-              {'batch': data.batch.toString(), 'sId': data.sId.toString()})
+              {'batch': data.batch.toString(), 'sId': data.sId.toString(), 'senderId': data.member?.map((member) => member.sId.toString()).first})
           .toList();
-      //print('c $c');
+      print('c $c');
 
       //  final dataList = Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList;
       //  //batch.add(dataList.batch.toString());
@@ -308,7 +308,9 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                     if (c != null) {
                       for (var item in c) {
                         if (selectedBatch == item['batch']) {
-                          print(item['sId']);
+                         groupId = item['sId'];
+                         senderId = item['senderId'].toString();
+                         print(senderId);
                         }
                       }
                     }
@@ -383,11 +385,15 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
 
   Future<void> facAddAnnouncement(
       FacAnnouncementController facAnnouncementController) async {
+
+    print(groupId);
+    print(senderId);
+
     final result = await facAnnouncementController.facAddAnnouncement(
         _taskTEController.text.trim(), selectedBatch, selectedDate);
     await Get.find<GroupChattingController>().groupChat(
-      groupId.toString(),
-      '665b188422620c800a94e387',
+      groupId!,
+      senderId!,
       _taskTEController.text.trim(),
       AuthController.fullName0.toString(),
       selectedDate!,
