@@ -385,12 +385,13 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       FacAnnouncementController facAnnouncementController) async {
     final result = await facAnnouncementController.facAddAnnouncement(
         _taskTEController.text.trim(), selectedBatch, selectedDate);
-    // await Get.find<GroupChattingController>().groupChat(
-    //   batchCoursePairs2,
-    //   _taskTEController.text.trim(),
-    //   AuthController.fullName0.toString(),
-    //   selectedDate!,
-    // );//
+    await Get.find<GroupChattingController>().groupChat(
+      groupId.toString(),
+      '665b188422620c800a94e387',
+      _taskTEController.text.trim(),
+      AuthController.fullName0.toString(),
+      selectedDate!,
+    );//
     if (result) {
       Get.snackbar('Successful!', 'Announcement has been added');
       selectedBatch = null;
