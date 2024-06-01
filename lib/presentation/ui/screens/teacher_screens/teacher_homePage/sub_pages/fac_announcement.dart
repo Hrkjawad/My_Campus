@@ -33,11 +33,12 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final List<Map<String, String>> batchCoursePairs = [];
-  late List<String> groupId = [];
-  late List<String> senderId = [
+  late List<String> groupId = [
     '665affb922620c800a94e15b',
     '665b074f22620c800a94e202'
   ];
+  late List<String> batch = [];
+  late List<String> senderId = [];
 
   @override
   void initState() {
@@ -57,7 +58,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
           final c = data.courseTitle!;
           batchCoursePairs
               .add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
-          groupId.add(d);
+          batch.add(a);
           //senderId.addAll();
         }
       }
@@ -283,7 +284,6 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
               SizedBox(
                 height: 10.h,
               ),
-
               CustomDropdownButton(
                 width: 360.w,
                 height: 45.h,
