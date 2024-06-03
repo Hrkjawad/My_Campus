@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 
 import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
@@ -33,6 +34,12 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      print(AuthController.accessToken);
+      print(AuthController.fullName0);
+      print(AuthController.department0);
+      print(AuthController.designation0);
+      print(AuthController.email0);
+      return;
       Get.find<FacAnnouncementController>().facShowAnnouncement();
       Get.find<FacResourceController>().showResource();
        //Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList!();

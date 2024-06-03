@@ -26,7 +26,7 @@ class StuSignInController extends GetxController {
     update();
     if (response.isSuccess) {
       _stuSignInModel = StuSignInModel.fromJson(response.responseJson!);
-      await AuthController.setAccessToken(response.responseJson?['token']);
+      //await AuthController.setAccessToken(response.responseJson?['token']);
       _message = 'Signed In';
       return true;
     } else {

@@ -24,16 +24,32 @@ class FacSignInController extends GetxController {
     _facSignInInProgress = false;
     update();
     if (response.isSuccess) {
-      _facSignInModel = FacSignInModel.fromJson(response.responseJson!);
-      await AuthController.setAccessToken(response.responseJson?['token']);
-      await AuthController.setProfileDetails(
-        response.responseJson!['data'][0]['email'].toString(),
-        response.responseJson!['data'][0]['fullName'].toString(),
-        response.responseJson!['data'][0]['designation'].toString(),
-        response.responseJson!['data'][0]['department'].toString(),
-      );
-      _message = 'Signed In';
-      return true;
+      final Map<String, dynamic> responseData = response.responseJson!;
+      final List<dynamic> userData = responseData['data'];
+      if (userData.isNotEmpty) {
+        final Map<String, dynamic> userDataMap = userData[0];
+        final String token = responseData['token'];
+        final String userEmail = userDataMap['email'].toString();
+        final String fullName = userDataMap['fullName'].toString();
+        final String designation = userDataMap['designation'].toString();
+        final String department = userDataMap['department'].toString();
+
+        await AuthController.setProfileDetails(
+          token,
+          userEmail,
+          fullName,
+          designation,
+          department,
+        );
+
+        print('Hello $userEmail');
+
+        _message = 'Signed In';
+        return true;
+      } else {
+        _message = 'No user found. Try again!!';
+        return false;
+      }
     } else {
       _message = 'No user found. Try again!!';
       return false;
