@@ -20,8 +20,9 @@ class Urls {
   static String chattingGroup(String groupId, String senderId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';
   static String showFacultySubGrpBatchSec = '$_facultyBaseUrl/showFacultySubGrpBatchSec';
   static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
-  static const String facultyShowAnnouncement =
-      '$_facultyBaseUrl/showAnnouncement';
+  static const String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
+  static const String resource = '$_facultyBaseUrl/resource';
+  static const String showResource = '$_facultyBaseUrl/showResources';
   static String facultyDeleteAnnouncement(String id) =>
       '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
   static String facultyAddTask(String batch, section, courseTitle, task) =>

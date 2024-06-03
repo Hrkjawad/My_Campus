@@ -106,48 +106,49 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       padding: EdgeInsets.only(left: 3.0.w),
       child: Stack(
         children: [
-          Container(
-            width: 380.w,
-            height: 450.h,
-            decoration: BoxDecoration(
-              color: const Color(0xFFF8FFAC),
-              border: Border.all(
-                color: const Color(0x999B9B9B),
-              ),
-              borderRadius: BorderRadius.all(
-                Radius.circular(20.w),
-              ),
-            ),
-          ),
-          Container(
-            width: 95.w,
-            height: 450.h,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.w),
-                bottomLeft: Radius.circular(20.w),
-              ),
-              border: const Border(
-                left: BorderSide(
-                  color: Color(0x999B9B9B),
-                ),
-                top: BorderSide(
-                  color: Color(0x999B9B9B),
-                ),
-                bottom: BorderSide(
-                  color: Color(0x999B9B9B),
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   width: 380.w,
+          //   height: 450.h,
+          //   decoration: BoxDecoration(
+          //     color: const Color(0xFFF8FFAC),
+          //     border: Border.all(
+          //       color: const Color(0x999B9B9B),
+          //     ),
+          //     borderRadius: BorderRadius.all(
+          //       Radius.circular(20.w),
+          //     ),
+          //   ),
+          // ),
+          // Container(
+          //   width: 95.w,
+          //   height: 450.h,
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     borderRadius: BorderRadius.only(
+          //       topLeft: Radius.circular(20.w),
+          //       bottomLeft: Radius.circular(20.w),
+          //     ),
+          //     border: const Border(
+          //       left: BorderSide(
+          //         color: Color(0x999B9B9B),
+          //       ),
+          //       top: BorderSide(
+          //         color: Color(0x999B9B9B),
+          //       ),
+          //       bottom: BorderSide(
+          //         color: Color(0x999B9B9B),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           RefreshIndicator(
             onRefresh: () async {
               Get.find<FacAnnouncementController>().facShowAnnouncement();
             },
-            child: SizedBox(
+            child: Container(
               width: 380.w,
               height: 430.h,
+              color: const Color(0xFFF8FFAC),
               child: GetBuilder<FacAnnouncementController>(
                 builder: (facAnnouncementController) {
                   if (facAnnouncementController.facShowAnnouncementInProgress) {

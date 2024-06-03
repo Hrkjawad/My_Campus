@@ -5,6 +5,7 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePa
 
 import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
+import '../../../../state_holders/faculty_state_holders/fac_resource_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../../utility/app_colors.dart';
 import '../../../widgets/file_upload.dart';
@@ -33,6 +34,7 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Get.find<FacAnnouncementController>().facShowAnnouncement();
+      Get.find<FacResourceController>().showResource();
        //Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList!();
       // Get.find<CategoryController>().getCategory();
       // Get.find<PopularProductController>().getPopularProducts();

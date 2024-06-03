@@ -51,15 +51,12 @@ class FacAnnouncementController extends GetxController {
   Future<bool> facShowAnnouncement() async {
     _facShowAnnouncementInProgress = true;
     update();
-    final NetworkResponse response = await NetworkCaller.getRequest(
-      Urls.facultyShowAnnouncement,
-    );
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.facultyShowAnnouncement);
     _facShowAnnouncementInProgress = false;
     update();
 
     if (response.isSuccess) {
-      _facShowAnnouncementModel =
-          FacShowAnnouncementModel.fromJson(response.responseJson ?? {});
+      _facShowAnnouncementModel = FacShowAnnouncementModel.fromJson(response.responseJson ?? {});
       return true;
     } else {
       update();
