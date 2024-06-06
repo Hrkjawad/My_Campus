@@ -25,7 +25,7 @@ class FacAnnouncementScreen extends StatefulWidget {
 class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
+  String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId, assignType;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
@@ -322,6 +322,22 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
               SizedBox(
                 height: 10.h,
               ),
+              CustomDropdownButton(
+                width: 360.w,
+                height: 45.h,
+                dropDownWidth: 360.w,
+                items: const ['None','Assignment', 'Tutorial', 'Viva', 'Lab Report', 'Lab Final'],
+                value: assignType,
+                hintText: 'Assign Type',
+                onChanged: (value) {
+                  setState(() {
+                    assignType = value;
+                  });
+                },
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
               CustomDatePicker(
                 controller: dateInput,
                 width: 360.w,
@@ -389,9 +405,10 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
 
     print(groupId);
     print(senderId);
+    print(assignType);
 
     final result = await facAnnouncementController.facAddAnnouncement(
-        _taskTEController.text.trim(), selectedBatch, selectedDate);
+        _taskTEController.text.trim(), selectedBatch, assignType, selectedDate);
     await Get.find<GroupChattingController>().groupChat(
       groupId!,
       senderId!,
@@ -404,6 +421,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       selectedBatch = null;
       dateInput.clear();
       _taskTEController.clear();
+      assignType = null;
       setState(() {});
       facAnnouncementController.facShowAnnouncement();
     } else {

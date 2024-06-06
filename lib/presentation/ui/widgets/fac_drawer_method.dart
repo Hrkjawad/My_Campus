@@ -33,6 +33,20 @@ Drawer customisedFacultyDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
+                    'My Batch Advisor',
+                    style:
+                    TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  Get.to(() => const FacMyTodo());
+                },
+              ),
+              divider(),
+              ListTile(
+                title: Center(
+                  child: Text(
                     "Department's CR",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
@@ -84,20 +98,6 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                       );
                     },
                   );
-                },
-              ),
-              divider(),
-              ListTile(
-                title: Center(
-                  child: Text(
-                    'My ToDo',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
-                  ),
-                ),
-                hoverColor: Colors.grey,
-                onTap: () {
-                  Get.to(() => const FacMyTodo());
                 },
               ),
               divider(),

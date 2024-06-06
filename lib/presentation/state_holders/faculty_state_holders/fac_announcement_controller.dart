@@ -24,7 +24,7 @@ class FacAnnouncementController extends GetxController {
   FacDeleteAnnouncementModel get facDeleteAnnouncementModel =>
       _facDeleteAnnouncementModel;
 
-  Future<bool> facAddAnnouncement(String task, batch, date) async {
+  Future<bool> facAddAnnouncement(String task, batch, type, date) async {
     _facAnnouncementInProgress = true;
     update();
     final NetworkResponse response = await NetworkCaller.postRequest(
@@ -32,6 +32,7 @@ class FacAnnouncementController extends GetxController {
       {
         "announcement": task,
         "batch": batch.toString(),
+        "type": type.toString(),
         "date": date.toString(),
       },
     );
