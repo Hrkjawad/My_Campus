@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 
 /// don't touch this file, solved file
 
@@ -11,14 +12,14 @@ class AuthController {
       fullName0,
       designation0,
       department0,
-      countt = '1';
+      count0;
 
   static String? accessToken1,
       email1,
       fullName1,
       studentId1,
       department1,
-      count1 = '0',
+      count1,
       batch1,
       section1;
 
@@ -26,7 +27,7 @@ class AuthController {
       String fullName1, String designation1, String department1, String count,
       [String? batch, String? section]) async {
     final SharedPreferences sharedPreferences =
-    await SharedPreferences.getInstance();
+        await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', token);
     await sharedPreferences.setString('email', email1);
     await sharedPreferences.setString('fullName', fullName1);
@@ -38,14 +39,14 @@ class AuthController {
     fullName0 = fullName1;
     designation0 = designation1;
     department0 = designation1;
-    countt = count;
+    count0 = count;
   }
 
   static Future<void> setStudentProfileDetails(String token, String email2,
       String fullName2, String studentId2, String department2, String count2,
       [String? batch, String? section]) async {
     final SharedPreferences sharedPreferences =
-    await SharedPreferences.getInstance();
+        await SharedPreferences.getInstance();
     await sharedPreferences.setString('token', token);
     await sharedPreferences.setString('email', email2);
     await sharedPreferences.setString('fullName', fullName2);
@@ -71,7 +72,7 @@ class AuthController {
     fullName0 = sharedPreferences.getString('fullName');
     designation0 = sharedPreferences.getString('designation');
     department0 = sharedPreferences.getString('department');
-    countt = sharedPreferences.getString('count');
+    count0 = sharedPreferences.getString('count');
 
     if (accessToken == null) {
       return false;
@@ -99,13 +100,15 @@ class AuthController {
   }
 
   static Future<void> clear() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const FacSignInScreen());
   }
 
   static Future<void> clearStu() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const StuSignInScreen());
   }
