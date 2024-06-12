@@ -671,51 +671,51 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-                       Get.to(()=> const MyHomePage());
-                        // showDialog(
-                        //     context: context,
-                        //     builder: (context) {
-                        //       return AlertDialog(
-                        //         title: const Text('Write Batch'),
-                        //         content: SizedBox(
-                        //           height: 150,
-                        //           width: 150,
-                        //           child: Column(
-                        //             //mainAxisAlignment: MainAxisAlignment.start,
-                        //             children: [
-                        //               TextFormField(
-                        //                 controller: batchController,
-                        //               ),
-                        //               SizedBox(
-                        //                 height: 10.h,
-                        //               ),
-                        //               TextFormField(
-                        //                 controller: sectionController,
-                        //               ),
-                        //             ],
-                        //           ),
-                        //         ),
-                        //         actions: [
-                        //           TextButton(
-                        //               style: TextButton.styleFrom(
-                        //                   foregroundColor: Colors.black),
-                        //               onPressed: () {
-                        //                 Navigator.pop(context);
-                        //               },
-                        //               child: const Text('Cancel')),
-                        //           TextButton(
-                        //               style: TextButton.styleFrom(
-                        //                   foregroundColor: Colors.black),
-                        //               onPressed: () {
-                        //                 Get.to(StudentClassRoutinue(
-                        //                   batch: batchController.text.toString(),
-                        //                   section: sectionController.text.toString(),
-                        //                 ));
-                        //               },
-                        //               child: const Text('Go'))
-                        //         ],
-                        //       );
-                        //     });
+
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Write Batch'),
+                                content: SizedBox(
+                                  height: 150,
+                                  width: 150,
+                                  child: Column(
+                                    //mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      TextFormField(
+                                        controller: batchController,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      TextFormField(
+                                        controller: sectionController,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.black),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cancel')),
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.black),
+                                      onPressed: () {
+                                        Get.to(()=> StuClassRoutinue(
+                                          batch: batchController.text,
+                                          section: sectionController.text,
+                                        ));
+                                      },
+                                      child: const Text('Go'))
+                                ],
+                              );
+                            });
                       },
                     ),
                     SizedBox(
