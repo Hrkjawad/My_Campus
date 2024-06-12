@@ -88,6 +88,47 @@ Drawer customisedStudentDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
+                    'My Batch Advisor',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return SizedBox(
+                        width: 500.w,
+                        height: 300.h,
+                        child: AlertDialog(
+                          title: Center(
+                            child: Text(
+                              "Batch Advisor",
+                              style: TextStyle(
+                                  fontSize: 24.sp, fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          content: InteractiveViewer(
+                            boundaryMargin:
+                                EdgeInsets.all(ScreenUtil().setWidth(20)),
+                            minScale: 0.1,
+                            maxScale: 6.0,
+                            child: ListTile(
+                              title: Text('Rana Sir'),
+                              subtitle: Text('Phone: 0177-7777777'),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+              divider(),
+              ListTile(
+                title: Center(
+                  child: Text(
                     'My ToDo',
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),

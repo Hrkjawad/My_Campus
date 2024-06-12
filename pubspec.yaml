@@ -23,6 +23,7 @@ dependencies:
   flutter_screenutil: ^5.9.0
   device_preview: ^1.1.0
   grouped_list: ^5.1.2
+  csv: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -35,6 +36,13 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/my_csv.csv
+    - assets/monday.csv
+    - assets/tuesday.csv
+    - assets/wednesday.csv
+    - assets/thursday.csv
+    - assets/friday.csv
+    - assets/saturday.csv
   # fonts:
   #   - family: Schyler
   #     fonts:

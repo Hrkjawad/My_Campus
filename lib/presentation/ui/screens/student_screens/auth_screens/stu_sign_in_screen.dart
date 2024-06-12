@@ -10,6 +10,7 @@ import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
 import '../../../widgets/customised_elevated_button.dart';
 import '../../../widgets/text_field_with_trailing.dart';
+import '../student_homePage/stu_home_screen.dart';
 
 class StuSignInScreen extends StatefulWidget {
   const StuSignInScreen({super.key});
@@ -19,7 +20,7 @@ class StuSignInScreen extends StatefulWidget {
 }
 
 class _StuSignInScreenState extends State<StuSignInScreen> {
-  final TextEditingController _emailTEController = TextEditingController();
+  final TextEditingController _idController = TextEditingController();
   final TextEditingController _passTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -39,14 +40,27 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                 SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your student email"'',),
+                SizedBox(
+                  width: 323.w,
+                  child: TextFormField(
+                    controller: _idController,
+                    textInputAction: TextInputAction.next,
+                    decoration: const InputDecoration(hintText: 'Student ID'),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your email';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: 12.h,
                 ),
                 PasswordTextField(
                   passwordTEController: _passTEController,
                   isObscure: true,
-                  hintText: 'Confirm Password',
+                  hintText: 'Password',
                 ),
                 SizedBox(
                   height: 30.h,
@@ -63,9 +77,6 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                     return CustomisedElevatedButton(
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
-                          /*Get.to(
-                                () => const StuHomeScreen(),
-                          );*/
                           stuSignIn(stuLoginController);
                         }
                       },
@@ -93,16 +104,15 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
 
   Future<void> stuSignIn(StuSignInController stuLoginController) async {
     final result = await stuLoginController.stuSignIn(
-      _emailTEController.text.trim(),
-      /*('${_emailTEController.text.trim()}@lus.ac.bd'),*/
+      _idController.text.trim(),
       _passTEController.text.trim(),
     );
 
     if (result) {
       Get.snackbar('Successful!', stuLoginController.message);
-      /*Get.to(
+      Get.to(
             () => const StuHomeScreen(),
-      );*/
+      );
     } else {
       Get.snackbar('Failed!', stuLoginController.message,
           colorText: Colors.redAccent);

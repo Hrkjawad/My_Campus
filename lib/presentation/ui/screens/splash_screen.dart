@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/home_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_main_bottom_screen.dart';
@@ -26,9 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
     final result = await AuthController.checkStudentLoginState();
     Future.delayed(const Duration(seconds: 2)).then((value) async {
       if (result) {
-        Get.offAll(const FacMainBottomNavBarScreen());
+        Get.offAll(const StuMainBottomNavBarScreen());
       } else {
-        Get.offAll(const FacSignInScreen());
+        Get.offAll(const StuSignInScreen());
       }
     });
   }

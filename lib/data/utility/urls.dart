@@ -1,6 +1,6 @@
 class Urls {
   static const String _facultyBaseUrl = 'http://10.0.2.2:2006/api/teacher';
-  static const String _studentBaseUrl = 'http://10.0.2.2:2006/api/teacher';
+  static const String _studentBaseUrl = 'http://10.0.2.2:2006/api/student';
 
   static const String availableFaculty = '$_facultyBaseUrl/AvailableTeachers';
   static const String facultyReg = '$_facultyBaseUrl/Registration';
@@ -37,7 +37,7 @@ class Urls {
   static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
   static const String studentReg = '$_studentBaseUrl/Registration';
   static String studentSignIn(email, password) =>
-      '$_facultyBaseUrl/Login/$email/$password';
+      '$_studentBaseUrl/Login/$email/$password';
   static const String studentSignup = '$_studentBaseUrl/ProfileUpdate';
   static String studentVerifyEmail(String email) =>
       '$_studentBaseUrl/RecoverVerifyEmail/$email';
