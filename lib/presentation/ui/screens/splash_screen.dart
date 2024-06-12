@@ -26,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
     final result = await AuthController.checkLoginState();
     Future.delayed(const Duration(seconds: 2)).then((value) async {
       if (result) {
-        print(result);
         Get.offAll(const FacMainBottomNavBarScreen());
       } else {
         Get.offAll(const FacSignInScreen());
