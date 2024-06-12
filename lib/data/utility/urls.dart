@@ -36,7 +36,8 @@ class Urls {
 
   static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
   static const String studentReg = '$_studentBaseUrl/Registration';
-  static const String studentSignIn = '$_studentBaseUrl/Login';
+  static String studentSignIn(email, password) =>
+      '$_facultyBaseUrl/Login/$email/$password';
   static const String studentSignup = '$_studentBaseUrl/ProfileUpdate';
   static String studentVerifyEmail(String email) =>
       '$_studentBaseUrl/RecoverVerifyEmail/$email';
