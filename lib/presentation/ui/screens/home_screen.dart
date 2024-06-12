@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_availability_checking_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_availability_checking_screen.dart';
 import '../widgets/app_logo.dart';
 import '../widgets/customised_elevated_button.dart';
@@ -42,9 +41,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               CustomisedElevatedButton(
                   onTap: () {
-                    Get.to(
+                    /*Get.to(
                       () => const StuAvailabilityCheckScreen(),
-                    );
+                    );*/
                   },
                   text: 'STUDENT'),
             ],
