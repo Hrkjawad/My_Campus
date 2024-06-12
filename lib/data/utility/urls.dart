@@ -16,11 +16,15 @@ class Urls {
   static const String facultyList =
       '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
-  static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
-  static String chattingGroup(String groupId, String senderId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';
-  static String showFacultySubGrpBatchSec = '$_facultyBaseUrl/showFacultySubGrpBatchSec';
+  static String facultySubGrpBatchSec =
+      '$_facultyBaseUrl/createSubjectGroupBatchSections';
+  static String chattingGroup(String groupId, String senderId) =>
+      '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';
+  static String showFacultySubGrpBatchSec =
+      '$_facultyBaseUrl/showFacultySubGrpBatchSec';
   static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
-  static const String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
+  static const String facultyShowAnnouncement =
+      '$_facultyBaseUrl/showAnnouncement';
   static const String resource = '$_facultyBaseUrl/resource';
   static const String showResource = '$_facultyBaseUrl/showResources';
   static String facultyDeleteAnnouncement(String id) =>
@@ -36,7 +40,8 @@ class Urls {
 
   static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
   static const String studentReg = '$_studentBaseUrl/Registration';
-  static const String studentSignIn = '$_studentBaseUrl/Login';
+  static String studentSignIn(email, password) =>
+      '$_facultyBaseUrl/Login/$email/$password';
   static const String studentSignup = '$_studentBaseUrl/ProfileUpdate';
   static String studentVerifyEmail(String email) =>
       '$_studentBaseUrl/RecoverVerifyEmail/$email';
