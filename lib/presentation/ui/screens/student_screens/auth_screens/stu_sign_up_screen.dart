@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
-import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signup_controller.dart';
 import '../../../../state_holders/student_state_holders/auth_state_holders/stu_verify_otp_controller.dart';
 import '../../../widgets/customised_elevated_button.dart';
+import '../../../widgets/new_confirm_password_text_field.dart';
 
 class StuSignUpScreen extends StatefulWidget {
   const StuSignUpScreen({super.key, required this.email});
@@ -22,7 +22,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
   final TextEditingController _otpTEController = TextEditingController();
   final TextEditingController _newPassTEController = TextEditingController();
   final TextEditingController _confirmPassTEController =
-  TextEditingController();
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -64,18 +64,12 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
                   SizedBox(
                     height: 12.h,
                   ),
-                  PasswordTextField(
-                    emailTEController: _newPassTEController,
+                  NewAndConfirmPasswordTextField(
+                    passwordTEController: _newPassTEController,
+                    confirmPasswordTEController: _confirmPassTEController,
                     isObscure: true,
-                    hintText: 'New Password',
-                  ),
-                  SizedBox(
-                    height: 12.h,
-                  ),
-                  PasswordTextField(
-                    emailTEController: _confirmPassTEController,
-                    isObscure: true,
-                    hintText: 'Confirm Password',
+                    password: 'Password',
+                    confirmPassword: 'Confirm Password',
                   ),
                   SizedBox(
                     height: 42.h,
@@ -126,8 +120,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
     }
   }
 
-  Future<void> changePassword(
-      StuSignUpController stuSignUpController) async {
+  Future<void> changePassword(StuSignUpController stuSignUpController) async {
     final result = await stuSignUpController.stuSignUp(
       widget.email,
       _otpTEController.text.trim(),
@@ -136,7 +129,7 @@ class _StuSignUpScreenState extends State<StuSignUpScreen> {
     if (result) {
       Get.snackbar('Successful!', stuSignUpController.message);
       Get.to(
-            () => const StuSignInScreen(),
+        () => const StuSignInScreen(),
       );
     } else {
       Get.snackbar('Failed!', stuSignUpController.message,

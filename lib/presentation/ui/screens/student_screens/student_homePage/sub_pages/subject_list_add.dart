@@ -38,7 +38,7 @@ class _SubjectListAddState extends State<SubjectListAdd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customisedAppBar(scaffoldKey, 'ID: 2122020011'),
+     // appBar: customisedAppBar(scaffoldKey, 'ID: 2122020011'),
       drawer: customisedFacultyDrawer(context),
       body: Scaffold(
         key: scaffoldKey,

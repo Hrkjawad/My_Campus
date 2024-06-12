@@ -10,7 +10,6 @@ import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../widgets/customised_elevated_button.dart';
-import '../teacher_homePage/fac_home_screen.dart';
 
 class FacSignInScreen extends StatefulWidget {
   const FacSignInScreen({super.key});

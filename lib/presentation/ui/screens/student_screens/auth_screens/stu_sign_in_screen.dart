@@ -9,7 +9,6 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
 import '../../../widgets/customised_elevated_button.dart';
-import '../../../widgets/text_field_with_trailing.dart';
 import '../student_homePage/stu_home_screen.dart';
 
 class StuSignInScreen extends StatefulWidget {
@@ -34,20 +33,35 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const TitleAndSubtitle(
-                    title: 'SIGN IN', subtitle: 'Student'),
+                const TitleAndSubtitle(title: 'SIGN IN', subtitle: 'Student'),
                 const AppLogo(),
                 SizedBox(
                   height: 76.h,
                 ),
-                TextFieldWithTrailing(emailTEController: _emailTEController, hintText: "Type your student email"'',),
+                SizedBox(
+                  width: 323.w,
+                  child: TextFormField(
+                    controller: _emailTEController,
+                    textInputAction: TextInputAction.next,
+                    decoration: const InputDecoration(hintText: 'Email'),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please enter your email';
+                      }
+                      if (value!.isEmail == false) {
+                        return 'Enter a valid email';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: 12.h,
                 ),
                 PasswordTextField(
-                  emailTEController: _passTEController,
+                  passwordTEController: _passTEController,
                   isObscure: true,
-                  hintText: 'Confirm Password',
+                  hintText: 'Password',
                 ),
                 SizedBox(
                   height: 30.h,
@@ -65,7 +79,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                       onTap: () async {
                         if (_formKey.currentState!.validate()) {
                           Get.to(
-                                () => const StuHomeScreen(),
+                            () => const StuHomeScreen(),
                           );
                           stuSignIn(stuLoginController);
                         }
@@ -80,7 +94,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                 CustomisedTextButton(
                     onTap: () {
                       Get.to(
-                            () => const StuRecoveryEmailScreen(),
+                        () => const StuRecoveryEmailScreen(),
                       );
                     },
                     text: 'Forgot Password')
@@ -102,7 +116,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
     if (result) {
       Get.snackbar('Successful!', stuLoginController.message);
       Get.to(
-            () => const StuHomeScreen(),
+        () => const StuHomeScreen(),
       );
     } else {
       Get.snackbar('Failed!', stuLoginController.message,

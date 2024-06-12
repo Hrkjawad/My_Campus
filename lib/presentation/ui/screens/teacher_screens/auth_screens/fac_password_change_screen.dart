@@ -65,9 +65,6 @@ class _FacPasswordChangeScreenState extends State<FacPasswordChangeScreen> {
                     hintText: 'New Password',
                   ),
                   SizedBox(
-                    height: 13.h,
-                  ),
-                  SizedBox(
                     height: 40.h,
                   ),
                   GetBuilder<FacVerifyOTPController>(

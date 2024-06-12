@@ -21,7 +21,6 @@ class StuPasswordChangeScreen extends StatefulWidget {
 
 class _StuPasswordChangeScreenState extends State<StuPasswordChangeScreen> {
   final TextEditingController _newPassTEController = TextEditingController();
-  final TextEditingController _confirmTEController = TextEditingController();
   final TextEditingController _otpTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
@@ -61,17 +60,9 @@ class _StuPasswordChangeScreenState extends State<StuPasswordChangeScreen> {
                     height: 13.h,
                   ),
                   PasswordTextField(
-                    emailTEController: _newPassTEController,
+                    passwordTEController: _newPassTEController,
                     isObscure: true,
                     hintText: 'New Password',
-                  ),
-                  SizedBox(
-                    height: 13.h,
-                  ),
-                  PasswordTextField(
-                    emailTEController: _confirmTEController,
-                    isObscure: true,
-                    hintText: 'Confirm Password',
                   ),
                   SizedBox(
                     height: 40.h,
@@ -133,7 +124,7 @@ class _StuPasswordChangeScreenState extends State<StuPasswordChangeScreen> {
     if (result) {
       Get.snackbar('Successful!', stuPasswordChangeController.message);
       Get.to(
-            () => const FacSignInScreen(),
+        () => const FacSignInScreen(),
       );
     } else {
       Get.snackbar('Failed!', stuPasswordChangeController.message,
