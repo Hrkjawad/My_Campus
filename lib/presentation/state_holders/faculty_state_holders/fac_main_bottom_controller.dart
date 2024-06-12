@@ -9,8 +9,7 @@ class FacMainBottomNavController extends GetxController {
     if (index == 1) {
       await Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
 
-      final dataList = Get.find<FacShowGroupBatchSectionCourseController>()
-          .facultyCreatingSubGrpBatchSecDataList;
+      final dataList = Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList;
 
       if (dataList != null) {
         for (final data in dataList) {

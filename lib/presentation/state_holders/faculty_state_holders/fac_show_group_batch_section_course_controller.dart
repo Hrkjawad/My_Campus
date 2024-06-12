@@ -36,8 +36,7 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
               .data;
 
       if (responseData is List) {
-        _facultyCreatingSubGrpBatchSecDataList =
-            responseData.cast<FacultyCreatingSubGrpBatchSecData>();
+        _facultyCreatingSubGrpBatchSecDataList = responseData.cast<FacultyCreatingSubGrpBatchSecData>();
         _message = 'Added';
       } else if (responseData is FacultyCreatingSubGrpBatchSecData) {
         _facultyCreatingSubGrpBatchSecData = responseData;
