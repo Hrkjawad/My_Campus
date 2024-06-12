@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
+
 /// don't touch this file, solved file
 
 class AuthController {
@@ -90,9 +92,7 @@ class AuthController {
     section1 = sharedPreferences.getString('section');
     count1 = sharedPreferences.getString('count');
 
-
-
-    if (accessToken == null) {
+    if (accessToken1 == null) {
       return false;
     } else {
       return true;
@@ -100,13 +100,18 @@ class AuthController {
   }
 
   static Future<void> clear() async {
-    final SharedPreferences sharedPreferences =
-        await SharedPreferences.getInstance();
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const FacSignInScreen());
   }
 
-  static bool get isLoggedIn {
-    return accessToken != null;
+  static Future<void> clearStu() async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    Get.offAll(() => const StuSignInScreen());
   }
+
+  // static bool get isLoggedIn {
+  //   return accessToken != null;
+  // }
 }
