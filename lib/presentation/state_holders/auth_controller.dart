@@ -12,14 +12,14 @@ class AuthController {
       fullName0,
       designation0,
       department0,
-      countt = '1';
+      countt;
 
   static String? accessToken1,
       email1,
       fullName1,
       studentId1,
       department1,
-      count1 = '0',
+      count1,
       batch1,
       section1;
 
