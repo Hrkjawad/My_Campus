@@ -17,6 +17,7 @@ class Urls {
       '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
   static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
+  static String joinSubjectGroupBatchSections(String groupId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId';
   static String chattingGroup(String groupId, String senderId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';
   static String showFacultySubGrpBatchSec = '$_facultyBaseUrl/showFacultySubGrpBatchSec';
   static const String facultyAddAnnouncement = '$_facultyBaseUrl/announcement';
@@ -44,4 +45,6 @@ class Urls {
   static String studentVerifyOTP(String email, String otp) =>
       '$_studentBaseUrl/RecoverVerifyOtp/$email/$otp';
   static String studentPasswordChange = '$_studentBaseUrl/RecoverResetPassword';
+
+  static String availableCourseBatch = '$_studentBaseUrl/availableCourseBatch';
 }

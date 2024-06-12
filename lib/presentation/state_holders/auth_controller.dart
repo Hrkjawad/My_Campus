@@ -105,6 +105,12 @@ class AuthController {
     Get.offAll(() => const FacSignInScreen());
   }
 
+  static Future<void> clear2() async {
+    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.clear();
+    Get.offAll(() => const StuSignInScreen());
+  }
+
   static Future<void> clearStu() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();

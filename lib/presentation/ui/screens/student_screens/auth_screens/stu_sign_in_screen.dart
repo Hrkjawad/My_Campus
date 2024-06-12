@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_recovery_email_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/customised_text_button.dart';
 import 'package:my_campus/presentation/ui/widgets/password_text_field.dart';
@@ -111,7 +112,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
     if (result) {
       Get.snackbar('Successful!', stuLoginController.message);
       Get.to(
-            () => const StuHomeScreen(),
+            () => const StuMainBottomNavBarScreen(),
       );
     } else {
       Get.snackbar('Failed!', stuLoginController.message,

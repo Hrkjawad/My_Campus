@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/course_offering_list.dart';
 import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
@@ -14,6 +16,20 @@ Drawer customisedStudentDrawer(BuildContext context) {
           child: ListView(
             shrinkWrap: true,
             children: [
+              ListTile(
+                title: Center(
+                  child: Text(
+                    'Course Offering List',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  Get.to(() => CourseOfferingList());
+                },
+              ),
+              divider(),
               ListTile(
                 title: Center(
                   child: Text(

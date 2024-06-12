@@ -72,10 +72,6 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
                           color: Colors.blue, size: 30.w),
                       label: 'Courses'),
                   BottomNavigationBarItem(
-                      icon: Icon(Icons.my_library_books_rounded,
-                          color: Colors.red, size: 30.w),
-                      label: 'Resources'),
-                  BottomNavigationBarItem(
                       icon: Icon(Icons.today_outlined,
                           color: Colors.brown, size: 30.w),
                       label: 'My Todo'),
