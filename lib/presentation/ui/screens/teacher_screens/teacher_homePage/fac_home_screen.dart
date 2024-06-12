@@ -53,7 +53,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
     //Get.find<FacAnnouncementController>().facShowAnnouncement();
-  }//
+  } //
 
   @override
   void dispose() {
@@ -76,8 +76,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       );
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +201,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             width: 26.w,
                           ),
                           InkWell(
-                            onTap: (){
+                            onTap: () {
                               Get.find<FacMainBottomNavController>().changeScreen(3);
                             },
                             child: ClipOval(
@@ -398,7 +396,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       ),
     );
   }
-
 
   Widget buildAnnouncementCard(String announcement) {
     return GestureDetector(

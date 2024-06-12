@@ -43,7 +43,7 @@ class _StuSignInScreenState extends State<StuSignInScreen> {
                   child: TextFormField(
                     controller: _emailTEController,
                     textInputAction: TextInputAction.next,
-                    decoration: const InputDecoration(hintText: 'Email'),
+                    decoration: const InputDecoration(hintText: 'ID'),
                     validator: (String? value) {
                       if (value?.trim().isEmpty ?? true) {
                         return 'Please enter your email';
