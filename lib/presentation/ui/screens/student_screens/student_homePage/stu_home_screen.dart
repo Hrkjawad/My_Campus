@@ -671,7 +671,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                       Get.to(()=> const MyHomePage());
                         // showDialog(
                         //     context: context,
                         //     builder: (context) {

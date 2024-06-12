@@ -96,6 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String? eight6;
   String? eight7;
 
+  bool _isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -103,67 +105,72 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _fetchData() async {
-    final _rawData7 = await rootBundle.loadString('assets/saturday.csv');
-    final _rawData = await rootBundle.loadString('assets/my_csv.csv');
-    final _rawData2 = await rootBundle.loadString('assets/monday.csv');
-    final _rawData3 = await rootBundle.loadString('assets/tuesday.csv');
-    final _rawData4 = await rootBundle.loadString('assets/wednesday.csv');
-    final _rawData5 = await rootBundle.loadString('assets/thursday.csv');
-    final _rawData6 = await rootBundle.loadString('assets/friday.csv');
+
+    setState(() {
+      _isLoading = true; // Start loading
+    });
+
+    final rawData7 = await rootBundle.loadString('assets/saturdayy.csv');
+    final rawData = await rootBundle.loadString('assets/sundayy.csv');
+    final rawData2 = await rootBundle.loadString('assets/mondayy.csv');
+    final rawData3 = await rootBundle.loadString('assets/tuesdayy.csv');
+    final rawData4 = await rootBundle.loadString('assets/wednesdayy.csv');
+    final rawData5 = await rootBundle.loadString('assets/thursdayy.csv');
+    final rawData6 = await rootBundle.loadString('assets/fridayy.csv');
 
 
-    List<List<dynamic>> _listData =
-    const CsvToListConverter().convert(_rawData);
-    List<List<dynamic>> _listData2 =
-    const CsvToListConverter().convert(_rawData2);
-    List<List<dynamic>> _listData3 =
-    const CsvToListConverter().convert(_rawData3);
-    List<List<dynamic>> _listData4 =
-    const CsvToListConverter().convert(_rawData4);
-    List<List<dynamic>> _listData5 =
-    const CsvToListConverter().convert(_rawData5);
-    List<List<dynamic>> _listData6 =
-    const CsvToListConverter().convert(_rawData6);
-    List<List<dynamic>> _listData7 =
-    const CsvToListConverter().convert(_rawData7);
+    List<List<dynamic>> listData =
+    const CsvToListConverter().convert(rawData);
+    List<List<dynamic>> listData2 =
+    const CsvToListConverter().convert(rawData2);
+    List<List<dynamic>> listData3 =
+    const CsvToListConverter().convert(rawData3);
+    List<List<dynamic>> listData4 =
+    const CsvToListConverter().convert(rawData4);
+    List<List<dynamic>> listData5 =
+    const CsvToListConverter().convert(rawData5);
+    List<List<dynamic>> listData6 =
+    const CsvToListConverter().convert(rawData6);
+    List<List<dynamic>> listData7 =
+    const CsvToListConverter().convert(rawData7);
 
-    _filteredValues = _listData.where((row) {
+    _filteredValues = listData.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
     }).toList();
 
-    _filteredValues2 = _listData2.where((row) {
+    _filteredValues2 = listData2.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
     }).toList();
 
-    _filteredValues3 = _listData3.where((row) {
+    _filteredValues3 = listData3.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
     }).toList();
 
-    _filteredValues4 = _listData4.where((row) {
+    _filteredValues4 = listData4.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
     }).toList();
 
-    _filteredValues5 = _listData5.where((row) {
+    _filteredValues5 = listData5.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
     }).toList();
 
-    _filteredValues6 = _listData6.where((row) {
+    _filteredValues6 = listData6.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
     }).toList();
 
-    _filteredValues7 = _listData7.where((row) {
+    _filteredValues7 = listData7.where((row) {
       return row.isNotEmpty &&
           row[1].toString() == batchToFilter &&
           row[2].toString() == sectionToFilter;
@@ -267,19 +274,23 @@ class _MyHomePageState extends State<MyHomePage> {
     jThu = [one5, two5, three5, four5, five5, six5, seven5, eight5];
     jFri = [one6, two6, three6, four6, five6, six6, seven6, eight6];
     jSat = [one7, two7, three7, four7, five7, six7, seven7, eight7];
+
+    setState(() {
+      _isLoading = false; // End loading
+    });
+
   }
 
   @override
   Widget build(BuildContext context) {
+   //print(batchToFilter);
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Rotinue'),
       ),
-      body: RefreshIndicator(
-        onRefresh: (){
-          return _fetchData();
-        },
-        child: Padding(
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator()) // Show loading indicator
+          : Padding(
           padding: const EdgeInsets.all(4.0),
           child: Center(
             child: SingleChildScrollView(
@@ -610,8 +621,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
