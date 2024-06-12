@@ -12,14 +12,14 @@ class AuthController {
       fullName0,
       designation0,
       department0,
-      count0;
+      facCount;
 
   static String? accessToken1,
       email1,
       fullName1,
       studentId1,
       department1,
-      count1,
+      stuCount,
       batch1,
       section1;
 
@@ -39,7 +39,7 @@ class AuthController {
     fullName0 = fullName1;
     designation0 = designation1;
     department0 = designation1;
-    count0 = count;
+    facCount = count;
   }
 
   static Future<void> setStudentProfileDetails(String token, String email2,
@@ -62,7 +62,7 @@ class AuthController {
     department1 = department2;
     batch1 = batch;
     section1 = section;
-    count1 = count2;
+    stuCount = count2;
   }
 
   static Future<bool> checkLoginState() async {
@@ -72,7 +72,7 @@ class AuthController {
     fullName0 = sharedPreferences.getString('fullName');
     designation0 = sharedPreferences.getString('designation');
     department0 = sharedPreferences.getString('department');
-    count0 = sharedPreferences.getString('count');
+    facCount = sharedPreferences.getString('count');
 
     if (accessToken == null) {
       return false;
@@ -90,7 +90,7 @@ class AuthController {
     department1 = sharedPreferences.getString('department');
     batch1 = sharedPreferences.getString('batch');
     section1 = sharedPreferences.getString('section');
-    count1 = sharedPreferences.getString('count');
+    stuCount = sharedPreferences.getString('count');
 
     if (accessToken1 == null) {
       return false;

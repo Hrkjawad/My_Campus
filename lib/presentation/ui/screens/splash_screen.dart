@@ -1,8 +1,8 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/home_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_up_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
@@ -16,7 +16,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -25,18 +24,27 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void checkUserAuthState() async {
     final result = await AuthController.checkLoginState();
-    Future.delayed(const Duration(seconds: 2)).then((value) async {
-      if(result){
-        print(result);
-        Get.offAll(const FacMainBottomNavBarScreen());
-
-      }else{
-        Get.offAll(const FacSignInScreen());
-      }
-
-    });
+    Future.delayed(const Duration(seconds: 2)).then(
+      (value) async {
+        if (result) {
+          log(result.toString());
+          if (AuthController.facCount == '1') {
+            log(AuthController.facCount.toString());
+            log(AuthController.stuCount.toString());
+            Get.offAll(
+              () => const FacMainBottomNavBarScreen(),
+            );
+          } else if (AuthController.stuCount == '0') {
+            Get.offAll(
+              () => const StuHomeScreen(),
+            );
+          }
+        } else {
+          Get.offAll(() => const HomeScreen());
+        }
+      },
+    );
   }
-
 
   @override
   Widget build(BuildContext context) {
