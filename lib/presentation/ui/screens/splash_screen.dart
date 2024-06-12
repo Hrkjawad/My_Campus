@@ -16,7 +16,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -24,21 +23,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void checkUserAuthState() async {
-
-
     final result = await AuthController.checkLoginState();
     Future.delayed(const Duration(seconds: 2)).then((value) async {
-      if(result && AuthController.countt == '1'){
+      if (result) {
         print(result);
         Get.offAll(const FacMainBottomNavBarScreen());
-
-      } else{
+      } else {
         Get.offAll(const FacSignInScreen());
       }
-
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
