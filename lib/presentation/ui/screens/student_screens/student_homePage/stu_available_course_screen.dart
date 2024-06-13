@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_enrolled_course_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_chat_screen.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 
 import '../../../../state_holders/auth_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
+import '../../../../state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import '../../../widgets/app_logo.dart';
-import '../../../widgets/dropdown_button.dart';
 
 class StuAvailableCourseScreen extends StatefulWidget {
   const StuAvailableCourseScreen({super.key});
@@ -35,7 +31,7 @@ class _StuAvailableCourseScreenState extends State<StuAvailableCourseScreen> {
     return PopScope(
       canPop: false,
       onPopInvoked: (_) {
-        Get.find<FacMainBottomNavController>().backToHome();
+        Get.find<StuMainBottomNavController>().changeScreen(0);
       },
       child: SafeArea(
         child: GetBuilder<StuEnrolledCourseController>(

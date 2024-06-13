@@ -2,8 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/student_subPages/stu_class_routinue.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/student_subPages/stu_subj_list_add_screen.dart';
+import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
@@ -43,6 +46,12 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Assignment');
+      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Tutorial');
+      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Viva');
+      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Lab Report');
+    });
   }
 
   @override
@@ -93,555 +102,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                 SizedBox(
                   height: 20.h,
                 ),
+                buildTasksType(),
                 SizedBox(
-                  height: 83.h,
-                  width: 370.w,
-                  child: GestureDetector(
-                    onTap: () {
-                      showModalBottomSheet(
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Expanded(
-                            child: Center(
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 3.w),
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      width: 380.w,
-                                      height: 400.h,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF8FFAC),
-                                        border: Border.all(
-                                          color: const Color(0x999B9B9B),
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.w),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 290.w,
-                                      height: 400.h,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20.w),
-                                          bottomLeft: Radius.circular(20.w),
-                                        ),
-                                        border: const Border(
-                                          left: BorderSide(
-                                            color: Color(0x999B9B9B),
-                                          ),
-                                          top: BorderSide(
-                                            color: Color(0x999B9B9B),
-                                          ),
-                                          bottom: BorderSide(
-                                            color: Color(0x999B9B9B),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 90.w,
-                                      height: 400.h,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFFF8FFAC),
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(20.w),
-                                          bottomLeft: Radius.circular(20.w),
-                                        ),
-                                        border: const Border(
-                                          left: BorderSide(
-                                            color: Color(0x999B9B9B),
-                                          ),
-                                          top: BorderSide(
-                                            color: Color(0x999B9B9B),
-                                          ),
-                                          bottom: BorderSide(
-                                            color: Color(0x999B9B9B),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 380.w,
-                                      height: 400.h,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: const Color(0x999B9B9B),
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(20.w),
-                                      ),
-                                      child: SingleChildScrollView(
-                                        child: DataTable(
-                                          dataRowMaxHeight: 105.h,
-                                          columnSpacing: 24.w,
-                                          horizontalMargin: 10.w,
-                                          columns: [
-                                            DataColumn(
-                                              label: Text(
-                                                'Type',
-                                                style: TextStyle(
-                                                  color:
-                                                      const Color(0xFF0D6858),
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 26.sp,
-                                                ),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 50.0.w),
-                                                child: Text(
-                                                  'Note',
-                                                  style: TextStyle(
-                                                    color:
-                                                        const Color(0xFF0D6858),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 26.sp,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            DataColumn(
-                                              label: Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 50.0.w),
-                                                child: Text(
-                                                  'Date',
-                                                  style: TextStyle(
-                                                    color:
-                                                        const Color(0xFF0D6858),
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 26.sp,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                          rows: tableData.map(
-                                            (data) {
-                                              return DataRow(
-                                                cells: [
-                                                  DataCell(
-                                                    GestureDetector(
-                                                      onLongPress: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                "Delete Data",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        24.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w900),
-                                                              ),
-                                                              content: Text(
-                                                                  "Are you sure you want to delete this data?",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500)),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                      "NO",
-                                                                      style: TextStyle(
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.green)),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    setState(
-                                                                        () {
-                                                                      tableData
-                                                                          .remove(
-                                                                              data);
-                                                                    });
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                      "YES",
-                                                                      style: TextStyle(
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.red)),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                      },
-                                                      child: SizedBox(
-                                                        width: 80.w,
-                                                        child: Wrap(
-                                                          children: [
-                                                            Text(
-                                                              data['Type']!,
-                                                              softWrap: true,
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 19.sp,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  DataCell(
-                                                    GestureDetector(
-                                                      onLongPress: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                "Delete Data",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        24.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w900),
-                                                              ),
-                                                              content: Text(
-                                                                  "Are you sure you want to delete this data?",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500)),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                      "NO",
-                                                                      style: TextStyle(
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.green)),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    setState(
-                                                                        () {
-                                                                      tableData
-                                                                          .remove(
-                                                                              data);
-                                                                    });
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                      "YES",
-                                                                      style: TextStyle(
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.red)),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                      },
-                                                      child: SizedBox(
-                                                        width: 160.w,
-                                                        child: Wrap(
-                                                          children: [
-                                                            Text(
-                                                              data['Note']!,
-                                                              softWrap: true,
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 19.sp,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  DataCell(
-                                                    GestureDetector(
-                                                      onLongPress: () {
-                                                        showDialog(
-                                                          context: context,
-                                                          builder: (BuildContext
-                                                              context) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                "Delete Data",
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        24.sp,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w900),
-                                                              ),
-                                                              content: Text(
-                                                                  "Are you sure you want to delete this data?",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          20.sp,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500)),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                      "NO",
-                                                                      style: TextStyle(
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.green)),
-                                                                ),
-                                                                TextButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                    setState(
-                                                                        () {
-                                                                      tableData
-                                                                          .remove(
-                                                                              data);
-                                                                    });
-                                                                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                  },
-                                                                  child: Text(
-                                                                      "YES",
-                                                                      style: TextStyle(
-                                                                          fontSize: 18
-                                                                              .sp,
-                                                                          fontWeight: FontWeight
-                                                                              .w500,
-                                                                          color:
-                                                                              Colors.red)),
-                                                                ),
-                                                              ],
-                                                            );
-                                                          },
-                                                        );
-                                                      },
-                                                      child: SizedBox(
-                                                        width: 80.w,
-                                                        child: Wrap(
-                                                          children: [
-                                                            Text(
-                                                              data['Date']!,
-                                                              softWrap: true,
-                                                              style: TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 14.sp,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ).toList(),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    child: Card(
-                      color: const Color(0xEEE5FEF3),
-                      elevation: 3,
-                      margin: EdgeInsets.symmetric(horizontal: 10.0.w),
-                      shape: RoundedRectangleBorder(
-                        side: const BorderSide(color: Color(0x999B9B9B)),
-                        borderRadius: BorderRadius.circular(50.w),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 43.w,
-                              ),
-                              Text(
-                                assignment!,
-                                style: TextStyle(
-                                  fontSize: 34.sp,
-                                  fontWeight: FontWeight.w900,
-                                  color: const Color(0xFF0D6858),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 52.w,
-                              ),
-                              Text(
-                                viva!,
-                                style: TextStyle(
-                                  fontSize: 34.sp,
-                                  fontWeight: FontWeight.w900,
-                                  color: const Color(0xFF0D6858),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 36.w,
-                              ),
-                              Text(
-                                tutorial!,
-                                style: TextStyle(
-                                  fontSize: 34.sp,
-                                  fontWeight: FontWeight.w900,
-                                  color: const Color(0xFF0D6858),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 32.w,
-                              ),
-                              Text(
-                                todo!,
-                                style: TextStyle(
-                                  fontSize: 34.sp,
-                                  fontWeight: FontWeight.w900,
-                                  color: const Color(0xFF0D6858),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 43.w,
-                              ),
-                              Text(
-                                presentation!,
-                                style: TextStyle(
-                                  fontSize: 34.sp,
-                                  fontWeight: FontWeight.w900,
-                                  color: const Color(0xFF0D6858),
-                                ),
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Spacer(),
-                              Text(
-                                "Assignment",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                              Text(
-                                "Viva",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                              Text(
-                                "Tutorial",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                              Text(
-                                "ToDo",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                              Text(
-                                "Presentation",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const Spacer(),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.h,
+                  height: 8.h,
                 ),
                 SizedBox(
                   height: 134.h,
@@ -671,7 +134,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-
                         showDialog(
                             context: context,
                             builder: (context) {
@@ -707,10 +169,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                                       style: TextButton.styleFrom(
                                           foregroundColor: Colors.black),
                                       onPressed: () {
-                                        Get.to(()=> StuClassRoutinue(
-                                          batch: batchController.text,
-                                          section: sectionController.text,
-                                        ));
+                                        Get.to(() => StuClassRoutinue(
+                                              batch: batchController.text,
+                                              section: sectionController.text,
+                                            ));
                                       },
                                       child: const Text('Go'))
                                 ],
@@ -775,14 +237,18 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                     SizedBox(
                       width: 71.w,
                     ),
-                    CardElevatedButton(
-                      width: 142.w,
-                      height: 102.h,
-                      text: 'Subject\n   List',
-                      color: 0xFFF8FFAC,
-                      onTap: () {
-                        Get.to(const StudentSubjectListAdd());
-                      },
+                    GetBuilder<StuMainBottomNavController>(
+                      builder: (stuMainBottomNavController) {
+                        return CardElevatedButton(
+                          width: 142.w,
+                          height: 102.h,
+                          text: 'Subject\n   List',
+                          color: 0xFFF8FFAC,
+                          onTap: () async{
+                            stuMainBottomNavController.changeScreen(1);
+                          },
+                        );
+                      }
                     ),
                   ],
                 ),
@@ -875,35 +341,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                                     "Exams",
                                     style: TextStyle(
                                         fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 8.w,
-                          ),
-                          ClipOval(
-                            child: Container(
-                              color: Colors.white,
-                              width: 80.w,
-                              height: 80.h,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    myAssignment!,
-                                    style: TextStyle(
-                                        fontSize: 32.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  Text(
-                                    "Assignment",
-                                    style: TextStyle(
-                                        fontSize: 14.sp,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
                                   )
@@ -1057,6 +494,93 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
         ),
       ),
     );
+  }
+
+  SizedBox buildTasksType() {
+    return SizedBox(
+                height: 115.h,
+                width: 382.h,
+                child: Card(
+                  color: AppColors.primaryColor,
+                  elevation: 3,
+                  shadowColor: Colors.blue,
+                  child: Center(
+                    child: GetBuilder<BatchAnnouncementController>(
+                      builder: (batchAnnouncementController) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CircleAvatar(
+                                  radius: 32,
+                                  child: Text(batchAnnouncementController.assignment.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Text('Assignment', style: TextStyle(fontWeight: FontWeight.bold),)
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CircleAvatar(
+                                  radius: 32,
+                                  child: Text(
+                                    batchAnnouncementController.tutorial.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Text('Tutorial', style: TextStyle(fontWeight: FontWeight.bold),)
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CircleAvatar(
+                                  radius: 32,
+                                  child: Text(
+                                    batchAnnouncementController.viva.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Text('Viva', style: TextStyle(fontWeight: FontWeight.bold),)
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                CircleAvatar(
+                                  radius: 32,
+                                  child: Text(
+                                    batchAnnouncementController.labReport.toString(),
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                const Text('Lab Report', style: TextStyle(fontWeight: FontWeight.bold),)
+                              ],
+                            ),
+
+                          ],
+                        );
+                      }
+                    ),
+                  ),
+                ),
+              );
   }
 
   Widget buildAnnouncementCard(String announcement) {

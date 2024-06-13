@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_available_course_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
@@ -27,20 +29,16 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
     StuHomeScreen(),
     StuAvailableCourseScreen(),
     StuHomeScreen(),
-    StuHomeScreen(),
   ];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // print(AuthController.accessToken1);
-      // print(AuthController.fullName1);
-      // print(AuthController.department1);
-      // print(AuthController.batch1);
-      // print(AuthController.email1);
-      // return;
-      // Get.find<FacAnnouncementController>().facShowAnnouncement();
+       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Assignment');
+       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Tutorial');
+       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Viva');
+       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Lab Report');
       // Get.find<FacResourceController>().showResource();
       //Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList!();
       // Get.find<CategoryController>().getCategory();
@@ -53,13 +51,13 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<FacMainBottomNavController>(
-        builder: (facMainBottomNavController) {
+    return GetBuilder<StuMainBottomNavController>(
+        builder: (stuMainBottomNavController) {
           return Scaffold(
-            body: _screens[facMainBottomNavController.currentSelectedScreen],
+            body: _screens[stuMainBottomNavController.currentSelectedScreen],
             bottomNavigationBar: BottomNavigationBar(
-                currentIndex: facMainBottomNavController.currentSelectedScreen,
-                onTap: facMainBottomNavController.changeScreen,
+                currentIndex: stuMainBottomNavController.currentSelectedScreen,
+                onTap: stuMainBottomNavController.changeScreen,
                 selectedItemColor: Colors.black,
                 unselectedItemColor: Colors.grey,
                 showUnselectedLabels: true,
