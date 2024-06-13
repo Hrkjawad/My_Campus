@@ -47,4 +47,5 @@ class Urls {
   static String studentPasswordChange = '$_studentBaseUrl/RecoverResetPassword';
 
   static String availableCourseBatch = '$_studentBaseUrl/availableCourseBatch';
+  static String stuEnrolledCourses(stuName) => '$_studentBaseUrl/enrolledCourse/$stuName';
 }

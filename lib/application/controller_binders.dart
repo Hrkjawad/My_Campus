@@ -19,6 +19,7 @@ import '../presentation/state_holders/student_state_holders/auth_state_holders/s
 import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_verify_email_controller.dart';
 import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_verify_otp_controller.dart';
 import '../presentation/state_holders/student_state_holders/available_course_batch_controller.dart';
+import '../presentation/state_holders/student_state_holders/stu_enrolled_course_controller.dart';
 
 class GetXBindings extends Bindings {
   @override
@@ -45,6 +46,7 @@ class GetXBindings extends Bindings {
     Get.put(StuVerifyOTPController());
     Get.put(StuPasswordChangeController());
     Get.put(AvailableCourseBatchController());
+    Get.put(StuEnrolledCourseController());
 
   }
 }

@@ -46,8 +46,7 @@ class _CourseOfferingListState extends State<CourseOfferingList> {
                         .availableCourseBatchModel.data?.length ??
                     0,
                 itemBuilder: (context, index) {
-                  final data = availableCourseBatchController
-                      .availableCourseBatchModel.data?[index];
+                  final data = availableCourseBatchController.availableCourseBatchModel.data?[index];
                   return SizedBox(
                     height: 135,
                     child: ListTile(
