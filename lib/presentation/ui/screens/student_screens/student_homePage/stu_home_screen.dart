@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
@@ -8,6 +10,7 @@ import 'package:my_campus/presentation/ui/screens/student_screens/student_homePa
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/student_subPages/stu_subj_list_add_screen.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../state_holders/student_state_holders/batch_all_announcement_controller.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/bottom_nav.dart';
@@ -47,10 +50,15 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Assignment');
-      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Tutorial');
-      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Viva');
-      Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Lab Report');
+      Get.find<BatchAnnouncementController>()
+          .batchAnnouncement('57 A+B', 'Assignment');
+      Get.find<BatchAnnouncementController>()
+          .batchAnnouncement('57 A+B', 'Tutorial');
+      Get.find<BatchAnnouncementController>()
+          .batchAnnouncement('57 A+B', 'Viva');
+      Get.find<BatchAnnouncementController>()
+          .batchAnnouncement('57 A+B', 'Lab Report');
+      Get.find<BatchAllAnnouncementController>().batchAllAnnouncement('57 A+B');
     });
   }
 
@@ -104,156 +112,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                 ),
                 buildTasksType(),
                 SizedBox(
-                  height: 8.h,
-                ),
-                SizedBox(
-                  height: 134.h,
-                  width: 375.w,
-                  child: PageView.builder(
-                    itemCount: announcements.length,
-                    controller: _announcementPageController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        _currentAnnouncement = index;
-                      });
-                    },
-                    itemBuilder: (context, index) {
-                      return buildAnnouncementCard(announcements[index]);
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CardElevatedButton(
-                      width: 142.w,
-                      height: 102.h,
-                      text: '    My\nClasses',
-                      color: 0xFFACFFDC,
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Write Batch'),
-                                content: SizedBox(
-                                  height: 150,
-                                  width: 150,
-                                  child: Column(
-                                    //mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      TextFormField(
-                                        controller: batchController,
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      TextFormField(
-                                        controller: sectionController,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                      style: TextButton.styleFrom(
-                                          foregroundColor: Colors.black),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Cancel')),
-                                  TextButton(
-                                      style: TextButton.styleFrom(
-                                          foregroundColor: Colors.black),
-                                      onPressed: () {
-                                        Get.to(() => StuClassRoutinue(
-                                              batch: batchController.text,
-                                              section: sectionController.text,
-                                            ));
-                                      },
-                                      child: const Text('Go'))
-                                ],
-                              );
-                            });
-                      },
-                    ),
-                    SizedBox(
-                      width: 71.w,
-                    ),
-                    CardElevatedButton(
-                      width: 142.w,
-                      height: 102.h,
-                      text: '  Exam\nRoutine',
-                      color: 0xFFFFE8D2,
-                      onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return SizedBox(
-                                height: 300.h,
-                                width: 500.w,
-                                child: AlertDialog(
-                                  title: Center(
-                                    child: Text(
-                                      "Exam Routine",
-                                      style: TextStyle(
-                                          fontSize: 24.sp,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  content: InteractiveViewer(
-                                    maxScale: 7.0,
-                                    minScale: 0.1,
-                                    child: Image.asset(
-                                      "assets/images/Bus Time.jpg",
-                                      width: 500.w,
-                                      height: 300.h,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            });
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CardElevatedButton(
-                      width: 142.w,
-                      height: 102.h,
-                      text: 'Cover\nPage',
-                      color: 0xBBB2FF9E,
-                      onTap: () {},
-                    ),
-                    SizedBox(
-                      width: 71.w,
-                    ),
-                    GetBuilder<StuMainBottomNavController>(
-                      builder: (stuMainBottomNavController) {
-                        return CardElevatedButton(
-                          width: 142.w,
-                          height: 102.h,
-                          text: 'Subject\n   List',
-                          color: 0xFFF8FFAC,
-                          onTap: () async{
-                            stuMainBottomNavController.changeScreen(1);
-                          },
-                        );
-                      }
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 25.h,
+                  height: 20.h,
                 ),
                 Stack(
                   alignment: Alignment(0.w, 0.w),
@@ -413,6 +272,154 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                   height: 10.h,
                 ),
                 const Date(),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CardElevatedButton(
+                      width: 142.w,
+                      height: 102.h,
+                      text: '    My\nClasses',
+                      color: 0xFFACFFDC,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Write Batch'),
+                                content: SizedBox(
+                                  height: 150,
+                                  width: 150,
+                                  child: Column(
+                                    //mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      TextFormField(
+                                        controller: batchController,
+                                      ),
+                                      SizedBox(
+                                        height: 10.h,
+                                      ),
+                                      TextFormField(
+                                        controller: sectionController,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.black),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text('Cancel')),
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                          foregroundColor: Colors.black),
+                                      onPressed: () {
+                                        Get.to(() => StuClassRoutinue(
+                                              batch: batchController.text,
+                                              section: sectionController.text,
+                                            ));
+                                      },
+                                      child: const Text('Go'))
+                                ],
+                              );
+                            });
+                      },
+                    ),
+                    SizedBox(
+                      width: 71.w,
+                    ),
+                    CardElevatedButton(
+                      width: 142.w,
+                      height: 102.h,
+                      text: '  Exam\nRoutine',
+                      color: 0xFFFFE8D2,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return SizedBox(
+                                height: 300.h,
+                                width: 500.w,
+                                child: AlertDialog(
+                                  title: Center(
+                                    child: Text(
+                                      "Exam Routine",
+                                      style: TextStyle(
+                                          fontSize: 24.sp,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                  content: InteractiveViewer(
+                                    maxScale: 7.0,
+                                    minScale: 0.1,
+                                    child: Image.asset(
+                                      "assets/images/Bus Time.jpg",
+                                      width: 500.w,
+                                      height: 300.h,
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CardElevatedButton(
+                      width: 142.w,
+                      height: 102.h,
+                      text: 'Cover\nPage',
+                      color: 0xBBB2FF9E,
+                      onTap: () {},
+                    ),
+                    SizedBox(
+                      width: 71.w,
+                    ),
+                    GetBuilder<StuMainBottomNavController>(
+                        builder: (stuMainBottomNavController) {
+                      return CardElevatedButton(
+                        width: 142.w,
+                        height: 102.h,
+                        text: 'Subject\n   List',
+                        color: 0xFFF8FFAC,
+                        onTap: () async {
+                          stuMainBottomNavController.changeScreen(1);
+                        },
+                      );
+                    }),
+                  ],
+                ),
+                SizedBox(
+                  height: 25.h,
+                ),
+                SizedBox(
+                  height: 134.h,
+                  width: 375.w,
+                  child: PageView.builder(
+                    itemCount: announcements.length,
+                    controller: _announcementPageController,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentAnnouncement = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return buildAnnouncementCard(announcements[index]);
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -498,89 +505,271 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
 
   SizedBox buildTasksType() {
     return SizedBox(
-                height: 115.h,
-                width: 382.h,
-                child: Card(
-                  color: AppColors.primaryColor,
-                  elevation: 3,
-                  shadowColor: Colors.blue,
+      height: 83.h,
+      width: 370.w,
+      child: GetBuilder<BatchAllAnnouncementController>(
+          builder: (batchAllAnnouncementController) {
+        return GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              builder: (BuildContext context) {
+                if (batchAllAnnouncementController.inProgress) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: Colors.blue,
+                    ),
+                  );
+                }
+                return Expanded(
                   child: Center(
-                    child: GetBuilder<BatchAnnouncementController>(
-                      builder: (batchAnnouncementController) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatar(
-                                  radius: 32,
-                                  child: Text(batchAnnouncementController.assignment.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                const Text('Assignment', style: TextStyle(fontWeight: FontWeight.bold),)
-                              ],
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 3.w),
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 380.w,
+                            height: 400.h,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF8FFAC),
+                              border: Border.all(
+                                color: const Color(0x999B9B9B),
+                              ),
+                              borderRadius: BorderRadius.circular(20.w),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatar(
-                                  radius: 32,
-                                  child: Text(
-                                    batchAnnouncementController.tutorial.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                          ),
+                          Container(
+                            width: 290.w,
+                            height: 400.h,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.w),
+                                bottomLeft: Radius.circular(20.w),
+                              ),
+                              border: const Border(
+                                left: BorderSide(
+                                  color: Color(0x999B9B9B),
                                 ),
-                                const Text('Tutorial', style: TextStyle(fontWeight: FontWeight.bold),)
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatar(
-                                  radius: 32,
-                                  child: Text(
-                                    batchAnnouncementController.viva.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                top: BorderSide(
+                                  color: Color(0x999B9B9B),
                                 ),
-                                const Text('Viva', style: TextStyle(fontWeight: FontWeight.bold),)
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                CircleAvatar(
-                                  radius: 32,
-                                  child: Text(
-                                    batchAnnouncementController.labReport.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                bottom: BorderSide(
+                                  color: Color(0x999B9B9B),
                                 ),
-                                const Text('Lab Report', style: TextStyle(fontWeight: FontWeight.bold),)
-                              ],
+                              ),
                             ),
-
-                          ],
-                        );
-                      }
+                          ),
+                          Container(
+                            width: 90.w,
+                            height: 400.h,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFF8FFAC),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.w),
+                                bottomLeft: Radius.circular(20.w),
+                              ),
+                              border: const Border(
+                                left: BorderSide(
+                                  color: Color(0x999B9B9B),
+                                ),
+                                top: BorderSide(
+                                  color: Color(0x999B9B9B),
+                                ),
+                                bottom: BorderSide(
+                                  color: Color(0x999B9B9B),
+                                ),
+                              ),
+                            ),
+                          ),
+                          showAllTasks(batchAllAnnouncementController),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              );
+                );
+              },
+            );
+          },
+          child: Card(
+            margin: EdgeInsets.symmetric(horizontal: 10.0.w),
+            shape: RoundedRectangleBorder(
+              side: const BorderSide(color: Color(0x999B9B9B)),
+              borderRadius: BorderRadius.circular(50.w),
+            ),
+            color: const Color(0xEEE5FEF3),
+            elevation: 3,
+            shadowColor: Colors.blue,
+            child: Center(
+              child: GetBuilder<BatchAnnouncementController>(
+                  builder: (batchAnnouncementController) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xEEE5FEF4),
+                          radius: 25,
+                          child: Text(
+                            batchAnnouncementController.assignment.toString(),
+                            style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF0D6858)),
+                          ),
+                        ),
+                        const Text(
+                          'Assignment',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xEEE5FEF3),
+                          radius: 25,
+                          child: Text(
+                            batchAnnouncementController.tutorial.toString(),
+                            style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF0D6858)),
+                          ),
+                        ),
+                        const Text(
+                          'Tutorial',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xEEE5FEF3),
+                          radius: 25,
+                          child: Text(
+                            batchAnnouncementController.viva.toString(),
+                            style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF0D6858)),
+                          ),
+                        ),
+                        const Text(
+                          'Viva',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: const Color(0xEEE5FEF3),
+                          radius: 25,
+                          child: Text(
+                            batchAnnouncementController.labReport.toString(),
+                            style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF0D6858)),
+                          ),
+                        ),
+                        const Text(
+                          'Lab Report',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ],
+                );
+              }),
+            ),
+          ),
+        );
+      }),
+    );
+  }
+
+  Container showAllTasks(
+      BatchAllAnnouncementController batchAllAnnouncementController) {
+    return Container(
+      width: 380.w,
+      height: 400.h,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: const Color(0x999B9B9B),
+        ),
+        borderRadius: BorderRadius.circular(20.w),
+      ),
+      child: Column(
+        children: [
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                'Type',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Text(
+                'Note',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Text(
+                'Date',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ],
+          ),
+          Expanded(
+            child: ListView.separated(
+              itemCount: batchAllAnnouncementController
+                      .batchAnnouncementModel.data?.length ??
+                  0,
+              itemBuilder: (context, index) {
+                final data = batchAllAnnouncementController
+                    .batchAnnouncementModel.data?[index];
+                return ListTile(
+                  leading: Text(
+                    data!.type.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 12),
+                  ),
+                  title: Center(
+                      child: Text(
+                    data.announcement.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16),
+                  )),
+                  trailing: Text(
+                    data.date.toString(),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 12),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const Divider(
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget buildAnnouncementCard(String announcement) {

@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
@@ -11,9 +9,9 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 class FacChatScreen extends StatefulWidget {
   const FacChatScreen(
       {super.key,
-      required this.batch,
-      required this.courseCode,
-      required this.courseTitle});
+        required this.batch,
+        required this.courseCode,
+        required this.courseTitle});
 
   final String batch, courseCode, courseTitle;
 
@@ -122,7 +120,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                     child: TextField(
                       controller: _messageTEController,
                       decoration:
-                          const InputDecoration(hintText: 'Type Message'),
+                      const InputDecoration(hintText: 'Type Message'),
                     ),
                   ),
                   IconButton(
