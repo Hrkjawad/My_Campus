@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,7 @@ class _FacBatchAndCourseListScreenState
                           Get.to(
                             () => FacChatScreen(
                               batch: batch[index],
-                              courseCode: courseCode[index], courseTitle: '',
+                              courseCode: courseCode[index], courseTitle: '', groupID: '', senderID: '',
                             ),
                           );
                         },
@@ -93,3 +94,4 @@ class _FacBatchAndCourseListScreenState
     );
   }
 }
+*/

@@ -113,6 +113,17 @@ class BottomNav extends StatelessWidget {
                                                                       index]
                                                                   ['courseCode']
                                                               .toString(),
+                                                      groupID:
+                                                          facShowGroupBatchSectionCourseController
+                                                              .facultyCreatingSubGrpBatchSecData
+                                                              .sId
+                                                              .toString(),
+                                                      senderID:
+                                                          facShowGroupBatchSectionCourseController
+                                                              .facultyCreatingSubGrpBatchSecData
+                                                              .member![index]
+                                                              .sId
+                                                              .toString(),
                                                     ),
                                                   );
                                                 },

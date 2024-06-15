@@ -19,16 +19,13 @@ class FacAvailableChatScreen extends StatefulWidget {
 }
 
 class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
-
   String? selectedBatch, selectedCourseTitle, selectedCourseCode;
-
-
 
   @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (_){
+      onPopInvoked: (_) {
         Get.find<FacMainBottomNavController>().backToHome();
       },
       child: SafeArea(
@@ -38,20 +35,29 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
             appBar: _buildAppBar,
             body: RefreshIndicator(
               key: const Key('refreshIndicatorKey'),
-              onRefresh: () async{
-                Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
+              onRefresh: () async {
+                Get.find<FacShowGroupBatchSectionCourseController>()
+                    .showGroups();
               },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    _availableGroupsUi(facMainBottomNavController),
-                  ],
-                ),
-              ),
+              child: GetBuilder<FacShowGroupBatchSectionCourseController>(
+                  builder: (facShowGroupBatchSectionCourseController) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      _availableGroupsUi(facMainBottomNavController,
+                          facShowGroupBatchSectionCourseController),
+                    ],
+                  ),
+                );
+              }),
             ),
             floatingActionButton: _createBatchAndCourse(context),
-            bottomNavigationBar: ColoredBox(color: const Color(0xFFCBD0F9), child: BackButton(onPressed: facMainBottomNavController.backToHome),),
+            bottomNavigationBar: ColoredBox(
+              color: const Color(0xFFCBD0F9),
+              child:
+                  BackButton(onPressed: facMainBottomNavController.backToHome),
+            ),
           );
         }),
       ),
@@ -66,16 +72,19 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
     );
   }
 
-  Expanded _availableGroupsUi(FacMainBottomNavController facMainBottomNavController) {
+  Expanded _availableGroupsUi(
+      FacMainBottomNavController facMainBottomNavController,
+      FacShowGroupBatchSectionCourseController
+          facShowGroupBatchSectionCourseController) {
     return Expanded(
       child: ListView.separated(
         key: const Key('refreshIndicatorKey'),
-        itemCount:
-        facMainBottomNavController.batchCoursePairs.length,
+        itemCount: facMainBottomNavController.batchCoursePairs.length,
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              _enterBatchesGroup(facMainBottomNavController, index);
+              _enterBatchesGroup(facMainBottomNavController, index,
+                  facShowGroupBatchSectionCourseController);
             },
             tileColor: AppColors.primaryColor.withOpacity(.7),
             title: Text(
@@ -109,155 +118,164 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
 
   FloatingActionButton _createBatchAndCourse(BuildContext context) {
     return FloatingActionButton(
-            child: const Icon(Icons.add),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return StatefulBuilder(
-                    builder: (context, StateSetter setState) {
-                      return AlertDialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                        ),
-                        title: Center(
-                          child: Text(
-                            "SELECT BATCH & COURSES",
-                            style:
-                            TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w900),
-                          ),
-                        ),
-                        actions: [
-                          Padding(
-                            padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
-                            child: CustomDropdownButton(
-                              width: 332.w,
-                              height: 51.h,
-                              dropDownWidth: 290.w,
-                              items: const ['57-A+B', '56-A', '56-B'],
-                              value: selectedBatch,
-                              hintText: 'Batch',
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedBatch = value;
-                                });
-                              },
+      child: const Icon(Icons.add),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return StatefulBuilder(
+              builder: (context, StateSetter setState) {
+                return AlertDialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16.0),
+                  ),
+                  title: Center(
+                    child: Text(
+                      "SELECT BATCH & COURSES",
+                      style: TextStyle(
+                          fontSize: 22.sp, fontWeight: FontWeight.w900),
+                    ),
+                  ),
+                  actions: [
+                    Padding(
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
+                      child: CustomDropdownButton(
+                        width: 332.w,
+                        height: 51.h,
+                        dropDownWidth: 290.w,
+                        items: const ['57-A+B', '56-A', '56-B'],
+                        value: selectedBatch,
+                        hintText: 'Batch',
+                        onChanged: (value) {
+                          setState(() {
+                            selectedBatch = value;
+                          });
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(12.w),
+                      child: CustomDropdownButton(
+                        width: 332.w,
+                        height: 51.h,
+                        dropDownWidth: 290.w,
+                        items: const ['OOP', 'Data Structure', 'C Programming'],
+                        value: selectedCourseTitle,
+                        hintText: 'Course Title',
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              selectedCourseTitle = value;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(12.w),
+                      child: CustomDropdownButton(
+                        width: 332.w,
+                        height: 51.h,
+                        dropDownWidth: 290.w,
+                        items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
+                        value: selectedCourseCode,
+                        hintText: 'Course Code',
+                        onChanged: (value) {
+                          setState(
+                            () {
+                              selectedCourseCode = value;
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 26,
+                    ),
+                    Center(
+                      child: GetBuilder<FacCreatingSubGrpBatchSecController>(
+                          builder: (facCreatingSubGrpBatchSecController) {
+                        return ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: CircleBorder(
+                              side: BorderSide(
+                                color: Colors.grey,
+                                width: 2.w,
+                              ),
                             ),
+                            backgroundColor: const Color(0xFFFFE8D2),
+                            foregroundColor: const Color(0x999B9B9B),
                           ),
-                          Padding(
-                            padding: EdgeInsets.all(12.w),
-                            child: CustomDropdownButton(
-                              width: 332.w,
-                              height: 51.h,
-                              dropDownWidth: 290.w,
-                              items: const ['OOP', 'Data Structure', 'C Programming'],
-                              value: selectedCourseTitle,
-                              hintText: 'Course Title',
-                              onChanged: (value) {
-                                setState(
-                                      () {
-                                    selectedCourseTitle = value;
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(12.w),
-                            child: CustomDropdownButton(
-                              width: 332.w,
-                              height: 51.h,
-                              dropDownWidth: 290.w,
-                              items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
-                              value: selectedCourseCode,
-                              hintText: 'Course Code',
-                              onChanged: (value) {
-                                setState(
-                                      () {
-                                    selectedCourseCode = value;
-                                  },
-                                );
-                              },
-                            ),
-                          ),
-                          const SizedBox(height: 26,),
-                          Center(
-                            child: GetBuilder<FacCreatingSubGrpBatchSecController>(
-                                builder: (facCreatingSubGrpBatchSecController) {
-                                  return ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(
-                                        side: BorderSide(
-                                          color: Colors.grey,
-                                          width: 2.w,
-                                        ),
-                                      ),
-                                      backgroundColor: const Color(0xFFFFE8D2),
-                                      foregroundColor: const Color(0x999B9B9B),
-                                    ),
-                                    onPressed: () async {
-                                      if (facCreatingSubGrpBatchSecController
-                                          .facCreatingSubGrpBatchSecInProgress) {
-                                        const Center(
-                                          child: LinearProgressIndicator(),
-                                        );
-                                      } else {
-                                        final result =
-                                        await facCreatingSubGrpBatchSecController
-                                            .facCreatingSubGrpBatchSec(
-                                          selectedBatch.toString(),
-                                          selectedCourseTitle.toString(),
-                                          selectedCourseCode.toString(),
-                                          AuthController.email0.toString(),
-                                          AuthController.fullName0.toString(),
-                                          AuthController.designation0.toString(),
-                                          AuthController.department0.toString(),
-                                        );
+                          onPressed: () async {
+                            if (facCreatingSubGrpBatchSecController
+                                .facCreatingSubGrpBatchSecInProgress) {
+                              const Center(
+                                child: LinearProgressIndicator(),
+                              );
+                            } else {
+                              final result =
+                                  await facCreatingSubGrpBatchSecController
+                                      .facCreatingSubGrpBatchSec(
+                                selectedBatch.toString(),
+                                selectedCourseTitle.toString(),
+                                selectedCourseCode.toString(),
+                                AuthController.email0.toString(),
+                                AuthController.fullName0.toString(),
+                                AuthController.designation0.toString(),
+                                AuthController.department0.toString(),
+                              );
 
-                                        if (result) {
-                                          Get.snackbar('Successful!', 'Group Created');
-                                        } else {
-                                          Get.snackbar('Failed!', 'Group Already Created',
-                                              colorText: Colors.redAccent);
-                                        }
-                                      }
-                                    },
-                                    child: const Text(
-                                      "ADD",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  );
-                                }),
+                              if (result) {
+                                Get.snackbar('Successful!', 'Group Created');
+                              } else {
+                                Get.snackbar('Failed!', 'Group Already Created',
+                                    colorText: Colors.redAccent);
+                              }
+                            }
+                          },
+                          child: const Text(
+                            "ADD",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
                           ),
-                          const SizedBox(height: 20,)
-                        ],
-                      );
-                    },
-                  );
-                },
-              );
-            },
-          );
-  }
-
-  void _enterBatchesGroup(FacMainBottomNavController facMainBottomNavController, int index) {
-    Get.to(
-      FacChatScreen(
-        batch: facMainBottomNavController
-            .batchCoursePairs[index]['batch']
-            .toString(),
-        courseCode: facMainBottomNavController
-            .batchCoursePairs[index]['courseCode']
-            .toString(),
-        courseTitle: facMainBottomNavController
-            .batchCoursePairs[index]['courseTitle']
-            .toString(),
-      ),
+                        );
+                      }),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    )
+                  ],
+                );
+              },
+            );
+          },
+        );
+      },
     );
   }
 
-
+  void _enterBatchesGroup(
+      FacMainBottomNavController facMainBottomNavController,
+      int index,
+      FacShowGroupBatchSectionCourseController
+          facShowGroupBatchSectionCourseController) {
+    Get.to(
+      FacChatScreen(
+        batch: facMainBottomNavController.batchCoursePairs[index]['batch']
+            .toString(),
+        courseCode: facMainBottomNavController.batchCoursePairs[index]
+                ['courseCode']
+            .toString(),
+        courseTitle: facMainBottomNavController.batchCoursePairs[index]
+                ['courseTitle']
+            .toString(),
+        groupID: facShowGroupBatchSectionCourseController
+            .facultyCreatingSubGrpBatchSecData.sId
+            .toString(),
+        senderID: '66697048a985c43e8bd4ad00'
+      ),
+    );
+  }
 }

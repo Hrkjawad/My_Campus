@@ -3,11 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
@@ -25,7 +23,12 @@ class FacAnnouncementScreen extends StatefulWidget {
 class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId, assignType;
+  String? selectedDate,
+      selectedAnnouncement,
+      selectedBatch,
+      groupId,
+      senderId,
+      assignType;
 
   TextEditingController dateInput = TextEditingController();
   final TextEditingController _taskTEController = TextEditingController();
@@ -50,8 +53,12 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
 
       c = Get.find<FacShowGroupBatchSectionCourseController>()
           .facultyCreatingSubGrpBatchSecDataList
-          ?.map((data) =>
-              {'batch': data.batch.toString(), 'sId': data.sId.toString(), 'senderId': data.member?.map((member) => member.sId.toString()).first})
+          ?.map((data) => {
+                'batch': data.batch.toString(),
+                'sId': data.sId.toString(),
+                'senderId':
+                    data.member?.map((member) => member.sId.toString()).first
+              })
           .toList();
       print('c $c');
 
@@ -309,13 +316,12 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                     if (c != null) {
                       for (var item in c) {
                         if (selectedBatch == item['batch']) {
-                         groupId = item['sId'];
-                         senderId = item['senderId'].toString();
-                         print(senderId);
+                          groupId = item['sId'];
+                          senderId = item['senderId'].toString();
+                          print(senderId);
                         }
                       }
                     }
-
                   });
                 },
               ),
@@ -326,7 +332,14 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
                 width: 360.w,
                 height: 45.h,
                 dropDownWidth: 360.w,
-                items: const ['None','Assignment', 'Tutorial', 'Viva', 'Lab Report', 'Lab Final'],
+                items: const [
+                  'None',
+                  'Assignment',
+                  'Tutorial',
+                  'Viva',
+                  'Lab Report',
+                  'Lab Final'
+                ],
                 value: assignType,
                 hintText: 'Assign Type',
                 onChanged: (value) {
@@ -402,7 +415,6 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
 
   Future<void> facAddAnnouncement(
       FacAnnouncementController facAnnouncementController) async {
-
     print(groupId);
     print(senderId);
     print(assignType);
@@ -415,7 +427,7 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
       _taskTEController.text.trim(),
       AuthController.fullName0.toString(),
       selectedDate!,
-    );//
+    ); //
     if (result) {
       Get.snackbar('Successful!', 'Announcement has been added');
       selectedBatch = null;

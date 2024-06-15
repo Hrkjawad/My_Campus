@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../../../data/models/network_response.dart';
 import '../../../data/services/network_caller.dart';
 import '../../../data/utility/urls.dart';
@@ -11,7 +10,8 @@ class GroupChattingController extends GetxController {
   bool get inProgress => _inProgress;
   String get message => _message;
 
-  Future<bool> groupChat(String groupId, String senderId, String message, String sender, String date) async {
+  Future<bool> groupChat(String groupId, String senderId, String message,
+      String sender, String date) async {
     _inProgress = true;
     update();
 

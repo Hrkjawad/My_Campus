@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -8,14 +11,18 @@ import 'package:intl/intl.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 
+import '../../../../../state_holders/faculty_state_holders/group_chatting_controller.dart';
+
 class FacChatScreen extends StatefulWidget {
   const FacChatScreen(
       {super.key,
       required this.batch,
       required this.courseCode,
-      required this.courseTitle});
+      required this.courseTitle,
+      required this.groupID,
+      required this.senderID});
 
-  final String batch, courseCode, courseTitle;
+  final String batch, courseCode, courseTitle, groupID, senderID;
 
   @override
   State<FacChatScreen> createState() => _FacChatScreenState();
@@ -125,19 +132,38 @@ class _FacChatScreenState extends State<FacChatScreen> {
                           const InputDecoration(hintText: 'Type Message'),
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      final message = Message(
-                          text: _messageTEController.text,
-                          date: DateTime.now(),
-                          isSentByMe: true);
-                      setState(() {
-                        messages.add(message);
-                      });
-                      _messageTEController.clear();
-                    },
-                    icon: const Icon(Icons.send_outlined),
-                  ),
+                  GetBuilder<GroupChattingController>(
+                      builder: (groupChattingController) {
+                    return IconButton(
+                      onPressed: () async {
+                        final result = await groupChattingController.groupChat(
+                            widget.groupID,
+                            widget.senderID,
+                            _messageTEController.text,
+                            'me',
+                            DateTime.now().toString());
+
+                        if (result) {
+                          Get.snackbar('Successful!', 'msg sent');
+
+                          _messageTEController.clear();
+                        } else {
+                          Get.snackbar('Failed!', "Couldn't send msg!!",
+                              colorText: Colors.redAccent);
+                        }
+
+                        final message = Message(
+                            text: _messageTEController.text,
+                            date: DateTime.now(),
+                            isSentByMe: true);
+                        setState(() {
+                          messages.add(message);
+                        });
+                        _messageTEController.clear();
+                      },
+                      icon: const Icon(Icons.send_outlined),
+                    );
+                  }),
                 ],
               ),
             ],
