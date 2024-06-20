@@ -1,22 +1,21 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/student_subPages/stu_class_routinue.dart';
-import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/student_subPages/stu_subj_list_add_screen.dart';
-import 'package:my_campus/presentation/ui/utility/app_colors.dart';
+
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../state_holders/student_state_holders/batch_all_announcement_controller.dart';
+import '../../../../state_holders/student_state_holders/stu_myTodo_controller.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
-import '../../../widgets/bottom_nav.dart';
+
 import '../../../widgets/dropdown_button.dart';
 import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
+import 'home_subPages/stu_class_routinue.dart';
 
 class StuHomeScreen extends StatefulWidget {
   const StuHomeScreen({super.key});
@@ -43,13 +42,26 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   late Timer _timer;
   late PageController _announcementPageController;
 
+  //api table data fetch
+  String? classAndTime = "Room: 302, RAB - 10.30 AM";
+  String? classes = "4";
+  String? exams = "1";
+  String? myTodo;
+  String? myAssignment = "2";
+
+  final List<String> announcements = [
+    'CSE 1111 | Next Sunday is Viva ',
+    'CSE 2222 | Next Sunday is Tutorial ',
+    'EEE 1111 | Next Sunday Class is Canceled ',
+  ];
+
   @override
   void initState() {
     super.initState();
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Assignment');
       Get.find<BatchAnnouncementController>()
@@ -59,6 +71,8 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
       Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Lab Report');
       Get.find<BatchAllAnnouncementController>().batchAllAnnouncement('57 A+B');
+      await Get.find<StuMyTodoController>().stuShowMyTodo();
+      myTodo = Get.find<StuMyTodoController>().stuMyShowMyTodoModel.count?.toString();
     });
   }
 
@@ -82,18 +96,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
     });
   }
 
-  //api table data fetch
-  String? classAndTime = "Room: 302, RAB - 10.30 AM";
-  String? classes = "4";
-  String? exams = "1";
-  String? myTodo = "3";
-  String? myAssignment = "2";
 
-  final List<String> announcements = [
-    'CSE 1111 | Next Sunday is Viva ',
-    'CSE 2222 | Next Sunday is Tutorial ',
-    'EEE 1111 | Next Sunday Class is Canceled ',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -210,29 +213,34 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                           SizedBox(
                             width: 8.w,
                           ),
-                          ClipOval(
-                            child: Container(
-                              color: Colors.white,
-                              width: 80.w,
-                              height: 80.h,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    myTodo!,
-                                    style: TextStyle(
-                                        fontSize: 30.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  ),
-                                  Text(
-                                    "My ToDo",
-                                    style: TextStyle(
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )
-                                ],
+                          GestureDetector(
+                            onTap: (){
+                              Get.find<StuMainBottomNavController>().changeScreen(2);
+                            },
+                            child: ClipOval(
+                              child: Container(
+                                color: Colors.white,
+                                width: 80.w,
+                                height: 80.h,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      myTodo ?? '0',
+                                      style: TextStyle(
+                                          fontSize: 30.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      "My ToDo",
+                                      style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),

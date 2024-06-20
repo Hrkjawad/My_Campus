@@ -6,6 +6,7 @@ import 'package:my_campus/presentation/state_holders/student_state_holders/batch
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_available_course_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_my_todo.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 
 import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
@@ -28,7 +29,7 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
   final List<Widget> _screens = const [
     StuHomeScreen(),
     StuAvailableCourseScreen(),
-    StuHomeScreen(),
+    StuMyTodoScreen(),
   ];
 
   @override

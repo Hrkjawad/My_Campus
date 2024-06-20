@@ -50,4 +50,6 @@ class Urls {
   static String stuEnrolledCourses(stuName) => '$_studentBaseUrl/enrolledCourse/$stuName';
   static String batchAllAnnouncement(batch) => '$_studentBaseUrl/allAnnouncement2/$batch';
   static String batchAnnouncement(batch, type) => '$_studentBaseUrl/allAnnouncement/$batch/$type';
+  static String stuAddMyTodo = '$_studentBaseUrl/stuAddMyTodo';
+  static String showStuTodo = '$_studentBaseUrl/showStudentTodo';
 }

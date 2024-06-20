@@ -14,7 +14,7 @@ class NetworkCaller {
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken.toString(),
+          'token': AuthController.accessToken1.toString(),
         },
       );
       log(response.statusCode.toString());
@@ -51,7 +51,7 @@ class NetworkCaller {
         Uri.parse(url),
         headers: {
           'Content-Type': 'application/json',
-          'token': AuthController.accessToken.toString()
+          'token': AuthController.accessToken1.toString()
         },
         body: jsonEncode(body),
       );

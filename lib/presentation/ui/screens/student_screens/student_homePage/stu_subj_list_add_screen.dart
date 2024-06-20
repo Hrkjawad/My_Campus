@@ -3,20 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:my_campus/presentation/ui/widgets/appbar_method.dart';
 import 'package:my_campus/presentation/ui/widgets/fac_drawer_method.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../widgets/date_select.dart';
-import '../../../../widgets/dropdown_button.dart';
-import '../../../../widgets/text_fields.dart';
-import '../../../../widgets/bottom_nav.dart';
-import '../stu_home_screen.dart';
+import '../../../widgets/dropdown_button.dart';
+import '../../../widgets/bottom_nav.dart';
+import 'stu_home_screen.dart';
 
-class StdCrAddTask extends StatefulWidget {
-  const StdCrAddTask({super.key});
+class StudentSubjectListAdd extends StatefulWidget {
+  const StudentSubjectListAdd({super.key});
 
   @override
-  State<StdCrAddTask> createState() => _StdCrAddTaskState();
+  State<StudentSubjectListAdd> createState() => _StudentSubjectListAddState();
 }
 
-class _StdCrAddTaskState extends State<StdCrAddTask> {
+class _StudentSubjectListAddState extends State<StudentSubjectListAdd> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   String? selectedBatch, selectedSubject, selectedDate, selectedTask;
   List<Map<String, String>> tableData = [];
@@ -52,152 +50,77 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
               SizedBox(
                 height: 23.h,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "BATCH     :  ",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomDropdownButton(
-                    width: 258.w,
-                    height: 44.50.h,
-                    dropDownWidth: 258.w,
-                    items: const ['57-A+B', '56-A', '56-B'],
-                    value: selectedBatch,
-                    hintText: 'Select',
-                    onChanged: (value) {
-                      setState(() {
-                        selectedBatch = value;
-                      });
-                    },
-                  ),
-                ],
+              Center(
+                child: CustomDropdownButton(
+                  width: 380.w,
+                  height: 50.h,
+                  dropDownWidth: 380.w,
+                  items: const ['57-A+B', '56-A', '56-B'],
+                  value: selectedBatch,
+                  hintText: 'Select Batch',
+                  onChanged: (value) {
+                    setState(() {
+                      selectedBatch = value;
+                    });
+                  },
+                ),
               ),
               SizedBox(
                 height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "SUBJECT :  ",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomDropdownButton(
-                    width: 258.w,
-                    dropDownWidth: 258.w,
-                    height: 44.50.h,
-                    items: const ['CSE-1111', 'EEE-1111', 'CSE-3121'],
-                    value: selectedSubject,
-                    hintText: 'Select',
-                    onChanged: (value) {
-                      setState(() {
-                        selectedSubject = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "TASK        :  ",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomTextField(
-                    controller: taskController,
-                    hintText: 'Enter Text',
-                    height: 44.50.h,
-                    width: 258.w,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedTask = value;
-                      });
-                    },
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "DATE         :  ",
-                    style: TextStyle(
-                      fontSize: 24.sp,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                  CustomDatePicker(
-                    controller: dateInput,
-                    width: 258.w,
-                    height: 44.50.h,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedDate = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 15.h,
               ),
               Center(
-                child: SizedBox(
-                  width: 258.w,
-                  height: 58.h,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0.w),
-                        side: const BorderSide(color: Color(0x999B9B9B)),
+                child: CustomDropdownButton(
+                  width: 380.w,
+                  dropDownWidth: 380.w,
+                  height: 50.h,
+                  items: const [
+                    'CSE-3319 (Software Engineering and Information System Design) Credit: 3',
+                    'CSE-3213 (Digital Signal Processing) Credit: 3',
+                    'CSE-3117 (Computer Architecture and Design) Credit: 3'
+                  ],
+                  value: selectedSubject,
+                  hintText: 'Select Course',
+                  onChanged: (value) {
+                    setState(() {
+                      selectedSubject = value;
+                    });
+                  },
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: CircleBorder(
+                      side: BorderSide(
+                        color: const Color(0xFF9B9B9B),
+                        width: 1.w,
                       ),
                     ),
-                    onPressed: () {
-                      if (selectedBatch != null &&
-                          selectedSubject != null &&
-                          selectedTask != null &&
-                          selectedDate != null) {
-                        setState(() {
-                          tableData.add({
-                            'Batch': selectedBatch!,
-                            'Exam&Task':
-                            "${selectedSubject!} -> ${selectedTask!}",
-                            'Date': selectedDate!
-                          });
-                          selectedBatch = null;
-                          selectedSubject = null;
-                          selectedDate = null;
-                          selectedTask = null;
-                          dateInput.clear();
-                          taskController.clear();
+                    backgroundColor: const Color(0xFFF8FFAC),
+                  ),
+                  onPressed: () {
+                    if (selectedBatch != null && selectedSubject != null) {
+                      setState(() {
+                        tableData.add({
+                          'Batch': selectedBatch!,
+                          'subjectNameAndTask': selectedSubject!,
                         });
-                      }
-                    },
-                    child: Text(
-                      "SUBMIT",
-                      style: TextStyle(
-                        fontSize: 22.sp,
+                        selectedBatch = null;
+                        selectedSubject = null;
+                        dateInput.clear();
+                        taskController.clear();
+                      });
+                    }
+                  },
+                  child: const Text(
+                    "Add",
+                    style: TextStyle(
                         fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                        color: Colors.black,
+                        fontSize: 24),
                   ),
                 ),
               ),
@@ -211,24 +134,10 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                     children: [
                       Container(
                         width: 380.w,
-                        height: 380.h,
+                        height: 450.h,
                         decoration: BoxDecoration(
-                          color: const Color(0xFFF8FFAC),
-                          border: Border.all(
-                            color: const Color(0x999B9B9B),
-                          ),
-                          borderRadius: BorderRadius.circular(20.w),
-                        ),
-                      ),
-                      Container(
-                        width: 290.w,
-                        height: 380.h,
-                        decoration:  BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.w),
-                            bottomLeft: Radius.circular(20.w),
-                          ),
+                          borderRadius: BorderRadius.circular(20.w),
                           border: const Border(
                             left: BorderSide(
                               color: Color(0x999B9B9B),
@@ -244,9 +153,9 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                       ),
                       Container(
                         width: 90.w,
-                        height: 380.h,
-                        decoration:  BoxDecoration(
-                          color: const Color(0xFFF8FFAC),
+                        height: 450.h,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFE8D2),
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(20.w),
                             bottomLeft: Radius.circular(20.w),
@@ -265,7 +174,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                         ),
                       ),
                       Container(
-                        height: 380.h,
+                        height: 450.h,
                         width: 380.w,
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -283,29 +192,18 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                 label: Text(
                                   'Batch',
                                   style: TextStyle(
-                                    color: const Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 26.sp,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 24.sp,
                                   ),
                                 ),
                               ),
                               DataColumn(
                                 label: Text(
-                                  'Exam & Task',
+                                  'Subject Name and Code',
                                   style: TextStyle(
                                     color: const Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 26.sp,
-                                  ),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Date',
-                                  style: TextStyle(
-                                    color: const Color(0xFF0D6858),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 26.sp,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 24.sp,
                                   ),
                                 ),
                               ),
@@ -369,16 +267,18 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                           );
                                         },
                                         child: SizedBox(
-                                          width: 80.w,
+                                          width: 70.w,
                                           child: Wrap(
                                             children: [
-                                              Text(
-                                                data['Batch']!,
-                                                softWrap: true,
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 19.sp,
+                                              Center(
+                                                child: Text(
+                                                  data['Batch']!,
+                                                  softWrap: true,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w900,
+                                                    fontSize: 19.sp,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -441,88 +341,17 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
                                           );
                                         },
                                         child: SizedBox(
-                                          width: 160.w,
+                                          width: 250.w,
                                           child: Wrap(
                                             children: [
                                               Text(
-                                                data['Exam&Task']!,
+                                                data['subjectNameAndTask']!,
                                                 softWrap: true,
                                                 style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 19.sp,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    DataCell(
-                                      GestureDetector(
-                                        onLongPress: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                title: Text(
-                                                  "Delete Data",
-                                                  style: TextStyle(
-                                                      fontSize: 24.sp,
-                                                      fontWeight:
-                                                      FontWeight.w900),
-                                                ),
-                                                content: Text(
-                                                    "Are you sure you want to delete this data?",
-                                                    style: TextStyle(
-                                                        fontSize: 20.sp,
-                                                        fontWeight:
-                                                        FontWeight.w500)),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("NO",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color:
-                                                            Colors.green)),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      setState(() {
-                                                        tableData.remove(data);
-                                                      });
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("YES",
-                                                        style: TextStyle(
-                                                            fontSize: 18.sp,
-                                                            fontWeight:
-                                                            FontWeight.w500,
-                                                            color: Colors.red)),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          );
-                                        },
-                                        child: SizedBox(
-                                          width: 80.w,
-                                          child: Wrap(
-                                            children: [
-                                              Text(
-                                                data['Date']!,
-                                                softWrap: true,
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 14.sp,
+                                                  color:
+                                                  const Color(0xFF393A3A),
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 20.sp,
                                                 ),
                                               ),
                                             ],
@@ -544,7 +373,7 @@ class _StdCrAddTaskState extends State<StdCrAddTask> {
             ],
           ),
         ),
-        bottomNavigationBar:  const BottomNav(home: StuHomeScreen()),
+        bottomNavigationBar: const BottomNav(home: StuHomeScreen()),
       ),
     );
   }
