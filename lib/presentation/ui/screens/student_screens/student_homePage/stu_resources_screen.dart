@@ -2,15 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
+
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_resources_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-
-import '../../../../state_holders/auth_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_resource_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../../../../state_holders/faculty_state_holders/group_chatting_controller.dart';
 import '../../../widgets/app_logo.dart';
 import '../../../widgets/dropdown_button.dart';
 import '../../home_screen.dart';
@@ -184,13 +178,6 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
               ),
             ),
           ),
-        ),
-        bottomNavigationBar: ColoredBox(
-          color: const Color(0xFFCBD0F9),
-          child: GetBuilder<FacMainBottomNavController>(
-              builder: (facMainBottomNavController) {
-                return BackButton(onPressed: facMainBottomNavController.backToHome);
-              }),
         ),
       ),
     );
