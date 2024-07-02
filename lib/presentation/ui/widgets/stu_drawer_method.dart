@@ -145,20 +145,6 @@ Drawer customisedStudentDrawer(BuildContext context) {
               ListTile(
                 title: Center(
                   child: Text(
-                    'My ToDo',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
-                  ),
-                ),
-                hoverColor: Colors.grey,
-                onTap: () {
-                  //  Get.to(() => const StuMyTodo());
-                },
-              ),
-              divider(),
-              ListTile(
-                title: Center(
-                  child: Text(
                     "Only For CR",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),

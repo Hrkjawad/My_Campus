@@ -17,7 +17,6 @@ import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_sec
 import '../../../utility/app_colors.dart';
 import '../../../widgets/file_upload.dart';
 
-
 class StuMainBottomNavBarScreen extends StatefulWidget {
   const StuMainBottomNavBarScreen({super.key});
 
@@ -30,18 +29,18 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
   final List<Widget> _screens = const [
     StuHomeScreen(),
     StuAvailableCourseScreen(),
+    StuResourcesScreen(),
     StuMyTodoScreen(),
-    StuResourcesScreen()
   ];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Assignment');
-       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Tutorial');
-       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Viva');
-       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Lab Report');
+      // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Assignment');
+      // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Tutorial');
+      // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Viva');
+      // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Lab Report');
       // Get.find<FacResourceController>().showResource();
       //Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList!();
       // Get.find<CategoryController>().getCategory();
@@ -56,32 +55,32 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<StuMainBottomNavController>(
         builder: (stuMainBottomNavController) {
-          return Scaffold(
-            body: _screens[stuMainBottomNavController.currentSelectedScreen],
-            bottomNavigationBar: BottomNavigationBar(
-                currentIndex: stuMainBottomNavController.currentSelectedScreen,
-                onTap: stuMainBottomNavController.changeScreen,
-                selectedItemColor: Colors.black,
-                unselectedItemColor: Colors.grey,
-                showUnselectedLabels: true,
-                items: [
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.home, color: Colors.green, size: 30.w),
-                      label: 'Home'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.mark_unread_chat_alt_rounded,
-                          color: Colors.blue, size: 30.w),
-                      label: 'Courses'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.today_outlined,
-                          color: Colors.brown, size: 30.w),
-                      label: 'My Todo'),
-                  BottomNavigationBarItem(
-                      icon: Icon(Icons.assignment,
-                          color: Colors.redAccent, size: 30.w),
-                      label: 'Resources'),
-                ]),
-          );
-        });
+      return Scaffold(
+        body: _screens[stuMainBottomNavController.currentSelectedScreen],
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: stuMainBottomNavController.currentSelectedScreen,
+            onTap: stuMainBottomNavController.changeScreen,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey,
+            showUnselectedLabels: true,
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home, color: Colors.green, size: 30.w),
+                  label: 'Home'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.mark_unread_chat_alt_rounded,
+                      color: Colors.blue, size: 30.w),
+                  label: 'Courses'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assignment,
+                      color: Colors.redAccent, size: 30.w),
+                  label: 'Resources'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.today_outlined,
+                      color: Colors.brown, size: 30.w),
+                  label: 'My Todo'),
+            ]),
+      );
+    });
   }
 }

@@ -15,9 +15,9 @@ class _DateState extends State<Date> {
     var date = DateTime.now();
     var formattedDate = DateFormat.yMMMMd().format(date);
     return Text(
-      formattedDate,
+      'Today: $formattedDate',
       style:  TextStyle(
-          fontWeight: FontWeight.w400, color: Colors.red, fontSize: 18.sp),
+          fontWeight: FontWeight.w500, color: Colors.redAccent, fontSize: 18.sp),
     );
   }
 }

@@ -17,6 +17,7 @@ import '../../../widgets/dropdown_button.dart';
 import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
 import 'home_subPages/stu_class_routinue.dart';
+import 'stu_cover_page_screen.dart';
 
 class StuHomeScreen extends StatefulWidget {
   const StuHomeScreen({super.key});
@@ -28,7 +29,13 @@ class StuHomeScreen extends StatefulWidget {
 var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _StuHomeScreenState extends State<StuHomeScreen> {
-
+  TextEditingController facNameController = TextEditingController();
+  TextEditingController facDesignationController = TextEditingController();
+  TextEditingController facDepartmentController = TextEditingController();
+  TextEditingController taskTypeController = TextEditingController();
+  TextEditingController taskTitleController = TextEditingController();
+  TextEditingController courseCodeController = TextEditingController();
+  TextEditingController courseTitleController = TextEditingController();
 
   List<Map<String, String>> tableData = [];
   String? selectedBatch,
@@ -72,7 +79,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           .batchAnnouncement('57 A+B', 'Lab Report');
       Get.find<BatchAllAnnouncementController>().batchAllAnnouncement('57 A+B');
       await Get.find<StuMyTodoController>().stuShowMyTodo();
-      myTodo = Get.find<StuMyTodoController>().stuMyShowMyTodoModel.count?.toString();
+      myTodo = Get.find<StuMyTodoController>()
+          .stuMyShowMyTodoModel
+          .count
+          ?.toString();
     });
   }
 
@@ -80,6 +90,13 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   void dispose() {
     _timer.cancel();
     _announcementPageController.dispose();
+    facDepartmentController.clear();
+    facDesignationController.clear();
+    facNameController.clear();
+    taskTitleController.clear();
+    taskTypeController.clear();
+    courseCodeController.clear();
+    courseTitleController.clear();
     super.dispose();
   }
 
@@ -95,8 +112,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
       );
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +229,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                             width: 8.w,
                           ),
                           GestureDetector(
-                            onTap: (){
-                              Get.find<StuMainBottomNavController>().changeScreen(2);
+                            onTap: () {
+                              Get.find<StuMainBottomNavController>()
+                                  .changeScreen(2);
                             },
                             child: ClipOval(
                               child: Container(
@@ -293,10 +309,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       color: 0xFFACFFDC,
                       onTap: () {
                         Get.to(() => StuClassRoutinue(
-                          batch: AuthController.batch1,
-                          section: 'A+B',
-                        ));
-
+                              batch: AuthController.batch1,
+                              section: 'A+B',
+                            ));
                       },
                     ),
                     SizedBox(
@@ -351,7 +366,122 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       height: 102.h,
                       text: 'Cover\nPage',
                       color: 0xBBB2FF9E,
-                      onTap: () {},
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return SingleChildScrollView(
+                                padding: const EdgeInsets.only(top: 50),
+                                child: AlertDialog(
+                                  title: const Text(
+                                      'Write Your Cover Page Core Information'),
+                                  content: SizedBox(
+                                    height: 500.h,
+                                    width: 150,
+                                    child: Column(
+                                      //mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        TextFormField(
+                                          controller: taskTypeController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Task Type (Assignment/Lab Report)'),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: taskTitleController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Task Title'),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: facNameController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Teacher Name'),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: facDesignationController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Teacher Designation'),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: facDepartmentController,
+                                          decoration: const InputDecoration(
+                                              hintText:
+                                                  'Teachers Department (CSE/EEE)'),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: courseCodeController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Course Code'),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
+                                        ),
+                                        TextFormField(
+                                          controller: courseTitleController,
+                                          decoration: const InputDecoration(
+                                              hintText: 'Course Title'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                        style: TextButton.styleFrom(
+                                            foregroundColor: Colors.black),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancel')),
+                                    TextButton(
+                                        style: TextButton.styleFrom(
+                                            foregroundColor: Colors.black),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  StuCoverPageScreen(
+                                                taskType: taskTypeController.text,
+                                                facName: facNameController.text,
+                                                facDesignation:
+                                                    facDesignationController.text,
+                                                facDepartment:
+                                                    facDepartmentController.text,
+                                                courseCode: courseCodeController.text,
+                                                courseTitle: courseTitleController.text,
+                                                taskTitle: taskTitleController.text,
+                                              ),
+                                            ),
+                                          );
+                                          facDepartmentController.clear();
+                                          facDesignationController.clear();
+                                          facNameController.clear();
+                                          taskTitleController.clear();
+                                          taskTypeController.clear();
+                                          courseCodeController.clear();
+                                          courseTitleController.clear();
+                                        },
+                                        child: const Text('Go'))
+                                  ],
+                                ),
+                              );
+                            });
+                        //Get.to(()=> StuCoverPageScreen());
+                      },
                     ),
                     SizedBox(
                       width: 71.w,
@@ -399,68 +529,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           hoverColor: const Color(0xFFFFE8D2),
           backgroundColor: const Color(0xFFF8FFAC),
           onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return StatefulBuilder(
-                  builder: (context, StateSetter setState) {
-                    return AlertDialog(
-                      title: Center(
-                        child: Text(
-                          "SELECT YOUR BATCH",
-                          style: TextStyle(
-                              fontSize: 28.sp,
-                              fontWeight: FontWeight.w900,
-                              color: const Color(0xFF0D6858)),
-                        ),
-                      ),
-                      actions: [
-                        Padding(
-                          padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
-                          child: CustomDropdownButton(
-                            width: 332.w,
-                            height: 51.h,
-                            dropDownWidth: 290.w,
-                            items: const ['57-A+B', '56-A', '56-B'],
-                            value: selectedBatch,
-                            hintText: 'Select Batch',
-                            onChanged: (value) {
-                              setState(() {
-                                selectedBatch = value;
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(
-                                side: BorderSide(
-                                  color: const Color(0xFF9B9B9B),
-                                  width: 1.w,
-                                ),
-                              ),
-                              backgroundColor: const Color(0xFFF8FFAC),
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              "OK",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 24),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            );
+            Get.find<StuMainBottomNavController>().changeScreen(3);
           },
           child: Icon(
             Icons.add,
@@ -774,4 +843,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
       ),
     );
   }
+
+
+
 }
