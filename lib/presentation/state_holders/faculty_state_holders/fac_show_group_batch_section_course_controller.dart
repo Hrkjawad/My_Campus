@@ -27,6 +27,7 @@ class FacShowGroupBatchSectionCourseController extends GetxController {
 
     NetworkResponse response =
         await NetworkCaller.getRequest(Urls.showFacultySubGrpBatchSec);
+    print(response.responseJson);
     _inProgress = false;
     update();
 

@@ -22,6 +22,11 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
 
   String? selectedBatch, selectedCourseTitle, selectedCourseCode;
 
+  @override
+  void initState() {
+    Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
+    super.initState();
+  }
 
 
   @override

@@ -24,12 +24,15 @@ class Urls {
   static const String facultyShowAnnouncement = '$_facultyBaseUrl/showAnnouncement';
   static const String resource = '$_facultyBaseUrl/resource';
   static const String showResource = '$_facultyBaseUrl/showResources';
+  static String facAddMyTodo = '$_facultyBaseUrl/facAddMyTodo';
+  static String showFacMyTodo = '$_facultyBaseUrl/showFacMyTodo';
+
   static String facultyDeleteAnnouncement(String id) =>
       '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
   static String facultyAddTask(String batch, section, courseTitle, task) =>
       '$_facultyBaseUrl/teacherAddTask/$batch/$section/$courseTitle/$task';
-  static String facultyAddMyToDo = '$_facultyBaseUrl/facultyMeeting';
-  static String facultyShowMyToDo = '$_facultyBaseUrl/showFacultyMeeting';
+  //static String facultyAddMyToDo = '$_facultyBaseUrl/facultyMeeting';
+  //static String facultyShowMyToDo = '$_facultyBaseUrl/showFacultyMeeting';
   static String facultyDeleteMyToDo(String id) =>
       '$_facultyBaseUrl/deleteFacultyMeeting/$id';
   static String facultyDeleteAnnouncementToDo(String id) =>

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_my_todo.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_my_todo_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
@@ -17,6 +17,19 @@ Drawer customisedFacultyDrawer(BuildContext context) {
             shrinkWrap: true,
             children: [
               ListTile(
+                title: Center(
+                  child: Text(
+                    'My Todo',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 21.sp),
+                  ),
+                ),
+                hoverColor: Colors.grey,
+                onTap: () {
+                  Get.to(()=> FacMyTodoScreen());
+                },
+              ),
+              divider(),ListTile(
                 title: Center(
                   child: Text(
                     'Departments Faculty',

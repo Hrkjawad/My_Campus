@@ -3,16 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
-
-import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_resource_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../../../utility/app_colors.dart';
 import '../../../widgets/file_upload.dart';
 import 'fac_available_chat_screen.dart';
 import 'fac_home_screen.dart';
-import 'sub_pages/fac_my_todo.dart';
+
 
 class FacMainBottomNavBarScreen extends StatefulWidget {
   const FacMainBottomNavBarScreen({super.key});
@@ -39,10 +34,9 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
       print(AuthController.department0);
       print(AuthController.designation0);
       print(AuthController.email0);
-      return;
-      Get.find<FacAnnouncementController>().facShowAnnouncement();
-      Get.find<FacResourceController>().showResource();
-       //Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList!();
+       // Get.find<FacAnnouncementController>().facShowAnnouncement();
+       // Get.find<FacResourceController>().showResource();
+       // Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
       // Get.find<CategoryController>().getCategory();
       // Get.find<PopularProductController>().getPopularProducts();
       // Get.find<SpecialProductController>().getSpecialProducts();
@@ -78,7 +72,7 @@ class _FacMainBottomNavBarScreenState extends State<FacMainBottomNavBarScreen> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.today_outlined,
                       color: Colors.brown, size: 30.w),
-                  label: 'My Todo'),
+                  label: 'Announcement'),
             ]),
       );
     });
