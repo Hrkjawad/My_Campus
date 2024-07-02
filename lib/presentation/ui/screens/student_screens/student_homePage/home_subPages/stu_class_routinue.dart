@@ -1,6 +1,10 @@
 import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+import '../../../../../state_holders/auth_controller.dart';
 
 class StuClassRoutinue extends StatefulWidget {
   const StuClassRoutinue({super.key, this.batch, this.section});
@@ -13,6 +17,9 @@ class StuClassRoutinue extends StatefulWidget {
 }
 
 class _StuClassRoutinueState extends State<StuClassRoutinue> {
+  TextEditingController batchController = TextEditingController();
+  TextEditingController sectionController = TextEditingController();
+
   List<dynamic>? jSat = [];
   List<dynamic>? jSun = [];
   List<dynamic>? jMon = [];
@@ -630,6 +637,65 @@ class _StuClassRoutinueState extends State<StuClassRoutinue> {
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: const Text('Write Batch'),
+                                      content: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Column(
+                                          //mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            TextFormField(
+                                              controller: batchController,
+                                              decoration: const InputDecoration(
+                                                  hintText: 'Batch'),
+                                            ),
+                                            SizedBox(
+                                              height: 10.h,
+                                            ),
+                                            TextFormField(
+                                              controller: sectionController,
+                                              decoration: const InputDecoration(
+                                                  hintText: 'Section'),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                foregroundColor: Colors.black),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Cancel')),
+                                        TextButton(
+                                            style: TextButton.styleFrom(
+                                                foregroundColor: Colors.black),
+                                            onPressed: () {
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=> StuClassRoutinue(
+                                                batch: batchController.text,
+                                                section:
+                                                sectionController.text,
+                                              )));
+                                            },
+                                            child: const Text('Go'))
+                                      ],
+                                    );
+                                  });
+                            },
+                            child: const Text('See Other Batch')),
+                      )
                     ],
                   ),
                 ),

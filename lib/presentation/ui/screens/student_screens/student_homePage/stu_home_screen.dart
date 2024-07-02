@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 
@@ -27,8 +28,7 @@ class StuHomeScreen extends StatefulWidget {
 var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _StuHomeScreenState extends State<StuHomeScreen> {
-  TextEditingController batchController = TextEditingController();
-  TextEditingController sectionController = TextEditingController();
+
 
   List<Map<String, String>> tableData = [];
   String? selectedBatch,
@@ -292,50 +292,11 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: const Text('Write Batch'),
-                                content: SizedBox(
-                                  height: 150,
-                                  width: 150,
-                                  child: Column(
-                                    //mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      TextFormField(
-                                        controller: batchController,
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      TextFormField(
-                                        controller: sectionController,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                      style: TextButton.styleFrom(
-                                          foregroundColor: Colors.black),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: const Text('Cancel')),
-                                  TextButton(
-                                      style: TextButton.styleFrom(
-                                          foregroundColor: Colors.black),
-                                      onPressed: () {
-                                        Get.to(() => StuClassRoutinue(
-                                              batch: batchController.text,
-                                              section: sectionController.text,
-                                            ));
-                                      },
-                                      child: const Text('Go'))
-                                ],
-                              );
-                            });
+                        Get.to(() => StuClassRoutinue(
+                          batch: AuthController.batch1,
+                          section: 'A+B',
+                        ));
+
                       },
                     ),
                     SizedBox(
