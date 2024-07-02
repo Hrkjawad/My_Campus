@@ -4,23 +4,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/stu_resources_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../state_holders/auth_controller.dart';
-import '../../state_holders/faculty_state_holders/fac_resource_controller.dart';
-import '../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../../state_holders/faculty_state_holders/group_chatting_controller.dart';
-import '../screens/home_screen.dart';
-import 'app_logo.dart';
-import 'dropdown_button.dart';
 
-class FileUpload extends StatefulWidget {
-  const FileUpload({super.key});
+import '../../../../state_holders/auth_controller.dart';
+import '../../../../state_holders/faculty_state_holders/fac_resource_controller.dart';
+import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
+import '../../../../state_holders/faculty_state_holders/group_chatting_controller.dart';
+import '../../../widgets/app_logo.dart';
+import '../../../widgets/dropdown_button.dart';
+import '../../home_screen.dart';
+
+
+class StuResourcesScreen extends StatefulWidget {
+  const StuResourcesScreen({super.key});
 
   @override
-  _FileUploadState createState() => _FileUploadState();
+  _StuResourcesScreenState createState() => _StuResourcesScreenState();
 }
 
-class _FileUploadState extends State<FileUpload> {
+class _StuResourcesScreenState extends State<StuResourcesScreen> {
 
   String? selectedDate, selectedAnnouncement, selectedBatch, groupId, senderId;
   dynamic c;
@@ -31,17 +34,17 @@ class _FileUploadState extends State<FileUpload> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await Get.find<FacResourceController>().showResource();
-      c = Get.find<FacShowGroupBatchSectionCourseController>()
-          .facultyCreatingSubGrpBatchSecDataList
-          ?.map((data) => {
-                'batch': data.batch.toString(),
-                'sId': data.sId.toString(),
-                'senderId':
-                    data.member?.map((member) => member.sId.toString()).first
-              })
-          .toList();
-      print('c $c');
+      await Get.find<StuResourcesController>().stuShowResources('57 A+B');
+      // c = Get.find<FacShowGroupBatchSectionCourseController>()
+      //     .facultyCreatingSubGrpBatchSecDataList
+      //     ?.map((data) => {
+      //   'batch': data.batch.toString(),
+      //   'sId': data.sId.toString(),
+      //   'senderId':
+      //   data.member?.map((member) => member.sId.toString()).first
+      // })
+      //     .toList();
+      // print('c $c');
 
     });
   }
@@ -59,7 +62,7 @@ class _FileUploadState extends State<FileUpload> {
           IconButton(
             onPressed: () {
               Get.offAll(
-                () => const HomeScreen(),
+                    () => const HomeScreen(),
               );
             },
             icon: const Icon(
@@ -85,11 +88,7 @@ class _FileUploadState extends State<FileUpload> {
                     width: 360.w,
                     height: 45.h,
                     dropDownWidth: 360.w,
-                    items: Get.find<FacShowGroupBatchSectionCourseController>()
-                            .facultyCreatingSubGrpBatchSecDataList
-                            ?.map((data) => data.batch.toString())
-                            .toList() ??
-                        [],
+                    items: const ['57 A+B'],
                     value: selectedBatch,
                     hintText: 'Select Batch',
                     onChanged: (value) {
@@ -109,26 +108,26 @@ class _FileUploadState extends State<FileUpload> {
                   ),
                   Padding(
                     padding: EdgeInsets.all(ScreenUtil().setWidth(14)),
-                    child: GetBuilder<FacAnnouncementController>(
-                        builder: (facAnnouncementController) {
-                      return ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFF8FFAC),
-                        ),
-                        onPressed: () {
-                          _pickFiles(facAnnouncementController);
-                        },
-                        child: const Text('Upload File'),
-                      );
-                    }),
+                    child: GetBuilder<StuResourcesController>(
+                        builder: (stuResourcesController) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFF8FFAC),
+                            ),
+                            onPressed: () {
+                              _pickFiles(stuResourcesController);
+                            },
+                            child: const Text('Upload File'),
+                          );
+                        }),
                   ),
                   RefreshIndicator(
                     onRefresh: () async {
-                      Get.find<FacResourceController>().showResource();
+                      Get.find<StuResourcesController>().stuShowResources('57 A+B');
                     },
-                    child: GetBuilder<FacResourceController>(
-                      builder: (facResourceController) {
-                        if (facResourceController.inProgress) {
+                    child: GetBuilder<StuResourcesController>(
+                      builder: (stuResourcesController) {
+                        if (stuResourcesController.inProgress) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
@@ -145,12 +144,10 @@ class _FileUploadState extends State<FileUpload> {
                               width: 380.w,
                               height: 520.h,
                               child: ListView.separated(
-                                itemCount: facResourceController
-                                        .resourceModel.data?.length ??
+                                itemCount: stuResourcesController.studentResourcesModel.data?.length ??
                                     0,
                                 itemBuilder: (context, index) {
-                                  final data = facResourceController
-                                      .resourceModel.data![index];
+                                  final data = stuResourcesController.studentResourcesModel.data![index];
                                   return ListTile(
                                     title: Text(
                                       data.resource.toString(),
@@ -192,39 +189,24 @@ class _FileUploadState extends State<FileUpload> {
           color: const Color(0xFFCBD0F9),
           child: GetBuilder<FacMainBottomNavController>(
               builder: (facMainBottomNavController) {
-            return BackButton(onPressed: facMainBottomNavController.backToHome);
-          }),
+                return BackButton(onPressed: facMainBottomNavController.backToHome);
+              }),
         ),
       ),
     );
   }
 
-  Future<void> _pickFiles(
-      FacAnnouncementController facAnnouncementController) async {
+  Future<void> _pickFiles(StuResourcesController stuResourcesController) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
 
-    final result2 = await Get.find<GroupChattingController>().groupChat(
-      groupId!,
-      senderId!,
-      result!.files.single.name,
-      AuthController.fullName0.toString(),
-      DateTime.now().toString(),
-    );
-
-    if (result2) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Successfully uploaded'),
-          backgroundColor: Colors.green,
-        ),
-      );
-      await Get.find<FacResourceController>().facUploadResource(
-          result.files.single.name, selectedBatch, DateTime.now());
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Upload failed'), backgroundColor: Colors.redAccent),
-      );
-    }
+    // final result2 = await Get.find<GroupChattingController>().groupChat(
+    //   groupId!,
+    //   senderId!,
+    //   result!.files.single.name,
+    //   AuthController.fullName1.toString(),
+    //   DateTime.now().toString(),
+    // );
+    //print(result!.files.single.name.toString());
+    await Get.find<StuResourcesController>().stuAddResources(result!.files.single.name.toString(), selectedBatch!, DateTime.now().toString());
   }
 }

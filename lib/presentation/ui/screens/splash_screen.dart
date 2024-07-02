@@ -34,6 +34,15 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offAll(const StuSignInScreen());
       }
     });
+
+    // final result = await AuthController.checkLoginState();
+    // Future.delayed(const Duration(seconds: 2)).then((value) async {
+    //   if (result) {
+    //     Get.offAll(const FacMainBottomNavBarScreen());
+    //   } else {
+    //     Get.offAll(const FacSignInScreen());
+    //   }
+    // });
   }
 
   @override

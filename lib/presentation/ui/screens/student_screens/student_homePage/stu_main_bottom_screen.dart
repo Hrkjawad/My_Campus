@@ -7,6 +7,7 @@ import 'package:my_campus/presentation/state_holders/student_state_holders/stu_m
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_available_course_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_my_todo.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_resources_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 
 import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
@@ -30,6 +31,7 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
     StuHomeScreen(),
     StuAvailableCourseScreen(),
     StuMyTodoScreen(),
+    StuResourcesScreen()
   ];
 
   @override
@@ -74,6 +76,10 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
                       icon: Icon(Icons.today_outlined,
                           color: Colors.brown, size: 30.w),
                       label: 'My Todo'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.assignment,
+                          color: Colors.redAccent, size: 30.w),
+                      label: 'Resources'),
                 ]),
           );
         });

@@ -24,6 +24,7 @@ import '../presentation/state_holders/student_state_holders/batch_announcement_c
 import '../presentation/state_holders/student_state_holders/stu_enrolled_course_controller.dart';
 import '../presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import '../presentation/state_holders/student_state_holders/stu_myTodo_controller.dart';
+import '../presentation/state_holders/student_state_holders/stu_resources_controller.dart';
 
 class GetXBindings extends Bindings {
   @override
@@ -55,6 +56,7 @@ class GetXBindings extends Bindings {
     Get.put(BatchAnnouncementController());
     Get.put(BatchAllAnnouncementController());
     Get.put(StuMyTodoController());
+    Get.put(StuResourcesController());
 
   }
 }

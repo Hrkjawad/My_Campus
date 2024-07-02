@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/stu_model/batch_announcement_model.dart';
 
 import '../../../data/models/network_response.dart';
 import '../../../data/models/stu_model/stu_show_myTodo_model.dart';
