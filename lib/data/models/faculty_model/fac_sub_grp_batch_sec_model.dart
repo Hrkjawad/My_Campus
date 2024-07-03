@@ -116,3 +116,59 @@ class Member {
     return data;
   }
 }
+
+class Chat {
+  final String message;
+  final String sender;
+  final String id;
+  final DateTime timestamp;
+
+  Chat({
+    required this.message,
+    required this.sender,
+    required this.id,
+    required this.timestamp,
+  });
+
+  factory Chat.fromJson(Map<String, dynamic> json) {
+    return Chat(
+      message: json['message'] ?? '',
+      sender: json['sender'] ?? '',
+      id: json['_id'] ?? '',
+      timestamp: DateTime.parse(json['timestamp']),
+    );
+  }
+}
+
+
+class Course {
+  final String id;
+  final String batch;
+  final String courseCode;
+  final String courseTitle;
+  final String email;
+  final List<Member> member;
+
+  Course({
+    required this.id,
+    required this.batch,
+    required this.courseCode,
+    required this.courseTitle,
+    required this.email,
+    required this.member,
+  });
+
+  factory Course.fromJson(Map<String, dynamic> json) {
+    var memberList = json['member'] as List;
+    List<Member> member = memberList.map((i) => Member.fromJson(i)).toList();
+
+    return Course(
+      id: json['_id'] ?? '',
+      batch: json['batch'] ?? '',
+      courseCode: json['courseCode'] ?? '',
+      courseTitle: json['courseTitle'] ?? '',
+      email: json['email'] ?? '',
+      member: member,
+    );
+  }
+}

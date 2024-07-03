@@ -30,36 +30,38 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
       },
       child: SafeArea(
         child: GetBuilder<FacMainBottomNavController>(
-            builder: (facMainBottomNavController) {
-          return Scaffold(
-            appBar: _buildAppBar,
-            body: RefreshIndicator(
-              key: const Key('refreshIndicatorKey'),
-              onRefresh: () async {
-                Get.find<FacShowGroupBatchSectionCourseController>()
-                    .showGroups();
-              },
-              child: GetBuilder<FacShowGroupBatchSectionCourseController>(
+          builder: (facMainBottomNavController) {
+            return Scaffold(
+              appBar: _buildAppBar,
+              body: RefreshIndicator(
+                key: const Key('refreshIndicatorKey'),
+                onRefresh: () async {
+                  Get.find<FacShowGroupBatchSectionCourseController>()
+                      .showGroups();
+                },
+                child: GetBuilder<FacShowGroupBatchSectionCourseController>(
                   builder: (facShowGroupBatchSectionCourseController) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      _availableGroupsUi(facMainBottomNavController,
-                          facShowGroupBatchSectionCourseController),
-                    ],
-                  ),
-                );
-              }),
-            ),
-            floatingActionButton: _createBatchAndCourse(context),
-            bottomNavigationBar: ColoredBox(
-              color: const Color(0xFFCBD0F9),
-              child:
-                  BackButton(onPressed: facMainBottomNavController.backToHome),
-            ),
-          );
-        }),
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          _availableGroupsUi(facMainBottomNavController,
+                              facShowGroupBatchSectionCourseController),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              floatingActionButton: _createBatchAndCourse(context),
+              bottomNavigationBar: ColoredBox(
+                color: const Color(0xFFCBD0F9),
+                child: BackButton(
+                    onPressed: facMainBottomNavController.backToHome),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
@@ -194,54 +196,56 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
                     ),
                     Center(
                       child: GetBuilder<FacCreatingSubGrpBatchSecController>(
-                          builder: (facCreatingSubGrpBatchSecController) {
-                        return ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: CircleBorder(
-                              side: BorderSide(
-                                color: Colors.grey,
-                                width: 2.w,
+                        builder: (facCreatingSubGrpBatchSecController) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: CircleBorder(
+                                side: BorderSide(
+                                  color: Colors.grey,
+                                  width: 2.w,
+                                ),
+                              ),
+                              backgroundColor: const Color(0xFFFFE8D2),
+                              foregroundColor: const Color(0x999B9B9B),
+                            ),
+                            onPressed: () async {
+                              if (facCreatingSubGrpBatchSecController
+                                  .facCreatingSubGrpBatchSecInProgress) {
+                                const Center(
+                                  child: LinearProgressIndicator(),
+                                );
+                              } else {
+                                final result =
+                                    await facCreatingSubGrpBatchSecController
+                                        .facCreatingSubGrpBatchSec(
+                                  selectedBatch.toString(),
+                                  selectedCourseTitle.toString(),
+                                  selectedCourseCode.toString(),
+                                  AuthController.email0.toString(),
+                                  AuthController.fullName0.toString(),
+                                  AuthController.designation0.toString(),
+                                  AuthController.department0.toString(),
+                                );
+
+                                if (result) {
+                                  Get.snackbar('Successful!', 'Group Created');
+                                } else {
+                                  Get.snackbar(
+                                      'Failed!', 'Group Already Created',
+                                      colorText: Colors.redAccent);
+                                }
+                              }
+                            },
+                            child: const Text(
+                              "ADD",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
-                            backgroundColor: const Color(0xFFFFE8D2),
-                            foregroundColor: const Color(0x999B9B9B),
-                          ),
-                          onPressed: () async {
-                            if (facCreatingSubGrpBatchSecController
-                                .facCreatingSubGrpBatchSecInProgress) {
-                              const Center(
-                                child: LinearProgressIndicator(),
-                              );
-                            } else {
-                              final result =
-                                  await facCreatingSubGrpBatchSecController
-                                      .facCreatingSubGrpBatchSec(
-                                selectedBatch.toString(),
-                                selectedCourseTitle.toString(),
-                                selectedCourseCode.toString(),
-                                AuthController.email0.toString(),
-                                AuthController.fullName0.toString(),
-                                AuthController.designation0.toString(),
-                                AuthController.department0.toString(),
-                              );
-
-                              if (result) {
-                                Get.snackbar('Successful!', 'Group Created');
-                              } else {
-                                Get.snackbar('Failed!', 'Group Already Created',
-                                    colorText: Colors.redAccent);
-                              }
-                            }
-                          },
-                          child: const Text(
-                            "ADD",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        );
-                      }),
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -261,6 +265,9 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
       int index,
       FacShowGroupBatchSectionCourseController
           facShowGroupBatchSectionCourseController) {
+    print(
+      facMainBottomNavController.batchCoursePairs[index]['sId'].toString(),
+    );
     Get.to(
       FacChatScreen(
         batch: facMainBottomNavController.batchCoursePairs[index]['batch']
@@ -271,10 +278,9 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
         courseTitle: facMainBottomNavController.batchCoursePairs[index]
                 ['courseTitle']
             .toString(),
-        groupID: facShowGroupBatchSectionCourseController
-            .facultyCreatingSubGrpBatchSecData.sId
+        groupID: facMainBottomNavController.batchCoursePairs[index]['sId']
             .toString(),
-        senderID: '66697048a985c43e8bd4ad00'
+        senderID: AuthController.fullName0.toString(),
       ),
     );
   }

@@ -18,7 +18,14 @@ class FacMainBottomNavController extends GetxController {
           final a = data.batch!;
           final b = data.courseCode!;
           final c = data.courseTitle!;
-          batchCoursePairs.add({'sId':d,'batch': a, 'courseCode': b, 'courseTitle': c});
+          batchCoursePairs.add(
+            {
+              'sId': d,
+              'batch': a,
+              'courseCode': b,
+              'courseTitle': c,
+            },
+          );
         }
       }
 
