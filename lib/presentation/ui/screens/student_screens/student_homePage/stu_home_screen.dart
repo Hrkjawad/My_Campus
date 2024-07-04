@@ -1,20 +1,21 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
-
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../state_holders/auth_controller.dart';
 import '../../../../state_holders/student_state_holders/batch_all_announcement_controller.dart';
 import '../../../../state_holders/student_state_holders/stu_myTodo_controller.dart';
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
 
-import '../../../widgets/dropdown_button.dart';
+import '../../../widgets/sheet_connect_api.dart';
+import '../../../widgets/sheet_data_fatch.dart';
 import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
+import '../../../widgets/routine_time_check.dart';
 import 'home_subPages/stu_class_routinue.dart';
 
 class StuHomeScreen extends StatefulWidget {
@@ -29,8 +30,12 @@ var scaffoldKey = GlobalKey<ScaffoldState>();
 class _StuHomeScreenState extends State<StuHomeScreen> {
   TextEditingController batchController = TextEditingController();
   TextEditingController sectionController = TextEditingController();
+  final TimeManager timeManager = Get.put(TimeManager());
 
-  List<Map<String, String>> tableData = [];
+  bool foundClass = false;
+  String batchToFind = AuthController.batch1.toString();
+  String sectionToFind = AuthController.section1.toString();
+
   String? selectedBatch,
       viva = "5",
       assignment = "5",
@@ -38,26 +43,24 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
       todo = "10",
       presentation = "1";
 
-  int _currentAnnouncement = 0;
-  late Timer _timer;
-  late PageController _announcementPageController;
-
   //api table data fetch
-  String? classAndTime = "Room: 302, RAB - 10.30 AM";
-  String? classes = "4";
-  String? exams = "1";
-  String? myTodo;
-  String? myAssignment = "2";
-
+  String? currentT5ime, classes = "4", exams = "1", myTodo, myAssignment = "2";
   final List<String> announcements = [
     'CSE 1111 | Next Sunday is Viva ',
     'CSE 2222 | Next Sunday is Tutorial ',
     'EEE 1111 | Next Sunday Class is Canceled ',
   ];
 
+  int _currentAnnouncement = 0;
+  late Timer _timer;
+  late PageController _announcementPageController;
+
   @override
   void initState() {
     super.initState();
+    readDataFromSheet();
+    gSheetIntit();
+    timeManager.startUpdating();
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
     _startTimer();
@@ -72,7 +75,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           .batchAnnouncement('57 A+B', 'Lab Report');
       Get.find<BatchAllAnnouncementController>().batchAllAnnouncement('57 A+B');
       await Get.find<StuMyTodoController>().stuShowMyTodo();
-      myTodo = Get.find<StuMyTodoController>().stuMyShowMyTodoModel.count?.toString();
+      myTodo = Get.find<StuMyTodoController>()
+          .stuMyShowMyTodoModel
+          .count
+          ?.toString();
     });
   }
 
@@ -96,10 +102,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
     });
   }
 
-
-
   @override
   Widget build(BuildContext context) {
+    String timeToFind = timeManager.currentClassTime.value;
+    print(timeToFind);
     return Scaffold(
       appBar: customisedAppBar(scaffoldKey, context),
       body: Scaffold(
@@ -182,7 +188,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                             ),
                           ),
                           SizedBox(
-                            width: 8.w,
+                            width: 20.w,
                           ),
                           ClipOval(
                             child: Container(
@@ -211,11 +217,12 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                             ),
                           ),
                           SizedBox(
-                            width: 8.w,
+                            width: 20.w,
                           ),
                           GestureDetector(
-                            onTap: (){
-                              Get.find<StuMainBottomNavController>().changeScreen(2);
+                            onTap: () {
+                              Get.find<StuMainBottomNavController>()
+                                  .changeScreen(2);
                             },
                             child: ClipOval(
                               child: Container(
@@ -267,13 +274,51 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                     ),
                     color: Colors.white,
                     child: Center(
-                        child: Text(
-                      classAndTime!,
-                      style: TextStyle(
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w900,
-                          color: const Color(0xFF393939)),
-                    )),
+                      child: GetBuilder<TimeManager>(
+                        builder: (controller) {
+                          String timeToFind = controller.currentClassTime.value;
+                          return ListView.builder(
+                            itemCount: dataFromSheet.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              var rowData = dataFromSheet[index];
+                              var batch = rowData["Batch"];
+                              var section = rowData["Section"];
+                              var timeColumn = rowData["Time"];
+                              var classAtTime = rowData[
+                                  timeToFind]; // Get the specific time slot column
+
+                              if (batchToFind == batch &&
+                                  sectionToFind == section &&
+                                  timeColumn == "Classes") {
+                                foundClass = true;
+                                var classInfo = classAtTime ?? 'NO CLASS';
+                                return Center(
+                                  child: Text(
+                                    "$classInfo",
+                                    style: TextStyle(
+                                      fontSize: 22.sp,
+                                      fontWeight: FontWeight.w900,
+                                      color: const Color(0xFF393939),
+                                    ),
+                                  ),
+                                );
+                              }
+                              if (index == dataFromSheet.length - 1 &&
+                                  !foundClass) {
+                                return Center(
+                                  child: Text(
+                                    "NO CLASS",
+                                    style: TextStyle(fontSize: 22.sp),
+                                  ),
+                                );
+                              }
+                              return const SizedBox();
+                            },
+                          );
+                        },
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -413,7 +458,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                   height: 25.h,
                 ),
                 SizedBox(
-                  height: 134.h,
+                  height: 150.h,
                   width: 375.w,
                   child: PageView.builder(
                     itemCount: announcements.length,
@@ -432,81 +477,81 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          elevation: 5,
-          mini: true,
-          hoverColor: const Color(0xFFFFE8D2),
-          backgroundColor: const Color(0xFFF8FFAC),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return StatefulBuilder(
-                  builder: (context, StateSetter setState) {
-                    return AlertDialog(
-                      title: Center(
-                        child: Text(
-                          "SELECT YOUR BATCH",
-                          style: TextStyle(
-                              fontSize: 28.sp,
-                              fontWeight: FontWeight.w900,
-                              color: const Color(0xFF0D6858)),
-                        ),
-                      ),
-                      actions: [
-                        Padding(
-                          padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
-                          child: CustomDropdownButton(
-                            width: 332.w,
-                            height: 51.h,
-                            dropDownWidth: 290.w,
-                            items: const ['57-A+B', '56-A', '56-B'],
-                            value: selectedBatch,
-                            hintText: 'Select Batch',
-                            onChanged: (value) {
-                              setState(() {
-                                selectedBatch = value;
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                        Center(
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(
-                                side: BorderSide(
-                                  color: const Color(0xFF9B9B9B),
-                                  width: 1.w,
-                                ),
-                              ),
-                              backgroundColor: const Color(0xFFF8FFAC),
-                            ),
-                            onPressed: () {},
-                            child: const Text(
-                              "OK",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 24),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                );
-              },
-            );
-          },
-          child: Icon(
-            Icons.add,
-            size: 30.sp,
-            color: Colors.black,
-          ),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   elevation: 5,
+        //   mini: true,
+        //   hoverColor: const Color(0xFFFFE8D2),
+        //   backgroundColor: const Color(0xFFF8FFAC),
+        //   onPressed: () {
+        //     showDialog(
+        //       context: context,
+        //       builder: (context) {
+        //         return StatefulBuilder(
+        //           builder: (context, StateSetter setState) {
+        //             return AlertDialog(
+        //               title: Center(
+        //                 child: Text(
+        //                   "SELECT YOUR BATCH",
+        //                   style: TextStyle(
+        //                       fontSize: 28.sp,
+        //                       fontWeight: FontWeight.w900,
+        //                       color: const Color(0xFF0D6858)),
+        //                 ),
+        //               ),
+        //               actions: [
+        //                 Padding(
+        //                   padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
+        //                   child: CustomDropdownButton(
+        //                     width: 332.w,
+        //                     height: 51.h,
+        //                     dropDownWidth: 290.w,
+        //                     items: const ['57-A+B', '56-A', '56-B'],
+        //                     value: selectedBatch,
+        //                     hintText: 'Select Batch',
+        //                     onChanged: (value) {
+        //                       setState(() {
+        //                         selectedBatch = value;
+        //                       });
+        //                     },
+        //                   ),
+        //                 ),
+        //                 SizedBox(
+        //                   height: 15.h,
+        //                 ),
+        //                 Center(
+        //                   child: ElevatedButton(
+        //                     style: ElevatedButton.styleFrom(
+        //                       shape: CircleBorder(
+        //                         side: BorderSide(
+        //                           color: const Color(0xFF9B9B9B),
+        //                           width: 1.w,
+        //                         ),
+        //                       ),
+        //                       backgroundColor: const Color(0xFFF8FFAC),
+        //                     ),
+        //                     onPressed: () {},
+        //                     child: const Text(
+        //                       "OK",
+        //                       style: TextStyle(
+        //                           fontWeight: FontWeight.bold,
+        //                           color: Colors.black,
+        //                           fontSize: 24),
+        //                     ),
+        //                   ),
+        //                 ),
+        //               ],
+        //             );
+        //           },
+        //         );
+        //       },
+        //     );
+        //   },
+        //   child: Icon(
+        //     Icons.add,
+        //     size: 30.sp,
+        //     color: Colors.black,
+        //   ),
+        // ),
       ),
     );
   }

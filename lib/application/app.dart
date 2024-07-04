@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:device_preview/device_preview.dart';
 import 'package:my_campus/presentation/ui/screens/splash_screen.dart';
 import '../presentation/ui/utility/app_colors.dart';
 import 'controller_binders.dart';
@@ -22,8 +21,6 @@ class _MyCampusState extends State<MyCampus> {
       designSize: const Size(420, 933),
       builder: (context, child) => GetMaterialApp(
         useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
         navigatorKey: MyCampus.globalKey,
         home: const SplashScreen(),
         initialBinding: GetXBindings(),

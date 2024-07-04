@@ -8,6 +8,7 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_availability_checking_controller.dart';
+import 'package:my_campus/presentation/ui/widgets/routine_time_check.dart';
 import '../presentation/state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_resource_controller.dart';
@@ -24,6 +25,7 @@ import '../presentation/state_holders/student_state_holders/batch_announcement_c
 import '../presentation/state_holders/student_state_holders/stu_enrolled_course_controller.dart';
 import '../presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import '../presentation/state_holders/student_state_holders/stu_myTodo_controller.dart';
+import '../presentation/ui/widgets/date.dart';
 
 class GetXBindings extends Bindings {
   @override
@@ -55,6 +57,8 @@ class GetXBindings extends Bindings {
     Get.put(BatchAnnouncementController());
     Get.put(BatchAllAnnouncementController());
     Get.put(StuMyTodoController());
+    Get.put(TimeManager());
+    Get.put(DateController());
 
   }
 }
