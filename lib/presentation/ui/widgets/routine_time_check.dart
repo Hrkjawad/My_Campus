@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class TimeManager extends GetxController {
@@ -33,7 +34,9 @@ class TimeManager extends GetxController {
     // Check if it's before 8:55 AM or after 3:55 PM, stop updating
     if (currentHour < 8 || (currentHour == 15 && currentMinute >= 55) || currentHour > 15) {
       currentClassTime.value = 'No class';
-      print('No class due to time constraints');
+      if (kDebugMode) {
+        print('No class due to time constraints');
+      }
       return;
     }
 
@@ -46,16 +49,20 @@ class TimeManager extends GetxController {
     String currentTime = '$hour12:${currentMinute.toString().padLeft(2, '0')} - $period';
 
 
-    print('Current time: $currentTime');
+    if (kDebugMode) {
+      print('Current time: $currentTime');
+    }
 
     int index = timeList.indexOf(currentTime);
 
     if (index == -1) {
-      index = 8;
+      index = 9;
     }
 
     currentClassTime.value = timeList[index];
 
-    print('Updated current class time to: ${currentClassTime.value}');
+    if (kDebugMode) {
+      print('Updated current class time to: ${currentClassTime.value}');
+    }
   }
 }

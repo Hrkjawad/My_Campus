@@ -34,7 +34,7 @@ class CustomDropdownButton extends StatelessWidget {
               child: Text(
                 hintText,
                 style:  TextStyle(
-                  fontSize: 24.sp,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
                 ),
@@ -51,8 +51,7 @@ class CustomDropdownButton extends StatelessWidget {
                       child: Text(
                         item,
                         style: TextStyle(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 20.sp,
                           color: Colors.black,
                         ),
                         textAlign: TextAlign.center,

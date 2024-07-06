@@ -8,7 +8,7 @@ import '../../auth_controller.dart';
 class StuSignInController extends GetxController {
   bool _stuSignInInProgress = false;
   String _message = '';
-  StuSignInModel _stuSignInModel = StuSignInModel();
+  final StuSignInModel _stuSignInModel = StuSignInModel();
 
   bool get stuSignInInProgress => _stuSignInInProgress;
   String get message => _message;

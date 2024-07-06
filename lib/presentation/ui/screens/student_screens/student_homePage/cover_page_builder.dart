@@ -70,243 +70,251 @@ class _StuCoverPageScreenState extends State<StuCoverPageScreen> {
     );
     final image =
         await imageFromAssetBundle('assets/images/Leading_University_Logo.png');
-
+    final marginPageFormat = format.copyWith(
+      marginLeft: 20.0,
+      marginRight: 20.0,
+      marginTop: 20.0,
+      marginBottom: 20.0,
+    );
     pdf.addPage(
       pw.Page(
-        pageFormat: format,
+        pageFormat: marginPageFormat,
         build: (context) {
-          return pw.Center(
-            child: pw.Column(
-              crossAxisAlignment: pw.CrossAxisAlignment.start,
-              children: [
-                pw.SizedBox(
-                  height: 150.h,
-                  child: pw.Center(child: pw.Image(image)),
-                ),
-                pw.SizedBox(height: 30.h),
-                pw.Center(
-                  child: pw.Text(
-                    widget.courseDepartment,
-                    style: pw.TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: pw.FontWeight.bold,
+          return pw.Padding(
+            padding: pw.EdgeInsets.only(left: 60.w, right: 60.w, top: 40.w),
+            child: pw.Center(
+              child: pw.Column(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.SizedBox(
+                    height: 150.h,
+                    child: pw.Center(child: pw.Image(image)),
+                  ),
+                  pw.SizedBox(height: 30.h),
+                  pw.Center(
+                    child: pw.Text(
+                      widget.courseDepartment,
+                      style: pw.TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: pw.FontWeight.bold,
+                      ),
                     ),
                   ),
-                ),
-                pw.SizedBox(height: 25.h),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Course Title    : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.courseTitle,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10.h),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Course Code  : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.courseCode,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Title                 : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.topicName,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 25),
-                pw.Center(
-                  child: pw.Text(
-                    'Submitted To',
-                    style: pw.TextStyle(
-                      fontSize: 18,
-                      fontWeight: pw.FontWeight.bold,
-                    ),
-                  ),
-                ),
-                pw.Divider(
-                    thickness: 2,
-                    color: PdfColors.black,
-                    indent: 170,
-                    endIndent: 170),
-                pw.SizedBox(height: 20),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Name             : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.teacherName,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Designation  : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.teacherDesignation,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Faculty          : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.facultyName,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 25),
-                pw.Center(
-                  child: pw.Text(
-                    'Submitted By',
-                    style: pw.TextStyle(
-                      fontSize: 18,
-                      fontWeight: pw.FontWeight.bold,
-                    ),
-                  ),
-                ),
-                pw.Divider(
-                    thickness: 2,
-                    color: PdfColors.black,
-                    indent: 170,
-                    endIndent: 170),
-                pw.SizedBox(height: 20),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Name            : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.studentName,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Department  : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.studentDepartment,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Batch            : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.studentBatch,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "Section         : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.studentSection,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 10),
-                pw.RichText(
-                  text: pw.TextSpan(
-                      text: "ID                   : ",
-                      style: pw.TextStyle(
-                          fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
-                      children: [
-                        pw.TextSpan(
-                          text: widget.studentId,
-                          style: pw.TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: pw.FontWeight.normal),
-                        ),
-                      ]),
-                ),
-                pw.SizedBox(height: 25),
-                pw.Center(
-                  child: pw.RichText(
+                  pw.SizedBox(height: 25.h),
+                  pw.RichText(
                     text: pw.TextSpan(
-                        text: "Submission Date: ",
+                        text: "Course Title    : ",
                         style: pw.TextStyle(
                             fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
                         children: [
                           pw.TextSpan(
-                            text: widget.submissionDate,
+                            text: widget.courseTitle,
                             style: pw.TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: pw.FontWeight.normal),
                           ),
                         ]),
                   ),
-                )
-              ],
-            ),
+                  pw.SizedBox(height: 10.h),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Course Code  : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.courseCode,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Title                 : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.topicName,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 25),
+                  pw.Center(
+                    child: pw.Text(
+                      'Submitted To',
+                      style: pw.TextStyle(
+                        fontSize: 18,
+                        fontWeight: pw.FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  pw.Divider(
+                      thickness: 2,
+                      color: PdfColors.black,
+                      indent: 170,
+                      endIndent: 170),
+                  pw.SizedBox(height: 20),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Name             : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.teacherName,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Designation  : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.teacherDesignation,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Faculty          : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.facultyName,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 25),
+                  pw.Center(
+                    child: pw.Text(
+                      'Submitted By',
+                      style: pw.TextStyle(
+                        fontSize: 18,
+                        fontWeight: pw.FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  pw.Divider(
+                      thickness: 2,
+                      color: PdfColors.black,
+                      indent: 170,
+                      endIndent: 170),
+                  pw.SizedBox(height: 20),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Name            : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.studentName,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Department  : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.studentDepartment,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Batch            : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.studentBatch,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "Section         : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.studentSection,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 10),
+                  pw.RichText(
+                    text: pw.TextSpan(
+                        text: "ID                   : ",
+                        style: pw.TextStyle(
+                            fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                        children: [
+                          pw.TextSpan(
+                            text: widget.studentId,
+                            style: pw.TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: pw.FontWeight.normal),
+                          ),
+                        ]),
+                  ),
+                  pw.SizedBox(height: 25),
+                  pw.Center(
+                    child: pw.RichText(
+                      text: pw.TextSpan(
+                          text: "Submission Date: ",
+                          style: pw.TextStyle(
+                              fontWeight: pw.FontWeight.bold, fontSize: 14.sp),
+                          children: [
+                            pw.TextSpan(
+                              text: widget.submissionDate,
+                              style: pw.TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: pw.FontWeight.normal),
+                            ),
+                          ]),
+                    ),
+                  )
+                ],
+              ),
+            )
           );
         },
       ),

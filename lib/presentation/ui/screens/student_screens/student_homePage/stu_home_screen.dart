@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -6,7 +7,6 @@ import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../state_holders/auth_controller.dart';
 import '../../../../state_holders/student_state_holders/batch_all_announcement_controller.dart';
 import '../../../../state_holders/student_state_holders/stu_myTodo_controller.dart';
 import '../../../widgets/appbar_method.dart';
@@ -35,8 +35,8 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   final TimeManager timeManager = Get.put(TimeManager());
 
   bool foundClass = false;
-  String batchToFind = AuthController.batch1.toString();
-  String sectionToFind = AuthController.section1.toString();
+  String batchToFind = (AuthController.batch1?.toString() ?? '').isEmpty ? '57' : AuthController.batch1.toString();
+  String sectionToFind = (AuthController.section1?.toString() ?? '').isEmpty ? 'A' : AuthController.section1.toString();
 
   String? selectedBatch,
       viva = "5",
@@ -115,7 +115,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   @override
   Widget build(BuildContext context) {
     String timeToFind = timeManager.currentClassTime.value;
-    print(timeToFind);
+    if (kDebugMode) {
+      print(timeToFind);
+    }
     return Scaffold(
       appBar: customisedAppBar(scaffoldKey, context),
       body: Scaffold(
@@ -347,7 +349,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       text: '    My\nClasses',
                       color: 0xFFACFFDC,
                       onTap: () {
-                        Get.to(() => StuClassRoutinue(
+                        Get.to(() => StuClassRoutine(
                               batch: AuthController.batch1,
                               section: 'A+B',
                             ));
@@ -453,81 +455,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
             ),
           ),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   elevation: 5,
-        //   mini: true,
-        //   hoverColor: const Color(0xFFFFE8D2),
-        //   backgroundColor: const Color(0xFFF8FFAC),
-        //   onPressed: () {
-        //     showDialog(
-        //       context: context,
-        //       builder: (context) {
-        //         return StatefulBuilder(
-        //           builder: (context, StateSetter setState) {
-        //             return AlertDialog(
-        //               title: Center(
-        //                 child: Text(
-        //                   "SELECT YOUR BATCH",
-        //                   style: TextStyle(
-        //                       fontSize: 28.sp,
-        //                       fontWeight: FontWeight.w900,
-        //                       color: const Color(0xFF0D6858)),
-        //                 ),
-        //               ),
-        //               actions: [
-        //                 Padding(
-        //                   padding: EdgeInsets.all(ScreenUtil().setWidth(12)),
-        //                   child: CustomDropdownButton(
-        //                     width: 332.w,
-        //                     height: 51.h,
-        //                     dropDownWidth: 290.w,
-        //                     items: const ['57-A+B', '56-A', '56-B'],
-        //                     value: selectedBatch,
-        //                     hintText: 'Select Batch',
-        //                     onChanged: (value) {
-        //                       setState(() {
-        //                         selectedBatch = value;
-        //                       });
-        //                     },
-        //                   ),
-        //                 ),
-        //                 SizedBox(
-        //                   height: 15.h,
-        //                 ),
-        //                 Center(
-        //                   child: ElevatedButton(
-        //                     style: ElevatedButton.styleFrom(
-        //                       shape: CircleBorder(
-        //                         side: BorderSide(
-        //                           color: const Color(0xFF9B9B9B),
-        //                           width: 1.w,
-        //                         ),
-        //                       ),
-        //                       backgroundColor: const Color(0xFFF8FFAC),
-        //                     ),
-        //                     onPressed: () {},
-        //                     child: const Text(
-        //                       "OK",
-        //                       style: TextStyle(
-        //                           fontWeight: FontWeight.bold,
-        //                           color: Colors.black,
-        //                           fontSize: 24),
-        //                     ),
-        //                   ),
-        //                 ),
-        //               ],
-        //             );
-        //           },
-        //         );
-        //       },
-        //     );
-        //   },
-        //   child: Icon(
-        //     Icons.add,
-        //     size: 30.sp,
-        //     color: Colors.black,
-        //   ),
-        // ),
         floatingActionButton: FloatingActionButton(
           elevation: 5,
           mini: true,

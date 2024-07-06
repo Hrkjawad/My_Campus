@@ -18,13 +18,11 @@ var credentials = r'''{
  ''';
 
 final gSheetInit = GSheets(credentials);
-var GsheetController;
+var gSheetController;
 Worksheet? gSheetCrudUserDetails;
 // Function to get current day name
 String getCurrentDayName() {
-  // Get current date
   DateTime now = DateTime.now();
-  // Get weekday name (full name)
   String dayName = now.weekday == 1
       ? 'Monday'
       : now.weekday == 2
@@ -41,9 +39,9 @@ String getCurrentDayName() {
 gSheetIntit() async {
   try {
 
-    GsheetController = await gSheetInit.spreadsheet(sheetId);
+    gSheetController = await gSheetInit.spreadsheet(sheetId);
     String currentDayName = getCurrentDayName();
-    gSheetCrudUserDetails = await GsheetController.worksheetByTitle(currentDayName);
+    gSheetCrudUserDetails = await gSheetController.worksheetByTitle(currentDayName);
 
     if (gSheetCrudUserDetails != null) {
       if (kDebugMode) {

@@ -2,12 +2,9 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-import '../../../../../state_holders/auth_controller.dart';
-
-class StuClassRoutinue extends StatefulWidget {
-  const StuClassRoutinue({super.key, this.batch, this.section});
+class StuClassRoutine extends StatefulWidget {
+  const StuClassRoutine({super.key, this.batch, this.section});
 
   final String? batch;
   final String? section;
@@ -16,10 +13,9 @@ class StuClassRoutinue extends StatefulWidget {
   _StuClassRoutinueState createState() => _StuClassRoutinueState();
 }
 
-class _StuClassRoutinueState extends State<StuClassRoutinue> {
+class _StuClassRoutinueState extends State<StuClassRoutine> {
   TextEditingController batchController = TextEditingController();
   TextEditingController sectionController = TextEditingController();
-
   List<dynamic>? jSat = [];
   List<dynamic>? jSun = [];
   List<dynamic>? jMon = [];
@@ -297,20 +293,20 @@ class _StuClassRoutinueState extends State<StuClassRoutinue> {
           ? const Center(
               child: CircularProgressIndicator()) // Show loading indicator
           : Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: EdgeInsets.all(4.w),
               child: Center(
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       Text(
                         '${widget.batch} ${widget.section} Routine',
-                        style: const TextStyle(
-                            fontSize: 20,
+                        style:  TextStyle(
+                            fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                             letterSpacing: .2),
                       ),
-                      const SizedBox(
-                        height: 14,
+                       SizedBox(
+                        height: 14.h,
                       ),
                       Table(
                         border: TableBorder.all(),
@@ -638,7 +634,7 @@ class _StuClassRoutinueState extends State<StuClassRoutinue> {
                         ],
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 20.h,
                       ),
                       SizedBox(
                         width: double.infinity,
@@ -650,8 +646,8 @@ class _StuClassRoutinueState extends State<StuClassRoutinue> {
                                     return AlertDialog(
                                       title: const Text('Write Batch'),
                                       content: SizedBox(
-                                        height: 150,
-                                        width: 150,
+                                        height: 150.h,
+                                        width: 150.w,
                                         child: Column(
                                           //mainAxisAlignment: MainAxisAlignment.start,
                                           children: [
@@ -683,7 +679,7 @@ class _StuClassRoutinueState extends State<StuClassRoutinue> {
                                             style: TextButton.styleFrom(
                                                 foregroundColor: Colors.black),
                                             onPressed: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)=> StuClassRoutinue(
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=> StuClassRoutine(
                                                 batch: batchController.text,
                                                 section:
                                                 sectionController.text,
@@ -720,12 +716,12 @@ class SubjectClass extends StatelessWidget {
     return TableCell(
       verticalAlignment: TableCellVerticalAlignment.middle,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(5.w),
         child: Text(
           title,
           style: TextStyle(
             overflow: TextOverflow.visible,
-            fontSize: 12.23,
+            fontSize: 12.23.sp,
             fontWeight: FontWeight.w600,
             letterSpacing: .1,
             color: color,

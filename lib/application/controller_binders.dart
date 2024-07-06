@@ -26,6 +26,7 @@ import '../presentation/state_holders/student_state_holders/stu_enrolled_course_
 import '../presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import '../presentation/state_holders/student_state_holders/stu_myTodo_controller.dart';
 import '../presentation/state_holders/student_state_holders/stu_resources_controller.dart';
+import '../presentation/ui/widgets/date.dart';
 
 class GetXBindings extends Bindings {
   @override
