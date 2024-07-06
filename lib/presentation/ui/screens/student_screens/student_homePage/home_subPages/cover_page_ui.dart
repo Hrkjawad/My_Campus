@@ -175,6 +175,7 @@ class _CoverPageUiState extends State<CoverPageUi> {
                 SizedBox(
                   width: 130.w,
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     controller: studentBatchController,
                     decoration: const InputDecoration(
                         labelText: 'Batch',
@@ -202,6 +203,7 @@ class _CoverPageUiState extends State<CoverPageUi> {
                   width: 130.w,
                   child: TextFormField(
                     controller: studentIdController,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         labelText: 'ID',
                         labelStyle: TextStyle(color: Colors.black)),
