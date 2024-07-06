@@ -1,23 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-class Date extends StatefulWidget {
+class DateController extends GetxController {
+  var date = DateTime.now().obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    updateDate();
+  }
+
+  void updateDate() {
+    Future.delayed(const Duration(seconds: 1), () {
+      date.value = DateTime.now();
+      updateDate();
+    });
+  }
+
+  String get formattedDay => DateFormat.EEEE().format(date.value);
+}
+
+class Date extends StatelessWidget {
   const Date({super.key});
 
   @override
-  State<Date> createState() => _DateState();
-}
-
-class _DateState extends State<Date> {
-  @override
   Widget build(BuildContext context) {
-    var date = DateTime.now();
-    var formattedDate = DateFormat.yMMMMd().format(date);
-    return Text(
-      'Today: $formattedDate',
-      style:  TextStyle(
-          fontWeight: FontWeight.w500, color: Colors.redAccent, fontSize: 18.sp),
+    return GetX<DateController>(
+      init: DateController(),
+      builder: (controller) {
+        var date = controller.date.value;
+        var formattedDate = DateFormat.yMMMMd().format(date);
+        var formattedTime = DateFormat.jm().format(date);
+        var formattedDay = DateFormat.EEEE().format(date);
+        return Text(
+          "$formattedDay - $formattedDate | $formattedTime",
+          style: TextStyle(
+              fontWeight: FontWeight.w400, color: Colors.red, fontSize: 18.sp),
+        );
+      },
     );
   }
 }
