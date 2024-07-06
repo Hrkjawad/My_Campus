@@ -68,9 +68,9 @@ class CustomDropdownButton extends StatelessWidget {
             buttonStyleData: ButtonStyleData(
               height: height,
               width: width,
-              padding:  EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14),),
+              padding:  EdgeInsets.only(left: 14.w, right: 14.w),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24),),
+                borderRadius: BorderRadius.circular(24.w),
                 border: Border.all(
                   color: const Color(0x999B9B9B),
                 ),
@@ -82,7 +82,7 @@ class CustomDropdownButton extends StatelessWidget {
               icon: const Icon(
                 Icons.arrow_drop_down_rounded,
               ),
-              iconSize: ScreenUtil().setSp(30),
+              iconSize: 30.sp,
               iconEnabledColor: Colors.black,
               iconDisabledColor: Colors.grey,
             ),
@@ -90,19 +90,19 @@ class CustomDropdownButton extends StatelessWidget {
               maxHeight: 350.h,
               width: dropDownWidth,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(24),),
+                borderRadius: BorderRadius.circular(24.w),
                 color: const Color(0xFFF0FFF8),
               ),
               offset: const Offset(0, 0),
               scrollbarTheme: ScrollbarThemeData(
-                radius:  Radius.circular(ScreenUtil().setWidth(40),),
-                thickness: MaterialStateProperty.all(6),
-                thumbVisibility: MaterialStateProperty.all(true),
+                radius:  Radius.circular(40.w),
+                thickness: WidgetStateProperty.all(6.w),
+                thumbVisibility: WidgetStateProperty.all(true),
               ),
             ),
             menuItemStyleData: MenuItemStyleData(
               height: 70.h,
-              padding: EdgeInsets.only(left: ScreenUtil().setWidth(14), right: ScreenUtil().setWidth(14),),
+              padding: EdgeInsets.only(left: 14.w, right: 14.w,),
             ),
           ),
         ),

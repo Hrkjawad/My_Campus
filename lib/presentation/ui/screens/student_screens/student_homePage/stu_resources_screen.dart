@@ -82,7 +82,7 @@ class _StuResourcesScreenState extends State<StuResourcesScreen> {
                     width: 360.w,
                     height: 45.h,
                     dropDownWidth: 360.w,
-                    items: const ['57 A+B'],
+                    items: const ['57 A+B', "58"],
                     value: selectedBatch,
                     hintText: 'Select Batch',
                     onChanged: (value) {

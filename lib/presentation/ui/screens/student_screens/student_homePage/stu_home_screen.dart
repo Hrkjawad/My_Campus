@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,11 +12,10 @@ import '../../../../state_holders/student_state_holders/stu_myTodo_controller.da
 import '../../../widgets/appbar_method.dart';
 import '../../../widgets/date.dart';
 
-import '../../../widgets/dropdown_button.dart';
 import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
+import 'home_subPages/cover_page_ui.dart';
 import 'home_subPages/stu_class_routinue.dart';
-import 'stu_cover_page_screen.dart';
 
 class StuHomeScreen extends StatefulWidget {
   const StuHomeScreen({super.key});
@@ -29,13 +27,6 @@ class StuHomeScreen extends StatefulWidget {
 var scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _StuHomeScreenState extends State<StuHomeScreen> {
-  TextEditingController facNameController = TextEditingController();
-  TextEditingController facDesignationController = TextEditingController();
-  TextEditingController facDepartmentController = TextEditingController();
-  TextEditingController taskTypeController = TextEditingController();
-  TextEditingController taskTitleController = TextEditingController();
-  TextEditingController courseCodeController = TextEditingController();
-  TextEditingController courseTitleController = TextEditingController();
 
   List<Map<String, String>> tableData = [];
   String? selectedBatch,
@@ -90,13 +81,17 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   void dispose() {
     _timer.cancel();
     _announcementPageController.dispose();
-    facDepartmentController.clear();
-    facDesignationController.clear();
-    facNameController.clear();
-    taskTitleController.clear();
-    taskTypeController.clear();
-    courseCodeController.clear();
     courseTitleController.clear();
+    courseCodeController.clear();
+    teacherNameController.clear();
+    teacherDesignationController.clear();
+    facultyNameController.clear();
+    studentNameController.clear();
+    studentDeptController.clear();
+    studentBatchController.clear();
+    studentSectionController.clear();
+    studentIdController.clear();
+    topicNameController.clear();
     super.dispose();
   }
 
@@ -293,7 +288,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 20.h,
                 ),
                 const Date(),
                 SizedBox(
@@ -370,117 +365,8 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                         showDialog(
                             context: context,
                             builder: (context) {
-                              return SingleChildScrollView(
-                                padding: const EdgeInsets.only(top: 50),
-                                child: AlertDialog(
-                                  title: const Text(
-                                      'Write Your Cover Page Core Information'),
-                                  content: SizedBox(
-                                    height: 500.h,
-                                    width: 150,
-                                    child: Column(
-                                      //mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        TextFormField(
-                                          controller: taskTypeController,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Task Type (Assignment/Lab Report)'),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        TextFormField(
-                                          controller: taskTitleController,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Task Title'),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        TextFormField(
-                                          controller: facNameController,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Teacher Name'),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        TextFormField(
-                                          controller: facDesignationController,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Teacher Designation'),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        TextFormField(
-                                          controller: facDepartmentController,
-                                          decoration: const InputDecoration(
-                                              hintText:
-                                                  'Teachers Department (CSE/EEE)'),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        TextFormField(
-                                          controller: courseCodeController,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Course Code'),
-                                        ),
-                                        SizedBox(
-                                          height: 10.h,
-                                        ),
-                                        TextFormField(
-                                          controller: courseTitleController,
-                                          decoration: const InputDecoration(
-                                              hintText: 'Course Title'),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                            foregroundColor: Colors.black),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Cancel')),
-                                    TextButton(
-                                        style: TextButton.styleFrom(
-                                            foregroundColor: Colors.black),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  StuCoverPageScreen(
-                                                taskType: taskTypeController.text,
-                                                facName: facNameController.text,
-                                                facDesignation:
-                                                    facDesignationController.text,
-                                                facDepartment:
-                                                    facDepartmentController.text,
-                                                courseCode: courseCodeController.text,
-                                                courseTitle: courseTitleController.text,
-                                                taskTitle: taskTitleController.text,
-                                              ),
-                                            ),
-                                          );
-                                          facDepartmentController.clear();
-                                          facDesignationController.clear();
-                                          facNameController.clear();
-                                          taskTitleController.clear();
-                                          taskTypeController.clear();
-                                          courseCodeController.clear();
-                                          courseTitleController.clear();
-                                        },
-                                        child: const Text('Go'))
-                                  ],
-                                ),
-                              );
+                              return const CoverPageUi();
                             });
-                        //Get.to(()=> StuCoverPageScreen());
                       },
                     ),
                     SizedBox(
@@ -843,7 +729,4 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
       ),
     );
   }
-
-
-
 }
