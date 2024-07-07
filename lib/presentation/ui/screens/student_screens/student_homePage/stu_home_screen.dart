@@ -35,8 +35,12 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   final TimeManager timeManager = Get.put(TimeManager());
 
   bool foundClass = false;
-  String batchToFind = (AuthController.batch1?.toString() ?? '').isEmpty ? '57' : AuthController.batch1.toString();
-  String sectionToFind = (AuthController.section1?.toString() ?? '').isEmpty ? 'A' : AuthController.section1.toString();
+  String batchToFind = (AuthController.batch1?.toString() ?? '').isEmpty
+      ? '57'
+      : AuthController.batch1.toString();
+  String sectionToFind = (AuthController.section1?.toString() ?? '').isEmpty
+      ? 'A'
+      : AuthController.section1.toString();
 
   String? selectedBatch,
       viva = "5",
@@ -77,7 +81,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           .batchAnnouncement('57 A+B', 'Lab Report');
       Get.find<BatchAllAnnouncementController>().batchAllAnnouncement('57 A+B');
       await Get.find<StuMyTodoController>().stuShowMyTodo();
-      myTodo = Get.find<StuMyTodoController>().stuMyShowMyTodoModel.count?.toString();
+      myTodo = Get.find<StuMyTodoController>()
+          .stuMyShowMyTodoModel
+          .count
+          ?.toString();
     });
   }
 
@@ -116,7 +123,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   Widget build(BuildContext context) {
     String timeToFind = timeManager.currentClassTime.value;
     if (kDebugMode) {
-      print(timeToFind);
+      print("we get: $timeToFind");
     }
     return Scaffold(
       appBar: customisedAppBar(scaffoldKey, context),
@@ -299,12 +306,11 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                               var timeColumn = rowData["Time"];
                               var classAtTime = rowData[
                                   timeToFind]; // Get the specific time slot column
-
                               if (batchToFind == batch &&
                                   sectionToFind == section &&
                                   timeColumn == "Classes") {
                                 foundClass = true;
-                                var classInfo = classAtTime ?? 'NO CLASS';
+                                var classInfo = classAtTime ?? 'NO CLASS NOW';
                                 return Center(
                                   child: Text(
                                     "$classInfo",
@@ -319,9 +325,15 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                               if (index == dataFromSheet.length - 1 &&
                                   !foundClass) {
                                 return Center(
-                                  child: Text(
-                                    "NO CLASS",
-                                    style: TextStyle(fontSize: 22.sp),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(top: 10.w),
+                                    child: Text(
+                                      "NO CLASS NOW\n",
+                                      style: TextStyle(
+                                        fontSize: 22.sp,
+                                        fontWeight: FontWeight.w900,
+                                      ),
+                                    ),
                                   ),
                                 );
                               }
