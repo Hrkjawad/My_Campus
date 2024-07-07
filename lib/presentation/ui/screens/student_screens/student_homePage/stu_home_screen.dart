@@ -34,7 +34,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   TextEditingController sectionController = TextEditingController();
   final TimeManager timeManager = Get.put(TimeManager());
 
-  bool foundClass = false;
   String batchToFind = (AuthController.batch1?.toString() ?? '').isEmpty
       ? '57'
       : AuthController.batch1.toString();
@@ -121,10 +120,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    String timeToFind = timeManager.currentClassTime.value;
-    if (kDebugMode) {
-      print("we get: $timeToFind");
-    }
     return Scaffold(
       appBar: customisedAppBar(scaffoldKey, context),
       body: Scaffold(
@@ -296,49 +291,56 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       child: GetBuilder<TimeManager>(
                         builder: (controller) {
                           String timeToFind = controller.currentClassTime.value;
-                          return ListView.builder(
-                            itemCount: dataFromSheet.length,
-                            shrinkWrap: true,
-                            itemBuilder: (context, index) {
-                              var rowData = dataFromSheet[index];
-                              var batch = rowData["Batch"];
-                              var section = rowData["Section"];
-                              var timeColumn = rowData["Time"];
-                              var classAtTime = rowData[
-                                  timeToFind]; // Get the specific time slot column
-                              if (batchToFind == batch &&
-                                  sectionToFind == section &&
-                                  timeColumn == "Classes") {
-                                foundClass = true;
-                                var classInfo = classAtTime ?? 'NO CLASS NOW';
-                                return Center(
-                                  child: Text(
-                                    "$classInfo",
-                                    style: TextStyle(
-                                      fontSize: 22.sp,
-                                      fontWeight: FontWeight.w900,
-                                      color: const Color(0xFF393939),
-                                    ),
-                                  ),
-                                );
-                              }
-                              if (index == dataFromSheet.length - 1 &&
-                                  !foundClass) {
-                                return Center(
-                                  child: Padding(
-                                    padding: EdgeInsets.only(top: 10.w),
+                          if (kDebugMode) {
+                            print("we get: $timeToFind");
+                          }
+                          if (timeToFind == "Next Class is Tomorrow") {
+                            return Center(
+                              child: Text(
+                                "Next Class is Tomorrow",
+                                style: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            );
+                          }
+                          return Center(
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: dataFromSheet.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                var rowData = dataFromSheet[index];
+                                var batch = rowData["Batch"];
+                                var section = rowData["Section"];
+                                var timeColumn = rowData["Time"];
+                                var classAtTime = rowData[timeToFind];
+
+                                // print("Processing row $index: batch=$batch, section=$section, timeColumn=$timeColumn");
+
+                                if (batchToFind == batch &&
+                                    sectionToFind == section &&
+                                    timeColumn == "Classes") {
+                                  var classInfo = classAtTime ?? 'NO CLASS ';
+
+                                  //print(" classInfo: $classInfo");
+
+                                  return Center(
                                     child: Text(
-                                      "NO CLASS NOW\n",
+                                      classInfo,
                                       style: TextStyle(
-                                        fontSize: 22.sp,
+                                        fontSize: 20.sp,
                                         fontWeight: FontWeight.w900,
+                                        color: const Color(0xFF393939),
                                       ),
                                     ),
-                                  ),
-                                );
-                              }
-                              return const SizedBox();
-                            },
+                                  );
+                                }
+
+                                return const SizedBox(); // Return an empty SizedBox if conditions are not met
+                              },
+                            ),
                           );
                         },
                       ),
