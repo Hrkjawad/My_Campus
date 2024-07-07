@@ -38,9 +38,13 @@ class TimeManager extends GetxController {
         (currentHour == 15 && currentMinute < 15)) {
       currentClassTime.value = '2:15 PM - 3:05 PM';
     } else if ((currentHour == 15 && currentMinute >= 15) ||
-        (currentHour == 16 && currentMinute < 10)) {
+        (currentHour == 16 && currentMinute < 00)) {
       currentClassTime.value = '3:10 PM - 4:00 PM';
-    } else if ((currentHour == 19 && currentMinute >= 00) ||
+    } else if ((currentHour == 16 && currentMinute >= 00) ||
+        (currentHour == 16 && currentMinute < 55)) {
+      currentClassTime.value = '4:05 PM - 4:55 PM';
+    }
+    else if ((currentHour == 19 && currentMinute >= 00) ||
         (currentHour == 19 && currentMinute < 50)) {
       currentClassTime.value = '7:00 PM - 7:50 PM';
     } else if ((currentHour == 20 && currentMinute >= 00) ||
