@@ -317,11 +317,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                                 var timeColumn = rowData["Time"];
                                 var classAtTime = rowData[timeToFind];
 
-                                // print("Processing row $index: batch=$batch, section=$section, timeColumn=$timeColumn");
+                               // print("Processing row $index: batch=$batch, section=$section, timeColumn=$timeColumn");
 
-                                if (batchToFind == batch &&
-                                    sectionToFind == section &&
-                                    timeColumn == "Classes") {
+                                if (batchToFind == batch && sectionToFind == section && timeColumn == "Classes") {
                                   var classInfo = classAtTime ?? 'NO CLASS ';
 
                                   //print(" classInfo: $classInfo");
@@ -341,7 +339,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                                 return const SizedBox(); // Return an empty SizedBox if conditions are not met
                               },
                             ),
+
+
                           );
+
                         },
                       ),
                     ),

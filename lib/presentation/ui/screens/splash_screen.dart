@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (result) {
         Get.offAll(const StuMainBottomNavBarScreen());
       } else {
-        Get.offAll(const StuSignInScreen());
+        Get.offAll(const StuHomeScreen());
       }
     });
 
