@@ -10,8 +10,6 @@ import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import 'package:my_campus/presentation/ui/widgets/title_and_subtitle.dart';
 import '../../../../state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
 import '../../../widgets/customised_elevated_button.dart';
-import '../../../widgets/text_field_with_trailing.dart';
-import '../student_homePage/stu_home_screen.dart';
 
 class StuSignInScreen extends StatefulWidget {
   const StuSignInScreen({super.key});
