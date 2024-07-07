@@ -40,6 +40,12 @@ class TimeManager extends GetxController {
     } else if ((currentHour == 15 && currentMinute >= 15) ||
         (currentHour == 16 && currentMinute < 10)) {
       currentClassTime.value = '3:10 PM - 4:00 PM';
+    } else if ((currentHour == 19 && currentMinute >= 00) ||
+        (currentHour == 19 && currentMinute < 50)) {
+      currentClassTime.value = '7:00 PM - 7:50 PM';
+    } else if ((currentHour == 20 && currentMinute >= 00) ||
+        (currentHour == 20 && currentMinute < 50)) {
+      currentClassTime.value = '8:00 PM - 8:50 PM';
     } else {
       currentClassTime.value = 'Next Class is Tomorrow';
     }
