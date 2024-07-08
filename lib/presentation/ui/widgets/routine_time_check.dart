@@ -16,7 +16,11 @@ class TimeManager extends GetxController {
     DateTime now = DateTime.now();
     int currentHour = now.hour;
     int currentMinute = now.minute;
-    if ((currentHour == 8 && currentMinute >= 55) ||
+    if ((currentHour == 0 && currentMinute >= 00) ||
+    (currentHour == 8 && currentMinute < 55)) {
+    currentClassTime.value = 'Classes will start as per your schedule';
+    }
+    else if ((currentHour == 8 && currentMinute >= 55) ||
         (currentHour == 9 && currentMinute < 45)) {
       currentClassTime.value = '8:55 AM - 9:45 AM';
     } else if ((currentHour == 9 && currentMinute >= 45) ||
@@ -49,7 +53,8 @@ class TimeManager extends GetxController {
     } else if ((currentHour == 19 && currentMinute >= 50) ||
         (currentHour == 20 && currentMinute < 50)) {
       currentClassTime.value = '8:00 PM - 8:50 PM';
-    } else {
+    }
+    else {
       currentClassTime.value = "Class is End";
     }
   }

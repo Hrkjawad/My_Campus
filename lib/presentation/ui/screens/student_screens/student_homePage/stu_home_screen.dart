@@ -294,6 +294,17 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                           if (kDebugMode) {
                             print("we get: $timeToFind");
                           }
+                          if (timeToFind == "Classes will start as per your schedule") {
+                            return Center(
+                              child: Text(
+                                "Classes will start as per your schedule",
+                                style: TextStyle(
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            );
+                          }
                           if (timeToFind == "Class is End") {
                             return Center(
                               child: Text(
