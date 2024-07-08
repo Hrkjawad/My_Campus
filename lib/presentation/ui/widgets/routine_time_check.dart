@@ -50,7 +50,7 @@ class TimeManager extends GetxController {
         (currentHour == 20 && currentMinute < 50)) {
       currentClassTime.value = '8:00 PM - 8:50 PM';
     } else {
-      currentClassTime.value = 'Next Class is Tomorrow';
+      currentClassTime.value = "Class is End";
     }
   }
 }

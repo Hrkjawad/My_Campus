@@ -294,13 +294,13 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                           if (kDebugMode) {
                             print("we get: $timeToFind");
                           }
-                          if (timeToFind == "Next Class is Tomorrow") {
+                          if (timeToFind == "Class is End") {
                             return Center(
                               child: Text(
-                                "Next Class is Tomorrow",
+                                "CLASS IS END",
                                 style: TextStyle(
                                   fontSize: 22.sp,
-                                  fontWeight: FontWeight.w900,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
                             );
@@ -315,34 +315,28 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                                 var batch = rowData["Batch"];
                                 var section = rowData["Section"];
                                 var timeColumn = rowData["Time"];
-                                var classAtTime = rowData[timeToFind];
-
-                               // print("Processing row $index: batch=$batch, section=$section, timeColumn=$timeColumn");
+                                var classAtTime = rowData[timeToFind]; // Get the specific time slot class
 
                                 if (batchToFind == batch && sectionToFind == section && timeColumn == "Classes") {
-                                  var classInfo = classAtTime ?? 'NO CLASS ';
+                                  var classInfo = (classAtTime == null || classAtTime.isEmpty) ? 'NO CLASS NOW' : classAtTime;
 
-                                  //print(" classInfo: $classInfo");
+                                  //print("classInfo: $classInfo");
 
                                   return Center(
                                     child: Text(
                                       classInfo,
                                       style: TextStyle(
                                         fontSize: 20.sp,
-                                        fontWeight: FontWeight.w900,
+                                        fontWeight: FontWeight.w700,
                                         color: const Color(0xFF393939),
                                       ),
                                     ),
                                   );
                                 }
-
-                                return const SizedBox(); // Return an empty SizedBox if conditions are not met
+                                return const SizedBox();
                               },
-                            ),
-
-
+                            )
                           );
-
                         },
                       ),
                     ),
