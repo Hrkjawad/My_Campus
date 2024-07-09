@@ -7,6 +7,7 @@ import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../../../state_holders/stu_announcement_listen_controller.dart';
 import '../../../../state_holders/student_state_holders/batch_all_announcement_controller.dart';
 import '../../../../state_holders/student_state_holders/stu_myTodo_controller.dart';
 import '../../../widgets/appbar_method.dart';
@@ -16,8 +17,8 @@ import '../../../widgets/sheet_connect_api.dart';
 import '../../../widgets/sheet_data_fatch.dart';
 import '../../../widgets/stu_drawer_method.dart';
 import '../../../widgets/homepage_card_elevated_button.dart';
-import 'home_subPages/cover_page_ui.dart';
-import '../../../widgets/routine_time_check.dart';
+import '../../../../state_holders/routine_time_controller.dart';
+import '../../../widgets/cover_page_info_method.dart';
 import 'home_subPages/stu_class_routinue.dart';
 
 class StuHomeScreen extends StatefulWidget {
@@ -32,7 +33,7 @@ var scaffoldKey = GlobalKey<ScaffoldState>();
 class _StuHomeScreenState extends State<StuHomeScreen> {
   TextEditingController batchController = TextEditingController();
   TextEditingController sectionController = TextEditingController();
-  final TimeManager timeManager = Get.put(TimeManager());
+  final RoutineTimeController timeManager = Get.put(RoutineTimeController());
 
   String batchToFind = (AuthController.batch1?.toString() ?? '').isEmpty
       ? '57'
@@ -50,11 +51,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
 
   //api table data fetch
   String? currentT5ime, classes = "4", exams = "1", myTodo, myAssignment = "2";
-  final List<String> announcements = [
-    'CSE 1111 | Next Sunday is Viva ',
-    'CSE 2222 | Next Sunday is Tutorial ',
-    'EEE 1111 | Next Sunday Class is Canceled ',
-  ];
 
   int _currentAnnouncement = 0;
   late Timer _timer;
@@ -68,48 +64,48 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
     timeManager.startUpdating();
     _announcementPageController =
         PageController(initialPage: _currentAnnouncement);
-    _startTimer();
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      Get.find<BatchAnnouncementController>()
+      await Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Assignment');
-      Get.find<BatchAnnouncementController>()
+      await Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Tutorial');
-      Get.find<BatchAnnouncementController>()
+      await Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Viva');
-      Get.find<BatchAnnouncementController>()
+      await Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Lab Report');
-      Get.find<BatchAllAnnouncementController>().batchAllAnnouncement('57 A+B');
-      await Get.find<StuMyTodoController>().stuShowMyTodo();
+      await Get.find<BatchAllAnnouncementController>()
+          .batchAllAnnouncement('57 A+B');
+
+      await Get.find<StuAnnouncementListenController>().why();
+      startTimer();
+
       myTodo = Get.find<StuMyTodoController>()
           .stuMyShowMyTodoModel
           .count
           ?.toString();
     });
+
   }
 
   @override
   void dispose() {
     _timer.cancel();
     _announcementPageController.dispose();
-    courseTitleController.clear();
-    courseCodeController.clear();
-    teacherNameController.clear();
-    teacherDesignationController.clear();
-    facultyNameController.clear();
-    studentNameController.clear();
-    studentDeptController.clear();
-    studentBatchController.clear();
-    studentSectionController.clear();
-    studentIdController.clear();
-    topicNameController.clear();
     super.dispose();
   }
 
-  void _startTimer() {
+  startTimer() async {
+    //if (Get.find<StuAnnouncementListenController>().announcements.isEmpty) return; // Ensure list is not empty before starting the timer
+
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (_announcementPageController.page == null) return;
+      // if (_announcementPageController.page == null ||
+      //     Get.find<StuAnnouncementListenController>().announcements.isEmpty)
+      //   return;
+
       final nextPage = (_announcementPageController.page!.toInt() + 1) %
-          announcements.length;
+          Get.find<StuAnnouncementListenController>().announcements.length;
+
       _announcementPageController.animateToPage(
         nextPage,
         duration: const Duration(milliseconds: 500),
@@ -288,13 +284,14 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                     ),
                     color: Colors.white,
                     child: Center(
-                      child: GetBuilder<TimeManager>(
+                      child: GetBuilder<RoutineTimeController>(
                         builder: (controller) {
                           String timeToFind = controller.currentClassTime.value;
                           if (kDebugMode) {
                             print("we get: $timeToFind");
                           }
-                          if (timeToFind == "Classes will start as per your schedule") {
+                          if (timeToFind ==
+                              "Classes will start as per your schedule") {
                             return Center(
                               child: Text(
                                 "Classes will start as per your schedule",
@@ -317,37 +314,42 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                             );
                           }
                           return Center(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: dataFromSheet.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                var rowData = dataFromSheet[index];
-                                var batch = rowData["Batch"];
-                                var section = rowData["Section"];
-                                var timeColumn = rowData["Time"];
-                                var classAtTime = rowData[timeToFind]; // Get the specific time slot class
+                              child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: dataFromSheet.length,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              var rowData = dataFromSheet[index];
+                              var batch = rowData["Batch"];
+                              var section = rowData["Section"];
+                              var timeColumn = rowData["Time"];
+                              var classAtTime = rowData[
+                                  timeToFind]; // Get the specific time slot class
 
-                                if (batchToFind == batch && sectionToFind == section && timeColumn == "Classes") {
-                                  var classInfo = (classAtTime == null || classAtTime.isEmpty) ? 'NO CLASS NOW' : classAtTime;
+                              if (batchToFind == batch &&
+                                  sectionToFind == section &&
+                                  timeColumn == "Classes") {
+                                var classInfo =
+                                    (classAtTime == null || classAtTime.isEmpty)
+                                        ? 'NO CLASS NOW'
+                                        : classAtTime;
 
-                                  //print("classInfo: $classInfo");
+                                //print("classInfo: $classInfo");
 
-                                  return Center(
-                                    child: Text(
-                                      classInfo,
-                                      style: TextStyle(
-                                        fontSize: 20.sp,
-                                        fontWeight: FontWeight.w700,
-                                        color: const Color(0xFF393939),
-                                      ),
+                                return Center(
+                                  child: Text(
+                                    classInfo,
+                                    style: TextStyle(
+                                      fontSize: 20.sp,
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xFF393939),
                                     ),
-                                  );
-                                }
-                                return const SizedBox();
-                              },
-                            )
-                          );
+                                  ),
+                                );
+                              }
+                              return const SizedBox();
+                            },
+                          ));
                         },
                       ),
                     ),
@@ -459,7 +461,9 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                   height: 150.h,
                   width: 375.w,
                   child: PageView.builder(
-                    itemCount: announcements.length,
+                    itemCount: Get.find<StuAnnouncementListenController>()
+                        .announcements
+                        .length,
                     controller: _announcementPageController,
                     onPageChanged: (index) {
                       setState(() {
@@ -467,7 +471,10 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                       });
                     },
                     itemBuilder: (context, index) {
-                      return buildAnnouncementCard(announcements[index]);
+                      return buildAnnouncementCard(
+                          Get.find<StuAnnouncementListenController>()
+                              .announcements[index]!
+                              .toString());
                     },
                   ),
                 ),
@@ -768,7 +775,7 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
         _timer.cancel();
       },
       onLongPressEnd: (_) {
-        _startTimer();
+        startTimer();
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10.0.w),
@@ -777,21 +784,26 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           border: Border.all(color: const Color(0x999B9B9B)),
           borderRadius: BorderRadius.circular(33.w),
         ),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(33.w),
-              child: Text(
-                announcement,
-                style: TextStyle(
-                  fontSize: 26.sp,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D6858),
+        child: GetBuilder<StuAnnouncementListenController>(
+            builder: (stuAnnouncementListenController) {
+          return Center(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(33.w),
+                child: Center(
+                  child: Text(
+                    announcement,
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w700,
+                      color: const Color(0xFF0D6858),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

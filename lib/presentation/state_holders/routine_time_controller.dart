@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:get/get.dart';
 
-class TimeManager extends GetxController {
+class RoutineTimeController extends GetxController {
   var currentClassTime = ''.obs;
 
   void startUpdating() {

@@ -49,8 +49,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   @override
   void initState() {
     super.initState();
-    _announcementPageController =
-        PageController(initialPage: _currentAnnouncement);
+    _announcementPageController = PageController(initialPage: _currentAnnouncement);
     _startTimer();
     //Get.find<FacAnnouncementController>().facShowAnnouncement();
   }//

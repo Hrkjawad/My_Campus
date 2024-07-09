@@ -95,8 +95,8 @@ class CustomDropdownButton extends StatelessWidget {
               offset: const Offset(0, 0),
               scrollbarTheme: ScrollbarThemeData(
                 radius:  Radius.circular(40.w),
-                thickness: WidgetStateProperty.all(6.w),
-                thumbVisibility: WidgetStateProperty.all(true),
+                 thickness: MaterialStateProperty.all(6.w),
+                 thumbVisibility: MaterialStateProperty.all(true),
               ),
             ),
             menuItemStyleData: MenuItemStyleData(

@@ -7,13 +7,14 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/auth_state_holders/fac_verify_email_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/auth_state_holders/stu_availability_checking_controller.dart';
-import 'package:my_campus/presentation/ui/widgets/routine_time_check.dart';
+import 'package:my_campus/presentation/state_holders/routine_time_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/auth_state_holders/fac_availability_checking_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_myTdo_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_resource_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
+import '../presentation/state_holders/stu_announcement_listen_controller.dart';
 import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_password_change_controller.dart';
 import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_signin_controller.dart';
 import '../presentation/state_holders/student_state_holders/auth_state_holders/stu_signup_controller.dart';
@@ -58,9 +59,10 @@ class GetXBindings extends Bindings {
     Get.put(BatchAnnouncementController());
     Get.put(BatchAllAnnouncementController());
     Get.put(StuMyTodoController());
-    Get.put(TimeManager());
+    Get.put(RoutineTimeController());
     Get.put(DateController());
     Get.put(StuResourcesController());
+    Get.put(StuAnnouncementListenController());
 
   }
 }

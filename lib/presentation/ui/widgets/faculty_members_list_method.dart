@@ -46,7 +46,7 @@ void facultyMembers(BuildContext context) {
                             ),
                           ),
                           title: Text(
-                            'Pritiraj Battacharje',
+                            'Md Ebrahim Hossain',
                             style: TextStyle(
                                 fontWeight: FontWeight.w800,
                                 fontSize: ScreenUtil().setSp(20),
@@ -60,7 +60,7 @@ void facultyMembers(BuildContext context) {
                                 height: ScreenUtil().setHeight(6),
                               ),
                               Text(
-                                'Lecturer',
+                                'Assistant Professor',
                                 style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                               SizedBox(
@@ -74,14 +74,14 @@ void facultyMembers(BuildContext context) {
                                 height: ScreenUtil().setHeight(8),
                               ),
                               Text(
-                                'Email: prb@lus.ac.bd',
+                                'Email: ebh@lus.ac.bd',
                                 style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                               SizedBox(
                                 height: ScreenUtil().setHeight(8),
                               ),
                               Text(
-                                'Mobile Number',
+                                'Call: 01812-848136',
                                 style: TextStyle(fontSize: ScreenUtil().setSp(18)),
                               ),
                             ],
