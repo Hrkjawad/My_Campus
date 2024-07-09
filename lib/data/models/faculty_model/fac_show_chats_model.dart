@@ -34,11 +34,11 @@ class FacChatData {
 
   FacChatData(
       {this.name,
-      this.designation,
-      this.department,
-      this.sId,
-      this.chat,
-      this.timestamp});
+        this.designation,
+        this.department,
+        this.sId,
+        this.chat,
+        this.timestamp});
 
   FacChatData.fromJson(Map<String, dynamic> json) {
     name = json['name'];

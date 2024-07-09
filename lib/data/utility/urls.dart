@@ -37,7 +37,7 @@ class Urls {
       '$_facultyBaseUrl/deleteFacultyMeeting/$id';
   static String facultyDeleteAnnouncementToDo(String id) =>
       '$_facultyBaseUrl/deleteTeacherAnnouncement/$id';
-  static String facultyShowChats = '$_facultyBaseUrl/showChats';
+  static String facultyShowChats(String id) => '$_facultyBaseUrl/showChats/$id';
 
   static const String availableStudent = '$_studentBaseUrl/AvailableTeachers';
   static const String studentReg = '$_studentBaseUrl/Registration';

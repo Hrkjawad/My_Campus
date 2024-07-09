@@ -268,7 +268,7 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
     print(
       facMainBottomNavController.batchCoursePairs[index]['sId'].toString(),
     );
-    Get.to(
+    Get.to(()=>
       FacChatScreen(
         batch: facMainBottomNavController.batchCoursePairs[index]['batch']
             .toString(),

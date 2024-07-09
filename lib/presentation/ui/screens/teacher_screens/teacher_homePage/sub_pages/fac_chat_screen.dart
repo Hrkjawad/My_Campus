@@ -2,9 +2,11 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:intl/intl.dart';
+import 'package:my_campus/data/models/faculty_model/fac_show_chats_model.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../../state_holders/faculty_state_holders/fac_show_chats_state_holders.dart';
+import '../../../../../../data/models/faculty_list_model.dart';
+import '../../../../../state_holders/faculty_state_holders/fac_show_chats_controller.dart';
 import '../../../../../state_holders/faculty_state_holders/group_chatting_controller.dart';
 
 class FacChatScreen extends StatefulWidget {
@@ -25,7 +27,13 @@ class FacChatScreen extends StatefulWidget {
 class _FacChatScreenState extends State<FacChatScreen> {
   final TextEditingController _messageTEController = TextEditingController();
 
-  List<Message> messages = [];
+  @override
+  void initState() {
+    super.initState();
+    Get.find<FacShowChatsController>().facShowChats(widget.groupID);
+  }
+
+  List<dynamic> messages = [];
 
   @override
   Widget build(BuildContext context) {
@@ -72,24 +80,32 @@ class _FacChatScreenState extends State<FacChatScreen> {
             children: [
               GetBuilder<FacShowChatsController>(
                   builder: (facShowChatsController) {
-                print(
-                    facShowChatsController.facChatData.chat?.length ?? 'null');
+                print(widget.groupID);
+                print(widget.courseTitle);
+                print(facShowChatsController.facChatDataList?[0].name ??
+                    'nulluu');
+                print(facShowChatsController.chatList?.length ?? 'nulluu');
+                print(facShowChatsController.facChatDataList?.length ?? 'nulluu');
+
+                List<Chat>? chats = facShowChatsController.getChatsForFaculty(widget.groupID);
+                if
+
                 return SizedBox(
                   height: 500,
                   child: ListView.builder(
-                    itemCount:
-                        facShowChatsController.facChatData.chat?.length ?? 0,
+                    itemCount: facShowChatsController.chatList?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(facShowChatsController
-                            .facChatData.chat![index].message
-                            .toString()),
+                      return ExpansionTile(
+                        title: Text(
+                          facShowChatsController.facChatDataList![index].chat.toString()
+                        ),
+
                       );
                     },
                   ),
                 );
 
-                Expanded(
+                /*Expanded(
                   child: GroupedListView<Message, DateTime>(
                     reverse: true,
                     order: GroupedListOrder.DESC,
@@ -137,7 +153,7 @@ class _FacChatScreenState extends State<FacChatScreen> {
                       ),
                     ),
                   ),
-                );
+                );*/
               }),
               Row(
                 children: [
@@ -201,7 +217,7 @@ class Message {
 
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import '../../../../../state_holders/faculty_state_holders/fac_show_chats_state_holders.dart';
+import '../../../../../state_holders/faculty_state_holders/fac_show_chats_controller.dart';
 
 class FacChatScreen extends StatefulWidget {
   const FacChatScreen(
