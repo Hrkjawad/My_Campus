@@ -5,7 +5,6 @@ class StuMainBottomNavController extends GetxController {
   int currentSelectedScreen = 0;
 
   Future<void> changeScreen(int index) async{
-    Get.find<StuAnnouncementListenController>().announcements;
     currentSelectedScreen = index;
     update();
   }
