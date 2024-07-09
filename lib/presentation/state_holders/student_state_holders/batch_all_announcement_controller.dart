@@ -25,9 +25,8 @@ class BatchAllAnnouncementController extends GetxController {
     if (response.isSuccess) {
       _batchAnnouncementModel =
           BatchAnnouncementModel.fromJson(response.responseJson!);
-
       total = _batchAnnouncementModel.total!;
-
+      _message = 'Announcement fetched';
       return true;
     } else {
       _message = "Faculty list couldn't be fetched!!";

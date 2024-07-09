@@ -59,13 +59,8 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
   @override
   void initState() {
     super.initState();
-    readDataFromSheet();
-    gSheetIntit();
-    timeManager.startUpdating();
-    _announcementPageController =
-        PageController(initialPage: _currentAnnouncement);
-
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Get.find<StuAnnouncementListenController>().why();
       await Get.find<BatchAnnouncementController>()
           .batchAnnouncement('57 A+B', 'Assignment');
       await Get.find<BatchAnnouncementController>()
@@ -77,7 +72,6 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
       await Get.find<BatchAllAnnouncementController>()
           .batchAllAnnouncement('57 A+B');
 
-      await Get.find<StuAnnouncementListenController>().why();
       startTimer();
 
       myTodo = Get.find<StuMyTodoController>()
@@ -85,7 +79,11 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           .count
           ?.toString();
     });
-
+    readDataFromSheet();
+    gSheetIntit();
+    timeManager.startUpdating();
+    _announcementPageController =
+        PageController(initialPage: _currentAnnouncement);
   }
 
   @override
@@ -457,26 +455,30 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
                 SizedBox(
                   height: 25.h,
                 ),
-                SizedBox(
-                  height: 150.h,
-                  width: 375.w,
-                  child: PageView.builder(
-                    itemCount: Get.find<StuAnnouncementListenController>()
-                        .announcements
-                        .length,
-                    controller: _announcementPageController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        _currentAnnouncement = index;
-                      });
-                    },
-                    itemBuilder: (context, index) {
-                      return buildAnnouncementCard(
-                          Get.find<StuAnnouncementListenController>()
-                              .announcements[index]!
-                              .toString());
-                    },
-                  ),
+                GetBuilder<StuAnnouncementListenController>(
+                  builder: (stuAnnouncementListenController) {
+                    return SizedBox(
+                      height: 150.h,
+                      width: 375.w,
+                      child: PageView.builder(
+                        itemCount: stuAnnouncementListenController
+                            .announcements.length,
+                        controller: _announcementPageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentAnnouncement = index;
+                          });
+                        },
+                        itemBuilder: (context, index) {
+                          return buildAnnouncementCard(
+                            stuAnnouncementListenController
+                                .announcements[index]!
+                                .toString(),
+                          );
+                        },
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -784,26 +786,23 @@ class _StuHomeScreenState extends State<StuHomeScreen> {
           border: Border.all(color: const Color(0x999B9B9B)),
           borderRadius: BorderRadius.circular(33.w),
         ),
-        child: GetBuilder<StuAnnouncementListenController>(
-            builder: (stuAnnouncementListenController) {
-          return Center(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.all(33.w),
-                child: Center(
-                  child: Text(
-                    announcement,
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xFF0D6858),
-                    ),
+        child: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(33.w),
+              child: Center(
+                child: Text(
+                  announcement,
+                  style: TextStyle(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
+                    color: const Color(0xFF0D6858),
                   ),
                 ),
               ),
             ),
-          );
-        }),
+          ),
+        ),
       ),
     );
   }

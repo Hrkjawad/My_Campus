@@ -12,6 +12,7 @@ class StuAnnouncementListenController extends GetxController {
     BatchAnnouncementModel model =
         Get.find<BatchAllAnnouncementController>().batchAnnouncementModel;
 
+    print('hi announcement');
     if (model.data != null) {
       for (var item in model.data!) {
         announcements.add('${item.type} | Date: ${item.date}');
@@ -19,6 +20,4 @@ class StuAnnouncementListenController extends GetxController {
     }
     update();
   }
-
-
 }
