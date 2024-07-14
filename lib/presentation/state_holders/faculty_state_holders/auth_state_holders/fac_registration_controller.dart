@@ -1,6 +1,6 @@
 /*
 import 'package:get/get.dart';
-import 'package:my_campus/data/models/faculty_model/fac_registration_model.dart';
+import 'package:my_campus/data/models/faculty_model/stu_registration_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 import '../../../data/utility/urls.dart';
@@ -36,8 +36,9 @@ class FacRegistrationController extends GetxController {
 }
 */
 
+/*
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import '../../../data/models/faculty_model/fac_registration_model.dart';
+import '../../../data/models/faculty_model/stu_registration_model.dart';
 import '../../../data/models/network_response.dart';
 import '../../../data/services/network_caller.dart';
 import '../../../data/utility/urls.dart';
@@ -73,3 +74,4 @@ class FacRegistrationController extends GetxController {
     }
   }
 }
+*/

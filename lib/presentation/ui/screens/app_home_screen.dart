@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_availability_checking_screen.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_availability_checking_screen.dart';
-import 'package:my_campus/presentation/ui/widgets/customised_elevated_button.dart';
-import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../widgets/app_logo.dart';
+import '../widgets/customised_elevated_button.dart';
+import '../widgets/screen_background.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,12 +23,12 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 263,
+              SizedBox(
+                height: 263.h,
               ),
               const AppLogo(),
-              const SizedBox(
-                height: 68,
+              SizedBox(
+                height: 68.h,
               ),
               CustomisedElevatedButton(
                   onTap: () {
@@ -36,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   text: 'FACULTY MEMBER'),
-              const SizedBox(
-                height: 50,
+              SizedBox(
+                height: 50.h,
               ),
               CustomisedElevatedButton(
                   onTap: () {

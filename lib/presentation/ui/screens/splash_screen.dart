@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/ui/screens/home_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/auth_screens/stu_sign_in_screen.dart';
+import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_main_bottom_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/auth_screens/fac_sign_in_screen.dart';
+import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/fac_main_bottom_screen.dart';
 import 'package:my_campus/presentation/ui/widgets/app_logo.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
+import '../../state_holders/auth_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,16 +18,28 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    goToNextScreen();
     super.initState();
+    checkUserAuthState();
   }
 
-  void goToNextScreen() {
-    Future.delayed(const Duration(seconds: 3)).then(
-      (value) => Get.offAll(
-        () => const HomeScreen(),
-      ),
-    );
+  void checkUserAuthState() async {
+    final result = await AuthController.checkStudentLoginState();
+    Future.delayed(const Duration(seconds: 2)).then((value) async {
+      if (result) {
+        Get.offAll(const StuMainBottomNavBarScreen());
+      } else {
+        Get.offAll(const StuSignInScreen());
+      }
+    });
+
+    // final result = await AuthController.checkLoginState();
+    // Future.delayed(const Duration(seconds: 2)).then((value) async {
+    //   if (result) {
+    //     Get.offAll(const FacMainBottomNavBarScreen());
+    //   } else {
+    //     Get.offAll(const FacSignInScreen());
+    //   }
+    // });
   }
 
   @override

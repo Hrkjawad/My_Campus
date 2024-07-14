@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TitleAndSubtitle extends StatelessWidget {
   const TitleAndSubtitle({super.key, required this.title, required this.subtitle});
@@ -10,27 +11,27 @@ class TitleAndSubtitle extends StatelessWidget {
     return  Center(
       child: Column(
         children: [
-          const SizedBox(
-            height: 131,
+           SizedBox(
+            height: 131.h,
           ),
           Text(
             title,
-            style: const TextStyle(
-              fontSize: 47,
+            style:  TextStyle(
+              fontSize: 47.sp,
               fontWeight: FontWeight.bold,
               letterSpacing: 1,
             ),
           ),
           Text(
            subtitle,
-            style: const TextStyle(
-              fontSize: 19,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF585858),
+            style: TextStyle(
+              fontSize: 19.sp,
+              fontWeight: FontWeight.w600,
+              color: const Color(0xFF585858),
             ),
           ),
-          const SizedBox(
-            height: 53,
+           SizedBox(
+            height: 53.sp,
           ),
         ],
       ),

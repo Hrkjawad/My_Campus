@@ -1,11 +1,11 @@
-class FacLoginModel {
+class StuSignInModel {
   String? status;
   Data? data;
   String? token;
 
-  FacLoginModel({this.status, this.data, this.token});
+  StuSignInModel({this.status, this.data, this.token});
 
-  FacLoginModel.fromJson(Map<String, dynamic> json) {
+  StuSignInModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
     token = json['token'];
