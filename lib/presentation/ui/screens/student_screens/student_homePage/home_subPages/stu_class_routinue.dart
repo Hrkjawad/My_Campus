@@ -111,12 +111,16 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
       _isLoading = true; // Start loading
     });
 
-    final rawData7 = await rootBundle.loadString('assets/routinue/saturday.csv');
+    final rawData7 =
+        await rootBundle.loadString('assets/routinue/saturday.csv');
     final rawData = await rootBundle.loadString('assets/routinue/sunday.csv');
     final rawData2 = await rootBundle.loadString('assets/routinue/monday.csv');
-    final rawData3 = await rootBundle.loadString('assets/routinue/tuesday.csv');
-    final rawData4 = await rootBundle.loadString('assets/routinue/wednesday.csv');
-    final rawData5 = await rootBundle.loadString('assets/routinue/thursday.csv');
+    final rawData3 =
+        await rootBundle.loadString('assets/routinue/tuesdayy.csv');
+    final rawData4 =
+        await rootBundle.loadString('assets/routinue/wednesdayy.csv');
+    final rawData5 =
+        await rootBundle.loadString('assets/routinue/thursdayy.csv');
     final rawData6 = await rootBundle.loadString('assets/routinue/friday.csv');
 
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
@@ -300,12 +304,12 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
                     children: [
                       Text(
                         '${widget.batch} ${widget.section} Routine',
-                        style:  TextStyle(
+                        style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.bold,
                             letterSpacing: .2),
                       ),
-                       SizedBox(
+                      SizedBox(
                         height: 14.h,
                       ),
                       Table(
@@ -679,11 +683,19 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
                                             style: TextButton.styleFrom(
                                                 foregroundColor: Colors.black),
                                             onPressed: () {
-                                              Navigator.push(context, MaterialPageRoute(builder: (context)=> StuClassRoutine(
-                                                batch: batchController.text,
-                                                section:
-                                                sectionController.text,
-                                              )));
+                                              Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StuClassRoutine(
+                                                    batch: batchController.text,
+                                                    section: sectionController
+                                                        .text
+                                                        .toUpperCase(),
+                                                  ),
+                                                ),
+                                                result: ModalRoute.of(context),
+                                              );
                                             },
                                             child: const Text('Go'))
                                       ],
