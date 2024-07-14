@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/auth_controller.dart';
-import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_available_course_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_home_screen.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_my_todo.dart';
 import 'package:my_campus/presentation/ui/screens/student_screens/student_homePage/stu_resources_screen.dart';
-import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
-
-import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_resource_controller.dart';
-import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
-import '../../../utility/app_colors.dart';
-import '../../../widgets/file_upload.dart';
-import '../../../widgets/sheet_connect_api.dart';
 
 class StuMainBottomNavBarScreen extends StatefulWidget {
   const StuMainBottomNavBarScreen({super.key});
