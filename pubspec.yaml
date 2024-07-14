@@ -38,13 +38,8 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/sundayy.csv
-    - assets/mondayy.csv
-    - assets/tuesdayy.csv
-    - assets/wednesdayy.csv
-    - assets/thursdayy.csv
-    - assets/fridayy.csv
-    - assets/saturdayy.csv
+    - assets/routinue/
+
   # fonts:
   #   - family: Schyler
   #     fonts:

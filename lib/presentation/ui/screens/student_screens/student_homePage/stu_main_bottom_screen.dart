@@ -16,6 +16,7 @@ import '../../../../state_holders/faculty_state_holders/fac_resource_controller.
 import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../../utility/app_colors.dart';
 import '../../../widgets/file_upload.dart';
+import '../../../widgets/sheet_connect_api.dart';
 
 class StuMainBottomNavBarScreen extends StatefulWidget {
   const StuMainBottomNavBarScreen({super.key});
@@ -36,7 +37,7 @@ class _StuMainBottomNavBarScreenState extends State<StuMainBottomNavBarScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Assignment');
       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Tutorial');
       // Get.find<BatchAnnouncementController>().batchAnnouncement('57 A+B', 'Viva');

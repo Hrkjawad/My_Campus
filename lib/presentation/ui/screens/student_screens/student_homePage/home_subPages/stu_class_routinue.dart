@@ -111,13 +111,13 @@ class _StuClassRoutinueState extends State<StuClassRoutine> {
       _isLoading = true; // Start loading
     });
 
-    final rawData7 = await rootBundle.loadString('assets/saturdayy.csv');
-    final rawData = await rootBundle.loadString('assets/sundayy.csv');
-    final rawData2 = await rootBundle.loadString('assets/mondayy.csv');
-    final rawData3 = await rootBundle.loadString('assets/tuesdayy.csv');
-    final rawData4 = await rootBundle.loadString('assets/wednesdayy.csv');
-    final rawData5 = await rootBundle.loadString('assets/thursdayy.csv');
-    final rawData6 = await rootBundle.loadString('assets/fridayy.csv');
+    final rawData7 = await rootBundle.loadString('assets/routinue/saturday.csv');
+    final rawData = await rootBundle.loadString('assets/routinue/sunday.csv');
+    final rawData2 = await rootBundle.loadString('assets/routinue/monday.csv');
+    final rawData3 = await rootBundle.loadString('assets/routinue/tuesday.csv');
+    final rawData4 = await rootBundle.loadString('assets/routinue/wednesday.csv');
+    final rawData5 = await rootBundle.loadString('assets/routinue/thursday.csv');
+    final rawData6 = await rootBundle.loadString('assets/routinue/friday.csv');
 
     List<List<dynamic>> listData = const CsvToListConverter().convert(rawData);
     List<List<dynamic>> listData2 =
