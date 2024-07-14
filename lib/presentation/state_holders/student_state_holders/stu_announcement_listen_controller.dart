@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_all_announcement_controller.dart';
 
-import '../../data/models/stu_model/batch_announcement_model.dart';
+import '../../../data/models/stu_model/batch_announcement_model.dart';
 
 class StuAnnouncementListenController extends GetxController {
   List<String?> announcements = [];

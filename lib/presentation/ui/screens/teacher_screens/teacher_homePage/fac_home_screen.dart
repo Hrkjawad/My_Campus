@@ -9,6 +9,7 @@ import 'package:my_campus/presentation/ui/widgets/bottom_nav.dart';
 import 'package:my_campus/presentation/ui/screens/teacher_screens/teacher_homePage/sub_pages/fac_announcement.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
 import '../../../../state_holders/faculty_state_holders/fac_announcement_controller.dart';
+import '../../../../state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import '../../../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../../widgets/appbar_method.dart';
@@ -40,19 +41,18 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
   String? exams = "1";
   int? myTodo = 0;
 
-  final List<String> announcements = [
-    '57-A+B | Next Sunday is Viva ',
-    '56-A | Next Sunday is Tutorial ',
-    '60-E | Next Sunday Class is Canceled ',
-  ];
+  //final List<String> announcements = [];
 
   @override
   void initState() {
     super.initState();
-    _announcementPageController = PageController(initialPage: _currentAnnouncement);
-    _startTimer();
-    //Get.find<FacAnnouncementController>().facShowAnnouncement();
-  }//
+    _announcementPageController =
+        PageController(initialPage: _currentAnnouncement);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await Get.find<FacAnnouncementListenController>().why();
+      startTimer();
+    });
+  }
 
   @override
   void dispose() {
@@ -61,13 +61,17 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     super.dispose();
   }
 
+  startTimer() async {
+    //if (Get.find<StuAnnouncementListenController>().announcements.isEmpty) return; // Ensure list is not empty before starting the timer
 
-
-  void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      if (_announcementPageController.page == null) return;
+      // if (_announcementPageController.page == null ||
+      //     Get.find<StuAnnouncementListenController>().announcements.isEmpty)
+      //   return;
+
       final nextPage = (_announcementPageController.page!.toInt() + 1) %
-          announcements.length;
+          Get.find<FacAnnouncementListenController>().announcements.length;
+
       _announcementPageController.animateToPage(
         nextPage,
         duration: const Duration(milliseconds: 500),
@@ -75,8 +79,6 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
       );
     });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -202,8 +204,9 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                             width: 26.w,
                           ),
                           InkWell(
-                            onTap: (){
-                              Get.find<FacMainBottomNavController>().changeScreen(3);
+                            onTap: () {
+                              Get.find<FacMainBottomNavController>()
+                                  .changeScreen(3);
                             },
                             child: ClipOval(
                               child: Container(
@@ -213,7 +216,8 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text('${Get.find<FacAnnouncementController>().facShowAnnouncementModel.data?.length ?? '0'}',
+                                    Text(
+                                      '${Get.find<FacAnnouncementController>().facShowAnnouncementModel.data?.length ?? '0'}',
                                       style: TextStyle(
                                           fontSize: 30.sp,
                                           fontWeight: FontWeight.bold,
@@ -348,21 +352,25 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                 SizedBox(
                   height: 25.w,
                 ),
-                SizedBox(
-                  height: 200.h,
-                  width: 375.w,
-                  child: PageView.builder(
-                    itemCount: announcements.length,
-                    controller: _announcementPageController,
-                    onPageChanged: (index) {
-                      setState(() {
-                        _currentAnnouncement = index;
-                      });
-                    },
-                    itemBuilder: (context, index) {
-                      return buildAnnouncementCard(announcements[index]);
-                    },
-                  ),
+                GetBuilder<FacAnnouncementListenController>(
+                  builder: (facAnnouncementListenController) {
+                    return SizedBox(
+                      height: 200.h,
+                      width: 375.w,
+                      child: PageView.builder(
+                        itemCount: facAnnouncementListenController.announcements.length,
+                        controller: _announcementPageController,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentAnnouncement = index;
+                          });
+                        },
+                        itemBuilder: (context, index) {
+                          return buildAnnouncementCard(facAnnouncementListenController.announcements[index].toString());
+                        },
+                      ),
+                    );
+                  }
                 ),
                 SizedBox(
                   height: 5.h,
@@ -375,9 +383,7 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
                       ScreenUtil().setWidth(20),
                     ),
                     onTap: () {
-                      Get.to(
-                        () => const FacAnnouncementScreen(),
-                      );
+                       Get.find<FacMainBottomNavController>().changeScreen(3);
                     },
                     child: CircleAvatar(
                       radius: 16,
@@ -398,14 +404,13 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     );
   }
 
-
   Widget buildAnnouncementCard(String announcement) {
     return GestureDetector(
       onLongPress: () {
         _timer.cancel();
       },
       onLongPressEnd: (_) {
-        _startTimer();
+        startTimer();
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10.0.w),
@@ -416,15 +421,14 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
         ),
         child: Center(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(33.w),
-              child: Text(
-                announcement,
-                style: TextStyle(
-                  fontSize: 26.sp,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFF0D6858),
-                ),
+            child: Text(
+              announcement,
+              style: TextStyle(
+                fontSize: 24.sp,
+                wordSpacing: .5,
+                fontWeight: FontWeight.w800,
+                color: const Color(0xFF0D6858),
+                height: 1.45
               ),
             ),
           ),
@@ -433,5 +437,4 @@ class _FacHomeScreenState extends State<FacHomeScreen> {
     );
   }
 
-  List<String> batch = ['57', '58', '59', '60'];
 }

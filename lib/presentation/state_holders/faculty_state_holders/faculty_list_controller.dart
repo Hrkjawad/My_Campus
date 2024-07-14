@@ -3,7 +3,7 @@ import 'package:my_campus/data/models/faculty_list_model.dart';
 import 'package:my_campus/data/models/network_response.dart';
 import 'package:my_campus/data/services/network_caller.dart';
 
-import '../../data/utility/urls.dart';
+import '../../../data/utility/urls.dart';
 
 class FacultyListController extends GetxController {
   bool _facultyListInProgress = false;

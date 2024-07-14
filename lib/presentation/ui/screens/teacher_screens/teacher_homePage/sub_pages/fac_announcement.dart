@@ -3,11 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_announcement_controller.dart';
-import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_creating_sub_grp_batch_sec_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../../state_holders/faculty_state_holders/fac_main_bottom_controller.dart';
+import '../../../../../state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
 import '../../../../widgets/appbar_method.dart';
 import '../../../../widgets/date_select.dart';
 import '../../../../widgets/dropdown_button.dart';
@@ -33,43 +32,17 @@ class _FacAnnouncementScreenState extends State<FacAnnouncementScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   dynamic c;
-  // final List<Map<String, String>> batchCoursePairs = [];
-  // late List<String> groupId = [
-  //   '665affb922620c800a94e15b',
-  //   '665b074f22620c800a94e202'
-  // ];
-  // List<String> batch = [];
-  // late List<String> senderId = [];
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      Get.find<FacAnnouncementController>().facShowAnnouncement();
-      //await Get.find<FacShowGroupBatchSectionCourseController>().showGroups();
-
+      await Get.find<FacAnnouncementController>().facShowAnnouncement();
       c = Get.find<FacShowGroupBatchSectionCourseController>()
           .facultyCreatingSubGrpBatchSecDataList
           ?.map((data) =>
               {'batch': data.batch.toString(), 'sId': data.sId.toString(), 'senderId': data.member?.map((member) => member.sId.toString()).first})
           .toList();
-      print('c $c');
-
-      //  final dataList = Get.find<FacShowGroupBatchSectionCourseController>().facultyCreatingSubGrpBatchSecDataList;
-      //  //batch.add(dataList.batch.toString());
-      //
-      //  if (dataList != null) {
-      //    for (final data in dataList) {
-      //      final d = data.sId!;
-      //      final a = data.batch!;
-      //      final b = data.courseCode!;
-      //      final c = data.courseTitle!;
-      //      batchCoursePairs.add({'sId': d, 'batch': a, 'courseCode': b, 'courseTitle': c});
-      //      batch.add(a);
-      //      //senderId.addAll();
-      //    }
-      // }
-      //  print('b  $batch');
     });
   }
 

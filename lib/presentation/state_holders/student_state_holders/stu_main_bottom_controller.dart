@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:my_campus/presentation/state_holders/stu_announcement_listen_controller.dart';
+import 'package:my_campus/presentation/state_holders/student_state_holders/stu_announcement_listen_controller.dart';
 
 class StuMainBottomNavController extends GetxController {
   int currentSelectedScreen = 0;

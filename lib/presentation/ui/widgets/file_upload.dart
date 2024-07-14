@@ -9,7 +9,7 @@ import '../../state_holders/auth_controller.dart';
 import '../../state_holders/faculty_state_holders/fac_resource_controller.dart';
 import '../../state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import '../../state_holders/faculty_state_holders/group_chatting_controller.dart';
-import '../screens/home_screen.dart';
+import '../screens/app_home_screen.dart';
 import 'app_logo.dart';
 import 'dropdown_button.dart';
 

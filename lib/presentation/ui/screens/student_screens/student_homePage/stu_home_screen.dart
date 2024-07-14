@@ -7,7 +7,7 @@ import 'package:my_campus/presentation/state_holders/auth_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/batch_announcement_controller.dart';
 import 'package:my_campus/presentation/state_holders/student_state_holders/stu_main_bottom_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../../state_holders/stu_announcement_listen_controller.dart';
+import '../../../../state_holders/student_state_holders/stu_announcement_listen_controller.dart';
 import '../../../../state_holders/student_state_holders/batch_all_announcement_controller.dart';
 import '../../../../state_holders/student_state_holders/stu_myTodo_controller.dart';
 import '../../../widgets/appbar_method.dart';
