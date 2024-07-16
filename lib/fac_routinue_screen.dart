@@ -174,13 +174,13 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
   Future<void> _loadData() async {
     String nameShortForm = widget.shortWords;
 
-    final result1 = await loadCsvData1(nameShortForm);
-    final result2 = await loadCsvData2(nameShortForm);
-    final result3 = await loadCsvData3(nameShortForm);
-    final result4 = await loadCsvData4(nameShortForm);
-    final result5 = await loadCsvData5(nameShortForm);
-    final result6 = await loadCsvData6(nameShortForm);
-    final result7 = await loadCsvData7(nameShortForm);
+    final result1 = await loadCsvData('saturday', nameShortForm);
+    final result2 = await loadCsvData('sunday', nameShortForm);
+    final result3 = await loadCsvData('monday', nameShortForm);
+    final result4 = await loadCsvData('tuesdayy', nameShortForm);
+    final result5 = await loadCsvData('wednesdayy', nameShortForm);
+    final result6 = await loadCsvData('thursdayy', nameShortForm);
+    final result7 = await loadCsvData('friday', nameShortForm);
 
     setState(() {
       csvData1 = List<Map<String, String>>.from(result1);
@@ -200,34 +200,14 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
     six = csvData6;
     seven = csvData7;
 
-    List<List<Map<String, String>>> csvLists = [
-      csvData1,
-      csvData2,
-      csvData3,
-      csvData4,
-      csvData5,
-      csvData6,
-      csvData7
-    ];
 
-    // List<List> okLists = [ok1, ok2, ok3, ok4, ok5, ok6, ok7];
-    //
-    // for (var i = 0; i < csvLists.length; i++) {
-    //   for (var j = 0; j < csvLists[i].length; j++) {
-    //     okLists[i].add(csvLists[i][j]['TimeSlots']
-    //         .toString()
-    //         .split(' ')
-    //         .where((slot) => slot != 'N/A' && slot.isNotEmpty)
-    //         .join(' '));
-    //   }
-    // }
-    // print(ok1);
-    // print(ok2);
-    // print(ok3);
-    // print(ok4);
-    // print(ok5);
-    // print(ok6);
-    // print(ok7);
+    print(one);
+    print(two);
+    print(three);
+    print(four);
+    print(five);
+    print(six);
+    print(seven);
   }
 
   @override
@@ -277,7 +257,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
+                                  displayText = timeSlots.join('\n');
                                 }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
@@ -360,8 +340,6 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                 final timeSlots = two[colIndex]['TimeSlots']
                                     .toString()
                                     .split(' ')
-                                    .where((slot) =>
-                                        slot != 'N/A' && slot.isNotEmpty)
                                     .toList();
 
                                 String displayText;
@@ -371,8 +349,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
-                                }
+                                  displayText = timeSlots.join('\n');                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -465,8 +442,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
-                                }
+                                  displayText = timeSlots.join('\n');                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -559,8 +535,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
-                                }
+                                  displayText = timeSlots.join('\n');                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -652,8 +627,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
-                                }
+                                  displayText = timeSlots.join('\n');                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -746,8 +720,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
-                                }
+                                  displayText = timeSlots.join('\n');                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -840,8 +813,7 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
                                   displayText =
                                       '${timeSlots.first}\n${timeSlots.last}';
                                 } else {
-                                  displayText = '';
-                                }
+                                  displayText = timeSlots.join('\n');                                }
                                 return Padding(
                                   padding: const EdgeInsets.all(5),
                                   child: Center(
@@ -910,9 +882,8 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
     );
   }
 
-  Future<List<Map<String, String>>> loadCsvData1(String shortForm) async {
-    final csvString =
-        await rootBundle.loadString('assets/routinue/saturday.csv');
+  Future<List<Map<String, String>>> loadCsvData(String day, String shortForm) async {
+    final csvString = await rootBundle.loadString('assets/routinue/$day.csv');
     final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
 
     if (csvData.isEmpty) return [];
@@ -925,195 +896,31 @@ class _FacRoutinueScreenState extends State<FacRoutinueScreen> {
     }).toList();
 
     final result = filteredRows.map((row) {
+      final timeSlots = headerRow
+          .asMap()
+          .entries
+          .where((entry) {
+        return row[entry.key].toString().contains(shortForm);
+      })
+          .map((entry) => headerRow[entry.key])
+          .toList();
+
       final rowMap = <String, String>{
         'Batch': row[1].toString(),
         'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
+        'TimeSlots': timeSlots.join(' ')
       };
+
       return rowMap;
     }).toList();
+
+    result.sort((a, b) {
+      final timeSlotsA = a['TimeSlots'] ?? '';
+      final timeSlotsB = b['TimeSlots'] ?? '';
+      return timeSlotsA.compareTo(timeSlotsB);
+    });
 
     return result;
   }
 
-  Future<List<Map<String, String>>> loadCsvData2(String shortForm) async {
-    final csvString = await rootBundle.loadString('assets/routinue/sunday.csv');
-    final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
-
-    if (csvData.isEmpty) return [];
-
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
-
-    final filteredRows = dataRows.where((row) {
-      return row.any((cell) => cell.toString().contains(shortForm));
-    }).toList();
-
-    final result = filteredRows.map((row) {
-      final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
-      };
-      return rowMap;
-    }).toList();
-
-    return result;
-  }
-
-  Future<List<Map<String, String>>> loadCsvData3(String shortForm) async {
-    final csvString = await rootBundle.loadString('assets/routinue/monday.csv');
-    final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
-
-    if (csvData.isEmpty) return [];
-
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
-
-    final filteredRows = dataRows.where((row) {
-      return row.any((cell) => cell.toString().contains(shortForm));
-    }).toList();
-
-    final result = filteredRows.map((row) {
-      final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
-      };
-      return rowMap;
-    }).toList();
-
-    return result;
-  }
-
-  Future<List<Map<String, String>>> loadCsvData4(String shortForm) async {
-    final csvString =
-        await rootBundle.loadString('assets/routinue/tuesdayy.csv');
-    final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
-
-    if (csvData.isEmpty) return [];
-
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
-
-    final filteredRows = dataRows.where((row) {
-      return row.any((cell) => cell.toString().contains(shortForm));
-    }).toList();
-
-    final result = filteredRows.map((row) {
-      final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
-      };
-      return rowMap;
-    }).toList();
-
-    return result;
-  }
-
-  Future<List<Map<String, String>>> loadCsvData5(String shortForm) async {
-    final csvString =
-        await rootBundle.loadString('assets/routinue/wednesdayy.csv');
-    final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
-
-    if (csvData.isEmpty) return [];
-
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
-
-    final filteredRows = dataRows.where((row) {
-      return row.any((cell) => cell.toString().contains(shortForm));
-    }).toList();
-
-    final result = filteredRows.map((row) {
-      final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
-      };
-      return rowMap;
-    }).toList();
-
-    return result;
-  }
-
-  Future<List<Map<String, String>>> loadCsvData6(String shortForm) async {
-    final csvString =
-        await rootBundle.loadString('assets/routinue/thursdayy.csv');
-    final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
-
-    if (csvData.isEmpty) return [];
-
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
-
-    final filteredRows = dataRows.where((row) {
-      return row.any((cell) => cell.toString().contains(shortForm));
-    }).toList();
-
-    final result = filteredRows.map((row) {
-      final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
-      };
-      return rowMap;
-    }).toList();
-
-    return result;
-  }
-
-  Future<List<Map<String, String>>> loadCsvData7(String shortForm) async {
-    final csvString = await rootBundle.loadString('assets/routinue/friday.csv');
-    final csvData = const CsvToListConverter().convert(csvString, eol: '\n');
-
-    if (csvData.isEmpty) return [];
-
-    final headerRow = csvData[1].map((e) => e.toString()).toList();
-    final dataRows = csvData.skip(2).toList();
-
-    final filteredRows = dataRows.where((row) {
-      return row.any((cell) => cell.toString().contains(shortForm));
-    }).toList();
-
-    final result = filteredRows.map((row) {
-      final rowMap = <String, String>{
-        'Batch': row[1].toString(),
-        'Section': row[2].toString(),
-        'TimeSlots': headerRow.asMap().entries.map((entry) {
-          return row[entry.key].toString().contains(shortForm)
-              ? headerRow[entry.key]
-              : 'N/A';
-        }).join(' ')
-      };
-      return rowMap;
-    }).toList();
-
-    return result;
-  }
 }
