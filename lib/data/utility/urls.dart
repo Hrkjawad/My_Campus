@@ -16,6 +16,7 @@ class Urls {
   static const String facultyList =
       '$_facultyBaseUrl/availableCourseAndTeacher';
   static const String facultyProfileDetails = '$_facultyBaseUrl/ProfileDetails';
+  static const String facultyProfileUpdate = '$_facultyBaseUrl/ProfileUpdate';
   static String facultySubGrpBatchSec = '$_facultyBaseUrl/createSubjectGroupBatchSections';
   static String joinSubjectGroupBatchSections(String groupId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId';
   static String chattingGroup(String groupId, String senderId) => '$_facultyBaseUrl/joinSubjectGroupBatchSections/$groupId/$senderId';

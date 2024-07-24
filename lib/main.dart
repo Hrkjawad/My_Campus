@@ -5,9 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'application/app.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await SharedPreferences.getInstance();
-  // await gSheetIntit();
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
+  //await gSheetIntit();
   runApp(
     const SafeArea(
       child: MyCampus(),

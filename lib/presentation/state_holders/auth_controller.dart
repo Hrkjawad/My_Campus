@@ -103,19 +103,13 @@ class AuthController {
     }
   }
 
-  static Future<void> clear() async {
+  static Future<void> facAuthClear() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const FacSignInScreen());
   }
 
-  static Future<void> clear2() async {
-    final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.clear();
-    Get.offAll(() => const StuSignInScreen());
-  }
-
-  static Future<void> clearStu() async {
+  static Future<void> stuAuthClear() async {
     final SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
     Get.offAll(() => const StuSignInScreen());

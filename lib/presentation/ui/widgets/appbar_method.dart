@@ -55,7 +55,7 @@ AppBar customisedAppBar(
                   ),
                   TextButton(
                     onPressed: () {
-                      AuthController.clear();
+                      AuthController.facAuthClear();
                     },
                     child: Text(
                       "YES",
