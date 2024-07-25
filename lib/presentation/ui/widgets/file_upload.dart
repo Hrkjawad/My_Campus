@@ -142,7 +142,7 @@ class _FileUploadState extends State<FileUpload> {
                             ),
                             child: SizedBox(
                               width: 380.w,
-                              height: 520.h,
+                              height: 575.h,
                               child: ListView.separated(
                                 itemCount: facResourceController
                                         .resourceModel.data?.length ??
@@ -186,13 +186,6 @@ class _FileUploadState extends State<FileUpload> {
               ),
             ),
           ),
-        ),
-        bottomNavigationBar: ColoredBox(
-          color: const Color(0xFFCBD0F9),
-          child: GetBuilder<FacMainBottomNavController>(
-              builder: (facMainBottomNavController) {
-            return BackButton(onPressed: facMainBottomNavController.backToHome);
-          }),
         ),
       ),
     );

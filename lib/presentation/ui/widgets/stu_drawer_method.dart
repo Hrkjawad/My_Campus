@@ -89,7 +89,7 @@ Drawer customisedStudentDrawer(BuildContext context) {
                             minScale: 0.1,
                             maxScale: 6.0,
                             child: Image.asset(
-                              'assets/images/Bus Time.jpg',
+                              'assets/images/bus.jpg',
                               height: 300.h,
                               width: 500.w,
                               fit: BoxFit.fill,

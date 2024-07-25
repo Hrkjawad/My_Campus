@@ -56,7 +56,6 @@ class _FacAvailableChatScreenState extends State<FacAvailableChatScreen> {
               ),
             ),
             floatingActionButton: _createBatchAndCourse(context),
-            bottomNavigationBar: ColoredBox(color: const Color(0xFFCBD0F9), child: BackButton(onPressed: facMainBottomNavController.backToHome),),
           );
         }),
       ),

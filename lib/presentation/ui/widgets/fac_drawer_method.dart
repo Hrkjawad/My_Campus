@@ -88,27 +88,24 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                     context: context,
                     builder: (context) {
                       return SizedBox(
-                        width: 500.w,
-                        height: 300.h,
+                        height: 500,
                         child: AlertDialog(
                           title: Center(
-                            child: Text(
-                              "Bus Schedules",
-                              style: TextStyle(
-                                  fontSize: 24.sp, fontWeight: FontWeight.w600),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Bus Schedules",
+                                  style: TextStyle(
+                                      fontSize: 24.sp, fontWeight: FontWeight.w600),
+                                ),
+                              ],
                             ),
                           ),
-                          content: InteractiveViewer(
-                            boundaryMargin:
-                                EdgeInsets.all(ScreenUtil().setWidth(20)),
-                            minScale: 0.1,
-                            maxScale: 6.0,
-                            child: Image.asset(
-                              'assets/images/Bus Time.jpg',
-                              height: 300.h,
-                              width: 500.w,
-                              fit: BoxFit.fill,
-                            ),
+                          content: Image.asset(
+                            'assets/images/bus.jpg',
+                            height: 300.h,
+                            width: 500.w,
+                            fit: BoxFit.fill,
                           ),
                         ),
                       );
