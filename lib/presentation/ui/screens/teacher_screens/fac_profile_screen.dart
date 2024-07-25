@@ -135,9 +135,11 @@ class _FacProfileScreenState extends State<FacProfileScreen> {
           _emailController.text,
           _fullNameController.text,
           _designationController.text,
-          _departmentController.text, _shortFormController.text,
+          _departmentController.text,
+          _shortFormController.text,
           '1'
       );
+
 
 
     } else {

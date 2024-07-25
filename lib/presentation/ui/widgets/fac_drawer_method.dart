@@ -5,6 +5,8 @@ import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_my_todo_sc
 import 'package:my_campus/presentation/ui/screens/teacher_screens/fac_profile_screen.dart';
 import 'package:my_campus/presentation/ui/utility/app_colors.dart';
 import 'package:my_campus/presentation/ui/widgets/faculty_members_list_method.dart';
+import '../../state_holders/faculty_state_holders/fac_available_controller.dart';
+import '../screens/teacher_screens/fac_available_screen.dart';
 import 'about_us_widget.dart';
 import 'blood_downer_list.dart';
 import 'cr_list_method.dart';
@@ -57,7 +59,7 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                 ),
                 hoverColor: Colors.grey,
                 onTap: () {
-                  facultyMembers(context);
+                  Get.to(() => const FacAvailableScreen());
                 },
               ),
               divider(),
@@ -166,7 +168,9 @@ Drawer customisedFacultyDrawer(BuildContext context) {
                           child: Text(
                             "This App Developed by",
                             style: TextStyle(
-                                fontSize: 22.sp, fontWeight: FontWeight.w900, color: Colors.green),
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.green),
                           ),
                         ),
                         actions: const [

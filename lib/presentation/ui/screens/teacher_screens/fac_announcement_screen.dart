@@ -6,7 +6,6 @@ import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_a
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/fac_show_group_batch_section_course_controller.dart';
 import 'package:my_campus/presentation/state_holders/faculty_state_holders/group_chatting_controller.dart';
 import 'package:my_campus/presentation/ui/widgets/screen_background.dart';
-import '../../../state_holders/faculty_state_holders/fac_announcement_listen_controller.dart';
 import '../../widgets/appbar_method.dart';
 import '../../widgets/date_select.dart';
 import '../../widgets/dropdown_button.dart';
