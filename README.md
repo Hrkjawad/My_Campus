@@ -93,4 +93,22 @@ Types of users in our app:
 - Architecture: MVVM(frontend) & MVC(backend)
 
 ## Architecture
+```bash
+.
+├── assets/
+│   ├── images/
+│   │   ├── bus_time.jpg
+│   │   ├── leading_university_logo.png
+│   │   ├── background.svg
+│   │   └── logo.svg
+│   └── routine/
+│       ├── friday.csv
+│       ├── saturday.csv
+│       ├── sunday.csv
+│       ├── monday.csv
+│       ├── tuesday.csv
+│       ├── wednesday.csv
+│       ├── thursday.csv
+│       └── friday.csv
+```
 
