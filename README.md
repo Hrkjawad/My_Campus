@@ -1,9 +1,10 @@
 # My Campus App
+Hello, this is a team project developed for the university's 3rd year defense. 
 
-Hello, this is a team project developed for the university's 3rd year defense.
 Team Member:
+
 1. Md Mahmud Hossain Ferdous
-2. Hasibur Rahman Khurasani Jawad
+2. Hasibur Rahman Khurasani Jawad
 3. Hasan Ahmed
 
 ## Video
@@ -23,13 +24,31 @@ Team Member:
 The idea of this innovative mobile app after identifying the recurring challenges faced by students each semester, such as joining various messaging platforms, gathering faculty and class representative details, navigating scattered course information, and creating class and exam schedules. We aimed to streamline university life and resolve these issues.
 This app is designed to centralize solutions for these challenges, eliminating the need for faculty members and students to juggle multiple apps. The goal is to establish a seamless and efficient platform that enables university members to effectively manage semesters, stay connected, and stay informed about important notices and announcements.
 
+
+## Installation
+
+Install This project using the command prompt
+
+```bash
+  git clone https://github.com/HasanJuned/My_Campus.git
+```
+```bash
+  cd My_Campus
+```
+```bash
+  flutter pub get
+```
+```bash
+  flutter run
+```
+
 ## Features
 
 Types of users in our app:
 1. Faculty Members.
 2. Students.
 
-Faculty Members:
+- Faculty Members:
 1. Sign up.
 2. Login.
 3. Create groups course-wise.
@@ -46,7 +65,7 @@ Faculty Members:
 14. See faculty members' info.
 15. Logout.
 
-Students:
+- Students:
 1. Sign up.
 2. Login.
 3. Join groups created by respective teachers.
@@ -67,13 +86,11 @@ Students:
 
 ## Tools
 
-Framework: Flutter
-State Management: GetX
-Backend: Express JS
-Database: MongoDB
-Architecture: MVVM(frontend) & MVC(backend)
+- Framework: Flutter
+- State Management: GetX
+- Backend: Express JS
+- Database: MongoDB
+- Architecture: MVVM(frontend) & MVC(backend)
 
 ## Architecture
-
-
 
