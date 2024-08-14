@@ -11,4 +11,4 @@ all are traceable for both faculty and students in this app.
 
 ## Documentation
 
--[Link](https://docs.google.com/document/d/1TLRVyqxY0_bvOv0ZefIGkDnYIXW1Ilo0Ul5NjrE0XQ8/edit)
+- [Link](https://docs.google.com/document/d/1TLRVyqxY0_bvOv0ZefIGkDnYIXW1Ilo0Ul5NjrE0XQ8/edit)
