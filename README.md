@@ -5,7 +5,7 @@ Flutter, NodeJs (MEN), Api
 Streamlined a platform that unifies academic tools, allowing faculty
 and students to manage courses, share resources, communicate, and
 receive updates in one app.
-Students can make cover page pdf without internet.
+Students can make cover page pdf without the internet.
 The information of Faculties, Batches CR, Assignment, Tutorial, Viva etc
 all are traceable for both faculty and students in this app.
 
