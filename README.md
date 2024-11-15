@@ -91,3 +91,9 @@ Types of users in our app:
 - Database: MongoDB
 - Architecture: MVVM(frontend) & MVC(backend)
 
+## Photo
+
+![mycampus](https://github.com/user-attachments/assets/7b7b3416-53f8-4120-bf62-9426731ba538)
+![1726821053786](https://github.com/user-attachments/assets/c17d9b4e-bfcf-4839-b854-fcc1583841ec)
+![1726821053909](https://github.com/user-attachments/assets/e1ac96f4-a586-4217-a165-db4b4ab31350)
+
