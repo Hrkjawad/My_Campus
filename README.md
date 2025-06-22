@@ -1,46 +1,18 @@
 # My Campus App
 Hello, this is a team project developed for the university's 3rd year defense. 
 
-Team Member:
+## Screenshoot
 
-1. Md Mahmud Hossain Ferdous
-2. Hasibur Rahman Khurasani Jawad
-3. Hasan Ahmed
+![Image](https://github.com/user-attachments/assets/3540d53c-4c72-41f7-84d5-7efff68586ee)
+![Image](https://github.com/user-attachments/assets/9012454d-9535-4175-957b-7d297da34030)
+![Image](https://github.com/user-attachments/assets/496bccb6-75e5-424d-99c0-450ba4be2165)
 
-## Video
 
-[Click_here]()
-
-## APK File
-
-[Click_here]()
-
-## Flow-Chart
-
-[Click_here]()
 
 ## Goal
 
 The idea of this innovative mobile app after identifying the recurring challenges faced by students each semester, such as joining various messaging platforms, gathering faculty and class representative details, navigating scattered course information, and creating class and exam schedules. We aimed to streamline university life and resolve these issues.
 This app is designed to centralize solutions for these challenges, eliminating the need for faculty members and students to juggle multiple apps. The goal is to establish a seamless and efficient platform that enables university members to effectively manage semesters, stay connected, and stay informed about important notices and announcements.
-
-
-## Installation
-
-Install This project using the command prompt
-
-```bash
-  git clone https://github.com/HasanJuned/My_Campus.git
-```
-```bash
-  cd My_Campus
-```
-```bash
-  flutter pub get
-```
-```bash
-  flutter run
-```
 
 ## Features
 
@@ -92,23 +64,8 @@ Types of users in our app:
 - Database: MongoDB
 - Architecture: MVVM(frontend) & MVC(backend)
 
-## Architecture
-```bash
-.
-├── assets/
-│   ├── images/
-│   │   ├── bus_time.jpg
-│   │   ├── leading_university_logo.png
-│   │   ├── background.svg
-│   │   └── logo.svg
-│   └── routine/
-│       ├── friday.csv
-│       ├── saturday.csv
-│       ├── sunday.csv
-│       ├── monday.csv
-│       ├── tuesday.csv
-│       ├── wednesday.csv
-│       ├── thursday.csv
-│       └── friday.csv
-```
+Team Member:
 
+1. Md Mahmud Hossain Ferdous
+2. Hasibur Rahman Khurasani Jawad
+3. Hasan Ahmed
